@@ -11,6 +11,21 @@ module.exports = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+
+      fontFamily: {
+        anybody: ["AnyBody", "sans-serif"],
+      },
+
+      fontFamily: {
+        gilroy: ["Gilroy", "sans-serif"],
+      },
+      container: {
+        center: true,
+        padding: "1rem",
+      },
+      screens: {
+        "2xl": "1440px",
+      },
     },
   },
   plugins: [],
