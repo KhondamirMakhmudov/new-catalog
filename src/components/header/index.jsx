@@ -15,7 +15,7 @@ const Header = () => {
           {/* top of the header. will be component in next time */}
           <div className={"flex justify-between"}>
             <ul className={"flex gap-x-[32px]"}>
-              <li>Bo'limlar</li>
+              <li>Bo&apos;limlar</li>
               <li>Klassifikator haqida</li>
               <li>Loyihalar</li>
               <li>Monitoring</li>

@@ -25,9 +25,9 @@ export default function Home() {
               </h1>
 
               <p className={"max-w-[458px]"}>
-                Global strategiyani o'zgartirish mahsulotning <br />{" "}
+                Global strategiyani o&apos;zgartirish mahsulotning <br />{" "}
                 sublimatsiya qilingan hayot aylanishini tejaydi. <br /> Amaliyot
-                aniq ko'rsatib turibdi
+                aniq ko&apos;rsatib turibdi
               </p>
 
               <Link href={"#"}>
@@ -36,7 +36,7 @@ export default function Home() {
                     "bg-white text-[#21201F] py-[14px] px-[28px] font-semibold font-gilroy rounded-[12px] inline-block"
                   }
                 >
-                  Ko'proq bilib oling
+                  Ko&apos;proq bilib oling
                 </p>
               </Link>
             </div>
@@ -63,8 +63,8 @@ export default function Home() {
                 <p
                   className={"font-medium text-[#21201FB2] mt-[16px] mb-[24px]"}
                 >
-                  Global strategiyani o'zgartirish mahsulotning sublimatsiya
-                  qilingan hayot aylanishini tejaydi. Amaliyot aniq
+                  Global strategiyani o&apos;zgartirish mahsulotning
+                  sublimatsiya qilingan hayot aylanishini tejaydi. Amaliyot aniq
                 </p>
 
                 <Link href="https://catalog.tmsiti.uz/">
@@ -111,7 +111,7 @@ export default function Home() {
                       "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
                     }
                   >
-                    Global strategiyani o'zgartirish <br /> sublimatsiyani
+                    Global strategiyani o&apos;zgartirish <br /> sublimatsiyani
                     tejaydi
                   </p>
 
@@ -159,7 +159,7 @@ export default function Home() {
                       "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
                     }
                   >
-                    Global strategiyani o'zgartirish tejaydi
+                    Global strategiyani o&apos;zgartirish tejaydi
                   </p>
 
                   <Link href="https://catalog.tmsiti.uz/">
@@ -193,7 +193,7 @@ export default function Home() {
                       "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
                     }
                   >
-                    Global strategiyani o'zgartirish tejaydi
+                    Global strategiyani o&apos;zgartirish tejaydi
                   </p>
 
                   <Link href="https://catalog.tmsiti.uz/works">
@@ -231,8 +231,8 @@ export default function Home() {
                 Byudjetni qayta <br /> taqsimlash
               </h1>
               <p className={"text-[17px] text-[#21201FB2] font-medium flex-1"}>
-                Global strategiyani o'zgartirish mahsulotning sublimatsiya
-                qilingan hayot aylanishini tejaydi. Amaliyot aniq ko'rsatib
+                Global strategiyani o&apos;zgartirish mahsulotning sublimatsiya
+                qilingan hayot aylanishini tejaydi. Amaliyot aniq ko&apos;rsatib
                 turibdi
               </p>
             </div>
