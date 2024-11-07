@@ -305,6 +305,27 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section
+          style={{ backgroundImage: `url(/images/bg-namunaviy-loyihalar.png)` }}
+          className="min-h-[879px] bg-no-repeat bg-cover relative z-10 "
+        >
+          <div
+            className={`absolute top-0 bottom-0 left-0 right-0 bg-[#1764C0] bg-opacity-70 -z-10`}
+          ></div>
+
+          <div className="container">
+            <div className="z-40 text-white pt-[42px]">
+              <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
+                Namunaviy loyihalar
+              </h1>
+              <p>
+                Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan shunchaki
+                qo'g'irchoq matn-bu shunchaki ishlatilgan qo'g'irchoq matn
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
