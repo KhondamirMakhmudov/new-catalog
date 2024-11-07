@@ -321,7 +321,8 @@ export default function Home() {
               </h1>
               <p>
                 Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan shunchaki
-                qo'g'irchoq matn-bu shunchaki ishlatilgan qo'g'irchoq matn
+                qo&apos;g&apos;irchoq matn-bu shunchaki ishlatilgan
+                qo&apos;g&apos;irchoq matn
               </p>
             </div>
           </div>
