@@ -243,6 +243,68 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <section className="relative">
+          <div className="absolute z-10 left-0 bottom-0">
+            <Image
+              src={"/images/bg-eco-2.png"}
+              alt={"eco-logo"}
+              width={270}
+              height={430}
+              className={""}
+            />
+          </div>
+
+          <div className="absolute -z-10 right-0 bottom-0">
+            <Image
+              src={"/images/bg-eco-1.png"}
+              alt={"eco-logo"}
+              width={270}
+              height={430}
+              className={""}
+            />
+          </div>
+          <div className="grid grid-cols-12 container bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
+            <div className="col-span-6">
+              <Image
+                src={"/images/eco-logo.png"}
+                alt={"eco-logo"}
+                width={600}
+                height={436}
+                className={"w-[600px] h-[436px] rounded-[20px]"}
+              />
+            </div>
+            <div className="col-span-6 flex items-start justify-center flex-col">
+              <h1 className={"font-bold text-[42px] text-[#21201F]"}>
+                Ekologiya va atrof-muhitni muhofaza qilish boshqar
+              </h1>
+              <p className={"font-medium text-[#21201FB2] mt-[16px] mb-[24px]"}>
+                Tempus integer eget vulputate imperdiet eget malesuada faucibus.
+                Accumsan, cursus viverra aliquam tortor risus malesuada rhoncus.
+                Augue risus ante blandit tincidunt pharetra sed. Imperdiet
+                pretium diam posuere commodo. Suscipit et in morbi nec varius
+                arcu orci egestas venenatis.
+              </p>
+
+              <Link href="https://catalog.tmsiti.uz/">
+                <div
+                  className={
+                    "  py-[13px] px-[52px]  justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                  }
+                >
+                  <p className={"text-[#21201FCC]"}>Jadvalni ko’rish</p>
+                  <Image
+                    src={"/icons/arrow-right.svg"}
+                    alt={"arrow-right"}
+                    width={20}
+                    height={20}
+                    className={"ml-[16px]"}
+                  />
+                </div>
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
