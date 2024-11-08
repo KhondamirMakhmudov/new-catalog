@@ -346,7 +346,7 @@ export default function Home() {
                 ></div>
                 <div className="absolute bottom-0 p-[32px] text-white ">
                   <h1 className={"text-[28px] font-bold "}>
-                    Bolalar bog'chasi
+                    Bolalar bog&apos;chasi
                   </h1>
                   <p className="text-sm font-normal mt-[10px] line-clamp-2">
                     Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
