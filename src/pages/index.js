@@ -3,10 +3,45 @@ import Title from "@/components/title";
 import CustomVideoPlayer from "@/components/video-player";
 import Image from "next/image";
 import Link from "next/link";
+import { get } from "lodash";
+import { useState } from "react";
+import Footer from "@/components/footer";
+
+const integrationData = [
+  {
+    id: 1,
+    title: "Soliq qo'mitasi",
+  },
+  {
+    id: 2,
+    title: "Tovar-xom ashyo birjasi",
+  },
+  {
+    id: 3,
+    title: "Statistika agentligi",
+  },
+  {
+    id: 4,
+    title: "Bojxona qo'mitasi",
+  },
+  {
+    id: 5,
+    title: "Tartibga solish agentligi",
+  },
+  {
+    id: 6,
+    title: "Statistika agentligi",
+  },
+];
 
 export default function Home() {
+  const [openFAQ, setOpenFAQ] = useState(false);
+  const toggleFAQ = () => {
+    setOpenFAQ(!openFAQ);
+  };
+
   return (
-    <div>
+    <>
       <Header />
 
       <main>
@@ -45,7 +80,7 @@ export default function Home() {
             className={`absolute top-0 bottom-0 left-0 right-0 bg-image-gradient -z-10 `}
           ></div>
         </section>
-
+        {/* Bo'limlar */}
         <section className={"container py-[60px]"}>
           <Title>Bo&apos;limlar</Title>
 
@@ -217,7 +252,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+        {/* Klassifikator haqida */}
         <section className={"container pb-[60px]"}>
           <Title>Klassifikator haqida</Title>
 
@@ -284,11 +319,10 @@ export default function Home() {
                     "font-medium text-[#21201FB2] text-[21px] mt-[16px] mb-[24px]"
                   }
                 >
-                  Tempus integer eget vulputate imperdiet eget malesuada
-                  faucibus. Accumsan, cursus viverra aliquam tortor risus
-                  malesuada rhoncus. Augue risus ante blandit tincidunt pharetra
-                  sed. Imperdiet pretium diam posuere commodo. Suscipit et in
-                  morbi nec varius arcu orci egestas venenatis.
+                  O‘zbekiston Respublikasi Vazirlar Mahkamasining 27.05.2019
+                  yildagi «O‘zbekiston Respublikasida mahsulotlarni ixtiyoriy
+                  ekologik markirovkalash tizimini joriy etish to‘g‘risida»gi
+                  435-son qarori
                 </p>
 
                 <Link href="https://catalog.tmsiti.uz/">
@@ -366,7 +400,7 @@ export default function Home() {
                   <div className="absolute bottom-0 right-0 p-[24px]">
                     <Image
                       src={"/images/school.png"}
-                      alt={"arrow-right"}
+                      alt={"school"}
                       width={150}
                       height={120}
                       className={"ml-[16px]"}
@@ -467,7 +501,129 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Mintaqalar bo'yicha monitoring */}
+        <section></section>
+
+        {/* Integratsiya bo'yicha sheriklar */}
+        <section className="bg-white">
+          <div className="container py-[42px]">
+            <h1 className="text-[32px] font-bold">
+              Integratsiya bo'yicha sheriklar
+            </h1>
+
+            <div className="grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
+              {integrationData.map((item) => (
+                <div
+                  className="col-span-4 flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]"
+                  key={get(item, "id")}
+                >
+                  <div
+                    className="bg-center bg-white border border-[#E6E5ED]  w-[110px] h-[110px] rounded-[16px]"
+                    style={{
+                      backgroundImage: `url(/images/integration-${get(
+                        item,
+                        "id"
+                      )}.png)`,
+                    }}
+                  ></div>
+                  <div>
+                    <h2 className="text-[20px] font-bold">
+                      {get(item, "title")}
+                    </h2>
+
+                    <Link
+                      href={"#"}
+                      className="inline-flex gap-x-[10px] bg-[#EBF1F9] rounded-[8px] py-[17px] px-[16px] mt-[10px]"
+                    >
+                      <p className="text-lg font-semibold text-[#0256BA]">
+                        Tanishib chiqish
+                      </p>
+                      <Image
+                        src={"/icons/integration-arrow-right.svg"}
+                        alt={"school"}
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Tez-tez so'raladigan savollar */}
+        <section className="bg-white">
+          <div className="container py-[42px]">
+            <h1 className="text-[32px] font-bold">
+              Tez-tez so'raladigan savollar
+            </h1>
+
+            <ul
+              className={"grid grid-cols-12 gap-[12px] font-gilroy mt-[20px]"}
+            >
+              <li className="col-span-12 py-[28px] px-[32px] bg-[#F7F7F7] rounded-[20px]">
+                <div className="flex justify-between">
+                  <div className="flex-1">
+                    <h4 className="text-[20px] text-[#020E03] font-bold">
+                      Et harum quidem rerum facilis est et expedita distinctio.
+                      Nam libero tempore
+                    </h4>
+                    {openFAQ && (
+                      <p className="text-[17px] text-[#9392A0] mt-[10px]">
+                        Sed ut perspiciatis, unde omnis iste natus error sit
+                        voluptatem accusantium doloremque laudantium, totam rem
+                        aperiam eaque ipsa, quae ab illo inventore veritatis et
+                        quasi architecto beatae vitae dicta sunt, explicabo.
+                        Nemo enim
+                      </p>
+                    )}
+                  </div>
+                  <button onClick={toggleFAQ}>
+                    <Image
+                      src={
+                        !openFAQ
+                          ? "/icons/add-icon.svg"
+                          : "/icons/minus-icon.svg"
+                      }
+                      alt={"school"}
+                      width={24}
+                      height={24}
+                    />
+
+                    <Image
+                      src={"/icons/minus.svg"}
+                      alt={"school"}
+                      width={24}
+                      height={24}
+                      className="hidden"
+                    />
+                  </button>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Address */}
+        <section className="container">
+          <div
+            className=" min-h-[164px] w-full bg-center bg-no-repeat
+            bg-cover rounded-[20px] flex items-center justify-center"
+            style={{ backgroundImage: `url(/images/address.png)` }}
+          >
+            <Link
+              href={"https://maps.app.goo.gl/nxPwsjmq6vi6hCPa7"}
+              className="py-[14px] px-[28px] text-sm font-medium font-gilroy text-white bg-[#0256BA] rounded-[12px]"
+            >
+              Google Maps ni ochish
+            </Link>
+          </div>
+        </section>
       </main>
-    </div>
+
+      <Footer />
+    </>
   );
 }

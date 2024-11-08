@@ -63,6 +63,18 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+footer {
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(
+    133.27deg,
+    #0256ba 4.32%,
+    #0256ba 22.48%,
+    #0256ba 56.37%,
+    #0256ba 100%
+  );
+}
+
 .overlayText {
   position: absolute;
   top: 50%;
