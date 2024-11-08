@@ -380,10 +380,10 @@ export default function Home() {
                       "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
                     }
                   >
-                    Biz to'y rejalashtiruvchisi bilan erta suhbatlashdik biz
-                    to'y rejalashtiruvchisi Rano Artykova bilan kelin va
-                    kuyovlar o'rtasidagi ziddiyatlar, keraksiz urf-odatlar va
-                    keyingi sevgi haqida suhbatlashdik
+                    Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                    biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                    va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                    urf-odatlar va keyingi sevgi haqida suhbatlashdik
                   </p>
                   <Link href="https://catalog.tmsiti.uz/works">
                     <div
@@ -424,10 +424,10 @@ export default function Home() {
                       "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
                     }
                   >
-                    Biz to'y rejalashtiruvchisi bilan erta suhbatlashdik biz
-                    to'y rejalashtiruvchisi Rano Artykova bilan kelin va
-                    kuyovlar o'rtasidagi ziddiyatlar, keraksiz urf-odatlar va
-                    keyingi sevgi haqida suhbatlashdik
+                    Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                    biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                    va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                    urf-odatlar va keyingi sevgi haqida suhbatlashdik
                   </p>
                   <Link href="https://catalog.tmsiti.uz/works">
                     <div
