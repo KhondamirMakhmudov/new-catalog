@@ -509,7 +509,7 @@ export default function Home() {
         <section className="bg-white">
           <div className="container py-[42px]">
             <h1 className="text-[32px] font-bold">
-              Integratsiya bo'yicha sheriklar
+              Integratsiya bo&apos;yicha sheriklar
             </h1>
 
             <div className="grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
@@ -557,7 +557,7 @@ export default function Home() {
         <section className="bg-white">
           <div className="container py-[42px]">
             <h1 className="text-[32px] font-bold">
-              Tez-tez so'raladigan savollar
+              Tez-tez so&apos;raladigan savollar
             </h1>
 
             <ul
