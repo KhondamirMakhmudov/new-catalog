@@ -6,6 +6,7 @@ import Selected from "../buttons/selected";
 import WebAccess from "../buttons/web-accessibility";
 import Login from "../buttons/login";
 import Search from "../search";
+import Lang from "../lang";
 
 const Header = () => {
   return (
@@ -35,15 +36,7 @@ const Header = () => {
 
               <div className={"bg-[#4885CD] w-[1px] h-[11px] mx-[13px]"}></div>
 
-              <div className={"flex gap-x-[10px]"}>
-                <h4>Uz</h4>
-                <Image
-                  src={"/icons/down.svg"}
-                  alt={"down"}
-                  width={18}
-                  height={18}
-                />
-              </div>
+              <Lang />
             </div>
           </div>
         </div>
