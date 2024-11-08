@@ -162,7 +162,7 @@ export default function Home() {
                     Global strategiyani o&apos;zgartirish tejaydi
                   </p>
 
-                  <Link href="https://catalog.tmsiti.uz/">
+                  <Link href="https://catalog.tmsiti.uz/technos">
                     <div
                       className={
                         "  py-[13px] w-full justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -243,8 +243,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <section className="relative">
+        {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
+        <section className="relative py-[60px]">
           <div className="absolute z-10 left-0 bottom-0">
             <Image
               src={"/images/bg-eco-2.png"}
@@ -264,48 +264,54 @@ export default function Home() {
               className={""}
             />
           </div>
-          <div className="grid grid-cols-12 container bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
-            <div className="col-span-6">
-              <Image
-                src={"/images/eco-logo.png"}
-                alt={"eco-logo"}
-                width={600}
-                height={436}
-                className={"w-[600px] h-[436px] rounded-[20px]"}
-              />
-            </div>
-            <div className="col-span-6 flex items-start justify-center flex-col">
-              <h1 className={"font-bold text-[42px] text-[#21201F]"}>
-                Ekologiya va atrof-muhitni muhofaza qilish boshqar
-              </h1>
-              <p className={"font-medium text-[#21201FB2] mt-[16px] mb-[24px]"}>
-                Tempus integer eget vulputate imperdiet eget malesuada faucibus.
-                Accumsan, cursus viverra aliquam tortor risus malesuada rhoncus.
-                Augue risus ante blandit tincidunt pharetra sed. Imperdiet
-                pretium diam posuere commodo. Suscipit et in morbi nec varius
-                arcu orci egestas venenatis.
-              </p>
-
-              <Link href="https://catalog.tmsiti.uz/">
-                <div
+          <div className="container">
+            <div className="grid grid-cols-12 gap-x-[30px]  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
+              <div className="col-span-6 w-[600px]">
+                <Image
+                  src={"/images/eco-logo.png"}
+                  alt={"eco-logo"}
+                  width={600}
+                  height={436}
+                  className={"w-full h-[436px] rounded-[20px]"}
+                />
+              </div>
+              <div className="col-span-6 flex items-start justify-center flex-col">
+                <h1 className={"font-bold text-[42px] text-[#21201F]"}>
+                  Ekologiya va atrof-muhitni muhofaza qilish boshqar
+                </h1>
+                <p
                   className={
-                    "  py-[13px] px-[52px]  justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                    "font-medium text-[#21201FB2] text-[21px] mt-[16px] mb-[24px]"
                   }
                 >
-                  <p className={"text-[#21201FCC]"}>Jadvalni ko’rish</p>
-                  <Image
-                    src={"/icons/arrow-right.svg"}
-                    alt={"arrow-right"}
-                    width={20}
-                    height={20}
-                    className={"ml-[16px]"}
-                  />
-                </div>
-              </Link>
+                  Tempus integer eget vulputate imperdiet eget malesuada
+                  faucibus. Accumsan, cursus viverra aliquam tortor risus
+                  malesuada rhoncus. Augue risus ante blandit tincidunt pharetra
+                  sed. Imperdiet pretium diam posuere commodo. Suscipit et in
+                  morbi nec varius arcu orci egestas venenatis.
+                </p>
+
+                <Link href="https://catalog.tmsiti.uz/">
+                  <div
+                    className={
+                      "  py-[13px] px-[52px]  justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                    }
+                  >
+                    <p className={"text-[#21201FCC]"}>Jadvalni ko’rish</p>
+                    <Image
+                      src={"/icons/arrow-right.svg"}
+                      alt={"arrow-right"}
+                      width={20}
+                      height={20}
+                      className={"ml-[16px]"}
+                    />
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
-
+        {/* ////////// Namunaviy loyihalar /////////// */}
         <section
           style={{ backgroundImage: `url(/images/bg-namunaviy-loyihalar.png)` }}
           className="min-h-[879px] bg-no-repeat bg-cover relative z-10 "
@@ -315,15 +321,149 @@ export default function Home() {
           ></div>
 
           <div className="container">
-            <div className="z-40 text-white pt-[42px]">
-              <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
-                Namunaviy loyihalar
-              </h1>
-              <p>
-                Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan shunchaki
-                qo&apos;g&apos;irchoq matn-bu shunchaki ishlatilgan
-                qo&apos;g&apos;irchoq matn
-              </p>
+            <div>
+              <div className="z-40 text-white pt-[42px]">
+                <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
+                  Namunaviy loyihalar
+                </h1>
+                <p>
+                  Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan shunchaki
+                  qo&apos;g&apos;irchoq matn-bu shunchaki ishlatilgan
+                  qo&apos;g&apos;irchoq matn
+                </p>
+              </div>
+            </div>
+
+            <div className={"grid grid-cols-12 gap-x-[20px] mt-[30px]"}>
+              <div
+                className={
+                  "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
+                }
+                style={{ backgroundImage: `url(/images/kindergarden.png)` }}
+              >
+                <div
+                  className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
+                ></div>
+                <div className="absolute bottom-0 p-[32px] text-white ">
+                  <h1 className={"text-[28px] font-bold "}>
+                    Bolalar bog'chasi
+                  </h1>
+                  <p className="text-sm font-normal mt-[10px] line-clamp-2">
+                    Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                    biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                    va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                    urf-odatlar va keyingi sevgi haqida suhbatlashdik
+                  </p>
+                </div>
+              </div>
+
+              <div className={"col-span-6 space-y-[20px]"}>
+                <div
+                  className={
+                    "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
+                  }
+                >
+                  <div className="absolute bottom-0 right-0 p-[24px]">
+                    <Image
+                      src={"/images/school.png"}
+                      alt={"arrow-right"}
+                      width={150}
+                      height={120}
+                      className={"ml-[16px]"}
+                    />
+                  </div>
+                  <h1 className="text-[28px] font-bold text-[#21201F]">
+                    Maktab
+                  </h1>
+                  <p
+                    className={
+                      "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                    }
+                  >
+                    Biz to'y rejalashtiruvchisi bilan erta suhbatlashdik biz
+                    to'y rejalashtiruvchisi Rano Artykova bilan kelin va
+                    kuyovlar o'rtasidagi ziddiyatlar, keraksiz urf-odatlar va
+                    keyingi sevgi haqida suhbatlashdik
+                  </p>
+                  <Link href="https://catalog.tmsiti.uz/works">
+                    <div
+                      className={
+                        "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                      }
+                    >
+                      <p className={"text-[#21201FCC]"}>Qarang</p>
+                      <Image
+                        src={"/icons/arrow-right.svg"}
+                        alt={"arrow-right"}
+                        width={20}
+                        height={20}
+                        className={"ml-[16px]"}
+                      />
+                    </div>
+                  </Link>
+                </div>
+                <div
+                  className={
+                    "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
+                  }
+                >
+                  <div className="absolute bottom-0 right-0 p-[24px]">
+                    <Image
+                      src={"/images/medicine.png"}
+                      alt={"medicine"}
+                      width={150}
+                      height={120}
+                      className={"ml-[16px]"}
+                    />
+                  </div>
+                  <h1 className="text-[28px] font-bold text-[#21201F]">
+                    Poliklinika
+                  </h1>
+                  <p
+                    className={
+                      "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                    }
+                  >
+                    Biz to'y rejalashtiruvchisi bilan erta suhbatlashdik biz
+                    to'y rejalashtiruvchisi Rano Artykova bilan kelin va
+                    kuyovlar o'rtasidagi ziddiyatlar, keraksiz urf-odatlar va
+                    keyingi sevgi haqida suhbatlashdik
+                  </p>
+                  <Link href="https://catalog.tmsiti.uz/works">
+                    <div
+                      className={
+                        "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                      }
+                    >
+                      <p className={"text-[#21201FCC]"}>Qarang</p>
+                      <Image
+                        src={"/icons/arrow-right.svg"}
+                        alt={"arrow-right"}
+                        width={20}
+                        height={20}
+                        className={"ml-[16px]"}
+                      />
+                    </div>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="col-span-12 mt-[30px] backdrop-blur-lg">
+                <div className="backdrop-blur bg-transparent">
+                  <Link
+                    href={"/"}
+                    className="flex gap-x-[12px] text-white py-[19px] w-full  justify-center border border-[#699EDB] rounded-[16px] "
+                  >
+                    <p>Hammasini tomosha qiling (952)</p>
+                    <Image
+                      src={"/icons/right.svg"}
+                      alt={"arrow-right"}
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </section>
