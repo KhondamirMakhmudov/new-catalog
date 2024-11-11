@@ -110,11 +110,11 @@ const Index = () => {
                 </span>
               )}
 
-              <button className="bg-[#0256BA] hover:bg-[#0255bae3] rounded-[12px] w-full text-white font-semibold py-[15px] my-[30px] transition-all duration-200">
+              <button className="bg-[#0256BA] hover:bg-[#0255bae3] rounded-[12px] w-full text-white font-semibold py-[15px] mb-[12px] transition-all duration-200">
                 Yuborish
               </button>
 
-              <p className="font-semibold text-[#1A202C]">
+              <p className="font-semibold text-[#1A202C] text-center">
                 Parolni esingizdami?{" "}
                 <span>
                   <Link

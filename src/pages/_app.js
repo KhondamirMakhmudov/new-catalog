@@ -18,7 +18,7 @@ export default function App({
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps?.dehydratedState}>
-          <NextNProgress height={5} color={"#1890FF"} />
+          <NextNProgress />
           <CounterProvider>
             <Component {...pageProps} />
           </CounterProvider>

@@ -44,7 +44,7 @@ export default function Home() {
     <>
       <Header />
 
-      <main>
+      <main className="bg-white">
         <section
           style={{ backgroundImage: `url(/images/bg-image.png)` }}
           className={

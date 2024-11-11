@@ -1,4 +1,4 @@
-const RightIcon = ({ props, color = "black" }) => {
+const RightIcon = ({ props, color = "black", classname }) => {
   return (
     <svg
       width="20"
@@ -6,6 +6,7 @@ const RightIcon = ({ props, color = "black" }) => {
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={classname}
       {...props}
     >
       <path
