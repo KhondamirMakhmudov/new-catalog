@@ -36,12 +36,12 @@ const Index = () => {
         captcha_response: get(data, "captcha_response").toLowerCase(),
         captcha_key: get(logins, "data.captcha_key"),
         redirect: false,
-        callbackUrl: "/dashboard/customer/my-orders",
+        callbackUrl: "/",
       });
 
       if (response.ok) {
         toast.success("Login successful!");
-        router.push("/dashboard/customer/my-orders");
+        router.push("/");
       } else {
         toast.error("Login failed! Please check your credentials.");
       }
@@ -141,9 +141,11 @@ const Index = () => {
                     />
                   </div>
 
-                  <p className="text-[#0256BA] font-semibold float-right">
-                    Parolni unutdingizmi?
-                  </p>
+                  <Link href={"/auth/forget-password"}>
+                    <p className="text-[#0256BA] font-semibold float-right">
+                      Parolni unutdingizmi?
+                    </p>
+                  </Link>
 
                   <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px] my-[30px]">
                     Kirish

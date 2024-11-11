@@ -28,7 +28,7 @@ const Index = () => {
       },
       {
         onSuccess: () => {
-          toast.success("Siz ro'yxatdan muvafaqiyyatli o'tdingiz", {
+          toast.success("Siz ro'yxatdan muvaffaqiyatli o'tdingiz", {
             position: "top-right",
           });
           router.push({
