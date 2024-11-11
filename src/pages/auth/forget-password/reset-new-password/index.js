@@ -15,7 +15,7 @@ const Index = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     setValue,
     formState: { errors },
   } = useForm();
@@ -25,10 +25,8 @@ const Index = () => {
 
   useEffect(() => {
     if (!reset_code) {
-      // Redirect back to signup page if no email is found in query params
       router.push("/auth/forget-password/confirm-code");
     } else {
-      // Set the email in the form's default values
       setValue("reset_code", reset_code);
     }
   }, [reset_code, router, setValue]);
@@ -45,7 +43,7 @@ const Index = () => {
       {
         onSuccess: () => {
           toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
-          router.push("/auth/login");
+          router.push("/auth/forget-password/final-step");
         },
       }
     );
@@ -79,7 +77,7 @@ const Index = () => {
         </section>
 
         <div className="flex justify-center items-center translate-y-1/2">
-          <div className="max-w-[510px] w-full font-gilroy !bg-white py-[40px] px-[27px] shadow-xl">
+          <div className="max-w-[510px] w-full font-gilroy !bg-white py-[40px] px-[27px] shadow-2xl rounded-[16px]">
             <h1 className="font-semibold text-[32px] text-center">
               Parolni tiklash
             </h1>
@@ -104,7 +102,7 @@ const Index = () => {
                 {...register("new_password", { required: true })}
                 type="password"
                 placeholder="Elektron pochtangizga kelgan parolni kiriting"
-                className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
+                className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg mb-[30px]"
               />
               {errors.password && (
                 <span className={"text-xs text-red-500"}>
@@ -112,9 +110,21 @@ const Index = () => {
                 </span>
               )}
 
-              <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px] ">
+              <button className="bg-[#0256BA] hover:bg-[#0255bae3] rounded-[12px] w-full text-white font-semibold py-[15px] my-[30px] transition-all duration-200">
                 Yuborish
               </button>
+
+              <p className="font-semibold text-[#1A202C]">
+                Parolni esingizdami?{" "}
+                <span>
+                  <Link
+                    href={"/auth/login"}
+                    className="text-[#1677FF] underline"
+                  >
+                    Kirish
+                  </Link>
+                </span>
+              </p>
             </form>
           </div>
         </div>
