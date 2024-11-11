@@ -35,12 +35,12 @@ const Index = () => {
           <div className="  flex-col ">
             <div className="text-center">
               <h1 className="text-[32px] font-bold  text-[#1A202C]">
-                Qaysi turdagi foydalanuvchi bo'lishni xohlayotganingizni
-                ko'rsating
+                Qaysi turdagi foydalanuvchi bo&apos;lishni xohlayotganingizni
+                ko&apos;rsating
               </h1>
               <p className="text-base font-medium   text-[#718096]">
                 Oldingi media kampaniyalari natijalarini hisobga olgan holda,
-                xaridor konventsiyasi tarkibni to'liq o'zgartiradi
+                xaridor konventsiyasi tarkibni to&apos;liq o&apos;zgartiradi
               </p>
             </div>
 
@@ -122,7 +122,7 @@ const Index = () => {
                 </button>
               </Link>
             ) : (
-              "" 
+              ""
             )}
           </div>
         </section>

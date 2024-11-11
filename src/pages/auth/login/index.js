@@ -156,7 +156,9 @@ const Index = () => {
                     <p className="text-center">
                       Akkaunt mavjud emasmi?{" "}
                       <span className="font-extrabold ">
-                        <Link href={"/auth/signup"}>Ro'yxatdan o'tish</Link>
+                        <Link href={"/auth/signup"}>
+                          Ro&apos;yxatdan o&apos;tish
+                        </Link>
                       </span>
                     </p>
                   </div>

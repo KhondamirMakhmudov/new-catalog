@@ -27,7 +27,7 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link href={"#"} className="text-[#0256BA] text-sm font-semibold">
-            Ro'yxatdan o'tish
+            Ro&apos;yxatdan o&apos;tish
           </Link>
         </section>
 
@@ -148,7 +148,7 @@ const Index = () => {
             <div className="col-span-6 place-items-center">
               <div className="max-w-[427px] w-full flex flex-col justify-center items-center ">
                 <h1 className="text-[32px] font-bold mb-[16px]">
-                  Ro'yxatdan o'tish
+                  Ro&apos;yxatdan o&apos;tish
                 </h1>
                 <p className="font-normal text-[#718096]">
                   Oqilona yuboring, sarflang va tejang
