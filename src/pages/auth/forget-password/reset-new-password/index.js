@@ -26,7 +26,7 @@ const Index = () => {
   useEffect(() => {
     if (!reset_code) {
       // Redirect back to signup page if no email is found in query params
-      router.push("/auth/confirm-code");
+      router.push("/auth/forget-password/confirm-code");
     } else {
       // Set the email in the form's default values
       setValue("reset_code", reset_code);
