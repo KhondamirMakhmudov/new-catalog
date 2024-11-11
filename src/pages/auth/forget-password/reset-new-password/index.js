@@ -89,7 +89,7 @@ const Index = () => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                {...register("reset_code", { required: true })}
+                {...register("new_password", { required: true })}
                 type="password"
                 placeholder="Elektron pochtangizga kelgan parolni kiriting"
                 className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
@@ -101,7 +101,7 @@ const Index = () => {
               )}
 
               <input
-                {...register("reset_code", { required: true })}
+                {...register("new_password", { required: true })}
                 type="password"
                 placeholder="Elektron pochtangizga kelgan parolni kiriting"
                 className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
