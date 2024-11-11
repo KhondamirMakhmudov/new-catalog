@@ -22,9 +22,6 @@ const Index = () => {
 
   const router = useRouter();
   const { data: session } = useSession();
-  const { mutate: signupRequest, isLoading } = usePostQuery({
-    listKeyId: KEYS.login,
-  });
 
   const { data: logins } = useGetQuery({
     key: KEYS.captcha,

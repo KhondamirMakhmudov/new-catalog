@@ -28,12 +28,11 @@ const Index = () => {
       },
       {
         onSuccess: () => {
-          toast.success(
-            "Biz sizning elektron pochta manzilingizga tasdiqlash kodini yubordik",
-            { position: "top-right" }
-          );
+          toast.success("Siz ro'yxatdan muvafaqiyyatli o'tdingiz", {
+            position: "top-right",
+          });
           router.push({
-            pathname: "/auth/confirm-email",
+            pathname: "/auth/login",
             query: { email: data.email },
           });
         },
@@ -244,7 +243,7 @@ const Index = () => {
                     <strong>Elektron aloqa siyosati</strong>.
                   </p>
 
-                  <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px] my-[30px]">
+                  <button className="bg-[#0256BA] hover:bg-[#0255bae3] rounded-[12px] w-full text-white font-semibold py-[15px] my-[30px] transition-all duration-200">
                     Kirish
                   </button>
                 </form>
