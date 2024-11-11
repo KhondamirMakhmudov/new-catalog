@@ -5,36 +5,47 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const router = useRouter();
-  const { email } = router.query;
-  console.log(router);
-
+  const { reset_code } = router.query;
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm();
-  const { mutate: confirmCodeFromEmail, isLoading } = usePostQuery({
-    listKeyId: KEYS.confirmCode,
+  const { mutate: confirmCodeForNewPassword, isLoading } = usePostQuery({
+    listKeyId: KEYS.newPasswordConfirm,
   });
 
+  useEffect(() => {
+    if (!reset_code) {
+      // Redirect back to signup page if no email is found in query params
+      router.push("/auth/confirm-code");
+    } else {
+      // Set the email in the form's default values
+      setValue("reset_code", reset_code);
+    }
+  }, [reset_code, router, setValue]);
+
   const onSubmit = (data) => {
-    confirmCodeFromEmail(
+    confirmCodeForNewPassword(
       {
-        url: URLS.confirmCode,
-        attributes: { ...data },
+        url: URLS.newPasswordConfirm,
+        attributes: {
+          reset_code: reset_code,
+          new_password: data.new_password,
+        },
       },
       {
         onSuccess: () => {
           toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
-          router.push({
-            pathname: "/auth/forget-password/reset-new-password",
-            query: { reset_code: data.reset_code },
-          });
+          router.push("/auth/login");
         },
       }
     );
@@ -70,20 +81,32 @@ const Index = () => {
         <div className="flex justify-center items-center translate-y-1/2">
           <div className="max-w-[510px] w-full font-gilroy !bg-white py-[40px] px-[27px] shadow-xl">
             <h1 className="font-semibold text-[32px] text-center">
-              Elektron pochtangizni tekshiring
+              Parolni tiklash
             </h1>
             <p className="text-[#718096] font-medium text-center  mt-[16px]">
-              Biz kodni quyidagi manzilga yubordik helloworld@gmail.com. {email}
+              Iltimos, eslab qoladigan narsani ko'rsating
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 {...register("reset_code", { required: true })}
-                type="text"
+                type="password"
                 placeholder="Elektron pochtangizga kelgan parolni kiriting"
                 className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
               />
-              {errors.email && (
+              {errors.password && (
+                <span className={"text-xs text-red-500"}>
+                  Ushbu qator to&apos;ldirilishi shart
+                </span>
+              )}
+
+              <input
+                {...register("reset_code", { required: true })}
+                type="password"
+                placeholder="Elektron pochtangizga kelgan parolni kiriting"
+                className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
+              />
+              {errors.password && (
                 <span className={"text-xs text-red-500"}>
                   Ushbu qator to&apos;ldirilishi shart
                 </span>
