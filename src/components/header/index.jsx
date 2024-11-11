@@ -42,7 +42,9 @@ const Header = () => {
         </div>
       </div>
 
-      <div className={"bg-white py-[20px] font-gilroy"}>
+      <div
+        className={"bg-white py-[20px] font-gilroy rounded-b-[24px] shadow-xl"}
+      >
         <div className={"container flex items-center justify-between"}>
           <Brand />
 

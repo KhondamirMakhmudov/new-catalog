@@ -1,0 +1,148 @@
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/header";
+import CustomerIcon from "@/components/icons/customer";
+import DeliverIcon from "@/components/icons/deliver";
+import RightIcon from "@/components/icons/right";
+
+const Index = () => {
+  const [selectPosition, setSelectPosition] = useState("");
+  const [isScaled, setIsScaled] = useState(false);
+
+  const handleSelection = (select) => {
+    setSelectPosition(select);
+    setIsScaled(!isScaled);
+  };
+  return (
+    <>
+      <Header />
+
+      <main className="container">
+        <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
+            Bosh sahifa
+          </Link>
+          <RightIcon color="#BCBFC2" />
+          <Link
+            className="text-[#0256BA] text-sm font-semibold"
+            href={"/select-position"}
+          >
+            Kirish
+          </Link>
+        </section>
+        <section className="font-gilroy max-w-[456px] mx-auto h-screen flex items-center justify-center">
+          <div className="  flex-col ">
+            <div className="text-center">
+              <h1 className="text-[32px] font-bold  text-[#1A202C]">
+                Qaysi turdagi foydalanuvchi bo'lishni xohlayotganingizni
+                ko'rsating
+              </h1>
+              <p className="text-base font-medium   text-[#718096]">
+                Oldingi media kampaniyalari natijalarini hisobga olgan holda,
+                xaridor konventsiyasi tarkibni to'liq o'zgartiradi
+              </p>
+            </div>
+
+            <div className="flex space-x-[24px] my-[30px]">
+              <button
+                onClick={() => handleSelection("client")}
+                className={`${
+                  selectPosition === "client"
+                    ? "bg-[#0256BA] text-white"
+                    : "bg-[#DFE8F2] text-[#1A202C]"
+                }  transition-all duration-200 max-w-[256px] w-full rounded-[16px]   p-[24px] flex flex-col items-center cursor-pointer`}
+              >
+                <div
+                  className={`p-[14px] ${
+                    selectPosition === "client" ? "bg-white" : "bg-[#0256BA]"
+                  } inline-block rounded-full`}
+                >
+                  <CustomerIcon
+                    color={selectPosition === "client" ? "#0256BA" : "white"}
+                  />
+                </div>
+
+                <h1 className="text-lg font-bold mt-[16px]">Buyurtmachi</h1>
+
+                <p
+                  className={`${
+                    selectPosition === "client"
+                      ? "text-[#84BCFE]"
+                      : "text-[#4A678A]"
+                  } text-xs text-center font-medium`}
+                >
+                  Siz qurilish materiallarini buyurtma qiluvchi kompaniyasiz
+                </p>
+              </button>
+
+              <button
+                onClick={() => handleSelection("deliver")}
+                className={`${
+                  selectPosition === "deliver"
+                    ? "bg-[#0256BA] text-white"
+                    : "bg-[#DFE8F2] text-[#1A202C]"
+                }  transition-all duration-200 max-w-[256px] w-full rounded-[16px]   p-[24px] flex flex-col items-center cursor-pointer`}
+              >
+                <div
+                  className={`p-[14px] ${
+                    selectPosition === "deliver" ? "bg-white" : "bg-[#0256BA]"
+                  } inline-block rounded-full`}
+                >
+                  <DeliverIcon
+                    color={selectPosition === "deliver" ? "#0256BA" : "white"}
+                  />
+                </div>
+
+                <h1 className="text-lg font-bold mt-[16px]">
+                  Yetkazib beruvchi
+                </h1>
+
+                <p
+                  className={`${
+                    selectPosition === "deliver"
+                      ? "text-[#84BCFE]"
+                      : "text-[#4A678A]"
+                  } text-xs text-center font-medium`}
+                >
+                  Siz qurilish materiallarini yetkazib beruvchi kompaniyasiz
+                </p>
+              </button>
+            </div>
+            {selectPosition === "client" ? (
+              <Link href={"/auth/login"} className="w-full  ">
+                <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
+                  Keyingi
+                </button>
+              </Link>
+            ) : selectPosition === "deliver" ? (
+              <Link href={"/auth/eri"} className="w-full mt-[30px] ">
+                <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
+                  Keyingi
+                </button>
+              </Link>
+            ) : (
+              "" 
+            )}
+          </div>
+        </section>
+      </main>
+
+      <footer className="container font-gilroy py-[48px]">
+        <div className="flex justify-between">
+          <div>
+            <p className="text-[#718096] text-semibold">
+              Qurilish Resurslari Milliy Klassifikatori 2024
+            </p>
+          </div>
+
+          <div>
+            <p className="text-[#718096] text-semibold">Copyright 2024</p>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+};
+
+export default Index;
