@@ -10,26 +10,29 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const router = useRouter();
-
+  const { email } = router.query;
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { mutate: forgetPassword, isLoading } = usePostQuery({
-    listKeyId: KEYS.forgetPassword,
+  const { mutate: confirmCodeFromEmail, isLoading } = usePostQuery({
+    listKeyId: KEYS.confirmCode,
   });
 
   const onSubmit = (data) => {
-    forgetPassword(
+    confirmCodeFromEmail(
       {
-        url: URLS.forgetPassword,
+        url: URLS.confirmCode,
         attributes: { ...data },
       },
       {
         onSuccess: () => {
           toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
-          router.push("/auth/forget-password/confirm-code");
+          router.push({
+            pathname: "/auth/forget-password/reset-new-password",
+            query: { reset_code: data.reset_code },
+          });
         },
       }
     );
@@ -51,7 +54,7 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link
-            href={"/login"}
+            href={"/auth/login"}
             className="text-[#262D33] text-sm font-semibold"
           >
             Buyurtmachi
@@ -63,21 +66,20 @@ const Index = () => {
         </section>
 
         <div className="flex justify-center items-center translate-y-1/2">
-          <div className="max-w-[427px] w-full font-gilroy !bg-white p-[40px] shadow-xl">
-            <h1 className="font-bold text-[32px] text-center">
-              Parolni unutdingizmi?
+          <div className="max-w-[510px] w-full font-gilroy !bg-white py-[40px] px-[27px] shadow-xl">
+            <h1 className="font-semibold text-[32px] text-center">
+              Elektron pochtangizni tekshiring
             </h1>
-            <p className="text-[#718096] text-center">
-              Xavotir olmang! Bu sodir bo&apos;ladi. Iltimos, hisobingizga
-              bog&apos;langan elektron pochta manzilini kiriting.
+            <p className="text-[#718096] font-medium text-center  mt-[16px]">
+              Biz kodni quyidagi manzilga yubordik helloworld@gmail.com. {email}
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                {...register("email", { required: true })}
+                {...register("reset_code", { required: true })}
                 type="text"
-                placeholder="Elektron pochta manzilingizni kiriting"
-                className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
+                placeholder="Elektron pochtangizga kelgan parolni kiriting"
+                className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
               />
               {errors.email && (
                 <span className={"text-xs text-red-500"}>
