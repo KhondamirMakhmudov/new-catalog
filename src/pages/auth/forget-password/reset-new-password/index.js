@@ -84,7 +84,7 @@ const Index = () => {
               Parolni tiklash
             </h1>
             <p className="text-[#718096] font-medium text-center  mt-[16px]">
-              Iltimos, eslab qoladigan narsani ko'rsating
+              Iltimos, eslab qoladigan narsani ko&apos;rsating
             </p>
 
             <form onSubmit={handleSubmit(onSubmit)}>
