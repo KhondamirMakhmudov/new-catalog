@@ -57,7 +57,7 @@ const Index = () => {
     <div className="bg-[#F7F7F7]">
       <Header />
 
-      <main className="container font-gilroy   h-screen">
+      <main className="container font-gilroy h-screen">
         <section className="mt-[16px] flex items-center space-x-[12px]">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa

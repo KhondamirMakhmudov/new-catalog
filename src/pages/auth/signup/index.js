@@ -2,7 +2,44 @@ import Header from "@/components/header";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import usePostQuery from "@/hooks/api/usePostQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+
 const Index = () => {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { mutate: signupRequest, isLoading } = usePostQuery({
+    listKeyId: KEYS.signup,
+  });
+
+  const onSubmit = (data) => {
+    signupRequest(
+      {
+        url: URLS.signup,
+        attributes: { ...data },
+      },
+      {
+        onSuccess: () => {
+          toast.success(
+            "Biz sizning elektron pochta manzilingizga tasdiqlash kodini yubordik",
+            { position: "top-right" }
+          );
+          router.push({
+            pathname: "/auth/confirm-email",
+            query: { email: data.email },
+          });
+        },
+      }
+    );
+  };
   return (
     <div>
       <Header />
@@ -154,41 +191,47 @@ const Index = () => {
                   Oqilona yuboring, sarflang va tejang
                 </p>
 
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <div className="my-[30px] space-y-[16px]">
                     <div className="w-full flex space-x-[16px]">
                       <input
                         type="text"
+                        {...register("first_name", { required: true })}
                         placeholder="Ismingiz"
                         className="placeholder:text-[#A0AEC0] text-black w-1/2 p-[16px] bg-white border border-[#C8CED5] rounded-lg"
                       />
 
                       <input
                         type="text"
+                        {...register("last_name", { required: true })}
                         placeholder="Familiyangiz"
                         className="placeholder:text-[#A0AEC0] text-black w-1/2 p-[16px] bg-white border border-[#C8CED5] rounded-lg"
                       />
                     </div>
                     <input
                       type="email"
+                      {...register("email", { required: true })}
                       placeholder="E-mailni kiriting"
                       className="placeholder:text-[#A0AEC0] text-black max-w-[427px] bg-white w-full p-[16px] border border-[#C8CED5] rounded-lg"
                     />
 
                     <input
                       type="text"
+                      {...register("company", { required: true })}
                       placeholder="INN"
                       className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] bg-white border border-[#C8CED5] rounded-lg"
                     />
 
                     <input
                       type="tel"
+                      {...register("phone", { required: true })}
                       placeholder="+998"
                       className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] bg-white border border-[#C8CED5] rounded-lg"
                     />
 
                     <input
                       type="password"
+                      {...register("password", { required: true })}
                       placeholder="Parol"
                       className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg"
                     />
