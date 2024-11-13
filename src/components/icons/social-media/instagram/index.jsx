@@ -10,7 +10,7 @@ export const InstagramIcon = ({ props, color = "white" }) => {
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clip-path="url(#clip0_206_3659)">
+      <g clipPath="url(#clip0_206_3659)">
         <path
           d="M16 4H8C5.79086 4 4 5.79086 4 8V16C4 18.2091 5.79086 20 8 20H16C18.2091 20 20 18.2091 20 16V8C20 5.79086 18.2091 4 16 4Z"
           stroke={color}
