@@ -49,8 +49,8 @@ const EimzoLogin = () => {
         </section>
         <section>
           <div className="grid grid-cols-12">
-            <div className="col-span-5">
-              <div className="col-span-6 ">
+            <div className="col-span-6">
+              <div className=" ">
                 <div
                   className="bg-[#0256BA] rounded-[20px] min-h-[823px] bg-no-repeat bg-center px-[31px] relative"
                   style={{ backgroundImage: `url(/images/map_uzb.png)` }}
@@ -168,7 +168,7 @@ const EimzoLogin = () => {
                 </div>
               </div>
             </div>
-            <div className="col-span-7 ">
+            <div className="col-span-6 ">
               <ESIGN open={true} setOpen={() => {}} eSign={loginWithKey} />
             </div>
           </div>

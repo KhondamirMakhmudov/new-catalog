@@ -7,6 +7,7 @@ import WebAccess from "../buttons/web-accessibility";
 import Login from "../buttons/login";
 import Search from "../search";
 import Lang from "../lang";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -16,12 +17,29 @@ const Header = () => {
           {/* top of the header. will be component in next time */}
           <div className={"flex justify-between"}>
             <ul className={"flex gap-x-[32px]"}>
-              <li>Bo&apos;limlar</li>
-              <li>Klassifikator haqida</li>
-              <li>Loyihalar</li>
-              <li>Monitoring</li>
-              <li>Integratsiya</li>
-              <li>Kontaktlar</li>
+              <li>
+                <Link href={"#"}>Bo&apos;limlar</Link>
+              </li>
+
+              <li>
+                <Link href={"#"}>Klassifikator haqida</Link>
+              </li>
+
+              <li>
+                <Link href={"/loyihalar"}>Loyihalar</Link>
+              </li>
+
+              <li>
+                <Link href={"#"}>Monitoring</Link>
+              </li>
+
+              <li>
+                <Link href={"#"}>Integratsiya</Link>
+              </li>
+
+              <li>
+                <Link href={"#"}>Kontaktlar</Link>
+              </li>
             </ul>
             <div className={"flex items-center"}>
               <div className={"flex gap-x-[10px]"}>

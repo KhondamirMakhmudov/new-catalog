@@ -52,7 +52,7 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="https://catalog.tmsiti.uz/works">
+                <Link href="/loyihalar/1">
                   <div
                     className={
                       "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -126,8 +126,8 @@ const Index = () => {
               >
                 <div className="absolute bottom-0 right-0 p-[24px]">
                   <Image
-                    src={"/images/medicine.png"}
-                    alt={"medicine"}
+                    src={"/images/kindergarten.png"}
+                    alt={"kindergarten"}
                     width={150}
                     height={120}
                     className={"ml-[16px]"}

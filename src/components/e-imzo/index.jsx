@@ -54,7 +54,9 @@ const ESIGN = ({
       {isArray(keys) && !isEmpty(keys) && (
         <div className="container font-gilroy  text-[#1F2937]">
           <div className={" space-y-[16px] mb-[29px] text-center"}>
-            <h1 className="text-[32px] font-bold ">Kirish</h1>
+            <h1 className="text-[32px] font-bold ">
+              Tizim uchun ERI-ni tanlang
+            </h1>
             <p className="font-normal text-[#718096]">
               Oqilona yuboring, sarflang va tejang
             </p>
