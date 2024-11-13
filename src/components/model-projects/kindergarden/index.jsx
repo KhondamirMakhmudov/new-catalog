@@ -52,7 +52,7 @@ const KindergardenProject = () => {
               Mahsulot Kodi
             </th>
             <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-              O'lchov Birligi
+              O&apos;lchov Birligi
             </th>
             <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
               Narxi
