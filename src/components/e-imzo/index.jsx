@@ -164,19 +164,19 @@ const ESIGN = ({
 
               <li>
                 Antivirus dasturi kalitlardan foydalanishni
-                ta'qiqlamayotganligini tekshiring
+                ta&apos;qiqlamayotganligini tekshiring
               </li>
 
               <li>
-                Korporativ kompyuterlarni ko'llash holatida tashkilot siyosati
-                sizga ERI kalitlaridan foydalanishga ruxsat berayotganiga
-                ishonch hosil qiling
+                Korporativ kompyuterlarni ko&apos;llash holatida tashkilot
+                siyosati sizga ERI kalitlaridan foydalanishga ruxsat
+                berayotganiga ishonch hosil qiling
               </li>
             </ol>
 
             <p className={"mt-[20px] text-[#525D8A]"}>
-              E-Imzo modulini o'rnatish bo'yicha yo'riqnoma va yuzaga kelishi
-              mumkin bo'lgan muammolar bilan{" "}
+              E-Imzo modulini o&apos;rnatish bo&apos;yicha yo&apos;riqnoma va
+              yuzaga kelishi mumkin bo&apos;lgan muammolar bilan{" "}
               <Link
                 href={"https://e-imzo.uz/#instructions"}
                 className={"text-[#017EFA] underline"}
@@ -205,19 +205,19 @@ const ESIGN = ({
               </li>
               <li>
                 Antivirus dasturi kalitlardan foydalanishni
-                ta'qiqlamayotganligini tekshiring
+                ta&apos;qiqlamayotganligini tekshiring
               </li>
 
               <li>
-                Korporativ kompyuterlarni ko'llash holatida tashkilot siyosati
-                sizga ERI kalitlaridan foydalanishga ruxsat berayotganiga
-                ishonch hosil qiling
+                Korporativ kompyuterlarni ko&apos;llash holatida tashkilot
+                siyosati sizga ERI kalitlaridan foydalanishga ruxsat
+                berayotganiga ishonch hosil qiling
               </li>
             </ol>
 
             <p className={"mt-[20px] text-[#525D8A]"}>
-              E-Imzo modulini o'rnatish bo'yicha yo'riqnoma va yuzaga kelishi
-              mumkin bo'lgan muammolar bilan{" "}
+              E-Imzo modulini o&apos;rnatish bo&apos;yicha yo&apos;riqnoma va
+              yuzaga kelishi mumkin bo&apos;lgan muammolar bilan{" "}
               <Link
                 href={"https://e-imzo.uz/#instructions"}
                 className={"text-[#017EFA] underline"}
