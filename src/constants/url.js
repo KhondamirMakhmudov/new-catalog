@@ -77,4 +77,7 @@ export const URLS = {
   verifyCaptcha: "api/verify-captcha/",
   ministry: "iqtisod_list/",
   soliq: "soliq/",
+  kindergarden: "/cmeta/sample/1",
+  school: "/cmeta/sample/2",
+  medicine: "/cmeta/sample/3",
 };

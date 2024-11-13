@@ -63,4 +63,7 @@ export const KEYS = {
   loginPost: "loginPost",
   ministry: "ministry",
   soliqPrice: "soliqPrice",
+  kindergarden: "kindergarden",
+  school: "school",
+  medicine: "medicine",
 };

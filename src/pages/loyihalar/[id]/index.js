@@ -3,16 +3,38 @@ import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
 import { useState } from "react";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
+import Pagination from "@/components/pagination";
+
+import { motion } from "framer-motion";
+import KindergardenProject from "@/components/model-projects/kindergarden";
+import SchoolProject from "@/components/model-projects/school";
+import MedicineProject from "@/components/model-projects/medicine";
+
 const Index = () => {
   const [tab, setTab] = useState("maktab");
-  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllProjects, setShowAllProjects] = useState(!false);
+
+  const {
+    data: kinderGarden,
+    isLoading: isLoadingKinderGarden,
+    isFetching: isFetchingKindergarden,
+  } = useGetQuery({
+    key: KEYS.kindergarden,
+    url: URLS.kindergarden,
+  });
+
+  console.log(kinderGarden);
 
   const selectProject = (tab) => {
     setTab(tab);
   };
 
   return (
-    <div className="bg-[#F7F7F7] h-screen">
+    <div className="bg-[#F7F7F7] ">
       <Header />
 
       <main className="container">
@@ -36,7 +58,7 @@ const Index = () => {
         <section>
           <h1 className="text-[32px] font-bold my-[16px]">Maktab</h1>
           <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-3 font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]">
+            <div className="col-span-3  font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]">
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Boshqa loyihalar</h4>
                 <button onClick={() => setShowAllProjects(!showAllProjects)}>
@@ -50,10 +72,21 @@ const Index = () => {
               </div>
 
               {showAllProjects && (
-                <ul className="mt-[10px] space-y-[10px]">
-                  <li>
-                    <div className="bg-[#F4F4F4] p-[10px] flex items-center gap-x-[8px] rounded-[12px]">
-                      <div className=" px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block">
+                <motion.ul
+                  className="mt-[10px] space-y-[10px]"
+                  initial={{ opacity: 0, translateY: "30px" }}
+                  animate={{ opacity: 1, translateY: "0" }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <li onClick={() => selectProject("maktab")}>
+                    <div
+                      className={`${
+                        tab === "maktab" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
+                      } p-[10px] flex items-center gap-x-[8px] rounded-[12px] cursor-pointer`}
+                    >
+                      <div
+                        className={` px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block`}
+                      >
                         <Image
                           src={"/images/school.png"}
                           alt={"school"}
@@ -65,13 +98,26 @@ const Index = () => {
                       <p className="flex-1">Maktab</p>
 
                       <div className="bg-[#9AA8BC] inline-block rounded-full">
-                        <RightIcon color="white" />
+                        {tab === "maktab" ? (
+                          <Image
+                            src={"/icons/checked.svg"}
+                            alt="checked"
+                            width={20}
+                            height={20}
+                          />
+                        ) : (
+                          <RightIcon color="white" />
+                        )}
                       </div>
                     </div>
                   </li>
 
-                  <li>
-                    <div className="bg-[#F4F4F4] p-[10px] flex items-center gap-x-[8px] rounded-[12px]">
+                  <li onClick={() => selectProject("poliklinika")}>
+                    <div
+                      className={`${
+                        tab === "poliklinika" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
+                      } p-[10px] flex items-center gap-x-[8px] rounded-[12px] cursor-pointer`}
+                    >
                       <div className=" px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block">
                         <Image
                           src={"/images/medicine.png"}
@@ -84,31 +130,63 @@ const Index = () => {
                       <p className="flex-1">Poliklinika</p>
 
                       <div className="bg-[#9AA8BC] inline-block rounded-full">
-                        <RightIcon color="white" />
+                        {tab === "poliklinika" ? (
+                          <Image
+                            src={"/icons/checked.svg"}
+                            alt="checked"
+                            width={20}
+                            height={20}
+                          />
+                        ) : (
+                          <RightIcon color="white" />
+                        )}
                       </div>
                     </div>
                   </li>
 
-                  <li>
-                    <div className="bg-[#F4F4F4] p-[10px] flex items-center gap-x-[8px] rounded-[12px]">
+                  <li onClick={() => selectProject("bogcha")}>
+                    <div
+                      className={`${
+                        tab === "bogcha" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
+                      } p-[10px] flex items-center gap-x-[8px] rounded-[12px] cursor-pointer`}
+                    >
                       <div className=" px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block">
                         <Image
-                          src={"/images/school.png"}
-                          alt={"school"}
+                          src={"/images/kindergarten.png"}
+                          alt={"kindergarten"}
                           width={42}
                           height={42}
                         />
                       </div>
 
-                      <p className="flex-1">Maktab</p>
+                      <p className="flex-1">Bog&apos;cha</p>
 
                       <div className="bg-[#9AA8BC] inline-block rounded-full">
-                        <RightIcon color="white" />
+                        {tab === "bogcha" ? (
+                          <Image
+                            src={"/icons/checked.svg"}
+                            alt="checked"
+                            width={20}
+                            height={20}
+                          />
+                        ) : (
+                          <RightIcon color="white" />
+                        )}
                       </div>
                     </div>
                   </li>
-                </ul>
+                </motion.ul>
               )}
+            </div>
+
+            <div className="col-span-9 font-gilroy">
+              <div className="w-full border border-[#D7D9E7] rounded-[10px] mb-[50px]">
+                {tab === "bogcha" && <KindergardenProject />}
+
+                {tab === "maktab" && <SchoolProject />}
+
+                {tab === "poliklinika" && <MedicineProject />}
+              </div>
             </div>
           </div>
         </section>
