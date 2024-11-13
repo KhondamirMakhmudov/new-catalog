@@ -74,7 +74,7 @@ const Index = () => {
         <section>
           <div className="grid grid-cols-12 gap-x-[48px] ">
             <div className="col-span-6">
-              <div className="max-w-[427px] w-full flex flex-col justify-center items-center ">
+              <div className="max-w-[427px] w-full flex flex-col justify-center items-center mt-[72px]">
                 <h1 className="text-[32px] font-bold ">Kirish</h1>
                 <p className="font-normal text-[#718096]">
                   Oqilona yuboring, sarflang va tejang

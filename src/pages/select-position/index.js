@@ -116,7 +116,7 @@ const Index = () => {
                 </button>
               </Link>
             ) : selectPosition === "deliver" ? (
-              <Link href={"/auth/eri"} className="w-full mt-[30px] ">
+              <Link href={"/auth/e-imzo"} className="w-full mt-[30px] ">
                 <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
                   Keyingi
                 </button>

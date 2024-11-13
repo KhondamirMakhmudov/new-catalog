@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Index = () => {
   return (
-    <>
+    <div className="bg-[#F7F7F7] h-screen">
       <Header />
 
       <main className="container">
@@ -26,7 +26,7 @@ const Index = () => {
           <h1 className="text-[32px] font-bold my-[16px]">Loyihalar</h1>
 
           <ul className="grid grid-cols-12 gap-[30px]">
-            <li className="col-span-6 bg-white shadow-2xl rounded-[30px]">
+            <li className="col-span-6 bg-white  rounded-[30px]">
               <div
                 className={
                   " flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -71,7 +71,7 @@ const Index = () => {
               </div>
             </li>
 
-            <li className="col-span-6 bg-white shadow-2xl rounded-[30px]">
+            <li className="col-span-6 bg-white rounded-[30px]">
               <div
                 className={
                   "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -118,7 +118,7 @@ const Index = () => {
               </div>
             </li>
 
-            <li className="col-span-6 bg-white shadow-2xl rounded-[30px]">
+            <li className="col-span-6 bg-white  rounded-[30px]">
               <div
                 className={
                   "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -167,7 +167,7 @@ const Index = () => {
           </ul>
         </section>
       </main>
-    </>
+    </div>
   );
 };
 
