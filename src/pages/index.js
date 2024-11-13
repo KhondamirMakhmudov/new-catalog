@@ -8,6 +8,8 @@ import { useState } from "react";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import Reveal from "@/components/reveal";
+import MapOfUz from "@/components/icons/uz-map";
+import HorizontalBarChart from "@/components/bar";
 
 const integrationData = [
   {
@@ -542,7 +544,27 @@ export default function Home() {
         </section>
 
         {/* Mintaqalar bo'yicha monitoring */}
-        <section></section>
+        <section className="bg-[#F7F7F7] ">
+          <div className="container py-[60px]">
+            <Reveal>
+              <h1 className="text-[32px] font-bold">
+                Mintaqalar bo&apos;yicha monitoring
+              </h1>
+            </Reveal>
+            <Reveal>
+              <div className="grid grid-cols-12 gap-x-[30px] bg-white p-[30px] rounded-[20px] mt-[20px]">
+                <div className="col-span-6">
+                  <HorizontalBarChart />
+                </div>
+                <div className="col-span-6">
+                  <div>
+                    <MapOfUz />
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
 
         {/* Integratsiya bo'yicha sheriklar */}
         <section className="bg-white">
@@ -655,18 +677,20 @@ export default function Home() {
 
         {/* Address */}
         <section className="container">
-          <div
-            className=" min-h-[164px] w-full bg-center bg-no-repeat
+          <Reveal>
+            <div
+              className=" min-h-[164px] w-full bg-center bg-no-repeat
             bg-cover rounded-[20px] flex items-center justify-center"
-            style={{ backgroundImage: `url(/images/address.png)` }}
-          >
-            <Link
-              href={"https://maps.app.goo.gl/nxPwsjmq6vi6hCPa7"}
-              className="py-[14px] px-[28px] text-sm font-medium font-gilroy text-white bg-[#0256BA] rounded-[12px]"
+              style={{ backgroundImage: `url(/images/address.png)` }}
             >
-              Google Maps ni ochish
-            </Link>
-          </div>
+              <Link
+                href={"https://maps.app.goo.gl/nxPwsjmq6vi6hCPa7"}
+                className="py-[14px] px-[28px] text-sm font-medium font-gilroy text-white bg-[#0256BA] rounded-[12px]"
+              >
+                Google Maps ni ochish
+              </Link>
+            </div>
+          </Reveal>
         </section>
       </main>
 
