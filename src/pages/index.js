@@ -10,6 +10,9 @@ import { motion } from "framer-motion";
 import Reveal from "@/components/reveal";
 import MapOfUz from "@/components/icons/uz-map";
 import HorizontalBarChart from "@/components/bar";
+import ArrowIcon from "@/components/icons/arrow-right";
+import ArrowRightButton from "@/components/buttons/deparment";
+import ScrollToTopButton from "@/components/scroll-to-top";
 
 const integrationData = [
   {
@@ -49,6 +52,7 @@ export default function Home() {
       <Header />
 
       <main className="bg-white">
+        <ScrollToTopButton />
         <section
           style={{ backgroundImage: `url(/images/bg-image.png)` }}
           className={
@@ -112,7 +116,7 @@ export default function Home() {
             <div className={"grid grid-cols-12 gap-[20px] mt-[20px]"}>
               <div
                 className={
-                  "col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section -z-20"
+                  "col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
                 }
               >
                 {/* machine-mechano */}
@@ -130,10 +134,10 @@ export default function Home() {
                     aniq
                   </p>
 
-                  <Link href="https://catalog.tmsiti.uz/">
+                  <Link href="/materials">
                     <div
                       className={
-                        "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                        " z-20 py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
                       }
                     >
                       <p className={"text-[#21201FCC]"}>Qarang</p>
@@ -147,7 +151,7 @@ export default function Home() {
                     </div>
                   </Link>
                 </div>
-                <div className={"absolute bg-section bottom-0 -z-10"}>
+                <div className={"absolute bg-section bottom-0 -z-30"}>
                   <Image
                     src={"/images/materials.png"}
                     alt={"materials"}
@@ -178,7 +182,7 @@ export default function Home() {
                       sublimatsiyani tejaydi
                     </p>
 
-                    <Link href="https://catalog.tmsiti.uz/machine-mechano">
+                    <Link href="/machine-mechano">
                       <div
                         className={
                           "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30"
@@ -211,10 +215,12 @@ export default function Home() {
                   {/* uskunalar va qurilmalar */}
                   <div
                     className={
-                      "border border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] cursor-pointer"
+                      "border works flex-col border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
                     }
                   >
-                    <h1 className={"font-bold text-[24px] text-[#21201F]"}>
+                    <h1
+                      className={"font-bold text-[24px] flex-1 text-[#21201F]"}
+                    >
                       Uskuna va <br /> qurilmalar
                     </h1>
                     <p
@@ -225,27 +231,14 @@ export default function Home() {
                       Global strategiyani o&apos;zgartirish tejaydi
                     </p>
 
-                    <Link href="https://catalog.tmsiti.uz/technos">
-                      <div
-                        className={
-                          "  py-[13px] w-full justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
-                        }
-                      >
-                        <p className={"text-[#21201FCC]"}>Qarang</p>
-                        <Image
-                          src={"/icons/arrow-right.svg"}
-                          alt={"arrow-right"}
-                          width={20}
-                          height={20}
-                          className={"ml-[16px]"}
-                        />
-                      </div>
+                    <Link href="/technos">
+                      <ArrowRightButton />
                     </Link>
                   </div>
                   {/* Qurilish ishlari */}
                   <div
                     className={
-                      "border border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] flex flex-col"
+                      "border works border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
                     }
                   >
                     <h1
@@ -261,21 +254,8 @@ export default function Home() {
                       Global strategiyani o&apos;zgartirish tejaydi
                     </p>
 
-                    <Link href="https://catalog.tmsiti.uz/works">
-                      <div
-                        className={
-                          "  py-[13px] w-full justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
-                        }
-                      >
-                        <p className={"text-[#21201FCC]"}>Qarang</p>
-                        <Image
-                          src={"/icons/arrow-right.svg"}
-                          alt={"arrow-right"}
-                          width={20}
-                          height={20}
-                          className={"ml-[16px]"}
-                        />
-                      </div>
+                    <Link href="/works">
+                      <ArrowRightButton />
                     </Link>
                   </div>
                 </div>
@@ -459,7 +439,7 @@ export default function Home() {
                       va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
                       urf-odatlar va keyingi sevgi haqida suhbatlashdik
                     </p>
-                    <Link href="https://catalog.tmsiti.uz/works">
+                    <Link href="/loyihalar/maktab">
                       <div
                         className={
                           "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -503,7 +483,7 @@ export default function Home() {
                       va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
                       urf-odatlar va keyingi sevgi haqida suhbatlashdik
                     </p>
-                    <Link href="https://catalog.tmsiti.uz/works">
+                    <Link href="/loyihalar/poliklinika">
                       <div
                         className={
                           "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -525,7 +505,7 @@ export default function Home() {
                 <div className="col-span-12 mt-[30px] backdrop-blur-lg">
                   <div className="backdrop-blur bg-transparent">
                     <Link
-                      href={"/"}
+                      href={"/loyihalar"}
                       className="flex gap-x-[12px] text-white py-[19px] w-full  justify-center border border-[#699EDB] rounded-[16px] "
                     >
                       <p>Hammasini tomosha qiling (952)</p>

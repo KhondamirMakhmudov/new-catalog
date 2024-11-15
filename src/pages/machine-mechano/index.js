@@ -15,17 +15,19 @@ const Index = () => {
   const [limit] = useState(24);
   const [offset, setOffset] = useState(0);
   const {
-    data: materials,
-    isLoading: materialLoading,
-    isError: materialError,
+    data: machineMechanos,
+    isLoading: machineMechanosLoading,
+    isError: machineMechanosError,
     isFetching: isFetchingMaterials,
   } = useGetQuery({
-    key: KEYS.materials,
-    url: URLS.materials,
+    key: KEYS.machinesMechanos,
+    url: URLS.machinesMechanos,
     params: { key: KEYS.viewCounts, page_size: limit },
   });
 
-  const totalItems = get(materials, "data.count");
+  console.log(machineMechanos);
+
+  const totalItems = get(machineMechanos, "data.count");
   const pageCount = Math.ceil(totalItems / limit);
 
   const handlePageClick = (event) => {
@@ -43,13 +45,13 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Materiallar va jihozlar
+            Mashina va mexanizmlar
           </Link>
         </section>
 
         <section>
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-            Material va jixozlar
+            Mashina va mexanizmlar
           </h1>
 
           <div className="grid grid-cols-12 gap-x-[30px]">
@@ -136,30 +138,32 @@ const Index = () => {
                   </thead>
 
                   <tbody>
-                    {get(materials, "data.results", []).map((item, index) => (
-                      <tr
-                        key={get(item, "id")}
-                        className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                      >
-                        <td className=" font-medium text-xs py-[10px]  text-center">
-                          {index + 1}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]">
-                          <Link
-                            href={"#"}
-                            className="underline-0 hover:underline transition-all duration-300"
-                          >
-                            {get(item, "material_csr_code")}
-                          </Link>
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]">
-                          {get(item, "material_name")}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px] text-center">
-                          {get(item, "material_measure")}
-                        </td>
-                      </tr>
-                    ))}
+                    {get(machineMechanos, "data.results", []).map(
+                      (item, index) => (
+                        <tr
+                          key={get(item, "id")}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            <Link
+                              href={"#"}
+                              className="underline-0 hover:underline transition-all duration-300"
+                            >
+                              {get(item, "mmechano_csr_code")}
+                            </Link>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            {get(item, "mmechano_name")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            {get(item, "mmechano_measure")}
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </motion.table>
                 <div className="w-full h-[1px] text-[#E2E2EA] "></div>
@@ -167,7 +171,7 @@ const Index = () => {
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {" "}
-                      {get(materials, "data.count")} tadan 1-{limit} tasi
+                      {get(machineMechanos, "data.count")} tadan 1-{limit} tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>

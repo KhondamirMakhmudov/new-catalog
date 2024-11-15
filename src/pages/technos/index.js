@@ -15,17 +15,17 @@ const Index = () => {
   const [limit] = useState(24);
   const [offset, setOffset] = useState(0);
   const {
-    data: materials,
-    isLoading: materialLoading,
-    isError: materialError,
-    isFetching: isFetchingMaterials,
+    data: technos,
+    isLoading: technosLoading,
+    isError: technosError,
+    isFetching: isFetchingTechnosLoading,
   } = useGetQuery({
-    key: KEYS.materials,
-    url: URLS.materials,
+    key: KEYS.technos,
+    url: URLS.technos,
     params: { key: KEYS.viewCounts, page_size: limit },
   });
 
-  const totalItems = get(materials, "data.count");
+  const totalItems = get(technos, "data.count");
   const pageCount = Math.ceil(totalItems / limit);
 
   const handlePageClick = (event) => {
@@ -43,13 +43,13 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Materiallar va jihozlar
+            Uskuna va qurilmalar
           </Link>
         </section>
 
         <section>
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-            Material va jixozlar
+            Uskuna va qurilmalar
           </h1>
 
           <div className="grid grid-cols-12 gap-x-[30px]">
@@ -136,7 +136,7 @@ const Index = () => {
                   </thead>
 
                   <tbody>
-                    {get(materials, "data.results", []).map((item, index) => (
+                    {get(technos, "data.results", []).map((item, index) => (
                       <tr
                         key={get(item, "id")}
                         className="text-sm odd:bg-[#EDF4FC] even:bg-white"
@@ -149,14 +149,14 @@ const Index = () => {
                             href={"#"}
                             className="underline-0 hover:underline transition-all duration-300"
                           >
-                            {get(item, "material_csr_code")}
+                            {get(item, "techno_csr_code")}
                           </Link>
                         </td>
                         <td className=" font-medium text-xs py-[10px]">
-                          {get(item, "material_name")}
+                          {get(item, "techno_name")}
                         </td>
                         <td className=" font-medium text-xs py-[10px] text-center">
-                          {get(item, "material_measure")}
+                          {get(item, "techno_measure")}
                         </td>
                       </tr>
                     ))}
@@ -167,7 +167,7 @@ const Index = () => {
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {" "}
-                      {get(materials, "data.count")} tadan 1-{limit} tasi
+                      {get(technos, "data.count")} tadan 1-{limit} tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>

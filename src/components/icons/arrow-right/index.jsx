@@ -1,0 +1,33 @@
+const ArrowIcon = () => {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ cursor: "pointer" }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.querySelector("path").style.fill = "#1D4ED8")
+      } // blue on hover
+      onMouseLeave={(e) =>
+        (e.currentTarget.querySelector("path").style.fill = "#4B4B4B")
+      }
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M3.3335 9.99996C3.3335 9.53972 3.70659 9.16663 4.16683 9.16663H15.8335C16.2937 9.16663 16.6668 9.53972 16.6668 9.99996C16.6668 10.4602 16.2937 10.8333 15.8335 10.8333H4.16683C3.70659 10.8333 3.3335 10.4602 3.3335 9.99996Z"
+        fill="#4B4B4B"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M9.41058 3.57745C9.73602 3.25201 10.2637 3.25201 10.5891 3.57745L16.4224 9.41079C16.7479 9.73622 16.7479 10.2639 16.4224 10.5893L10.5891 16.4226C10.2637 16.7481 9.73602 16.7481 9.41058 16.4226C9.08514 16.0972 9.08514 15.5696 9.41058 15.2441L14.6547 10L9.41058 4.75596C9.08514 4.43053 9.08514 3.90289 9.41058 3.57745Z"
+        fill="#4B4B4B"
+      />
+    </svg>
+  );
+};
+
+export default ArrowIcon;

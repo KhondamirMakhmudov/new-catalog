@@ -34,12 +34,13 @@ body {
 }
 
 .bg-section {
-  transform: scaleZ(1);
+  transform: scaleX(1);
+  transform: scaleY(1);
   transition: 0.3s ease-in-out;
 }
 
 .section:hover .bg-section {
-  transform: scaleZ(1.3);
+  transform: scaleX(1.2) scaleY(1.4);
 }
 
 .videoContainer {
@@ -83,5 +84,21 @@ body {
 }
 
 .e-imzo:hover p {
+  color: white;
+}
+
+.works {
+  display: flex;
+}
+
+.works:hover {
+  background-color: #308eff;
+  color: white;
+}
+
+.works:hover h1 {
+  color: white;
+}
+.works:hover p {
   color: white;
 }
