@@ -52,7 +52,7 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="/loyihalar/1">
+                <Link href="/loyihalar/maktab">
                   <div
                     className={
                       "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -99,7 +99,7 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="https://catalog.tmsiti.uz/works">
+                <Link href="/loyihalar/poliklinika">
                   <div
                     className={
                       "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -146,7 +146,7 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="https://catalog.tmsiti.uz/works">
+                <Link href="loyihalar/bogcha">
                   <div
                     className={
                       "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"

@@ -31,7 +31,7 @@ const Index = () => {
             Kirish
           </Link>
         </section>
-        <section className="font-gilroy max-w-[456px] mx-auto h-screen flex items-center justify-center">
+        <section className="font-gilroy max-w-[456px] mx-auto mt-[130px]">
           <div className="  flex-col ">
             <div className="text-center">
               <h1 className="text-[32px] font-bold  text-[#1A202C]">
@@ -128,7 +128,7 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="container font-gilroy py-[48px]">
+      {/* <footer className="container font-gilroy py-[48px]">
         <div className="flex justify-between">
           <div>
             <p className="text-[#718096] text-semibold">
@@ -140,7 +140,7 @@ const Index = () => {
             <p className="text-[#718096] text-semibold">Copyright 2024</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 };

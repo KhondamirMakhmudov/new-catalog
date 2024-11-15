@@ -6,15 +6,15 @@ import { useState } from "react";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
-import { get } from "lodash";
-import Pagination from "@/components/pagination";
 
 import { motion } from "framer-motion";
 import KindergardenProject from "@/components/model-projects/kindergarden";
 import SchoolProject from "@/components/model-projects/school";
 import MedicineProject from "@/components/model-projects/medicine";
+import { useRouter } from "next/router";
 
 const Index = () => {
+  const router = useRouter();
   const [tab, setTab] = useState("maktab");
   const [showAllProjects, setShowAllProjects] = useState(!false);
 
@@ -30,6 +30,7 @@ const Index = () => {
   console.log(kinderGarden);
 
   const selectProject = (tab) => {
+    router.push(`/loyihalar/${tab}`);
     setTab(tab);
   };
 
@@ -58,7 +59,7 @@ const Index = () => {
         <section>
           <h1 className="text-[32px] font-bold my-[16px]">Maktab</h1>
           <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-3  font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]">
+            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]">
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Boshqa loyihalar</h4>
                 <button onClick={() => setShowAllProjects(!showAllProjects)}>

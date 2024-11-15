@@ -80,4 +80,6 @@ export const URLS = {
   kindergarden: "/cmeta/sample/1",
   school: "/cmeta/sample/2",
   medicine: "/cmeta/sample/3",
+  worksCategory: "cmeta/cmeta/category/",
+  cmetaCategories: "cmeta/cmeta",
 };

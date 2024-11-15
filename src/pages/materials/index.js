@@ -11,6 +11,7 @@ import { useState } from "react";
 import Footer from "@/components/footer";
 
 const Index = () => {
+  const [showAllProjects, setShowAllProjects] = useState(!false);
   const [limit] = useState(24);
   const [offset, setOffset] = useState(0);
   const {
@@ -21,7 +22,7 @@ const Index = () => {
   } = useGetQuery({
     key: KEYS.materials,
     url: URLS.materials,
-    params: { key: KEYS.viewCounts, page_size: offset },
+    params: { key: KEYS.viewCounts, page_size: limit },
   });
 
   const totalItems = get(materials, "data.count");
@@ -31,7 +32,6 @@ const Index = () => {
     const newOffset = event?.selected * limit;
     setOffset(newOffset);
   };
-  const [showAllProjects, setShowAllProjects] = useState(!false);
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
@@ -73,9 +73,7 @@ const Index = () => {
               />
             </div>
 
-            <div className="col-span-9 font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
-              <div></div>
-
+            <div className="col-span-9 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
               <div>
                 <motion.table
                   className="w-full border-collapse border-[#D7D9E7]"

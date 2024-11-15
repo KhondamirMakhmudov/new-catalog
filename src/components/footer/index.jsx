@@ -115,7 +115,7 @@ const Footer = () => {
 
               <div className="   text-white space-y-[24px] mt-[20px]">
                 <div>
-                  <div className="flex space-x-[8px]">
+                  <div className="flex items-start space-x-[8px]">
                     <div className="p-[9px] bg-[#3F7ECB] rounded-[12px] inline-block">
                       <Image
                         src={"/icons/phone-call.svg"}
@@ -131,7 +131,7 @@ const Footer = () => {
                   </div>
                 </div>
 
-                <div className="flex space-x-[8px]">
+                <div className="flex items-start space-x-[8px]">
                   <div className="p-[9px] bg-[#3F7ECB] rounded-[12px] inline-block">
                     <Image
                       src={"/icons/mail.svg"}

@@ -66,4 +66,6 @@ export const KEYS = {
   kindergarden: "kindergarden",
   school: "school",
   medicine: "medicine",
+  worksCategory: "worksCategory",
+  cmetaCategories: "cmetaCategories",
 };

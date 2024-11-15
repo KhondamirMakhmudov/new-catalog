@@ -168,10 +168,7 @@ const EimzoLogin = () => {
                 </div>
               </div>
             </div>
-            <div
-              className="col-span-6
-             "
-            >
+            <div className="col-span-6">
               <ESIGN open={true} setOpen={() => {}} eSign={loginWithKey} />
             </div>
           </div>
