@@ -138,7 +138,7 @@ const Index = () => {
                   <tbody>
                     {get(materials, "data.results", []).map((item, index) => (
                       <tr
-                        key={get(item, "id")}
+                        key={index}
                         className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                       >
                         <td className=" font-medium text-xs py-[10px]  text-center">
