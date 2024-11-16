@@ -18,7 +18,7 @@ const EimzoLogin = () => {
         company_stir: get(key, "TIN"),
         company_ceo: get(key, "CN"),
         redirect: true,
-        callbackUrl: "/dashboard",
+        callbackUrl: "/dashboard/deliver",
       });
     } else {
       toast.error("Jismoniy shaxs kalitida tizimga kirish mumkin emas", {
