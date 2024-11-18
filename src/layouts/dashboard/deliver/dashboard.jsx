@@ -1,10 +1,28 @@
 import Header from "@/components/header";
-
+import { useSettingsStore } from "@/store";
 import Sidebar from "./components/sidebar";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
-
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { URLS } from "@/constants/url";
+import { KEYS } from "@/constants/key";
+import { get } from "lodash";
+import { useSession } from "next-auth/react";
 const DeliverDashboard = ({ children }) => {
+  const { data: session } = useSession();
+
+  const setToken = useSettingsStore((state) =>
+    get(state, "setToken", () => {})
+  );
+  const token = useSettingsStore((state) => get(state, "token", null));
+  const { data: user } = useGetQuery({
+    key: KEYS.getMe,
+    url: URLS.getMe,
+    headers: { token: token ?? `${get(session, "user.token")}` },
+    enabled: !!(
+      get(session, "user.token") && get(session, "user.role") === "company"
+    ),
+  });
   return (
     <div className="bg-[#F7F7F7]">
       <Header />

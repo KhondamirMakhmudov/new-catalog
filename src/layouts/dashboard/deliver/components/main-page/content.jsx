@@ -36,7 +36,7 @@ const MainSectionContent = ({ children }) => {
         </div>
         <div className="col-span-3 bg-white p-[24px] rounded-[16px] ">
           <Link
-            href={"/dashboard/deliver/material/add-ads"}
+            href={"/dashboard/deliver/main/machine-mechanos/add-ads"}
             className="flex items-center justify-center flex-col"
           >
             <button className="p-[18px] rounded-full bg-[#EBF1F9] mb-[24px]">
@@ -55,7 +55,7 @@ const MainSectionContent = ({ children }) => {
 
         <div className="col-span-3 bg-white p-[24px] rounded-[16px] ">
           <Link
-            href={"/dashboard/deliver/material/add-ads"}
+            href={"/dashboard/deliver/main/technos/add-ads"}
             className="flex items-center justify-center flex-col"
           >
             <button className="p-[18px] rounded-full bg-[#EBF1F9] mb-[24px]">
@@ -74,7 +74,7 @@ const MainSectionContent = ({ children }) => {
 
         <div className="col-span-3 bg-white p-[24px] rounded-[16px] ">
           <Link
-            href={"/dashboard/deliver/material/add-ads"}
+            href={"/dashboard/deliver/main/works/add-ads"}
             className="flex items-center justify-center flex-col"
           >
             <button className="p-[18px] rounded-full bg-[#EBF1F9] mb-[24px]">

@@ -12,23 +12,20 @@ const RecentAds = ({ children }) => {
   return (
     <div>
       <ul className="flex items-center gap-x-[12px] mt-[20px]">
-        <li>
-          <Link
-            href={"#"}
-            onClick={() => {
-              handleSelectDepartment("all");
-            }}
+        <li
+          onClick={() => {
+            handleSelectDepartment("all");
+          }}
+        >
+          <button
+            className={`py-[10px] px-[20px] ${
+              router.pathname === "/dashboard/deliver/main/all"
+                ? "bg-[#0256BA] text-white border-none"
+                : "bg-white text-[#718096] border border-[#E6E6E6]"
+            }  rounded-[8px] text-sm `}
           >
-            <button
-              className={`py-[10px] px-[20px] ${
-                selectDepartment === "all"
-                  ? "bg-[#0256BA] text-white border-none"
-                  : "bg-white text-[#718096] border border-[#E6E6E6]"
-              }  rounded-[8px] text-sm `}
-            >
-              Barcha e&apos;lonlar
-            </button>
-          </Link>
+            Barcha e&apos;lonlar
+          </button>
         </li>
 
         <li
@@ -36,17 +33,15 @@ const RecentAds = ({ children }) => {
             handleSelectDepartment("materials");
           }}
         >
-          <Link href={"#"}>
-            <button
-              className={`py-[10px] px-[20px] ${
-                selectDepartment === "materials"
-                  ? "bg-[#0256BA] text-white border-none"
-                  : "bg-white text-[#718096] border border-[#E6E6E6]"
-              }  rounded-[8px] text-sm `}
-            >
-              Material va jihozlar
-            </button>
-          </Link>
+          <button
+            className={`py-[10px] px-[20px] ${
+              router.pathname === "/dashboard/deliver/main/materials"
+                ? "bg-[#0256BA] text-white border-none"
+                : "bg-white text-[#718096] border border-[#E6E6E6]"
+            }  rounded-[8px] text-sm `}
+          >
+            Material va jihozlar
+          </button>
         </li>
 
         <li
@@ -54,17 +49,15 @@ const RecentAds = ({ children }) => {
             handleSelectDepartment("machine-mechanos");
           }}
         >
-          <Link href={"#"}>
-            <button
-              className={`py-[10px] px-[20px] ${
-                selectDepartment === "mmechano"
-                  ? "bg-[#0256BA] text-white border-none"
-                  : "bg-white text-[#718096] border border-[#E6E6E6]"
-              }  rounded-[8px] text-sm `}
-            >
-              Mashina va mexanizmlar
-            </button>
-          </Link>
+          <button
+            className={`py-[10px] px-[20px] ${
+              router.pathname === "/dashboard/deliver/main/machine-mechanos"
+                ? "bg-[#0256BA] text-white border-none"
+                : "bg-white text-[#718096] border border-[#E6E6E6]"
+            }  rounded-[8px] text-sm `}
+          >
+            Mashina va mexanizmlar
+          </button>
         </li>
 
         <li
@@ -72,17 +65,15 @@ const RecentAds = ({ children }) => {
             handleSelectDepartment("technos");
           }}
         >
-          <Link href={"#"}>
-            <button
-              className={`py-[10px] px-[20px] ${
-                selectDepartment === "technos"
-                  ? "bg-[#0256BA] text-white border-none"
-                  : "bg-white text-[#718096] border border-[#E6E6E6]"
-              }  rounded-[8px] text-sm `}
-            >
-              Uskuna va qurilmalar
-            </button>
-          </Link>
+          <button
+            className={`py-[10px] px-[20px] ${
+              router.pathname === "/dashboard/deliver/main/technos"
+                ? "bg-[#0256BA] text-white border-none"
+                : "bg-white text-[#718096] border border-[#E6E6E6]"
+            }  rounded-[8px] text-sm `}
+          >
+            Uskuna va qurilmalar
+          </button>
         </li>
 
         <li
@@ -93,7 +84,7 @@ const RecentAds = ({ children }) => {
           <Link href={"#"}>
             <button
               className={`py-[10px] px-[20px] ${
-                selectDepartment === "works"
+                router.pathname === "/dashboard/deliver/main/works"
                   ? "bg-[#0256BA] text-white border-none"
                   : "bg-white text-[#718096] border border-[#E6E6E6]"
               }  rounded-[8px] text-sm `}
