@@ -10,18 +10,18 @@ import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import MainSectionContent from "@/layouts/dashboard/deliver/components/main-page/content";
 import RecentAds from "@/layouts/dashboard/deliver/components/main-page/recent-ads";
 
-const MyMaterials = () => {
+const MyMachineMechanos = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(24);
-
-  const { data: myMaterials } = useGetQuery({
-    key: KEYS.myMaterials,
-    url: URLS.myMaterials,
+  const { data: machineMechano } = useGetQuery({
+    key: KEYS.myMachineMechano,
+    url: URLS.myMachineMechano,
     params: {
       page,
       page_size: pageSize,
     },
   });
+
   return (
     <DeliverDashboard>
       <MainSectionContent>
@@ -55,7 +55,7 @@ const MyMaterials = () => {
               </thead>
 
               <tbody>
-                {get(myMaterials, "data.results", []).map((item, index) => (
+                {get(machineMechano, "data.results", []).map((item, index) => (
                   <tr
                     key={index}
                     className="text-sm odd:bg-[#EDF4FC] even:bg-white"
@@ -85,8 +85,7 @@ const MyMaterials = () => {
             <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
               <div>
                 <p className="text-sm text-[#9392A0]">
-                  {" "}
-                  {get(myMaterials, "data.count")} tadan 1-{pageSize}
+                  {get(machineMechano, "data.count")} tadan 1-{pageSize}
                   tasi ko&apos;rsatilgan
                 </p>
               </div>
@@ -94,7 +93,7 @@ const MyMaterials = () => {
               <div>
                 <Pagination
                   page={page}
-                  pageCount={get(myMaterials, "data.total_pages", 0)}
+                  pageCount={get(machineMechano, "data.total_pages", 0)}
                 />
               </div>
             </div>
@@ -105,4 +104,4 @@ const MyMaterials = () => {
   );
 };
 
-export default MyMaterials;
+export default MyMachineMechanos;
