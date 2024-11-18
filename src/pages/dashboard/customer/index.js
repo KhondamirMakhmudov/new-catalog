@@ -3,7 +3,7 @@ import RightIcon from "@/components/icons/right";
 import Link from "next/link";
 import { useState } from "react";
 import DeliverIcon from "@/components/icons/deliver";
-import ArrowRightButton from "@/components/buttons/deparment";
+import ArrowRightButton from "@/components/buttons/arrow-right";
 import Image from "next/image";
 
 const Index = () => {

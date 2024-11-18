@@ -10,8 +10,7 @@ import { motion } from "framer-motion";
 import Reveal from "@/components/reveal";
 import MapOfUz from "@/components/icons/uz-map";
 import HorizontalBarChart from "@/components/bar";
-import ArrowIcon from "@/components/icons/arrow-right";
-import ArrowRightButton from "@/components/buttons/deparment";
+import ArrowRightButton from "@/components/buttons/arrow-right";
 import ScrollToTopButton from "@/components/scroll-to-top";
 
 const integrationData = [

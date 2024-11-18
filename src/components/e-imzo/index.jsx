@@ -236,7 +236,7 @@ const ESIGN = ({
       )}
       {!loading && (
         <button
-          handleClick={() => {
+          onClick={() => {
             initEIMZO();
             setKeys([]);
             setError(null);
