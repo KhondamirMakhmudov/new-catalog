@@ -4,12 +4,15 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import Select from "react-select";
-import { debounce, get, isEmpty, head } from "lodash";
+import { debounce, get, isEmpty, head, find } from "lodash";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-
+import Image from "next/image";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 const Index = () => {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const [warning, setWarning] = useState(false);
   const [material, setMaterial] = useState({});
@@ -55,12 +58,17 @@ const Index = () => {
     sertificate_reestr_num,
     material_owner,
     material_measure,
+    material_image,
   }) => {
     let formData = new FormData();
     formData.append("material_name", material_csr_code);
     formData.append("material_description", material_description);
     formData.append("material_price", material_price);
     formData.append("material_price_currency", material_price_currency);
+    formData.append(
+      "https://backend-market.tmsiti.uz/media/materials/59.1.11.03-0971.jpg",
+      material_image
+    );
     formData.append("material_amount", material_amount);
     formData.append("sertificate_blank_num", sertificate_blank_num);
     formData.append("sertificate_reestr_num", sertificate_reestr_num);
@@ -77,7 +85,7 @@ const Index = () => {
           toast.success("E'lon muvaffaqiyatli joylandi", {
             position: "top-center",
           });
-          router.push("/dashboard/materials");
+          router.push("/dashboard/deliver/main/materials");
         },
         onError: (error) => {
           toast.error(`Error is ${error}`, { position: "top-right" });
@@ -125,9 +133,16 @@ const Index = () => {
             <input
               defaultValue={get(material, "material_volume_name")}
               disabled={true}
-              type="text"
               placeholder="Tanlang"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
+            />
+            <input
+              placeholder={
+                "Грунтовка полимерная для повышения адгезия битумно-полимерных мастик и герметиков при герметизации деформационных швов асфальта"
+              }
+              className={"hidden"}
+              value={1}
+              {...register("material_owner", { required: true })}
             />
           </div>
 
@@ -174,7 +189,7 @@ const Index = () => {
           <div className="col-span-4 space-y-[10px]">
             <label>Material narxi</label>
             <input
-              type="text"
+              type="number"
               {...register("material_price", { required: true })}
               placeholder="Tanlang"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
@@ -199,7 +214,7 @@ const Index = () => {
             <label>Material miqdori</label>
             <input
               {...register("material_amount", { required: true })}
-              type="text"
+              type="number"
               placeholder="Tanlang"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
@@ -210,6 +225,8 @@ const Index = () => {
             <input
               type="text"
               {...register("material_measure")}
+              defaultValue={get(material, "material_measure")}
+              disabled={true}
               placeholder="Tanlang"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
@@ -221,6 +238,9 @@ const Index = () => {
               {...register("material_amount_measure")}
               type="text"
               placeholder="Tanlang"
+              defaultValue={get(material, "material_measure")}
+              {...register("material_amount_measure")}
+              disabled={true}
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
@@ -233,6 +253,29 @@ const Index = () => {
               name="about-material"
               className=" py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             ></textarea>
+
+            <div className="hidden">
+              <h4 className={"text-[#28366D] text-base "}>Material rasmi</h4>
+              <label
+                htmlFor="dropzone-file"
+                className={
+                  "shadow-2xl py-[20px] px-[30px] my-[10px] rounded-[5px] cursor-pointer  flex flex-col justify-center items-center  w-[320px] h-[224px] bg-white"
+                }
+              >
+                <Image
+                  src={"/icons/upload.svg"}
+                  alt={"upload"}
+                  width={48}
+                  height={48}
+                />
+                <p>yuklash</p>
+              </label>
+              <input
+                id={"dropzone-file"}
+                type={"file"}
+                {...register("material_image")}
+              />
+            </div>
           </div>
 
           <div className="col-span-6 space-y-[10px]">
