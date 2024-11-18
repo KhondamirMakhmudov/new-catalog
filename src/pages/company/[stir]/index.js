@@ -5,3 +5,5 @@ const Index = () => {
     <Header />
   </div>;
 };
+
+export default Index;
