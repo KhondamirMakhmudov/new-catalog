@@ -3,12 +3,20 @@ import DeliverIcon from "@/components/icons/deliver";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MyAdsIcon from "@/components/icons/my-ads";
+import { signOut, useSession } from "next-auth/react";
 
 const Sidebar = () => {
   const [selectBar, setSelectBar] = useState("");
   const router = useRouter();
+  const { data: session } = useSession();
   const handleSelectBar = (nav) => {
     setSelectBar(nav);
+  };
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: "/" });
+
+    localStorage.clear();
+    sessionStorage.clear();
   };
   return (
     <div className="col-span-3 border border-r border-t border-l-0 border-b-0 h-screen py-[20px] font-gilroy">
@@ -98,6 +106,10 @@ const Sidebar = () => {
               <p className="text-xs text-[#718096]">Manage notifications</p>
             </div>
           </div>
+        </li>
+
+        <li>
+          <button onClick={() => handleLogout()}>Chiqish</button>
         </li>
       </ul>
     </div>
