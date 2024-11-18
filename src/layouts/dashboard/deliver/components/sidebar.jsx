@@ -2,9 +2,10 @@ import { useState } from "react";
 import DeliverIcon from "@/components/icons/deliver";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import MyAdsIcon from "@/components/icons/my-ads";
 
 const Sidebar = () => {
-  const [selectBar, setSelectBar] = useState("main");
+  const [selectBar, setSelectBar] = useState("");
   const router = useRouter();
   const handleSelectBar = (nav) => {
     setSelectBar(nav);
@@ -43,7 +44,7 @@ const Sidebar = () => {
           onClick={() => handleSelectBar("orders")}
           className="cursor-pointer"
         >
-          <Link href={"/dashboard/deliver/orders"}>
+          <Link href={"/dashboard/deliver/my-ads"}>
             <div
               className={`${
                 selectBar === "orders"
@@ -56,13 +57,15 @@ const Sidebar = () => {
                   selectBar === "orders" ? " bg-[#0256BA]" : "bg-white"
                 } inline-block rounded-full`}
               >
-                <DeliverIcon
+                <MyAdsIcon
                   color={selectBar === "orders" ? "white" : "#0256BA"}
                 />
               </div>
 
               <div>
-                <h1 className="font-extrabold text-sm">Buyurtmalar</h1>
+                <h1 className="font-extrabold text-sm">
+                  Mening e&apos;lonlarim
+                </h1>
                 <p className="text-xs text-[#718096]">Manage notifications</p>
               </div>
             </div>

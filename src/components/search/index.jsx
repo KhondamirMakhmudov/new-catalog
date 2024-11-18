@@ -20,7 +20,7 @@ const Search = () => {
         type={"text"}
         placeholder={"Qidirmoq..."}
         className={
-          "placeholder:text-[#B3B1C0] text-[#020E03] text-sm font-medium py-[9px] pl-[8px] w-full rounded-[8px]"
+          "placeholder:text-[#B3B1C0] text-[#020E03]  text-sm font-medium py-[9px] pl-[8px] w-full rounded-[8px]"
         }
       />
     </div>

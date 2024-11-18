@@ -5,7 +5,6 @@ const Index = () => {
   return (
     <DeliverDashboard>
       <MainContent>
-        {" "}
         <div className="font-gilroy">
           <h1 className="font-bold text-[26px]">Yangi qo’shish</h1>
           <p className="text-[#718096] text-sm mt-[6px]">
