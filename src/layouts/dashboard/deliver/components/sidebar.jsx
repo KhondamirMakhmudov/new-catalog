@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import MyAdsIcon from "@/components/icons/my-ads";
 import { signOut, useSession } from "next-auth/react";
+import CompanyIcon from "@/components/icons/about-company";
 
 const Sidebar = () => {
   const [selectBar, setSelectBar] = useState("");
@@ -25,18 +26,24 @@ const Sidebar = () => {
           <Link href={"/dashboard/deliver/main"}>
             <div
               className={`${
-                selectBar === "main"
+                router.pathname === "/dashboard/deliver/main"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
               } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
-                  selectBar === "main" ? " bg-[#0256BA]" : "bg-white"
+                  router.pathname === "/dashboard/deliver/main"
+                    ? " bg-[#0256BA]"
+                    : "bg-white"
                 } inline-block rounded-full`}
               >
                 <DeliverIcon
-                  color={selectBar === "main" ? "white" : "#0256BA"}
+                  color={
+                    router.pathname === "/dashboard/deliver/main"
+                      ? "white"
+                      : "#0256BA"
+                  }
                 />
               </div>
 
@@ -55,18 +62,24 @@ const Sidebar = () => {
           <Link href={"/dashboard/deliver/my-ads"}>
             <div
               className={`${
-                selectBar === "orders"
+                router.pathname === "/dashboard/deliver/my-ads"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
               } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
-                  selectBar === "orders" ? " bg-[#0256BA]" : "bg-white"
+                  router.pathname === "/dashboard/deliver/my-ads"
+                    ? " bg-[#0256BA]"
+                    : "bg-white"
                 } inline-block rounded-full`}
               >
                 <MyAdsIcon
-                  color={selectBar === "orders" ? "white" : "#0256BA"}
+                  color={
+                    router.pathname === "/dashboard/deliver/my-ads"
+                      ? "white"
+                      : "#0256BA"
+                  }
                 />
               </div>
 
@@ -84,28 +97,36 @@ const Sidebar = () => {
           onClick={() => handleSelectBar("profile")}
           className="cursor-pointer"
         >
-          <div
-            className={`${
-              selectBar === "profile"
-                ? "bg-white border-l-[2px] border-[#0256BA]"
-                : "bg-transparent"
-            } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
-          >
+          <Link href={"/dashboard/deliver/profile"}>
             <div
-              className={`p-[14px] ${
-                selectBar === "profile" ? " bg-[#0256BA]" : "bg-white"
-              } inline-block rounded-full`}
+              className={`${
+                router.pathname === "/dashboard/deliver/profile"
+                  ? "bg-white border-l-[2px] border-[#0256BA]"
+                  : "bg-transparent"
+              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
-              <DeliverIcon
-                color={selectBar === "profile" ? "white" : "#0256BA"}
-              />
-            </div>
+              <div
+                className={`p-[14px] ${
+                  router.pathname === "/dashboard/deliver/profile"
+                    ? " bg-[#0256BA]"
+                    : "bg-white"
+                } inline-block rounded-full`}
+              >
+                <CompanyIcon
+                  color={
+                    router.pathname === "/dashboard/deliver/profile"
+                      ? "white"
+                      : "#0256BA"
+                  }
+                />
+              </div>
 
-            <div>
-              <h1 className="font-extrabold text-sm">Profile</h1>
-              <p className="text-xs text-[#718096]">Manage notifications</p>
+              <div>
+                <h1 className="font-extrabold text-sm">Kompaniya haqida</h1>
+                <p className="text-xs text-[#718096]">Manage notifications</p>
+              </div>
             </div>
-          </div>
+          </Link>
         </li>
 
         <li>
