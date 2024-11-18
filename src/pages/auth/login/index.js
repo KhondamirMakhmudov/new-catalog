@@ -11,7 +11,7 @@ import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import toast from "react-hot-toast";
 
-const { default: Header } = require("@/components/header");
+import Header from "@/components/header";
 
 const Index = () => {
   const {
