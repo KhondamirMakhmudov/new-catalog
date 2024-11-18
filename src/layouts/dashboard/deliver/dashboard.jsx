@@ -8,6 +8,7 @@ import { URLS } from "@/constants/url";
 import { KEYS } from "@/constants/key";
 import { get } from "lodash";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const DeliverDashboard = ({ children }) => {
   const { data: session } = useSession();
@@ -24,6 +25,12 @@ const DeliverDashboard = ({ children }) => {
       get(session, "user.token") && get(session, "user.role") === "company"
     ),
   });
+
+  useEffect(() => {
+    if (get(session, "user.token")) {
+      setToken(get(session, "user.token"));
+    }
+  }, [session]);
   return (
     <div className="bg-[#F7F7F7]">
       <Header />

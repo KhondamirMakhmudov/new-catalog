@@ -82,4 +82,5 @@ export const URLS = {
   medicine: "/cmeta/sample/3",
   worksCategory: "cmeta/cmeta/category/",
   cmetaCategories: "cmeta/cmeta",
+  ads: "fastapi/materials/filter",
 };

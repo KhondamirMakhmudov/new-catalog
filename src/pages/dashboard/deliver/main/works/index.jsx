@@ -1,20 +1,21 @@
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
-import useGetQuery from "@/hooks/api/useGetQuery";
-import { motion } from "framer-motion";
 import Pagination from "@/components/pagination";
 import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import MainSectionContent from "@/layouts/dashboard/deliver/components/main-page/content";
 import RecentAds from "@/layouts/dashboard/deliver/components/main-page/recent-ads";
+import dayjs from "dayjs";
 
-const MyWorks = () => {
+const MyMaterials = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(24);
 
-  const { data: works } = useGetQuery({
+  const { data: myWork } = useGetQuery({
     key: KEYS.myWork,
     url: URLS.myWork,
     params: {
@@ -22,7 +23,6 @@ const MyWorks = () => {
       page_size: pageSize,
     },
   });
-
   return (
     <DeliverDashboard>
       <MainSectionContent>
@@ -44,19 +44,28 @@ const MyWorks = () => {
                     №
                   </th>
                   <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                    Material kodi
+                    Kompaniya
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Resurs kodi
                   </th>
                   <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                    Mahsulot Kodi
+                    Resurs nomi
                   </th>
                   <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold  rounded-tr-[10px]">
                     O&apos;lchov Birligi
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Narxi
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Oxirgi o&apos;zgarish
                   </th>
                 </tr>
               </thead>
 
               <tbody>
-                {get(works, "data.results", []).map((item, index) => (
+                {get(myWork, "data.results", []).map((item, index) => (
                   <tr
                     key={index}
                     className="text-sm odd:bg-[#EDF4FC] even:bg-white"
@@ -64,30 +73,54 @@ const MyWorks = () => {
                     <td className=" font-medium text-xs py-[10px]  text-center">
                       {index + 1}
                     </td>
+                    <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                      {get(item, "company_name")}
+                    </td>
                     <td className=" font-medium text-xs py-[10px]">
                       <Link
-                        href={`/materials/${get(item, "material_csr_code")}`}
+                        href={`/machine-mechano/${get(item, "work_code")}`}
                         className="underline-0 hover:underline transition-all duration-300"
                       >
-                        {get(item, "material_csr_code")}
+                        {get(item, "work_code")}
                       </Link>
                     </td>
-                    <td className=" font-medium text-xs py-[10px]">
-                      {get(item, "material_name")}
+                    <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                      {get(item, "work_name")}
                     </td>
                     <td className=" font-medium text-xs py-[10px] text-center">
-                      {get(item, "material_measure")}
+                      {get(item, "work_measure")}
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] text-center">
+                      <div className="flex space-x-[4px]">
+                        {get(item, "work_price")}
+                        {get(item, "work_price_currency")}
+                      </div>
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] text-center">
+                      <div className="flex space-x-[4px]">
+                        <p>
+                          {" "}
+                          {dayjs(get(item, "work_updated_date")).format(
+                            "DD.MM.YYYY"
+                          )}
+                        </p>
+                        <p>
+                          {dayjs(get(item, "work_updated_date")).format(
+                            "HH:mm"
+                          )}
+                        </p>
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </motion.table>
-            <div className="w-full h-[1px] text-[#E2E2EA] "></div>
+            <div className="w-full h-[1px] text-[#E2E2EA]"></div>
             <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
               <div>
                 <p className="text-sm text-[#9392A0]">
-                  {" "}
-                  {get(works, "data.count")} tadan 1-{pageSize}
+                  {get(myWork, "data.count")} tadan 1-
+                  {get(myWork, "data.count")}
                   tasi ko&apos;rsatilgan
                 </p>
               </div>
@@ -95,7 +128,7 @@ const MyWorks = () => {
               <div>
                 <Pagination
                   page={page}
-                  pageCount={get(works, "data.total_pages", 0)}
+                  pageCount={get(myWork, "data.total_pages", 0)}
                 />
               </div>
             </div>
@@ -106,4 +139,4 @@ const MyWorks = () => {
   );
 };
 
-export default MyWorks;
+export default MyMaterials;

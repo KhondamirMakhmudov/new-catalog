@@ -68,4 +68,5 @@ export const KEYS = {
   medicine: "medicine",
   worksCategory: "worksCategory",
   cmetaCategories: "cmetaCategories",
+  ads: "ads",
 };
