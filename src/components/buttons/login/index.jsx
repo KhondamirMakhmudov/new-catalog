@@ -12,26 +12,7 @@ import DeliverIcon from "@/components/icons/deliver";
 const Login = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const token = useSettingsStore((state) => get(state, "token", null));
-  const { data: user } = useGetQuery({
-    key: KEYS.getMe,
-    url: URLS.getMe,
-    headers: { token: token ?? `${get(session, "user.token")}` },
-    enabled: !!(
-      get(session, "user.token") && get(session, "user.role") === "company"
-    ),
-  });
 
-  console.log(user);
-
-  const { data: customer } = useGetQuery({
-    key: KEYS.getCustomer,
-    url: URLS.getCustomer,
-    headers: { token: token ?? `${get(session, "user.token")}` },
-    enabled: !!(
-      get(session, "user.token") && get(session, "user.role") === "customer"
-    ),
-  });
   return (
     <>
       {!get(session, "user.token") ? (

@@ -6,7 +6,7 @@ import Header from "@/components/header";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
-const ESIGN = dynamic(() => import("../../../components/e-imzo"), {
+const ESIGN = dynamic(() => import("../../components/e-imzo"), {
   ssr: false,
 });
 
