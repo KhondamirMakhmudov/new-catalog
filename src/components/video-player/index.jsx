@@ -15,7 +15,7 @@ const CustomVideoPlayer = ({ url }) => {
   return (
     <div className={"relative w-full rounded-[12px] "}>
       <ReactPlayer
-        url={"/videos/example-video.mp4"}
+        url={"/videos/catalog-video.mp4"}
         style={{ borderRadius: "12px" }}
         controls
         width="100%"
