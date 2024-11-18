@@ -4,9 +4,9 @@ import Link from "next/link";
 const Brand = () => {
   return (
     <Link href={"/"}>
-      <div className={"uppercase flex gap-x-[6px]"}>
-        <Image src={"/images/logo.png"} alt={"logo"} width={37} height={32} />
-        <h1 className={"text-xs font-bold"}>
+      <div className={"uppercase flex gap-x-[6px] items-center"}>
+        <Image src={"/icons/logo.svg"} alt={"logo"} width={29} height={32} />
+        <h1 className={"lg:text-xs md:text-[10px] text-0 font-bold"}>
           Qurilish resurslari <br />
           milliy klassifikatori
         </h1>

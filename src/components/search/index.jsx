@@ -4,7 +4,7 @@ const Search = () => {
   return (
     <div
       className={
-        "w-full max-w-[729px] border border-[#E6E5ED] rounded-[8px]  flex items-center"
+        "w-full max-w-[700px] border border-[#E6E5ED] rounded-[8px]  flex items-center"
       }
     >
       <button>

@@ -49,7 +49,7 @@ const Index = () => {
 
         <section>
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-            Material va jixozlar
+            Material va jihozlar
           </h1>
 
           <div className="grid grid-cols-12 gap-x-[30px]">

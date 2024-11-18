@@ -22,6 +22,8 @@ const Login = () => {
     ),
   });
 
+  console.log(user);
+
   const { data: customer } = useGetQuery({
     key: KEYS.getCustomer,
     url: URLS.getCustomer,
