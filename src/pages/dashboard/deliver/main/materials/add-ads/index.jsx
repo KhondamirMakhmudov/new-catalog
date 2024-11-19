@@ -251,6 +251,7 @@ const Index = () => {
             <textarea
               {...register("material_description")}
               name="about-material"
+              placeholder="Izoh qoldiring"
               className=" py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             ></textarea>
 

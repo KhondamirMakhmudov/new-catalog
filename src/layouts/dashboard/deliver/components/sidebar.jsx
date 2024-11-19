@@ -100,6 +100,42 @@ const Sidebar = () => {
           <Link href={"/dashboard/deliver/profile"}>
             <div
               className={`${
+                router.pathname === "/dashboard/deliver/orders"
+                  ? "bg-white border-l-[2px] border-[#0256BA]"
+                  : "bg-transparent"
+              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+            >
+              <div
+                className={`p-[14px] ${
+                  router.pathname === "/dashboard/deliver/orders"
+                    ? " bg-[#0256BA]"
+                    : "bg-white"
+                } inline-block rounded-full`}
+              >
+                <CompanyIcon
+                  color={
+                    router.pathname === "/dashboard/deliver/orders "
+                      ? "white"
+                      : "#0256BA"
+                  }
+                />
+              </div>
+
+              <div>
+                <h1 className="font-extrabold text-sm">Kompaniya haqida</h1>
+                <p className="text-xs text-[#718096]">Manage notifications</p>
+              </div>
+            </div>
+          </Link>
+        </li>
+
+        <li
+          onClick={() => handleSelectBar("profile")}
+          className="cursor-pointer"
+        >
+          <Link href={"/dashboard/deliver/profile"}>
+            <div
+              className={`${
                 router.pathname === "/dashboard/deliver/profile"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"

@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 import { toast } from "react-hot-toast";
+import Image from "next/image";
 
 const ESIGN = ({
   setOpen = () => {},
@@ -191,13 +192,24 @@ const ESIGN = ({
           </div>
         </>
       ) : isEqual(error, "KEY_NOT_FOUND") ? (
-        <>
-          <div className={"!text-start !font-semibold mb-[20px]"}>
+        <div className="ml-[90px]">
+          <div
+            className={
+              "!text-start flex items-center gap-x-[10px] p-[10px] text-[#D36804] bg-[#FFD3B4] rounded-[12px] !font-semibold mb-[20px]"
+            }
+          >
+            <Image
+              src={"/icons/warning.svg"}
+              alt="warning"
+              width={20}
+              height={20}
+              className=""
+            />
             <h4 className={"text-base"}>
-              ERI urnatilgan lekin kalit topilmadi.
+              ERI o&apos;rnatilgan lekin kalit topilmadi.
             </h4>
           </div>
-          <div className={"!text-start text-sm "}>
+          <div className={"!text-start text-xs text-[#718096]"}>
             <p>Xatoni hal qilish uchun quyidagilarni bajaring:</p>
 
             <ol className={"list-decimal ml-[20px]"}>
@@ -229,8 +241,18 @@ const ESIGN = ({
               </Link>{" "}
               tanishishingiz mumkin
             </p>
+
+            <div className="flex justify-center items-center">
+              <Image
+                src={"/images/key-not-found.png"}
+                alt="key-not-found"
+                width={492}
+                height={492}
+                className="mt-[40px]"
+              />
+            </div>
           </div>
-        </>
+        </div>
       ) : (
         ""
       )}
