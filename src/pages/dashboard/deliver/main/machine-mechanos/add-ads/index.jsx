@@ -162,7 +162,7 @@ const Index = () => {
           </div>
 
           <div className="col-span-6 space-y-[10px]">
-            <label>Material nomi</label>
+            <label>Mahsulot nomi</label>
             <input
               type="text"
               defaultValue={get(machineMechano, "mmechano_name")}
@@ -173,7 +173,7 @@ const Index = () => {
           </div>
 
           <div className="col-span-4 space-y-[10px]">
-            <label>Material narxi</label>
+            <label>Mahsulot narxi</label>
             <input
               type="number"
               {...register("mmechano_rent_price", { required: true })}
@@ -197,7 +197,7 @@ const Index = () => {
           </div>
 
           <div className="col-span-6 space-y-[10px]">
-            <label>Material miqdori</label>
+            <label>Mahsulot miqdori</label>
             <input
               type="number"
               {...register("mmechano_amount", { required: true })}
@@ -207,7 +207,7 @@ const Index = () => {
           </div>
 
           <div className="col-span-3 space-y-[10px]">
-            <label>Material o’lchov birligi</label>
+            <label>Mahsulot o’lchov birligi</label>
             <input
               type="text"
               defaultValue={get(machineMechano, "mmechano_measure")}
@@ -218,7 +218,7 @@ const Index = () => {
           </div>
 
           <div className="col-span-3 space-y-[10px]">
-            <label>Material miqdor o’lchov birligi</label>
+            <label>Mahsulot miqdor o’lchov birligi</label>
             <input
               type="text"
               placeholder="Tanlang"
@@ -229,7 +229,7 @@ const Index = () => {
           </div>
 
           <div className="col-span-12 space-y-[10px]">
-            <label>Material miqdori</label>
+            <label>Mahsulot tavsifi</label>
 
             <textarea
               {...register("mmechano_description")}

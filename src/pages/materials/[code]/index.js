@@ -12,7 +12,7 @@ import { useState } from "react";
 import BasketIcon from "@/components/icons/basket";
 import Selected from "@/components/buttons/selected";
 import dayjs from "dayjs";
-import Basket from "@/components/buttons/basket";
+
 const Index = () => {
   const [limit] = useState(9);
   const router = useRouter();
@@ -220,7 +220,12 @@ const Index = () => {
                               </p>
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
-                              {get(item, "company_name")}
+                              <Link
+                                href={`/company/${get(item, "company_stir")}`}
+                                className="underline-0 hover:underline transition-all duration-300"
+                              >
+                                {get(item, "company_name")}
+                              </Link>
                             </td>
                             <td className=" font-medium text-xs py-[10px]">
                               <Link

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import MyAdsIcon from "@/components/icons/my-ads";
 import { signOut, useSession } from "next-auth/react";
 import CompanyIcon from "@/components/icons/about-company";
+import DeliverOrderIcon from "@/components/icons/deliver-order";
 
 const Sidebar = () => {
   const [selectBar, setSelectBar] = useState("");
@@ -94,10 +95,10 @@ const Sidebar = () => {
         </li>
 
         <li
-          onClick={() => handleSelectBar("profile")}
+          onClick={() => handleSelectBar("orders")}
           className="cursor-pointer"
         >
-          <Link href={"/dashboard/deliver/profile"}>
+          <Link href={"/dashboard/deliver/orders"}>
             <div
               className={`${
                 router.pathname === "/dashboard/deliver/orders"
@@ -112,9 +113,9 @@ const Sidebar = () => {
                     : "bg-white"
                 } inline-block rounded-full`}
               >
-                <CompanyIcon
+                <DeliverOrderIcon
                   color={
-                    router.pathname === "/dashboard/deliver/orders "
+                    router.pathname === "/dashboard/deliver/orders"
                       ? "white"
                       : "#0256BA"
                   }
@@ -122,7 +123,7 @@ const Sidebar = () => {
               </div>
 
               <div>
-                <h1 className="font-extrabold text-sm">Kompaniya haqida</h1>
+                <h1 className="font-extrabold text-sm">Buyurtmalar</h1>
                 <p className="text-xs text-[#718096]">Manage notifications</p>
               </div>
             </div>
@@ -133,24 +134,24 @@ const Sidebar = () => {
           onClick={() => handleSelectBar("profile")}
           className="cursor-pointer"
         >
-          <Link href={"/dashboard/deliver/profile"}>
+          <Link href={"/dashboard/deliver/about-company"}>
             <div
               className={`${
-                router.pathname === "/dashboard/deliver/profile"
+                router.pathname === "/dashboard/deliver/about-company"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
               } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
-                  router.pathname === "/dashboard/deliver/profile"
+                  router.pathname === "/dashboard/deliver/about-company"
                     ? " bg-[#0256BA]"
                     : "bg-white"
                 } inline-block rounded-full`}
               >
                 <CompanyIcon
                   color={
-                    router.pathname === "/dashboard/deliver/profile"
+                    router.pathname === "/dashboard/deliver/about-company"
                       ? "white"
                       : "#0256BA"
                   }

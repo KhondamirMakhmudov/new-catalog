@@ -1,0 +1,274 @@
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get, isNil } from "lodash";
+import Pagination from "@/components/pagination";
+import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
+import MyAdsAll from "@/layouts/dashboard/deliver/components/myAds-page/my-ads";
+import MainContent from "@/layouts/dashboard/deliver/components/main-page/main";
+import dayjs from "dayjs";
+import usePutQuery from "@/hooks/api/usePutQuery";
+import toast from "react-hot-toast";
+import Image from "next/image";
+
+const MyMaterials = () => {
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(24);
+  const [itemId, setItemId] = useState(null);
+
+  const { data: myWork } = useGetQuery({
+    key: KEYS.myWork,
+    url: URLS.myWork,
+    params: {
+      page,
+      page_size: pageSize,
+    },
+  });
+
+  const { mutate: deactivateRequest, isLoading: isLoadingDeActivate } =
+    usePutQuery({
+      listKeyId: KEYS.myMachineMechano,
+    });
+
+  const deActivate = (_id) => {
+    if (_id) {
+      deactivateRequest(
+        {
+          url: URLS.deactivateMachineMechano,
+          attributes: {
+            id: _id,
+          },
+        },
+        {
+          onSuccess: () => {
+            toast.success("E‘lon muvaffaqiyatli o‘chirildi!", {
+              position: "top-center",
+            });
+            setItemId(null);
+          },
+        }
+      );
+    }
+  };
+  return (
+    <DeliverDashboard>
+      <MainContent>
+        <MyAdsAll>
+          <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] mt-[12px]">
+            <motion.table
+              className="w-full border-collapse border-[#D7D9E7]"
+              initial={{ opacity: 0, translateY: "30px" }}
+              animate={{ opacity: 1, translateY: "0" }}
+              transition={{ duration: 0.4 }}
+            >
+              <thead className="text-black text-start rounded-[10px]">
+                <tr className="rounded-[10px]">
+                  <th
+                    className={
+                      "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                    }
+                  >
+                    №
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Kompaniya
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Resurs kodi
+                  </th>
+                  <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                    Resurs nomi
+                  </th>
+                  <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold  rounded-tr-[10px]">
+                    O&apos;lchov Birligi
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Narxi
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                    Oxirgi o&apos;zgarish
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {get(myWork, "data.results", []).map((item, index) => (
+                  <tr
+                    key={index}
+                    className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                  >
+                    <td className=" font-medium text-xs py-[10px]  text-center">
+                      {index + 1}
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                      {get(item, "company_name")}
+                    </td>
+                    <td className=" font-medium text-xs py-[10px]">
+                      <Link
+                        href={`/machine-mechano/${get(item, "work_code")}`}
+                        className="underline-0 hover:underline transition-all duration-300"
+                      >
+                        {get(item, "work_code")}
+                      </Link>
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                      {get(item, "work_name")}
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] text-center">
+                      <div className="flex space-x-[4px]">
+                        <Image
+                          src={"/icons/measure-basket.svg"}
+                          alt="clock"
+                          width={16}
+                          height={16}
+                        />
+                        <p>{get(item, "work_measure")}</p>
+                      </div>
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] text-center">
+                      <div className="flex space-x-[4px]">
+                        {get(item, "work_rent_price")}
+                        {get(item, "work_rent_price_currency")}
+                      </div>
+                    </td>
+                    <td className=" font-medium text-xs py-[10px] text-center">
+                      <div className="flex space-x-[4px]">
+                        <p>
+                          {" "}
+                          {dayjs(get(item, "work_updated_date")).format(
+                            "DD.MM.YYYY"
+                          )}
+                        </p>
+                        <p>
+                          {dayjs(get(item, "work_updated_date")).format(
+                            "HH:mm"
+                          )}
+                        </p>
+                      </div>
+                    </td>
+                    <td>
+                      <div className="flex gap-x-[4px]">
+                        <Link href={`/materials/${get(item, "material_code")}`}>
+                          <button className="bg-[#DAE8F7] rounded-[8px] p-[5px]">
+                            <Image
+                              src={"/icons/eye.svg"}
+                              alt="clock"
+                              width={18}
+                              height={18}
+                            />
+                          </button>
+                        </Link>
+                        <Link href={`${URLS.materials}${get(item, "id")}`}>
+                          <button className="bg-[#DAE8F7] rounded-[8px] p-[5px]">
+                            <Image
+                              src={"/icons/edit.svg"}
+                              alt="clock"
+                              width={18}
+                              height={18}
+                            />
+                          </button>
+                        </Link>
+                        <button className="bg-[#E9E1E8] rounded-[8px] p-[5px]">
+                          <Image
+                            src={"/icons/delete.svg"}
+                            alt="clock"
+                            width={18}
+                            onClick={() => setItemId(get(item, "id"))}
+                            height={18}
+                          />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </motion.table>
+            <div className="w-full h-[1px] text-[#E2E2EA]"></div>
+            <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+              <div>
+                <p className="text-sm text-[#9392A0]">
+                  {get(myWork, "data.count")} tadan 1-
+                  {get(myWork, "data.count")}
+                  tasi ko&apos;rsatilgan
+                </p>
+              </div>
+
+              <div>
+                <Pagination
+                  page={page}
+                  pageCount={get(myWork, "data.total_pages", 0)}
+                />
+              </div>
+              {/* delete modal */}
+              <div
+                className={`fixed inset-0  z-50 bg-black bg-opacity-75 flex justify-center items-center ${
+                  isNil(itemId) ? "hidden" : "visible"
+                }`}
+              >
+                <div className={"w-[550px] p-[30px] rounded-[5px] bg-white"}>
+                  <div>
+                    <Image
+                      onClick={() => setItemId(null)}
+                      src={"/icons/closeModal.svg"}
+                      alt={"modalcloser"}
+                      width={24}
+                      height={24}
+                      className={"float-right block cursor-pointer"}
+                    />
+                  </div>
+                  <br />
+
+                  <div className={"flex items-center gap-x-[15px]"}>
+                    <div className="rounded-full border border-gray-300 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
+                      <Image
+                        src={"/images/warning.png"}
+                        alt={"warning"}
+                        width={30}
+                        height={30}
+                      />
+                    </div>
+                    <div className="mt-4 md:mt-0 md:ml-6  md:text-left">
+                      <p className="font-bold">E'lonni o‘chirmoqchimisiz?</p>
+                      <p className="text-sm text-gray-700 mt-1">
+                        O'chirish tugmasi bosilganidan so‘ng siz tanlagan e'lon
+                        o‘chiriladi.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    className={
+                      "text-center flex items-center gap-x-[20px] mt-[20px]"
+                    }
+                  >
+                    <button
+                      onClick={() => deActivate(itemId)}
+                      className={
+                        "block w-full px-4 py-3 md:py-2 bg-red-200 hover:bg-red-400 duration-300 transition-all text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2"
+                      }
+                    >
+                      O'chirish
+                    </button>
+                    <button
+                      onClick={() => setItemId(null)}
+                      className={
+                        "block w-full  md:w-auto px-4 py-3 md:py-2 bg-gray-200 hover:bg-gray-400 transition-all duration-300 rounded-lg font-semibold text-sm  md:mt-0 md:order-1"
+                      }
+                    >
+                      Bekor qilish
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </MyAdsAll>
+      </MainContent>
+    </DeliverDashboard>
+  );
+};
+
+export default MyMaterials;
