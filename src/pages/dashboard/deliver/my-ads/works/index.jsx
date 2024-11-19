@@ -231,10 +231,12 @@ const MyMaterials = () => {
                       />
                     </div>
                     <div className="mt-4 md:mt-0 md:ml-6  md:text-left">
-                      <p className="font-bold">E'lonni o‘chirmoqchimisiz?</p>
+                      <p className="font-bold">
+                        E&apos;lonni o‘chirmoqchimisiz?
+                      </p>
                       <p className="text-sm text-gray-700 mt-1">
-                        O'chirish tugmasi bosilganidan so‘ng siz tanlagan e'lon
-                        o‘chiriladi.
+                        O&apos;chirish tugmasi bosilganidan so‘ng siz tanlagan
+                        e&apos;lon o‘chiriladi.
                       </p>
                     </div>
                   </div>
@@ -250,7 +252,7 @@ const MyMaterials = () => {
                         "block w-full px-4 py-3 md:py-2 bg-red-200 hover:bg-red-400 duration-300 transition-all text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2"
                       }
                     >
-                      O'chirish
+                      O&apos;chirish
                     </button>
                     <button
                       onClick={() => setItemId(null)}
