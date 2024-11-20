@@ -91,7 +91,7 @@ const Header = () => {
               </li>
 
               <li>
-                <Link href={"#"}>Integratsiya</Link>
+                <Link href={"/integrations"}>Integratsiya</Link>
               </li>
 
               <li>
