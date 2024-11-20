@@ -17,7 +17,7 @@ import BirjaComponent from "@/components/integrations/birja";
 import BojxonaComponent from "@/components/integrations/bojxona";
 
 const Index = () => {
-  const [tab, setTab] = useState("maktab");
+  const [tab, setTab] = useState("birja");
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const selectProject = (tab) => {
     setTab(tab);
