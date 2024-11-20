@@ -16,7 +16,7 @@ import dayjs from "dayjs";
 import MyAdsAll from "@/layouts/dashboard/deliver/components/myAds-page/my-ads";
 import CompanyFilterAds from "@/layouts/dashboard/deliver/components/company-filter/companeFilter";
 const Index = () => {
-  const [page, setPage] = useState(3);
+  const [page, setPage] = useState(1);
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const router = useRouter();
   const { stir } = router.query;

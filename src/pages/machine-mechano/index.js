@@ -149,7 +149,10 @@ const Index = () => {
                           </td>
                           <td className=" font-medium text-xs py-[10px]">
                             <Link
-                              href={"#"}
+                              href={`/machine-mechano/${get(
+                                item,
+                                "mmechano_csr_code"
+                              )}`}
                               className="underline-0 hover:underline transition-all duration-300"
                             >
                               {get(item, "mmechano_csr_code")}

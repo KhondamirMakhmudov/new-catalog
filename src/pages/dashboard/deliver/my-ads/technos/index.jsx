@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 
 const MyMaterials = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(24);
   const [itemId, setItemId] = useState(null);
 

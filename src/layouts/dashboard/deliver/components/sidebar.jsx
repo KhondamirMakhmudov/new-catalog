@@ -3,9 +3,11 @@ import DeliverIcon from "@/components/icons/deliver";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import MyAdsIcon from "@/components/icons/my-ads";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import CompanyIcon from "@/components/icons/about-company";
 import DeliverOrderIcon from "@/components/icons/deliver-order";
+import Image from "next/image";
+import LogOut from "@/components/buttons/logout";
 
 const Sidebar = () => {
   const [selectBar, setSelectBar] = useState("");
@@ -14,15 +16,10 @@ const Sidebar = () => {
   const handleSelectBar = (nav) => {
     setSelectBar(nav);
   };
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: "/" });
 
-    localStorage.clear();
-    sessionStorage.clear();
-  };
   return (
-    <div className="col-span-3 border border-r border-t border-l-0 border-b-0 h-screen py-[20px] font-gilroy">
-      <ul>
+    <div className="col-span-3 border border-r border-t border-l-0 border-b-0  py-[20px] font-gilroy flex flex-col space-y-[388px] self-start">
+      <ul className="">
         <li onClick={() => handleSelectBar("main")} className="cursor-pointer">
           <Link href={"/dashboard/deliver/main"}>
             <div
@@ -165,11 +162,9 @@ const Sidebar = () => {
             </div>
           </Link>
         </li>
-
-        <li>
-          <button onClick={() => handleLogout()}>Chiqish</button>
-        </li>
       </ul>
+
+      <LogOut />
     </div>
   );
 };
