@@ -14,6 +14,8 @@ import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
 
 const Index = () => {
+  const [volumed, setVolumed] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const [regionName, setRegionName] = useState("");
 
@@ -39,7 +41,15 @@ const Index = () => {
     url: URLS.materialVolumeFast,
   });
 
-  console.log(materialVolume);
+  const { data: materialCategory, isLoading: isLoadingCategory } = useGetQuery({
+    key: [KEYS.materialCategoryFast, volumed],
+    url: `${URLS.materialCategoryFast}${volumed}`,
+  });
+
+  const { data: materialGroup, isLoading: isLoadingGroup } = useGetQuery({
+    key: [KEYS.materialGroupFast, categoryId],
+    url: `${URLS.materialGroupFast}${categoryId}`,
+  });
 
   const { data: currency } = useGetQuery({
     key: KEYS.currency,
@@ -96,22 +106,91 @@ const Index = () => {
               />
 
               <div className="mt-[16px]">
-                <div className="cursor-pointer">
+                <ul className="cursor-pointer">
                   {get(materialVolume, "data")?.map((volume) => (
-                    <div key={get(volume, "id")} className="flex gap-x-[4px]">
-                      <Image
-                        src={"/icons/arrow_right.svg"}
-                        alt="arrow_right"
-                        width={16}
-                        height={16}
-                      />
-                      <p className="text-xs font-medium text-[#475467]">
-                        {" "}
-                        {get(volume, "volume_name")}
-                      </p>
-                    </div>
+                    <li
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setVolumed(get(volume, "id"));
+                      }}
+                      key={get(volume, "id")}
+                    >
+                      <div className="flex gap-x-[4px]">
+                        <Image
+                          src={"/icons/arrow_right.svg"}
+                          alt="arrow_right"
+                          width={16}
+                          height={16}
+                        />
+                        <p className="text-xs font-medium text-[#475467]">
+                          {get(volume, "volume_name")}
+                        </p>
+                      </div>
+                      {volumed === get(volume, "id") && ( // Only show categories for selected volume
+                        <>
+                          {isLoadingCategory ? (
+                            <div>Loading categories...</div>
+                          ) : (
+                            <ul className="ml-[10px]">
+                              {get(materialCategory, "data")?.map(
+                                (category) => (
+                                  <li
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setCategoryId(get(category, "id"));
+                                    }}
+                                    key={get(category, "id")}
+                                  >
+                                    <div className="flex gap-x-[4px]">
+                                      <Image
+                                        src={"/icons/arrow_right.svg"}
+                                        alt="arrow_right"
+                                        width={16}
+                                        height={16}
+                                      />
+                                      <p className="text-xs font-medium text-[#475467]">
+                                        {get(category, "category_name")}
+                                      </p>
+                                    </div>
+                                    {categoryId === get(category, "id") && (
+                                      <>
+                                        {isLoadingGroup ? (
+                                          <div>Loading groups</div>
+                                        ) : (
+                                          <ul className="ml-[10px]">
+                                            {get(materialGroup, "data")?.map(
+                                              (group) => (
+                                                <li key={get(group, "id")}>
+                                                  <div className="flex gap-x-[4px]">
+                                                    <Image
+                                                      src={
+                                                        "/icons/arrow_right.svg"
+                                                      }
+                                                      alt="arrow_right"
+                                                      width={16}
+                                                      height={16}
+                                                    />
+                                                    <p className="text-xs font-medium text-[#475467]">
+                                                      {get(group, "group_name")}
+                                                    </p>
+                                                  </div>
+                                                </li>
+                                              )
+                                            )}
+                                          </ul>
+                                        )}
+                                      </>
+                                    )}
+                                  </li>
+                                )
+                              )}
+                            </ul>
+                          )}
+                        </>
+                      )}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
 

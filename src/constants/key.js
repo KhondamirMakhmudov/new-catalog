@@ -71,4 +71,6 @@ export const KEYS = {
   ads: "ads",
   materialsFast: "materialsFast",
   materialVolumeFast: "materialVolumeFast",
+  materialCategoryFast: "materialCategoryFast",
+  materialGroupFast: "materialGroupFast",
 };
