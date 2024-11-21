@@ -21,9 +21,10 @@ const Index = () => {
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const [regionName, setRegionName] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
+  const [page, setPage] = useState(1);
 
   const [limit] = useState(24);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(1);
   const {
     data: materialsFast,
     isLoading: materialLoading,
@@ -35,6 +36,8 @@ const Index = () => {
       region_name: regionName || undefined,
       min_price: 0,
       max_price: 1000,
+      page: page,
+      page_size: 12,
     },
     enabled: true,
   });
@@ -435,15 +438,16 @@ const Index = () => {
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {" "}
-                      {get(materialsFast, "data.count")} tadan 1-{limit} tasi
+                      {get(materialsFast, "data.count")} tadan 1-12 tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>
 
                   <div>
                     <Pagination
-                      pageCount={pageCount}
-                      onPageChange={handlePageClick}
+                      pageCount={get(materialsFast, "data.total_pages")}
+                      page={page}
+                      setPage={(prev) => setPage(prev)}
                     />
                   </div>
                 </div>
