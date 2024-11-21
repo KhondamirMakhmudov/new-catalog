@@ -245,7 +245,7 @@ const Index = () => {
                     value={regionName}
                     onChange={(e) => {
                       const value = e.target.value;
-                      setRegionName(value.trim());
+                      setRegionName(value);
                     }}
                     className="py-[10px] pl-[15px] border w-full rounded-[8px]"
                   />
