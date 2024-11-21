@@ -1,0 +1,22 @@
+const DownIcon = ({ props, color = "white", classNames }) => {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={classNames}
+      {...props}
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M9 10.6169L13.9186 6.1678C14.166 5.94407 14.5671 5.94407 14.8145 6.1678C15.0618 6.39153 15.0618 6.75428 14.8145 6.97801L9.44793 11.8322C9.20054 12.0559 8.79945 12.0559 8.55207 11.8322L3.18554 6.97801C2.93815 6.75428 2.93815 6.39153 3.18554 6.1678C3.43292 5.94407 3.83401 5.94407 4.0814 6.1678L9 10.6169Z"
+        fill={color}
+      />
+    </svg>
+  );
+};
+
+export default DownIcon;
