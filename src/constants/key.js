@@ -69,4 +69,6 @@ export const KEYS = {
   worksCategory: "worksCategory",
   cmetaCategories: "cmetaCategories",
   ads: "ads",
+  materialsFast: "materialsFast",
+  materialVolumeFast: "materialVolumeFast",
 };

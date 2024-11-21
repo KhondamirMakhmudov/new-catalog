@@ -7,25 +7,48 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { motion } from "framer-motion";
 import { get } from "lodash";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import Footer from "@/components/footer";
+import { NumericFormat } from "react-number-format";
+import dayjs from "dayjs";
 
 const Index = () => {
   const [showAllProjects, setShowAllProjects] = useState(!false);
+  const [regionName, setRegionName] = useState("");
+
   const [limit] = useState(24);
   const [offset, setOffset] = useState(0);
   const {
-    data: materials,
+    data: materialsFast,
     isLoading: materialLoading,
-    isError: materialError,
     isFetching: isFetchingMaterials,
   } = useGetQuery({
-    key: KEYS.materials,
-    url: URLS.materials,
-    params: { key: KEYS.viewCounts, page_size: limit },
+    key: [KEYS.materialsFast, regionName],
+    url: URLS.materialsFast,
+    params: {
+      region_name: regionName || undefined,
+      min_price: 0,
+      max_price: 1000,
+    },
+    enabled: true,
   });
 
-  const totalItems = get(materials, "data.count");
+  const { data: materialVolume, isLoading } = useGetQuery({
+    key: KEYS.materialVolumeFast,
+    url: URLS.materialVolumeFast,
+  });
+
+  console.log(materialVolume);
+
+  const { data: currency } = useGetQuery({
+    key: KEYS.currency,
+    url: URLS.currency,
+  });
+
+  console.log(get(currency, "data"));
+
+  const totalItems = get(materialsFast, "data.count");
   const pageCount = Math.ceil(totalItems / limit);
 
   const handlePageClick = (event) => {
@@ -71,6 +94,25 @@ const Index = () => {
                 className="py-[10px] px-[15px] border w-full mt-[20px] rounded-[8px]"
                 placeholder="Qidirish"
               />
+
+              <div className="mt-[16px]">
+                <div className="cursor-pointer">
+                  {get(materialVolume, "data")?.map((volume) => (
+                    <div key={get(volume, "id")} className="flex gap-x-[4px]">
+                      <Image
+                        src={"/icons/arrow_right.svg"}
+                        alt="arrow_right"
+                        width={16}
+                        height={16}
+                      />
+                      <p className="text-xs font-medium text-[#475467]">
+                        {" "}
+                        {get(volume, "volume_name")}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div className="col-span-9 space-y-[16px]">
@@ -80,19 +122,32 @@ const Index = () => {
 
                   <input
                     type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    placeholder="Kiriting"
+                    value={regionName}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setRegionName(value.trim());
+                    }}
+                    className="py-[10px] pl-[15px] border w-full rounded-[8px]"
                   />
                 </div>
 
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
 
-                  <input
-                    type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
+                  <div className="flex gap-x-[2px] items-center">
+                    <input
+                      type="text"
+                      placeholder="Kiriting"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    />
+                    <div className="h-[1px] w-full max-w-[8px] bg-[#BCBFC2]"></div>
+                    <input
+                      type="text"
+                      placeholder="Kiriting"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    />
+                  </div>
                 </div>
 
                 <div className="col-span-4">
@@ -124,45 +179,139 @@ const Index = () => {
                         №
                       </th>
                       <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                        Material kodi
+                        Hudud
                       </th>
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Mahsulot Kodi
+                        Kompaniya
                       </th>
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        O&apos;lchov Birligi
+                        Resurs kodi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Resurs nomi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        O&apos;lchov birligi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Narxi (so’m)
+                      </th>
+
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Oxirgi o&apos;zgarish
                       </th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    {get(materials, "data.results", []).map((item, index) => (
-                      <tr
-                        key={index}
-                        className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                      >
-                        <td className=" font-medium text-xs py-[10px]  text-center">
-                          {index + 1}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]">
-                          <Link
-                            href={`/materials/${get(
-                              item,
-                              "material_csr_code"
-                            )}`}
-                            className="underline-0 hover:underline transition-all duration-300"
-                          >
-                            {get(item, "material_csr_code")}
-                          </Link>
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]">
-                          {get(item, "material_name")}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px] text-center">
-                          {get(item, "material_measure")}
-                        </td>
-                      </tr>
-                    ))}
+                    {get(materialsFast, "data.materials")?.map(
+                      (item, index) => (
+                        <tr
+                          key={index}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]  text-start">
+                            {get(item, "material_region_name")}
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
+                            {get(item, "company_name")}
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px]">
+                            <Link
+                              href={`/materials/${get(
+                                item,
+                                "material_name_id"
+                              )}`}
+                              className="underline-0 hover:underline transition-all duration-300"
+                            >
+                              {get(item, "material_name_id")}
+                            </Link>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                            {get(item, "material_name")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/measure-basket.svg"}
+                                alt="measure-basket"
+                                width={16}
+                                height={16}
+                              />
+                              <p>{get(item, "material_measure")}</p>
+                            </div>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] ">
+                            <NumericFormat
+                              thousandSeparator={" "}
+                              className="bg-transparent max-w-[100px]"
+                              value={
+                                Number.isInteger(get(item, "material_price"))
+                                  ? get(item, "material_price")
+                                  : parseFloat(
+                                      get(item, "material_price")
+                                    ).toFixed(2)
+                              }
+                            />
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/clock.svg"}
+                                alt="clock"
+                                width={16}
+                                height={16}
+                              />
+                              <p>
+                                {" "}
+                                {dayjs(
+                                  get(item, "material_updated_date")
+                                ).format("DD.MM.YYYY")}
+                              </p>
+                              <p>
+                                {dayjs(
+                                  get(item, "material_updated_date")
+                                ).format("HH:mm")}
+                              </p>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="flex items-center gap-x-[4px]">
+                              <button
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/heart.svg"}
+                                  alt={"heart"}
+                                  width={18}
+                                  height={18}
+                                />
+                              </button>
+
+                              <button
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/basket.svg"}
+                                  alt={"heart"}
+                                  width={18}
+                                  height={18}
+                                />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </tbody>
                 </motion.table>
                 <div className="w-full h-[1px] text-[#E2E2EA] "></div>
@@ -170,7 +319,7 @@ const Index = () => {
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {" "}
-                      {get(materials, "data.count")} tadan 1-{limit} tasi
+                      {get(materialsFast, "data.count")} tadan 1-{limit} tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>

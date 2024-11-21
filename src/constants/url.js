@@ -83,4 +83,6 @@ export const URLS = {
   worksCategory: "cmeta/cmeta/category/",
   cmetaCategories: "cmeta/cmeta",
   ads: "fastapi/materials/filter",
+  materialsFast: "fastapi/materials/filter",
+  materialVolumeFast: "fastapi/material_volume/",
 };
