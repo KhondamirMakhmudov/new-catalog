@@ -78,4 +78,8 @@ export const KEYS = {
   technoVolumeFast: "technoVolumeFast",
   technoCategoryFast: "technoCategoryFast",
   technoGroupFast: "technoGroupFast",
+
+  mmechanoFast: "mmechanoFast",
+  mmechanoCategoryFast: "mmechanoCategoryFast",
+  mmechanoGroupFast: "mmechanoGroupFast",
 };

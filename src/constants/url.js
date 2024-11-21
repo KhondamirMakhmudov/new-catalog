@@ -92,4 +92,8 @@ export const URLS = {
   technoVolumeFast: "fastapi/techno_volume/",
   technoCategoryFast: "fastapi/techno_categories/",
   technoGroupFast: "fastapi/techno_groups/",
+
+  mmechanoFast: "fastapi/mmechano_ads/filter",
+  mmechanoCategoryFast: "fastapi/mmechano_categories/",
+  mmechanoGroupFast: "fastapi/mmechano_groups/",
 };

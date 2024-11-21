@@ -20,6 +20,9 @@ const Index = () => {
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const [regionName, setRegionName] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(0);
+  const [nameValue, setNameValue] = useState("");
   const [page, setPage] = useState(1);
   const {
     data: technos,
@@ -30,8 +33,9 @@ const Index = () => {
     url: URLS.technoFast,
     params: {
       region_name: regionName || undefined,
-      min_price: 0,
-
+      min_price: minValue || undefined,
+      max_price: maxValue || undefined,
+      name_value: nameValue,
       page: page,
       page_size: 12,
     },
@@ -89,12 +93,6 @@ const Index = () => {
                   />
                 </button>
               </div>
-
-              <input
-                type="text"
-                className="py-[10px] px-[15px] border w-full mt-[20px] rounded-[8px]"
-                placeholder="Qidirish"
-              />
 
               <div className="mt-[16px]">
                 <ul className="cursor-pointer">
@@ -199,6 +197,7 @@ const Index = () => {
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
+
                   <input
                     type="text"
                     placeholder="Kiriting"
@@ -214,21 +213,41 @@ const Index = () => {
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
 
-                  <input
-                    type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
+                  <div className="flex gap-x-[2px] items-center">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setMinValue(value);
+                      }}
+                      placeholder="Kiriting"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    />
+                    <div className="h-[1px] w-full max-w-[8px] bg-[#BCBFC2]"></div>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setMaxValue(value);
+                      }}
+                      placeholder="Kiriting"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    />
+                  </div>
                 </div>
 
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">
-                    Sanani tanlash
+                    Mahsulot nomi
                   </h3>
 
                   <input
                     type="text"
-                    placeholder="Tanlash"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setNameValue(value);
+                    }}
+                    placeholder="Qidirish"
                     className="py-[10px] px-[15px] border w-full  rounded-[8px]"
                   />
                 </div>

@@ -7,33 +7,73 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { motion } from "framer-motion";
 import { get } from "lodash";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Image from "next/image";
 import Footer from "@/components/footer";
+import { NumericFormat } from "react-number-format";
+import dayjs from "dayjs";
+import ContentLoader from "@/components/loader/content-loader";
+import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
+  const [volumed, setVolumed] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(!false);
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(0);
+  const [regionName, setRegionName] = useState("");
+  const [nameValue, setNameValue] = useState("");
+  const [selectedItems, setSelectedItems] = useState({});
+  const [page, setPage] = useState(1);
+
   const [limit] = useState(24);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState(1);
   const {
-    data: machineMechanos,
-    isLoading: machineMechanosLoading,
-    isError: machineMechanosError,
-    isFetching: isFetchingMaterials,
+    data: machineMechano,
+    isLoading: mmechanoLoading,
+    isFetching: isFetchingMmechano,
   } = useGetQuery({
-    key: KEYS.machinesMechanos,
-    url: URLS.machinesMechanos,
-    params: { key: KEYS.viewCounts, page_size: limit },
+    key: [KEYS.mmechanoFast, regionName],
+    url: URLS.mmechanoFast,
+    params: {
+      region_name: regionName || undefined,
+      min_price: minValue || undefined,
+      max_price: maxValue || undefined,
+      page: page,
+      page_size: 12,
+      name_value: nameValue || undefined,
+    },
+    enabled: true,
   });
 
-  console.log(machineMechanos);
+  const { data: mmechanoCategory, isLoading: isLoadingCategory } = useGetQuery({
+    key: KEYS.mmechanoCategoryFast,
+    url: URLS.mmechanoCategoryFast,
+  });
 
-  const totalItems = get(machineMechanos, "data.count");
-  const pageCount = Math.ceil(totalItems / limit);
+  const { data: mmechanoGroup, isLoading: isLoadingGroup } = useGetQuery({
+    key: [KEYS.mmechanoGroupFast, categoryId],
+    url: `${URLS.mmechanoGroupFast}${categoryId}`,
+  });
 
-  const handlePageClick = (event) => {
-    const newOffset = event?.selected * limit;
-    setOffset(newOffset);
+  const { data: currency } = useGetQuery({
+    key: KEYS.currency,
+    url: URLS.currency,
+  });
+
+  const { mutate: getMaterial } = usePostQuery({ listKeyId: KEYS.getMaterial });
+
+  const handleCheckboxChange = (item) => {
+    const isSelected = !selectedItems[item.id];
+    const newSelectedState = { ...selectedItems, [item.id]: isSelected };
+    setSelectedItems(newSelectedState);
+
+    getMaterial({
+      url: URLS.getMaterial,
+      attributes: [item.id],
+    });
   };
+
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
@@ -68,11 +108,69 @@ const Index = () => {
                 </button>
               </div>
 
-              <input
-                type="text"
-                className="py-[10px] px-[15px] border w-full mt-[20px] rounded-[8px]"
-                placeholder="Qidirish"
-              />
+              <div className="mt-[16px]">
+                <ul className="cursor-pointer">
+                  {get(mmechanoCategory, "data")?.map((category) => (
+                    <li
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCategoryId(get(category, "id"));
+                      }}
+                      key={get(category, "id")}
+                    >
+                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                        <Image
+                          src={"/icons/arrow_right.svg"}
+                          alt="arrow_right"
+                          width={16}
+                          height={16}
+                        />
+                        <p className="text-xs font-medium text-[#475467]">
+                          {get(category, "category_name")}
+                        </p>
+                      </div>
+                      {categoryId === get(category, "id") && (
+                        <>
+                          {isLoadingGroup ? (
+                            <div>
+                              <ContentLoader />
+                            </div>
+                          ) : (
+                            <motion.ul
+                              className="ml-[10px]"
+                              initial={{ opacity: 0, translateY: "20px" }}
+                              animate={{ opacity: 1, translateY: "0px" }}
+                              transition={{ duration: 0.1 }}
+                            >
+                              {get(mmechanoGroup, "data")?.map((group) => (
+                                <li
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setCategoryId(get(group, "id"));
+                                  }}
+                                  key={get(group, "id")}
+                                >
+                                  <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                    <Image
+                                      src={"/icons/arrow_right.svg"}
+                                      alt="arrow_right"
+                                      width={16}
+                                      height={16}
+                                    />
+                                    <p className="text-xs font-medium text-[#475467]">
+                                      {get(group, "group_name")}
+                                    </p>
+                                  </div>
+                                </li>
+                              ))}
+                            </motion.ul>
+                          )}
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="col-span-9 space-y-[16px]">
@@ -82,29 +180,54 @@ const Index = () => {
 
                   <input
                     type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    placeholder="Kiriting"
+                    value={regionName}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setRegionName(value);
+                    }}
+                    className="py-[10px] pl-[15px] border w-full rounded-[8px]"
                   />
                 </div>
 
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
 
-                  <input
-                    type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
+                  <div className="flex gap-x-[2px] items-center">
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setMinValue(value);
+                      }}
+                      placeholder="Kiriting"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    />
+                    <div className="h-[1px] w-full max-w-[8px] bg-[#BCBFC2]"></div>
+                    <input
+                      type="number"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setMaxValue(value);
+                      }}
+                      placeholder="Kiriting"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                    />
+                  </div>
                 </div>
 
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">
-                    Sanani tanlash
+                    Mahsulot nomi
                   </h3>
 
                   <input
                     type="text"
-                    placeholder="Tanlash"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setNameValue(value);
+                    }}
+                    placeholder="Qidirish"
                     className="py-[10px] px-[15px] border w-full  rounded-[8px]"
                   />
                 </div>
@@ -126,43 +249,135 @@ const Index = () => {
                         №
                       </th>
                       <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                        Material kodi
+                        Hudud
                       </th>
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Mahsulot Kodi
+                        Kompaniya
                       </th>
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        O&apos;lchov Birligi
+                        Resurs kodi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Resurs nomi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        O&apos;lchov birligi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Narxi (so’m)
+                      </th>
+
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Oxirgi o&apos;zgarish
                       </th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    {get(machineMechanos, "data.results", []).map(
+                    {get(machineMechano, "data.mmechano_ads")?.map(
                       (item, index) => (
                         <tr
-                          key={get(item, "id")}
+                          key={index}
                           className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                         >
                           <td className=" font-medium text-xs py-[10px]  text-center">
                             {index + 1}
                           </td>
+                          <td className=" font-medium text-xs py-[10px]  text-start">
+                            {get(item, "mmechano_region_name")}
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
+                            {get(item, "company_name")}
+                          </td>
+
                           <td className=" font-medium text-xs py-[10px]">
                             <Link
                               href={`/machine-mechano/${get(
                                 item,
-                                "mmechano_csr_code"
+                                "mmechano_name_id"
                               )}`}
                               className="underline-0 hover:underline transition-all duration-300"
                             >
-                              {get(item, "mmechano_csr_code")}
+                              {get(item, "mmechano_name_id")}
                             </Link>
                           </td>
-                          <td className=" font-medium text-xs py-[10px]">
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
                             {get(item, "mmechano_name")}
                           </td>
                           <td className=" font-medium text-xs py-[10px] text-center">
-                            {get(item, "mmechano_measure")}
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/measure-basket.svg"}
+                                alt="measure-basket"
+                                width={16}
+                                height={16}
+                              />
+                              <p>{get(item, "mmechano_measure")}</p>
+                            </div>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] ">
+                            <NumericFormat
+                              thousandSeparator={" "}
+                              className="bg-transparent max-w-[100px]"
+                              value={
+                                Number.isInteger(get(item, "material_price"))
+                                  ? get(item, "mmechano_rent_price")
+                                  : parseFloat(
+                                      get(item, "mmechano_rent_price")
+                                    ).toFixed(2)
+                              }
+                            />
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/clock.svg"}
+                                alt="clock"
+                                width={16}
+                                height={16}
+                              />
+                              <p>
+                                {" "}
+                                {dayjs(
+                                  get(item, "material_updated_date")
+                                ).format("DD.MM.YYYY")}
+                              </p>
+                              <p>
+                                {dayjs(
+                                  get(item, "material_updated_date")
+                                ).format("HH:mm")}
+                              </p>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="flex items-center gap-x-[4px]">
+                              <button
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/heart.svg"}
+                                  alt={"heart"}
+                                  width={18}
+                                  height={18}
+                                />
+                              </button>
+
+                              <button
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/basket.svg"}
+                                  alt={"heart"}
+                                  width={18}
+                                  height={18}
+                                />
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       )
@@ -174,15 +389,16 @@ const Index = () => {
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {" "}
-                      {get(machineMechanos, "data.count")} tadan 1-{limit} tasi
+                      {get(machineMechano, "data.count")} tadan 1-12 tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>
 
                   <div>
                     <Pagination
-                      pageCount={pageCount}
-                      onPageChange={handlePageClick}
+                      pageCount={get(machineMechano, "data.total_pages")}
+                      page={page}
+                      setPage={(prev) => setPage(prev)}
                     />
                   </div>
                 </div>

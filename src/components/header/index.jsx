@@ -26,7 +26,7 @@ const Header = () => {
               </li>
 
               <li>
-                <Link href={"#"}>Monitoring</Link>
+                <Link href={"/monitoring"}>Monitoring</Link>
               </li>
 
               <li>

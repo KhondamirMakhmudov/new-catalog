@@ -37,8 +37,8 @@ const Index = () => {
     url: URLS.materialsFast,
     params: {
       region_name: regionName || undefined,
-      min_price: minValue,
-      max_price: 1000,
+      min_price: minValue || undefined,
+      max_price: maxValue || undefined,
       page: page,
       page_size: 12,
       name_value: nameValue || undefined,
