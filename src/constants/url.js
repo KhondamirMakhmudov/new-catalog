@@ -87,4 +87,5 @@ export const URLS = {
   materialVolumeFast: "fastapi/material_volume/",
   materialCategoryFast: "fastapi/material_categories/",
   materialGroupFast: "fastapi/material_groups/",
+  getMaterial: "fastapi/material_ads/",
 };

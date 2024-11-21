@@ -12,12 +12,15 @@ import Image from "next/image";
 import Footer from "@/components/footer";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
+import ContentLoader from "@/components/loader/content-loader";
+import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const [volumed, setVolumed] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const [regionName, setRegionName] = useState("");
+  const [selectedItems, setSelectedItems] = useState({});
 
   const [limit] = useState(24);
   const [offset, setOffset] = useState(0);
@@ -36,7 +39,11 @@ const Index = () => {
     enabled: true,
   });
 
-  const { data: materialVolume, isLoading } = useGetQuery({
+  const {
+    data: materialVolume,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
     key: KEYS.materialVolumeFast,
     url: URLS.materialVolumeFast,
   });
@@ -56,7 +63,25 @@ const Index = () => {
     url: URLS.currency,
   });
 
-  console.log(get(currency, "data"));
+  const { mutate: getMaterial } = usePostQuery({ listKeyId: KEYS.getMaterial });
+
+  const handleCheckboxChange = (item) => {
+    const isSelected = !selectedItems[item.id];
+    const newSelectedState = { ...selectedItems, [item.id]: isSelected };
+    setSelectedItems(newSelectedState);
+
+    getMaterial({
+      url: URLS.getMaterial,
+      attributes: [item.id],
+    });
+  };
+
+  const clickToGetMaterial = (data) => {
+    getMaterial({
+      url: URLS.getMaterial,
+      attributes: { ...data },
+    });
+  };
 
   const totalItems = get(materialsFast, "data.count");
   const pageCount = Math.ceil(totalItems / limit);
@@ -111,11 +136,13 @@ const Index = () => {
                     <li
                       onClick={(e) => {
                         e.stopPropagation();
+                        setCategoryId(null);
                         setVolumed(get(volume, "id"));
                       }}
                       key={get(volume, "id")}
+                      className=""
                     >
-                      <div className="flex gap-x-[4px]">
+                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                         <Image
                           src={"/icons/arrow_right.svg"}
                           alt="arrow_right"
@@ -129,9 +156,16 @@ const Index = () => {
                       {volumed === get(volume, "id") && ( // Only show categories for selected volume
                         <>
                           {isLoadingCategory ? (
-                            <div>Loading categories...</div>
+                            <div>
+                              <ContentLoader />
+                            </div>
                           ) : (
-                            <ul className="ml-[10px]">
+                            <motion.ul
+                              className="ml-[10px]"
+                              initial={{ opacity: 0, translateY: "20px" }}
+                              animate={{ opacity: 1, translateY: "0px" }}
+                              transition={{ duration: 0.1 }}
+                            >
                               {get(materialCategory, "data")?.map(
                                 (category) => (
                                   <li
@@ -141,7 +175,7 @@ const Index = () => {
                                     }}
                                     key={get(category, "id")}
                                   >
-                                    <div className="flex gap-x-[4px]">
+                                    <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                                       <Image
                                         src={"/icons/arrow_right.svg"}
                                         alt="arrow_right"
@@ -155,22 +189,25 @@ const Index = () => {
                                     {categoryId === get(category, "id") && (
                                       <>
                                         {isLoadingGroup ? (
-                                          <div>Loading groups</div>
+                                          <div>
+                                            <ContentLoader />
+                                          </div>
                                         ) : (
                                           <ul className="ml-[10px]">
                                             {get(materialGroup, "data")?.map(
                                               (group) => (
                                                 <li key={get(group, "id")}>
-                                                  <div className="flex gap-x-[4px]">
-                                                    <Image
-                                                      src={
-                                                        "/icons/arrow_right.svg"
+                                                  <div className="flex gap-x-[4px] items-center ">
+                                                    <input
+                                                      type="checkbox"
+                                                      onChange={() =>
+                                                        handleCheckboxChange(
+                                                          group
+                                                        )
                                                       }
-                                                      alt="arrow_right"
-                                                      width={16}
-                                                      height={16}
+                                                      className="form-checkbox  text-blue-600 border-gray-300 rounded"
                                                     />
-                                                    <p className="text-xs font-medium text-[#475467]">
+                                                    <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                                                       {get(group, "group_name")}
                                                     </p>
                                                   </div>
@@ -184,7 +221,7 @@ const Index = () => {
                                   </li>
                                 )
                               )}
-                            </ul>
+                            </motion.ul>
                           )}
                         </>
                       )}
