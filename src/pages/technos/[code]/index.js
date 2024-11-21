@@ -11,6 +11,7 @@ import { get } from "lodash";
 import { useState } from "react";
 import BasketIcon from "@/components/icons/basket";
 import dayjs from "dayjs";
+import { NumericFormat } from "react-number-format";
 
 const Index = () => {
   const [limit] = useState(9);
@@ -18,18 +19,18 @@ const Index = () => {
   const { code } = router.query;
 
   const {
-    data: material,
+    data: techno,
     isLoading,
     isError,
   } = useGetQuery({
-    key: [KEYS.materials, code],
-    url: `${URLS.materials}${code}/`,
+    key: [KEYS.technos, code],
+    url: `${URLS.technos}${code}/`,
     enabled: !!code,
   });
 
-  const { data: materialAds, isLoading: isLoadingMaterialAds } = useGetQuery({
-    key: [KEYS.materialAds, code],
-    url: `${URLS.materialAds}${code}/`,
+  const { data: technoAds, isLoading: isLoadingMaterialAds } = useGetQuery({
+    key: [KEYS.technosAds, code],
+    url: `${URLS.technosAds}${code}/`,
     enabled: !!code,
   });
 
@@ -77,13 +78,13 @@ const Index = () => {
                     />
 
                     <p className="text-xs font-medium ">
-                      #{get(material, "data.material_csr_code")}
+                      #{get(techno, "data.techno_csr_code")}
                     </p>
                   </div>
                 </div>
 
                 <h2 className="text-lg font-semibold">
-                  {get(material, "data.material_name")}
+                  {get(techno, "data.techno_name")}
                 </h2>
               </div>
 
@@ -197,95 +198,94 @@ const Index = () => {
                           Oxirgi o&apos;zgarish
                         </th>
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          Narxi
+                          Narxi (so&apos;m)
                         </th>
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold "></th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {get(materialAds, "data.results", []).map(
-                        (item, index) => (
-                          <tr
-                            key={get(item, "id")}
-                            className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                          >
-                            <td className=" font-medium text-xs py-[10px]  text-center">
-                              {index + 1}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px]">
-                              <p className="underline-0 hover:underline transition-all duration-300">
-                                {get(item, "material_region")}
-                              </p>
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] ">
-                              <Link
-                                href={`/company/${get(item, "company_stir")}`}
-                                className="underline-0 hover:underline transition-all duration-300"
+                      {get(technoAds, "data.results", []).map((item, index) => (
+                        <tr
+                          key={get(item, "id")}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            <p className="underline-0 hover:underline transition-all duration-300">
+                              {get(item, "techno_region")}
+                            </p>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] ">
+                            <Link
+                              href={`/company/${get(item, "company_stir")}`}
+                              className="underline-0 hover:underline transition-all duration-300"
+                            >
+                              {get(item, "company_name")}
+                            </Link>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            <Link
+                              href={`/technos/${get(item, "techno_code")}`}
+                              className="underline-0 hover:underline transition-all duration-300"
+                            >
+                              {get(item, "techno_code")}
+                            </Link>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]  max-w-[170px]">
+                            {get(item, "techno_name")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            {get(item, "techno_measure")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] ">
+                            {dayjs(get(item, "techno_updated_date")).format(
+                              "DD.MM.YYYY"
+                            )}{" "}
+                            {dayjs(get(item, "techno_updated_date")).format(
+                              "HH:mm"
+                            )}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] ">
+                            <NumericFormat
+                              value={get(item, "techno_price")}
+                              thousandSeparator={" "}
+                              className="bg-transparent max-w-[100px]"
+                            />
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] ">
+                            <div className="flex items-center gap-x-[4px]">
+                              <button
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
                               >
-                                {get(item, "company_name")}
-                              </Link>
-                            </td>
-                            <td className=" font-medium text-xs py-[10px]">
-                              <Link
-                                href={`/materials/${get(
-                                  item,
-                                  "material_code"
-                                )}`}
-                                className="underline-0 hover:underline transition-all duration-300"
-                              >
-                                {get(item, "material_code")}
-                              </Link>
-                            </td>
-                            <td className=" font-medium text-xs py-[10px]  max-w-[170px]">
-                              {get(item, "material_name")}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] ">
-                              {get(item, "material_measure")}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] ">
-                              {dayjs(get(item, "material_updated_date")).format(
-                                "DD.MM.YYYY"
-                              )}{" "}
-                              {dayjs(get(item, "material_updated_date")).format(
-                                "HH:mm"
-                              )}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] ">
-                              {get(item, "material_price")}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] ">
-                              <div className="flex items-center gap-x-[4px]">
-                                <button
-                                  className={
-                                    "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                                  }
-                                >
-                                  <Image
-                                    src={"/icons/heart.svg"}
-                                    alt={"heart"}
-                                    width={18}
-                                    height={18}
-                                  />
-                                </button>
+                                <Image
+                                  src={"/icons/heart.svg"}
+                                  alt={"heart"}
+                                  width={18}
+                                  height={18}
+                                />
+                              </button>
 
-                                <button
-                                  className={
-                                    "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                                  }
-                                >
-                                  <Image
-                                    src={"/icons/basket.svg"}
-                                    alt={"heart"}
-                                    width={18}
-                                    height={18}
-                                  />
-                                </button>
-                              </div>
-                            </td>
-                          </tr>
-                        )
-                      )}
+                              <button
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/basket.svg"}
+                                  alt={"heart"}
+                                  width={18}
+                                  height={18}
+                                />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </motion.table>
                   <div className="w-full h-[1px] text-[#E2E2EA] "></div>
@@ -293,17 +293,17 @@ const Index = () => {
                     <div>
                       <p className="text-sm text-[#9392A0]">
                         {" "}
-                        {get(materialAds, "data.count")} tadan 1-{limit} tasi
+                        {get(technoAds, "data.count")} tadan 1-{limit} tasi
                         ko&apos;rsatilgan
                       </p>
                     </div>
 
                     {/* <div>
-                    <Pagination
-                      pageCount={pageCount}
-                      onPageChange={handlePageClick}
-                    />
-                  </div> */}
+                      <Pagination
+                        pageCount={pageCount}
+                        onPageChange={handlePageClick}
+                      />
+                    </div> */}
                   </div>
                 </div>
               </div>

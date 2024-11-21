@@ -74,4 +74,8 @@ export const KEYS = {
   materialCategoryFast: "materialCategoryFast",
   materialGroupFast: "materialGroupFast",
   getMaterial: "getMaterial",
+  technoFast: "technoFast",
+  technoVolumeFast: "technoVolumeFast",
+  technoCategoryFast: "technoCategoryFast",
+  technoGroupFast: "technoGroupFast",
 };

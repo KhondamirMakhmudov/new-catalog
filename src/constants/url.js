@@ -88,4 +88,8 @@ export const URLS = {
   materialCategoryFast: "fastapi/material_categories/",
   materialGroupFast: "fastapi/material_groups/",
   getMaterial: "fastapi/material_ads/",
+  technoFast: "fastapi/techno-ads/filter",
+  technoVolumeFast: "fastapi/techno_volume/",
+  technoCategoryFast: "fastapi/techno_categories/",
+  technoGroupFast: "fastapi/techno_groups/",
 };
