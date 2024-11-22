@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const router = useRouter();

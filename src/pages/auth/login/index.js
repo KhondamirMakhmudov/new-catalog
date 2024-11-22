@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 
 import Header from "@/components/header";
 
@@ -41,7 +42,7 @@ const Index = () => {
 
       if (response.ok) {
         toast.success("Login successful!");
-        router.push("/");
+        router.push("/dashboard/customer");
       } else {
         toast.error("Login failed! Please check your credentials.");
       }

@@ -18,7 +18,7 @@ const Header = () => {
           <div className={"flex justify-between"}>
             <ul className={"flex gap-x-[32px]"}>
               <li>
-                <Link href={"catalog.tmsiti.uz"}>Klassifikator</Link>
+                <Link href={"/classifier"}>Klassifikator</Link>
               </li>
 
               <li>

@@ -31,13 +31,13 @@ const Index = () => {
           <RightIcon color="#BCBFC2" />
           <Link
             className="text-[#262D33] text-sm font-semibold"
-            href={"/auth/e-imzo"}
+            href={"/auth/login"}
           >
-            E-imzo
+            Login
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Yetkazib beruvchi
+            Buyurtmachi
           </Link>
         </section>
 

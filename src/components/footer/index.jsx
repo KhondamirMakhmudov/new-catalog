@@ -68,7 +68,7 @@ const Footer = () => {
                 </li>
 
                 <li>
-                  <Link href={"/"}>Loyihalar</Link>
+                  <Link href={"/loyihalar"}>Loyihalar</Link>
                 </li>
 
                 <li>
@@ -85,26 +85,22 @@ const Footer = () => {
                   </h4>
                 </li>
                 <li>
-                  <Link href={"/"}>Material va jixozlar</Link>
+                  <Link href={"/materials"}>Material va jihozlar</Link>
                 </li>
 
                 <li>
-                  <Link href={"/"}>Mashina va mexanizmlar</Link>
+                  <Link href={"/machine-mechano"}>Mashina va mexanizmlar</Link>
                 </li>
 
                 <li>
-                  <Link href={"/"}>Uskuna va qurilmalar</Link>
+                  <Link href={"/technos"}>Uskuna va qurilmalar</Link>
                 </li>
 
                 <li>
-                  <Link href={"/"}>Kichik mexanizatsiyalar</Link>
-                </li>
-
-                <li>
-                  <Link href={"/"}>Qurilish ishlari</Link>
+                  <Link href={"/works"}>Qurilish ishlari</Link>
                 </li>
                 <li>
-                  <Link href={"/"}>Integratsiyalar</Link>
+                  <Link href={"/integrations"}>Integratsiyalar</Link>
                 </li>
               </ul>
             </div>
