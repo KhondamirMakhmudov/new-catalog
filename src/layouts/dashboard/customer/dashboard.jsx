@@ -1,6 +1,7 @@
 import Header from "@/components/header";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
+import Sidebar from "./components/sidebar";
 
 const CustomerDashboard = () => {
   return (
