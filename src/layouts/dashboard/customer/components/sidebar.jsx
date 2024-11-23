@@ -9,7 +9,7 @@ import DeliverOrderIcon from "@/components/icons/deliver-order";
 import Image from "next/image";
 import LogOut from "@/components/buttons/logout";
 
-const Sidebar = () => {
+const SidebarCustomer = () => {
   const [selectBar, setSelectBar] = useState("");
   const router = useRouter();
   const { data: session } = useSession();
@@ -57,7 +57,7 @@ const Sidebar = () => {
           onClick={() => handleSelectBar("orders")}
           className="cursor-pointer"
         >
-          <Link href={"/dashboard/customer/my-ads"}>
+          <Link href={"/dashboard/customer/orders"}>
             <div
               className={`${
                 router.pathname === "/dashboard/customer/orders"
@@ -93,24 +93,24 @@ const Sidebar = () => {
           onClick={() => handleSelectBar("profile")}
           className="cursor-pointer"
         >
-          <Link href={"/dashboard/deliver/profile"}>
+          <Link href={"/dashboard/customer/profile"}>
             <div
               className={`${
-                router.pathname === "/dashboard/deliver/profile"
+                router.pathname === "/dashboard/customer/profile"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
               } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
-                  router.pathname === "/dashboard/deliver/profile"
+                  router.pathname === "/dashboard/customer/profile"
                     ? " bg-[#0256BA]"
                     : "bg-white"
                 } inline-block rounded-full`}
               >
                 <DeliverOrderIcon
                   color={
-                    router.pathname === "/dashboard/deliver/profile"
+                    router.pathname === "/dashboard/customer/profile"
                       ? "white"
                       : "#0256BA"
                   }
@@ -131,4 +131,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default SidebarCustomer;

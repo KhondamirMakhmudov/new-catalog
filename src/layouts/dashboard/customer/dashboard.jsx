@@ -1,9 +1,28 @@
 import Header from "@/components/header";
 import Link from "next/link";
+import { useSettingsStore } from "@/store";
 import RightIcon from "@/components/icons/right";
-import Sidebar from "./components/sidebar";
+import SidebarCustomer from "./components/sidebar";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { URLS } from "@/constants/url";
+import { KEYS } from "@/constants/key";
+import { get } from "lodash";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
-const CustomerDashboard = () => {
+const CustomerDashboard = ({ children }) => {
+  const { data: session } = useSession();
+  const token = useSettingsStore((state) => get(state, "token", null));
+
+  const setToken = useSettingsStore((state) =>
+    get(state, "setToken", () => {})
+  );
+
+  useEffect(() => {
+    if (get(session, "user.token")) {
+      setToken(get(session, "user.token"));
+    }
+  }, [session]);
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
@@ -35,7 +54,7 @@ const CustomerDashboard = () => {
 
         <section className="pb-[50px]">
           <div className="grid grid-cols-12">
-            <Sidebar />
+            <SidebarCustomer />
             {children}
           </div>
         </section>
