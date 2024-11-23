@@ -81,7 +81,7 @@ const Index = () => {
 
           <div className="col-span-12 space-y-[10px]">
             <label className="text-[#718096]">
-              O'zingiz haqingizda ma&apos;lumot bering
+              O&apos;zingiz haqingizda ma&apos;lumot bering
             </label>
 
             <textarea
