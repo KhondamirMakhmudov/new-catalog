@@ -9,14 +9,18 @@ import Search from "../search";
 import Lang from "../lang";
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({ id }) => {
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    section.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <header>
       <div className={"text-white bg-[#0256BA] py-[13px]   font-gilroy"}>
         <div className="container ">
           {/* top of the header. will be component in next time */}
           <div className={"flex justify-between"}>
-            <ul className={"flex gap-x-[32px]"}>
+            <ul className={"flex gap-x-[32px] cursor-pointer"}>
               <li>
                 <Link href={"/classifier"}>Klassifikator</Link>
               </li>
@@ -33,8 +37,8 @@ const Header = () => {
                 <Link href={"/integrations"}>Integratsiya</Link>
               </li>
 
-              <li>
-                <Link href={"#"}>Klassifikator bu</Link>
+              <li onClick={() => scrollToSection("about-classifier")}>
+                <p>Klassifikator bu</p>
               </li>
 
               <li>

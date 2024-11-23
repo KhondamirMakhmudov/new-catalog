@@ -82,4 +82,6 @@ export const KEYS = {
   mmechanoFast: "mmechanoFast",
   mmechanoCategoryFast: "mmechanoCategoryFast",
   mmechanoGroupFast: "mmechanoGroupFast",
+
+  globalSearch: "globalSearch",
 };

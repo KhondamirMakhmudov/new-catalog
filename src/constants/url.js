@@ -96,4 +96,6 @@ export const URLS = {
   mmechanoFast: "fastapi/mmechano_ads/filter",
   mmechanoCategoryFast: "fastapi/mmechano_categories/",
   mmechanoGroupFast: "fastapi/mmechano_groups/",
+
+  globalSearch: "fastapi/global/search/",
 };

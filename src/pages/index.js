@@ -263,7 +263,7 @@ export default function Home() {
           </Reveal>
         </motion.section>
         {/* Klassifikator haqida */}
-        <section className={"container pb-[60px]"}>
+        <section className={"container pb-[60px]"} id="about-classifier">
           <Reveal>
             <Title>Klassifikator haqida</Title>
           </Reveal>
