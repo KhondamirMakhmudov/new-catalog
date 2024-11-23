@@ -98,191 +98,188 @@ const Index = () => {
           </Link>
         </section>
 
-        {isLoading || materialLoading || isFetchingMaterials ? (
-          <ContentLoader />
-        ) : (
-          <section>
-            <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-              Material va jihozlar
-            </h1>
+        <section>
+          <h1 className="font-bold text-[32px] my-[16px] font-anybody">
+            Material va jihozlar
+          </h1>
 
-            <div className="grid grid-cols-12 gap-x-[30px]">
-              <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
-                <div className="flex justify-between items-center">
-                  <h4 className="font-extrabold">Mahsulot qidirish</h4>
-                  <button onClick={() => setShowAllProjects(!showAllProjects)}>
-                    <RightIcon
-                      classname={`${
-                        !showAllProjects ? "rotate-90" : "-rotate-90"
-                      } transition-all duration-200`}
-                      color="#BCBFC2"
-                    />
-                  </button>
-                </div>
-
-                <div className="mt-[16px]">
-                  <ul className="cursor-pointer">
-                    {get(materialVolume, "data")?.map((volume) => (
-                      <li
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCategoryId(null);
-                          setVolumed(get(volume, "id"));
-                        }}
-                        key={get(volume, "id")}
-                        className=""
-                      >
-                        <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                          <Image
-                            src={"/icons/arrow_right.svg"}
-                            alt="arrow_right"
-                            width={16}
-                            height={16}
-                          />
-                          <p className="text-xs font-medium text-[#475467]">
-                            {get(volume, "volume_name")}
-                          </p>
-                        </div>
-                        {volumed === get(volume, "id") && ( // Only show categories for selected volume
-                          <>
-                            {isLoadingCategory ? (
-                              <div>
-                                <ContentLoader />
-                              </div>
-                            ) : (
-                              <motion.ul
-                                className="ml-[10px]"
-                                initial={{ opacity: 0, translateY: "20px" }}
-                                animate={{ opacity: 1, translateY: "0px" }}
-                                transition={{ duration: 0.1 }}
-                              >
-                                {get(materialCategory, "data")?.map(
-                                  (category) => (
-                                    <li
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        setCategoryId(get(category, "id"));
-                                      }}
-                                      key={get(category, "id")}
-                                    >
-                                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                                        <Image
-                                          src={"/icons/arrow_right.svg"}
-                                          alt="arrow_right"
-                                          width={16}
-                                          height={16}
-                                        />
-                                        <p className="text-xs font-medium text-[#475467]">
-                                          {get(category, "category_name")}
-                                        </p>
-                                      </div>
-                                      {categoryId === get(category, "id") && (
-                                        <>
-                                          {isLoadingGroup ? (
-                                            <div>
-                                              <ContentLoader />
-                                            </div>
-                                          ) : (
-                                            <ul className="ml-[10px]">
-                                              {get(materialGroup, "data")?.map(
-                                                (group) => (
-                                                  <li key={get(group, "id")}>
-                                                    <div className="flex gap-x-[4px] items-center ">
-                                                      <input
-                                                        type="checkbox"
-                                                        onChange={() =>
-                                                          handleCheckboxChange(
-                                                            group
-                                                          )
-                                                        }
-                                                        className="form-checkbox  text-blue-600 border-gray-300 rounded"
-                                                      />
-                                                      <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                                                        {get(
-                                                          group,
-                                                          "group_name"
-                                                        )}
-                                                      </p>
-                                                    </div>
-                                                  </li>
-                                                )
-                                              )}
-                                            </ul>
-                                          )}
-                                        </>
-                                      )}
-                                    </li>
-                                  )
-                                )}
-                              </motion.ul>
-                            )}
-                          </>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+          <div className="grid grid-cols-12 gap-x-[30px]">
+            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
+              <div className="flex justify-between items-center">
+                <h4 className="font-extrabold">Mahsulot qidirish</h4>
+                <button onClick={() => setShowAllProjects(!showAllProjects)}>
+                  <RightIcon
+                    classname={`${
+                      !showAllProjects ? "rotate-90" : "-rotate-90"
+                    } transition-all duration-200`}
+                    color="#BCBFC2"
+                  />
+                </button>
               </div>
 
-              <div className="col-span-9 space-y-[16px]">
-                <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                  <div className="col-span-4">
-                    <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
+              <div className="mt-[16px]">
+                <ul className="cursor-pointer">
+                  {get(materialVolume, "data")?.map((volume) => (
+                    <li
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCategoryId(null);
+                        setVolumed(get(volume, "id"));
+                      }}
+                      key={get(volume, "id")}
+                      className=""
+                    >
+                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                        <Image
+                          src={"/icons/arrow_right.svg"}
+                          alt="arrow_right"
+                          width={16}
+                          height={16}
+                        />
+                        <p className="text-xs font-medium text-[#475467]">
+                          {get(volume, "volume_name")}
+                        </p>
+                      </div>
+                      {volumed === get(volume, "id") && ( // Only show categories for selected volume
+                        <>
+                          {isLoadingCategory ? (
+                            <div>
+                              <ContentLoader />
+                            </div>
+                          ) : (
+                            <motion.ul
+                              className="ml-[10px]"
+                              initial={{ opacity: 0, translateY: "20px" }}
+                              animate={{ opacity: 1, translateY: "0px" }}
+                              transition={{ duration: 0.1 }}
+                            >
+                              {get(materialCategory, "data")?.map(
+                                (category) => (
+                                  <li
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setCategoryId(get(category, "id"));
+                                    }}
+                                    key={get(category, "id")}
+                                  >
+                                    <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                      <Image
+                                        src={"/icons/arrow_right.svg"}
+                                        alt="arrow_right"
+                                        width={16}
+                                        height={16}
+                                      />
+                                      <p className="text-xs font-medium text-[#475467]">
+                                        {get(category, "category_name")}
+                                      </p>
+                                    </div>
+                                    {categoryId === get(category, "id") && (
+                                      <>
+                                        {isLoadingGroup ? (
+                                          <div>
+                                            <ContentLoader />
+                                          </div>
+                                        ) : (
+                                          <ul className="ml-[10px]">
+                                            {get(materialGroup, "data")?.map(
+                                              (group) => (
+                                                <li key={get(group, "id")}>
+                                                  <div className="flex gap-x-[4px] items-center ">
+                                                    <input
+                                                      type="checkbox"
+                                                      onChange={() =>
+                                                        handleCheckboxChange(
+                                                          group
+                                                        )
+                                                      }
+                                                      className="form-checkbox  text-blue-600 border-gray-300 rounded"
+                                                    />
+                                                    <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                                      {get(group, "group_name")}
+                                                    </p>
+                                                  </div>
+                                                </li>
+                                              )
+                                            )}
+                                          </ul>
+                                        )}
+                                      </>
+                                    )}
+                                  </li>
+                                )
+                              )}
+                            </motion.ul>
+                          )}
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
+            <div className="col-span-9 space-y-[16px]">
+              <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
+                <div className="col-span-4">
+                  <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
+
+                  <input
+                    type="text"
+                    placeholder="Kiriting"
+                    value={regionName}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setRegionName(value);
+                    }}
+                    className="py-[10px] pl-[15px] border w-full rounded-[8px]"
+                  />
+                </div>
+
+                <div className="col-span-4">
+                  <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
+
+                  <div className="flex gap-x-[2px] items-center">
                     <input
-                      type="text"
+                      type="number"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setMinValue(value);
+                      }}
                       placeholder="Kiriting"
-                      value={regionName}
-                      onChange={(e) => {
-                        const value = e.target.value;
-                        setRegionName(value);
-                      }}
-                      className="py-[10px] pl-[15px] border w-full rounded-[8px]"
+                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
                     />
-                  </div>
-
-                  <div className="col-span-4">
-                    <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
-
-                    <div className="flex gap-x-[2px] items-center">
-                      <input
-                        type="number"
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setMinValue(value);
-                        }}
-                        placeholder="Kiriting"
-                        className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                      />
-                      <div className="h-[1px] w-full max-w-[8px] bg-[#BCBFC2]"></div>
-                      <input
-                        type="number"
-                        onChange={(e) => {
-                          const value = e.target.value;
-                          setMaxValue(value);
-                        }}
-                        placeholder="Kiriting"
-                        className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-span-4">
-                    <h3 className="font-semibold text-sm mb-[6px] ">
-                      Mahsulot nomi
-                    </h3>
-
+                    <div className="h-[1px] w-full max-w-[8px] bg-[#BCBFC2]"></div>
                     <input
-                      type="text"
+                      type="number"
                       onChange={(e) => {
                         const value = e.target.value;
-                        setNameValue(value);
+                        setMaxValue(value);
                       }}
-                      placeholder="Qidirish"
+                      placeholder="Kiriting"
                       className="py-[10px] px-[15px] border w-full  rounded-[8px]"
                     />
                   </div>
                 </div>
+
+                <div className="col-span-4">
+                  <h3 className="font-semibold text-sm mb-[6px] ">
+                    Mahsulot nomi
+                  </h3>
+
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setNameValue(value);
+                    }}
+                    placeholder="Qidirish"
+                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                  />
+                </div>
+              </div>
+              {materialLoading && isFetchingMaterials ? (
+                <ContentLoader />
+              ) : (
                 <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
                   <motion.table
                     className="w-full border-collapse border-[#D7D9E7]"
@@ -459,10 +456,10 @@ const Index = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
       </main>
 
       <Footer />

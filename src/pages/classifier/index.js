@@ -14,67 +14,34 @@ import ContentLoader from "@/components/loader/content-loader";
 
 const Index = () => {
   const [count, setCount] = useState(0);
-  const [showAllProjects, setShowAllProjects] = useState(!false);
   const [search, setSearch] = useState("");
-  const [volumeId, setVolumeId] = useState(null);
-  const [partId, setPartId] = useState(null);
-  const [chapterId, setChapterId] = useState(null);
-  const [groupId, setGroupId] = useState(null);
-
-  const { data: classifier, isLoading: isLoadingClassifier } = useGetQuery({
-    key: KEYS.classifier,
-    url: URLS.classifier,
-    params: {
-      key: "volumes",
-    },
-  });
-
-  const { data: volumes, isLoading: isLoadingVolumes } = useGetQuery({
-    key: KEYS.classifier,
-    url: URLS.classifier,
-    params: {
-      key: "volumes",
-    },
-  });
+  const [volumed, setVolumed] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
+  const [showAllProjects, setShowAllProjects] = useState(!false);
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(0);
+  const [regionName, setRegionName] = useState("");
+  const [nameValue, setNameValue] = useState("");
+  const [selectedItems, setSelectedItems] = useState({});
+  const [page, setPage] = useState(1);
 
   const {
-    data: parts,
-    isLoading: isLoadingParts,
-    isFetching: isFetchingParts,
+    data: materialVolume,
+    isLoading,
+    isFetching,
   } = useGetQuery({
-    key: [KEYS.classifier, volumeId],
-    url: URLS.classifier,
-    params: {
-      key: "parts",
-      parent: volumeId,
-    },
-    enabled: !!volumeId,
+    key: KEYS.materialVolumeFast,
+    url: URLS.materialVolumeFast,
   });
-  const {
-    data: chapters,
-    isLoading: isLoadingChapters,
-    isFetching: isFetchingChapters,
-  } = useGetQuery({
-    key: [KEYS.classifier, volumeId, partId],
-    url: URLS.classifier,
-    params: {
-      key: "chapters",
-      parent: partId,
-    },
-    enabled: !!partId,
+
+  const { data: materialCategory, isLoading: isLoadingCategory } = useGetQuery({
+    key: [KEYS.materialCategoryFast, volumed],
+    url: `${URLS.materialCategoryFast}${volumed}`,
   });
-  const {
-    data: groups,
-    isLoading: isLoadingGroups,
-    isFetching: isFetchingGroups,
-  } = useGetQuery({
-    key: [KEYS.classifier, volumeId, partId, chapterId],
-    url: URLS.classifier,
-    params: {
-      key: "groups",
-      parent: chapterId,
-    },
-    enabled: !!chapterId,
+
+  const { data: materialGroup, isLoading: isLoadingGroup } = useGetQuery({
+    key: [KEYS.materialGroupFast, categoryId],
+    url: `${URLS.materialGroupFast}${categoryId}`,
   });
   return (
     <div className="bg-[#F7F7F7]">
@@ -129,196 +96,118 @@ const Index = () => {
                 )}
               </div>
             </div>
-            <div className="col-span-3  max-h-[200vh]">
-              <ul className={"bg-white shadow-category p-2"}>
-                {get(volumes, "data.results", []).map((volume, i) => (
-                  <li
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setGroupId(null);
-                      setChapterId(null);
-                      setPartId(null);
-                      setVolumeId(get(volume, "id"));
-                    }}
-                    className={clsx(
-                      " transition cursor-pointer text-xs text-[#475467] hover:bg-[#EDF4FC]",
-                      {
-                        "text-[#1B41C6] font-medium hover:bg-transparent":
-                          get(volume, "id") == volumeId,
-                        "!mb-0":
-                          get(volumes, "data.results", [])?.length == i + 1,
-                      }
-                    )}
-                    key={get(volume, "id")}
-                  >
-                    <div className={"flex items-start"}>
-                      <motion.div
-                        className={"mr-2 flex-none"}
-                        animate={{
-                          rotate: get(volume, "id") == volumeId ? 90 : 0,
-                        }}
-                      >
+            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
+              <div className="flex justify-between items-center">
+                <h4 className="font-extrabold">Mahsulot qidirish</h4>
+                <button onClick={() => setShowAllProjects(!showAllProjects)}>
+                  <RightIcon
+                    classname={`${
+                      !showAllProjects ? "rotate-90" : "-rotate-90"
+                    } transition-all duration-200`}
+                    color="#BCBFC2"
+                  />
+                </button>
+              </div>
+
+              <div className="mt-[16px]">
+                <ul className="cursor-pointer">
+                  {get(materialVolume, "data")?.map((volume) => (
+                    <li
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCategoryId(null);
+                        setVolumed(get(volume, "id"));
+                      }}
+                      key={get(volume, "id")}
+                      className=""
+                    >
+                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                         <Image
                           src={"/icons/arrow_right.svg"}
                           alt="arrow_right"
                           width={16}
                           height={16}
                         />
-                      </motion.div>
-                      <span>{get(volume, "volume_name")}</span>
-                    </div>
-                    {get(volume, "id") == volumeId &&
-                      (isLoadingParts || isFetchingParts ? (
-                        <ContentLoader
-                          classNames={"!bg-transparent min-h-[25vh]"}
-                        />
-                      ) : (
-                        <ul className={"pl-3 py-1.5"}>
-                          {get(parts, "data.results", []).map((part, j) => (
-                            <li
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                setGroupId(null);
-                                setChapterId(null);
-                                setPartId(get(part, "id"));
-                              }}
-                              className={clsx(
-                                " transition cursor-pointer mb-2  hover:text-[#1B41C6] text-xs text-[#28366D] font-normal",
-                                {
-                                  "!text-[#017EFA] !font-medium":
-                                    get(part, "id") == partId,
-                                  "!mb-0":
-                                    get(parts, "data.results", [])?.length ==
-                                    j + 1,
-                                }
-                              )}
-                              key={get(part, "id")}
+                        <p className="text-xs font-medium text-[#475467]">
+                          {get(volume, "volume_name")}
+                        </p>
+                      </div>
+                      {volumed === get(volume, "id") && ( // Only show categories for selected volume
+                        <>
+                          {isLoadingCategory ? (
+                            <div>
+                              <ContentLoader />
+                            </div>
+                          ) : (
+                            <motion.ul
+                              className="ml-[10px]"
+                              initial={{ opacity: 0, translateY: "20px" }}
+                              animate={{ opacity: 1, translateY: "0px" }}
+                              transition={{ duration: 0.1 }}
                             >
-                              <div className={"flex items-start"}>
-                                <motion.div
-                                  className={"mr-2 flex-none "}
-                                  animate={{
-                                    rotate: get(part, "id") == partId ? 90 : 0,
-                                  }}
-                                >
-                                  <Image
-                                    src={"/icons/arrow_right.svg"}
-                                    alt="arrow_right"
-                                    width={16}
-                                    height={16}
-                                  />
-                                </motion.div>
-                                <span>{get(part, "part_name")}</span>
-                              </div>
-                              {get(part, "id") == partId &&
-                                (isLoadingChapters || isFetchingChapters ? (
-                                  <ContentLoader
-                                    classNames={"!bg-transparent min-h-[25vh]"}
-                                  />
-                                ) : (
-                                  <ul className={"pl-5 py-1.5"}>
-                                    {get(chapters, "data.results", []).map(
-                                      (chapter, k) => (
-                                        <li
-                                          className={clsx(
-                                            " transition cursor-pointer mb-1.5  hover:text-[#1B41C6] text-sm text-[#28366D] font-normal",
-                                            {
-                                              "!text-[#017EFA] !font-medium":
-                                                get(chapter, "id") == chapterId,
-                                              "!mb-0":
-                                                get(
-                                                  chapters,
-                                                  "data.results",
-                                                  []
-                                                )?.length ==
-                                                k + 1,
-                                            }
-                                          )}
-                                          key={get(chapter, "id")}
-                                          onClick={(e) => {
-                                            e.stopPropagation();
-                                            setGroupId(null);
-                                            setChapterId(get(chapter, "id"));
-                                          }}
-                                        >
-                                          <div className={"flex items-start"}>
-                                            <motion.div
-                                              className={"mr-2 flex-none "}
-                                              animate={{
-                                                rotate:
-                                                  get(chapter, "id") ==
-                                                  chapterId
-                                                    ? 90
-                                                    : 0,
-                                              }}
-                                            >
-                                              <Image
-                                                src={"/icons/arrow_right.svg"}
-                                                alt="arrow_right"
-                                                width={16}
-                                                height={16}
-                                              />
-                                            </motion.div>
-                                            <span>
-                                              {get(chapter, "chapter_name")}
-                                            </span>
+                              {get(materialCategory, "data")?.map(
+                                (category) => (
+                                  <li
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      setCategoryId(get(category, "id"));
+                                    }}
+                                    key={get(category, "id")}
+                                  >
+                                    <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                      <Image
+                                        src={"/icons/arrow_right.svg"}
+                                        alt="arrow_right"
+                                        width={16}
+                                        height={16}
+                                      />
+                                      <p className="text-xs font-medium text-[#475467]">
+                                        {get(category, "category_name")}
+                                      </p>
+                                    </div>
+                                    {categoryId === get(category, "id") && (
+                                      <>
+                                        {isLoadingGroup ? (
+                                          <div>
+                                            <ContentLoader />
                                           </div>
-                                          {get(chapter, "id") == chapterId &&
-                                            (isLoadingGroups ||
-                                            isFetchingGroups ? (
-                                              <ContentLoader
-                                                classNames={
-                                                  "!bg-transparent min-h-[25vh]"
-                                                }
-                                              />
-                                            ) : (
-                                              <ul className={"pl-9 py-1.5"}>
-                                                {get(
-                                                  groups,
-                                                  "data.results",
-                                                  []
-                                                ).map((group, l) => (
-                                                  <li
-                                                    key={get(group, "id")}
-                                                    className={clsx(
-                                                      " transition cursor-pointer mb-1.5  hover:text-[#1B41C6] text-sm text-[#28366D] font-normal",
-                                                      {
-                                                        "!text-[#017EFA] !font-medium":
-                                                          get(group, "id") ===
-                                                          groupId,
-                                                        "!mb-0":
-                                                          get(
-                                                            groups,
-                                                            "data.results",
-                                                            []
-                                                          )?.length ===
-                                                          l + 1,
+                                        ) : (
+                                          <ul className="ml-[10px]">
+                                            {get(materialGroup, "data")?.map(
+                                              (group) => (
+                                                <li key={get(group, "id")}>
+                                                  <div className="flex gap-x-[4px] items-center ">
+                                                    <input
+                                                      type="checkbox"
+                                                      onChange={() =>
+                                                        handleCheckboxChange(
+                                                          group
+                                                        )
                                                       }
-                                                    )}
-                                                    onClick={(e) => {
-                                                      e.stopPropagation();
-                                                      setGroupId(
-                                                        get(group, "id")
-                                                      );
-                                                    }}
-                                                  >
-                                                    {get(group, "group_name")}
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            ))}
-                                        </li>
-                                      )
+                                                      className="form-checkbox  text-blue-600 border-gray-300 rounded"
+                                                    />
+                                                    <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                                      {get(group, "group_name")}
+                                                    </p>
+                                                  </div>
+                                                </li>
+                                              )
+                                            )}
+                                          </ul>
+                                        )}
+                                      </>
                                     )}
-                                  </ul>
-                                ))}
-                            </li>
-                          ))}
-                        </ul>
-                      ))}
-                  </li>
-                ))}
-              </ul>
+                                  </li>
+                                )
+                              )}
+                            </motion.ul>
+                          )}
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
             <div className="col-span-9 tablet:mt-0 mt-[30px]">
               <div className="grid grid-cols-12 tablet:gap-x-8 gap-x-4 ">

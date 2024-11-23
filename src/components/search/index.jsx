@@ -126,7 +126,7 @@ const Search = () => {
           )}
         </div>
 
-        {openSearch && nameValue.trim() !== "" && (
+        {nameValue.trim() !== "" && (
           <motion.div
             initial={{ opacity: 0, translateY: "30px" }}
             animate={{ opacity: 1, translateY: 0 }}
@@ -159,7 +159,7 @@ const Search = () => {
 
                 {category === "mmechno" && (
                   <ul className="py-[16px]">
-                    {get(globalSearch, "data.materials")?.map((item) => (
+                    {get(globalSearch, "data.mmechano")?.map((item) => (
                       <li key={get(item, "id")}>
                         <p className="text-sm font-medium">
                           <Link
@@ -179,7 +179,7 @@ const Search = () => {
 
                 {category === "techno" && (
                   <ul className="py-[16px]">
-                    {get(globalSearch, "data.materials")?.map((item) => (
+                    {get(globalSearch, "data.techno")?.map((item) => (
                       <li key={get(item, "id")}>
                         <p className="text-sm font-medium">
                           <Link
