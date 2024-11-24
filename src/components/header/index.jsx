@@ -42,7 +42,7 @@ const Header = ({ id }) => {
               </li>
 
               <li>
-                <Link href={"#"}>Kontaktlar</Link>
+                <Link href={"/contacts"}>Kontaktlar</Link>
               </li>
             </ul>
             <div className={"flex items-center"}>
