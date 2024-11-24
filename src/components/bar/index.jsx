@@ -1,8 +1,14 @@
 import React from "react";
-
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+import { useState, useEffect } from "react";
 
 const HorizontalBarChart = () => {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const options = {
     chart: {
       type: "bar",
