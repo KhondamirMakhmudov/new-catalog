@@ -14,6 +14,8 @@ import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
 import usePostQuery from "@/hooks/api/usePostQuery";
+import { useCounter } from "@/context/counter";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [volumed, setVolumed] = useState(null);
@@ -25,6 +27,7 @@ const Index = () => {
   const [nameValue, setNameValue] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
+  const { state, dispatch } = useCounter();
 
   const [limit] = useState(24);
   const [offset, setOffset] = useState(1);
@@ -80,6 +83,14 @@ const Index = () => {
     getMaterial({
       url: URLS.getMaterial,
       attributes: [item.id],
+    });
+  };
+
+  const handleIncrement = (product) => {
+    dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
+    toast.success("Tanlagan mahsulotingiz savatchaga qo'shildi!", {
+      duration: 3000,
+      position: "top-left",
     });
   };
 
@@ -419,6 +430,7 @@ const Index = () => {
                                 </button>
 
                                 <button
+                                  onClick={() => handleIncrement(item)}
                                   className={
                                     "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
                                   }

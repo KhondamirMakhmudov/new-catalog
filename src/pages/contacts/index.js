@@ -20,7 +20,7 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Materiallar va jihozlar
+            Kontaktlar
           </Link>
         </section>
 
