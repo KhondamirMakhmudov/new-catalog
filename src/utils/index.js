@@ -28,7 +28,7 @@ export const findCurrency = (currencyList = [], currency) => {
 export const findCategoryName = (item) => {
   let category = "";
   forEach(keys(CATEGORY_LIST), (_key) => {
-    if (includes(keys(item), `${_key}_code`)) {
+    if (includes(keys(item), `${_key}_name_id`)) {
       category = CATEGORY_LIST[_key];
     }
   });

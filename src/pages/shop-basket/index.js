@@ -4,9 +4,7 @@ import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import { motion } from "framer-motion";
 import { useCounter } from "@/context/counter";
-import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useSettingsStore } from "@/store";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
@@ -16,11 +14,11 @@ import { ORDER_STATUS } from "@/constants/enums";
 import { forEach, get, head, isEmpty, last, entries } from "lodash";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { NumericFormat } from "react-number-format";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const { state, dispatch } = useCounter();
   const { data: session } = useSession();
-  const router = useRouter();
   const token = useSettingsStore((state) => get(state, "token", null));
 
   const { data: currency } = useGetQuery({
