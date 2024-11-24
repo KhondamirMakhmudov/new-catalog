@@ -12,11 +12,17 @@ import { useState } from "react";
 import BasketIcon from "@/components/icons/basket";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
+import { NumericFormat } from "react-number-format";
+import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const [limit] = useState(9);
   const router = useRouter();
   const { code } = router.query;
+  const [soliqAveragePrice, setSoliqAveragePrice] = useState(null);
+  const [soliqProductCount, setSoliqProductCount] = useState(null);
+  const [info, setInfo] = useState(null);
+  const [hasPosted, setHasPosted] = useState(false);
 
   const {
     data: material,
@@ -37,6 +43,57 @@ const Index = () => {
     url: `${URLS.materialAds}${code}/`,
     enabled: !!code,
   });
+
+  ////////// SOLIQ BILAN INTEGRATSIYA ///////////////
+
+  const { mutate: postSoliqMxik, isLoading: isLoadingSoliq } = usePostQuery({
+    listKeyId: KEYS.soliqPrice,
+  });
+
+  const postSoliqData = () => {
+    postSoliqMxik(
+      {
+        url: URLS.soliq,
+        attributes: {
+          mxik: get(material, "data.mxik_soliq").split(".")[0],
+          fromDate: "01.10.2024",
+          toDate: "01.11.2024",
+        },
+      },
+      {
+        onSuccess: (data) => {
+          const productCount = get(data, "data.data").reduce(
+            (initialQuantity, currentQuantity) =>
+              initialQuantity + get(currentQuantity, "product_count"),
+            0
+          );
+          setSoliqProductCount(productCount);
+
+          const deliver = get(data, "data.data").map(
+            (item) => get(item, "delivery_sum") / get(item, "product_count")
+          );
+
+          const deliverSum = deliver.reduce(
+            (initialValue, currentValue) => initialValue + currentValue,
+            0
+          );
+
+          const averageDeliverySum = (
+            deliverSum / get(data, "data.data").length
+          ).toFixed(2);
+
+          console.log("Response data:", averageDeliverySum);
+          setSoliqAveragePrice(averageDeliverySum);
+          setHasPosted(true);
+        },
+        onError: (error) => {
+          console.error("Error posting data:", error);
+        },
+      }
+    );
+  };
+
+  //////////////////////////////////////////////////
 
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
@@ -100,7 +157,7 @@ const Index = () => {
                     <div className="flex float-right space-x-[12px]">
                       <button
                         className={
-                          "p-[12px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                          "p-[12px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200 w-full block"
                         }
                       >
                         <Image
@@ -114,6 +171,248 @@ const Index = () => {
                         <BasketIcon color="white" />
                         <p className="font-semibold text-white">Sotib oling</p>
                       </button>
+                    </div>
+                  </div>
+
+                  <div className="col-span-12 grid grid-cols-10 gap-x-[30px]">
+                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                      <div className="flex gap-x-[10px] items-center">
+                        <div>
+                          <div
+                            className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                            style={{
+                              backgroundImage: "url(/images/integration-1.png)",
+                            }}
+                          ></div>
+                        </div>
+
+                        <p className="text-xs font-bold">
+                          Davlat soliq qo&apos;mitasi
+                        </p>
+                      </div>
+                      {!hasPosted ? (
+                        <button
+                          onClick={postSoliqData}
+                          className={
+                            "p-[9px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                          }
+                        >
+                          <Image
+                            src={"/icons/eye.svg"}
+                            alt={"eye"}
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                            <p className="font-bold">{soliqProductCount}</p>
+                          </li>
+
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
+
+                            <p className="font-bold">
+                              {soliqAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+
+                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                      <div className="flex gap-x-[10px] items-center">
+                        <div>
+                          <div
+                            className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                            style={{
+                              backgroundImage: "url(/images/integration-1.png)",
+                            }}
+                          ></div>
+                        </div>
+
+                        <p className="text-xs font-bold">
+                          Davlat soliq qo&apos;mitasi
+                        </p>
+                      </div>
+                      {!hasPosted ? (
+                        <button
+                          onClick={postSoliqData}
+                          className={
+                            "p-[9px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                          }
+                        >
+                          <Image
+                            src={"/icons/eye.svg"}
+                            alt={"eye"}
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                            <p className="font-bold">{soliqProductCount}</p>
+                          </li>
+
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
+
+                            <p className="font-bold">
+                              {soliqAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+
+                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                      <div className="flex gap-x-[10px] items-center">
+                        <div>
+                          <div
+                            className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                            style={{
+                              backgroundImage: "url(/images/integration-1.png)",
+                            }}
+                          ></div>
+                        </div>
+
+                        <p className="text-xs font-bold">
+                          Davlat soliq qo&apos;mitasi
+                        </p>
+                      </div>
+                      {!hasPosted ? (
+                        <button
+                          onClick={postSoliqData}
+                          className={
+                            "p-[9px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                          }
+                        >
+                          <Image
+                            src={"/icons/eye.svg"}
+                            alt={"eye"}
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                            <p className="font-bold">{soliqProductCount}</p>
+                          </li>
+
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
+
+                            <p className="font-bold">
+                              {soliqAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+
+                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                      <div className="flex gap-x-[10px] items-center">
+                        <div>
+                          <div
+                            className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                            style={{
+                              backgroundImage: "url(/images/integration-1.png)",
+                            }}
+                          ></div>
+                        </div>
+
+                        <p className="text-xs font-bold">
+                          Davlat soliq qo&apos;mitasi
+                        </p>
+                      </div>
+                      {!hasPosted ? (
+                        <button
+                          onClick={postSoliqData}
+                          className={
+                            "p-[9px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                          }
+                        >
+                          <Image
+                            src={"/icons/eye.svg"}
+                            alt={"eye"}
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                            <p className="font-bold">{soliqProductCount}</p>
+                          </li>
+
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
+
+                            <p className="font-bold">
+                              {soliqAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
+
+                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                      <div className="flex gap-x-[10px] items-center">
+                        <div>
+                          <div
+                            className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                            style={{
+                              backgroundImage: "url(/images/integration-1.png)",
+                            }}
+                          ></div>
+                        </div>
+
+                        <p className="text-xs font-bold">
+                          Davlat soliq qo&apos;mitasi
+                        </p>
+                      </div>
+                      {!hasPosted ? (
+                        <button
+                          onClick={postSoliqData}
+                          className={
+                            "p-[9px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                          }
+                        >
+                          <Image
+                            src={"/icons/eye.svg"}
+                            alt={"eye"}
+                            width={20}
+                            height={20}
+                          />
+                        </button>
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                            <p className="font-bold">{soliqProductCount}</p>
+                          </li>
+
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
+
+                            <p className="font-bold">
+                              {soliqAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
                     </div>
                   </div>
                 </div>
