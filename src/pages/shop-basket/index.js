@@ -4,6 +4,7 @@ import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import { motion } from "framer-motion";
 import { useCounter } from "@/context/counter";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSettingsStore } from "@/store";
@@ -12,16 +13,7 @@ import { URLS } from "@/constants/url";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { findCategoryName } from "@/utils";
 import { ORDER_STATUS } from "@/constants/enums";
-import {
-  forEach,
-  get,
-  head,
-  isEmpty,
-  isNull,
-  values,
-  last,
-  entries,
-} from "lodash";
+import { forEach, get, head, isEmpty, last, entries } from "lodash";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { NumericFormat } from "react-number-format";
 
@@ -72,7 +64,7 @@ const Index = () => {
         company: get(JSON.parse(head(item)), "company_stir"),
         product_code: get(
           JSON.parse(head(item)),
-          `${findCategoryName(JSON.parse(head(item)))}_code`
+          `${findCategoryName(JSON.parse(head(item)))}_name_id`
         ),
         product_name: get(
           JSON.parse(head(item)),
@@ -92,6 +84,8 @@ const Index = () => {
         order_status: ORDER_STATUS.new_order,
         quantity: parseInt(last(item)),
       };
+
+      console.log(findCategoryName(JSON.parse(head(item))));
 
       sendOrder(
         { url: URLS.sendOrders, attributes: attributes },
@@ -183,19 +177,34 @@ const Index = () => {
                           <p className={"hidden"}>
                             {get(JSON.parse(head(item)), "id")}
                           </p>
+                        </td>
+
+                        <td className="hidden">
                           <p className={"hidden"}>
-                            {get(JSON.parse(head(item)), "material_code")
+                            {get(JSON.parse(head(item)), "material_name_id")
                               ? "material"
-                              : get(JSON.parse(head(item)), "mmechano_code")
+                              : get(JSON.parse(head(item)), "mmechano_name_id")
                               ? "mmechano"
-                              : get(JSON.parse(head(item)), "techno_code")
+                              : get(JSON.parse(head(item)), "techno_name_id")
                               ? "techno"
                               : get(JSON.parse(head(item)), "smallmechano_code")
                               ? "smallmechano"
-                              : get(JSON.parse(head(item)), "work_code")
+                              : get(JSON.parse(head(item)), "work_name_id")
                               ? "work"
                               : ""}
                           </p>
+                        </td>
+
+                        <td className="hidden">
+                          {get(JSON.parse(head(item)), "material_name_id")
+                            ? "material"
+                            : get(JSON.parse(head(item)), "mmechano_name_id")
+                            ? "mmechano"
+                            : get(JSON.parse(head(item)), "techno_name_id")
+                            ? "techno"
+                            : get(JSON.parse(head(item)), "material_name_id")
+                            ? "work"
+                            : ""}
                         </td>
 
                         <td className=" font-medium text-xs py-[10px] max-w-[200px]">
@@ -343,40 +352,7 @@ const Index = () => {
                               )}`}
                             />
                           </p>
-                          <p
-                            className={`${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "smallmechano_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            }`}
-                          >
-                            <NumericFormat
-                              displayType={"text"}
-                              thousandSeparator={" "}
-                              value={(
-                                get(
-                                  JSON.parse(head(item)),
-                                  "smallmechano_rent_price",
-                                  0
-                                ) *
-                                last(item) *
-                                get(
-                                  currency,
-                                  `data[${get(
-                                    JSON.parse(head(item)),
-                                    "smallmechano_rent_price_currency"
-                                  )}]`,
-                                  1
-                                )
-                              ).toFixed(2)}
-                              suffix={` so'm / ${get(
-                                JSON.parse(head(item)),
-                                "smallmechano_measure"
-                              )}`}
-                            />
-                          </p>
+
                           <p
                             className={`${
                               isEmpty(get(JSON.parse(head(item)), "work_name"))
