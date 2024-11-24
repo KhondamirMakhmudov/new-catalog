@@ -67,7 +67,13 @@ const HorizontalBarChart = () => {
     },
   ];
 
-  return <Chart options={options} series={series} type="bar" height={400} />;
+  return (
+    <>
+      {isClient && (
+        <Chart options={options} series={series} type="bar" height={400} />
+      )}
+    </>
+  );
 };
 
 export default HorizontalBarChart;
