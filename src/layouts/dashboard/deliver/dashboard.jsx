@@ -30,7 +30,7 @@ const DeliverDashboard = ({ children }) => {
     if (get(session, "user.token")) {
       setToken(get(session, "user.token"));
     }
-  }, [session]);
+  }, [session, setToken]);
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />

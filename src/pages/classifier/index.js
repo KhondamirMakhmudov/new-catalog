@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import ContentLoader from "@/components/loader/content-loader";
+import Pagination from "@/components/pagination";
 
 const Index = () => {
   const [count, setCount] = useState(0);
@@ -24,6 +25,15 @@ const Index = () => {
   const [nameValue, setNameValue] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
+
+  const {
+    data: classifier,
+    isLoadingClassifier,
+    isFetchingClassifier,
+  } = useGetQuery({
+    key: KEYS.classifier,
+    url: URLS.classifier,
+  });
 
   const {
     data: materialVolume,
@@ -209,56 +219,177 @@ const Index = () => {
                 </ul>
               </div>
             </div>
-            <div className="col-span-9 tablet:mt-0 mt-[30px]">
-              <div className="grid grid-cols-12 tablet:gap-x-8 gap-x-4 ">
-                {/* <div className="col-span-12">
-                  {volumeId ? (
-                    <GridView
-                      getCount={setCount}
-                      url={URLS.classifierResources}
-                      key={[KEYS.classifierResources, volumeId]}
-                      params={
-                        search && search?.length > 3
-                          ? {
-                              key: "name",
-                              value: search,
+            <div className="col-span-9 tablet:mt-0 ">
+              <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+                <motion.table
+                  className="w-full border-collapse border-[#D7D9E7]"
+                  initial={{ opacity: 0, translateY: "30px" }}
+                  animate={{ opacity: 1, translateY: "0" }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <thead className="text-black text-start rounded-[10px]">
+                    <tr className="rounded-[10px]">
+                      <th
+                        className={
+                          "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                        }
+                      >
+                        №
+                      </th>
+                      <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                        Hudud
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Kompaniya
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Resurs kodi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Resurs nomi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        O&apos;lchov birligi
+                      </th>
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Narxi (so’m)
+                      </th>
+
+                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        Oxirgi o&apos;zgarish
+                      </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {get(classifier, "data.materials")?.map((item, index) => (
+                      <tr
+                        key={index}
+                        className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                      >
+                        <td className=" font-medium text-xs py-[10px]  text-center">
+                          {index + 1}
+                        </td>
+                        <td className=" font-medium text-xs py-[10px]  text-start">
+                          {get(item, "material_region_name")}
+                        </td>
+
+                        <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
+                          <Link
+                            href={`/company/${get(item, "company_stir")}`}
+                            className="underline-0 hover:underline transition-all duration-300"
+                          >
+                            {get(item, "company_name")}
+                          </Link>
+                        </td>
+
+                        <td className=" font-medium text-xs py-[10px]">
+                          <Link
+                            href={`/materials/${get(item, "material_name_id")}`}
+                            className="underline-0 hover:underline transition-all duration-300"
+                          >
+                            {get(item, "material_name_id")}
+                          </Link>
+                        </td>
+                        <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                          {get(item, "material_name")}
+                        </td>
+                        <td className=" font-medium text-xs py-[10px] text-center">
+                          <div className="flex space-x-[4px]">
+                            <Image
+                              src={"/icons/measure-basket.svg"}
+                              alt="measure-basket"
+                              width={16}
+                              height={16}
+                            />
+                            <p>{get(item, "material_measure")}</p>
+                          </div>
+                        </td>
+                        <td className=" font-medium text-xs py-[10px] ">
+                          <NumericFormat
+                            thousandSeparator={" "}
+                            className="bg-transparent max-w-[100px]"
+                            value={
+                              Number.isInteger(get(item, "material_price"))
+                                ? get(item, "material_price")
+                                : parseFloat(
+                                    get(item, "material_price")
+                                  ).toFixed(2)
                             }
-                          : {
-                              key: groupId
-                                ? "group"
-                                : chapterId
-                                ? "chapter"
-                                : partId
-                                ? "part"
-                                : "volume",
-                              value: groupId
-                                ? groupId
-                                : chapterId
-                                ? chapterId
-                                : partId
-                                ? partId
-                                : volumeId,
-                            }
-                      }
-                      columns={columns}
+                          />
+                        </td>
+                        <td className=" font-medium text-xs py-[10px]">
+                          <div className="flex space-x-[4px]">
+                            <Image
+                              src={"/icons/clock.svg"}
+                              alt="clock"
+                              width={16}
+                              height={16}
+                            />
+                            <p>
+                              {" "}
+                              {dayjs(get(item, "material_updated_date")).format(
+                                "DD.MM.YYYY"
+                              )}
+                            </p>
+                            <p>
+                              {dayjs(get(item, "material_updated_date")).format(
+                                "HH:mm"
+                              )}
+                            </p>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="flex items-center gap-x-[4px]">
+                            <button
+                              className={
+                                "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                              }
+                            >
+                              <Image
+                                src={"/icons/heart.svg"}
+                                alt={"heart"}
+                                width={18}
+                                height={18}
+                              />
+                            </button>
+
+                            <button
+                              className={
+                                "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                              }
+                            >
+                              <Image
+                                src={"/icons/basket.svg"}
+                                alt={"heart"}
+                                width={18}
+                                height={18}
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </motion.table>
+                <div className="w-full h-[1px] text-[#E2E2EA] "></div>
+                <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-[#9392A0]">
+                      {" "}
+                      {get(classifier, "data.count")} tadan 1-12 tasi
+                      ko&apos;rsatilgan
+                    </p>
+                  </div>
+
+                  <div>
+                    <Pagination
+                      pageCount={get(classifier, "data.total_pages")}
+                      page={page}
+                      setPage={(prev) => setPage(prev)}
                     />
-                  ) : (
-                    <GridView
-                      getCount={setCount}
-                      url={URLS.classifier}
-                      key={KEYS.classifier}
-                      params={
-                        search && search?.length > 3
-                          ? {
-                              key: "name",
-                              parent: search,
-                            }
-                          : { key: "resources" }
-                      }
-                      columns={columns}
-                    />
-                  )}
-                </div> */}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
