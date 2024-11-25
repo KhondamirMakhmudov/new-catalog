@@ -207,7 +207,7 @@ const Index = () => {
 
                         <td className=" font-medium text-xs py-[10px] max-w-[200px]">
                           <p
-                            className={`text-base  ${
+                            className={`text-xs  ${
                               isEmpty(
                                 get(JSON.parse(head(item)), "material_name")
                               )
@@ -219,7 +219,7 @@ const Index = () => {
                           </p>
 
                           <p
-                            className={`text-base ${
+                            className={`text-xs ${
                               isEmpty(
                                 get(JSON.parse(head(item)), "techno_name")
                               )
@@ -230,7 +230,7 @@ const Index = () => {
                             {get(JSON.parse(head(item)), "techno_name")}
                           </p>
                           <p
-                            className={`text-base ${
+                            className={`text-xs ${
                               isEmpty(get(JSON.parse(head(item)), "work_name"))
                                 ? "hidden"
                                 : "visible"
@@ -239,7 +239,7 @@ const Index = () => {
                             {get(JSON.parse(head(item)), "work_name")}
                           </p>
                           <p
-                            className={`text-base ${
+                            className={`text-xs ${
                               isEmpty(
                                 get(JSON.parse(head(item)), "mmechano_name")
                               )
@@ -454,7 +454,7 @@ const Index = () => {
 
               <div className="font-semibold text-xl flex justify-between">
                 <p>Jami</p>
-                <p>1 112 000 000 so&apos;m</p>
+                <p> so&apos;m</p>
               </div>
 
               <button
