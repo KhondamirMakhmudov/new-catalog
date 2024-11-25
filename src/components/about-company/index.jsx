@@ -3,9 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const videos = [
-  { url: "https://www.youtube.com/watch?v=ccvWyzJxPRM", title: "Video 1" },
-  { url: "https://www.youtube.com/watch?v=lYhF-jnmonQ", title: "Video 2" },
-  { url: "https://www.youtube.com/watch?v=lxRwEPvL-mQ", title: "Video 3" },
+  { url: "/videos/catalog-video.mp4", title: "Video 1" },
+  { url: "/videos/catalog-video-2.mp4", title: "Video 2" },
 ];
 const AboutClassifier = () => {
   const playerRef = useRef(null);

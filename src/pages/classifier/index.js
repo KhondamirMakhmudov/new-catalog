@@ -13,6 +13,7 @@ import Image from "next/image";
 import ContentLoader from "@/components/loader/content-loader";
 import Pagination from "@/components/pagination";
 import usePostQuery from "@/hooks/api/usePostQuery";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [count, setCount] = useState(0);
@@ -33,18 +34,18 @@ const Index = () => {
     listKeyId: KEYS.showTable,
   });
 
-  const onSubmit = (attrs={}) => {
+  const onSubmit = (attrs = {}) => {
     showTable(
       {
         url: URLS.classifierFast,
         attributes: {
-          ...attrs
+          ...attrs,
         },
       },
       {
         onSuccess: (response) => {
           setData(response);
-          toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
+          toast.success("Mavjud", { position: "top-right" });
         },
       }
     );
@@ -67,7 +68,7 @@ const Index = () => {
     key: [KEYS.materialGroupFast, categoryId],
     url: `${URLS.materialGroupFast}${categoryId}`,
   });
-  console.log('volumed',volumed)
+  console.log("volumed", volumed);
   return (
     <div className="bg-[#F7F7F7]">
       <Header />
@@ -144,9 +145,9 @@ const Index = () => {
                         setGroupId(null);
                         setVolumed(get(volume, "id"));
                         onSubmit({
-                          volume_ids:[get(volume, "id")],
-                          category_ids:categoryId ? [categoryId] : undefined,
-                          group_ids:groupId ? [groupId] : undefined,
+                          volume_ids: [get(volume, "id")],
+                          category_ids: categoryId ? [categoryId] : undefined,
+                          group_ids: groupId ? [groupId] : undefined,
                         });
                       }}
                       key={get(volume, "id")}
@@ -183,9 +184,11 @@ const Index = () => {
                                       e.stopPropagation();
                                       setCategoryId(get(category, "id"));
                                       onSubmit({
-                                        volume_ids:[volumed],
-                                        category_ids:[get(category, "id")],
-                                        group_ids:groupId ? [groupId] : undefined,
+                                        volume_ids: [volumed],
+                                        category_ids: [get(category, "id")],
+                                        group_ids: groupId
+                                          ? [groupId]
+                                          : undefined,
                                       });
                                     }}
                                     key={get(category, "id")}
@@ -245,7 +248,7 @@ const Index = () => {
               </div>
             </div>
             <div className="col-span-9 tablet:mt-0 ">
-              {/* <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+              <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
                 <motion.table
                   className="w-full border-collapse border-[#D7D9E7]"
                   initial={{ opacity: 0, translateY: "30px" }}
@@ -261,12 +264,7 @@ const Index = () => {
                       >
                         №
                       </th>
-                      <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                        Hudud
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Kompaniya
-                      </th>
+
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                         Resurs kodi
                       </th>
@@ -274,20 +272,17 @@ const Index = () => {
                         Resurs nomi
                       </th>
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        O&apos;lchov birligi
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Narxi (so’m)
+                        GOST
                       </th>
 
                       <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Oxirgi o&apos;zgarish
+                        O&apos;lchov birligi
                       </th>
                     </tr>
                   </thead>
 
                   <tbody>
-                    {get(classifier, "data.materials")?.map((item, index) => (
+                    {get(data, "data.materials")?.map((item, index) => (
                       <tr
                         key={index}
                         className="text-sm odd:bg-[#EDF4FC] even:bg-white"
@@ -296,28 +291,14 @@ const Index = () => {
                           {index + 1}
                         </td>
                         <td className=" font-medium text-xs py-[10px]  text-start">
-                          {get(item, "material_region_name")}
+                          {get(item, "material_csr_code")}
                         </td>
 
-                        <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
-                          <Link
-                            href={`/company/${get(item, "company_stir")}`}
-                            className="underline-0 hover:underline transition-all duration-300"
-                          >
-                            {get(item, "company_name")}
-                          </Link>
-                        </td>
-
-                        <td className=" font-medium text-xs py-[10px]">
-                          <Link
-                            href={`/materials/${get(item, "material_name_id")}`}
-                            className="underline-0 hover:underline transition-all duration-300"
-                          >
-                            {get(item, "material_name_id")}
-                          </Link>
-                        </td>
                         <td className=" font-medium text-xs py-[10px] max-w-[200px]">
                           {get(item, "material_name")}
+                        </td>
+                        <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                          {get(item, "materil_gost")}
                         </td>
                         <td className=" font-medium text-xs py-[10px] text-center">
                           <div className="flex space-x-[4px]">
@@ -330,69 +311,6 @@ const Index = () => {
                             <p>{get(item, "material_measure")}</p>
                           </div>
                         </td>
-                        <td className=" font-medium text-xs py-[10px] ">
-                          <NumericFormat
-                            thousandSeparator={" "}
-                            className="bg-transparent max-w-[100px]"
-                            value={
-                              Number.isInteger(get(item, "material_price"))
-                                ? get(item, "material_price")
-                                : parseFloat(
-                                    get(item, "material_price")
-                                  ).toFixed(2)
-                            }
-                          />
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]">
-                          <div className="flex space-x-[4px]">
-                            <Image
-                              src={"/icons/clock.svg"}
-                              alt="clock"
-                              width={16}
-                              height={16}
-                            />
-                            <p>
-                              {" "}
-                              {dayjs(get(item, "material_updated_date")).format(
-                                "DD.MM.YYYY"
-                              )}
-                            </p>
-                            <p>
-                              {dayjs(get(item, "material_updated_date")).format(
-                                "HH:mm"
-                              )}
-                            </p>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="flex items-center gap-x-[4px]">
-                            <button
-                              className={
-                                "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                              }
-                            >
-                              <Image
-                                src={"/icons/heart.svg"}
-                                alt={"heart"}
-                                width={18}
-                                height={18}
-                              />
-                            </button>
-
-                            <button
-                              className={
-                                "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                              }
-                            >
-                              <Image
-                                src={"/icons/basket.svg"}
-                                alt={"heart"}
-                                width={18}
-                                height={18}
-                              />
-                            </button>
-                          </div>
-                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -402,20 +320,20 @@ const Index = () => {
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {" "}
-                      {get(classifier, "data.count")} tadan 1-12 tasi
+                      {get(data, "data.count")} tadan 1-12 tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>
 
                   <div>
                     <Pagination
-                      pageCount={get(classifier, "data.total_pages")}
+                      pageCount={get(data, "data.total_pages")}
                       page={page}
                       setPage={(prev) => setPage(prev)}
                     />
                   </div>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
         </section>

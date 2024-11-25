@@ -28,6 +28,7 @@ const Index = () => {
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
   const { state, dispatch } = useCounter();
+  const [tableData, setTableData] = useState([]);
 
   const [limit] = useState(24);
   const [offset, setOffset] = useState(1);
@@ -83,6 +84,14 @@ const Index = () => {
     getMaterial({
       url: URLS.getMaterial,
       attributes: [item.id],
+      onSuccess: (response) => {
+        setTableData((prevData) => [...prevData, ...response.data]);
+        console.log(response);
+      },
+      onError: (error) => {
+        console.error("Error fetching material:", error);
+        toast.error("Xato yuz berdi");
+      },
     });
   };
 
@@ -230,6 +239,158 @@ const Index = () => {
             </div>
 
             <div className="col-span-9 space-y-[16px]">
+              <motion.table
+                className="w-full border-collapse border-[#D7D9E7]"
+                initial={{ opacity: 0, translateY: "30px" }}
+                animate={{ opacity: 1, translateY: "0" }}
+                transition={{ duration: 0.4 }}
+              >
+                <thead className="text-black text-start rounded-[10px]">
+                  <tr className="rounded-[10px]">
+                    <th
+                      className={
+                        "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                      }
+                    >
+                      №
+                    </th>
+                    <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                      Hudud
+                    </th>
+                    <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                      Kompaniya
+                    </th>
+                    <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                      Resurs kodi
+                    </th>
+                    <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                      Resurs nomi
+                    </th>
+                    <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                      O&apos;lchov birligi
+                    </th>
+                    <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                      Narxi (so’m)
+                    </th>
+
+                    <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                      Oxirgi o&apos;zgarish
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  {get(tableData, "data.materials")?.map((item, index) => (
+                    <tr
+                      key={index}
+                      className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                    >
+                      <td className=" font-medium text-xs py-[10px]  text-center">
+                        {index + 1}
+                      </td>
+                      <td className=" font-medium text-xs py-[10px]  text-start">
+                        {get(item, "material_region_name")}
+                      </td>
+
+                      <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
+                        <Link
+                          href={`/company/${get(item, "company_stir")}`}
+                          className="underline-0 hover:underline transition-all duration-300"
+                        >
+                          {get(item, "company_name")}
+                        </Link>
+                      </td>
+
+                      <td className=" font-medium text-xs py-[10px]">
+                        <Link
+                          href={`/materials/${get(item, "material_name_id")}`}
+                          className="underline-0 hover:underline transition-all duration-300"
+                        >
+                          {get(item, "material_name_id")}
+                        </Link>
+                      </td>
+                      <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                        {get(item, "material_name")}
+                      </td>
+                      <td className=" font-medium text-xs py-[10px] text-center">
+                        <div className="flex space-x-[4px]">
+                          <Image
+                            src={"/icons/measure-basket.svg"}
+                            alt="measure-basket"
+                            width={16}
+                            height={16}
+                          />
+                          <p>{get(item, "material_measure")}</p>
+                        </div>
+                      </td>
+                      <td className=" font-medium text-xs py-[10px] ">
+                        <NumericFormat
+                          thousandSeparator={" "}
+                          className="bg-transparent max-w-[100px]"
+                          value={
+                            Number.isInteger(get(item, "material_price"))
+                              ? get(item, "material_price")
+                              : parseFloat(get(item, "material_price")).toFixed(
+                                  2
+                                )
+                          }
+                        />
+                      </td>
+                      <td className=" font-medium text-xs py-[10px]">
+                        <div className="flex space-x-[4px]">
+                          <Image
+                            src={"/icons/clock.svg"}
+                            alt="clock"
+                            width={16}
+                            height={16}
+                          />
+                          <p>
+                            {" "}
+                            {dayjs(get(item, "material_updated_date")).format(
+                              "DD.MM.YYYY"
+                            )}
+                          </p>
+                          <p>
+                            {dayjs(get(item, "material_updated_date")).format(
+                              "HH:mm"
+                            )}
+                          </p>
+                        </div>
+                      </td>
+                      <td>
+                        <div className="flex items-center gap-x-[4px]">
+                          <button
+                            className={
+                              "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                            }
+                          >
+                            <Image
+                              src={"/icons/heart.svg"}
+                              alt={"heart"}
+                              width={18}
+                              height={18}
+                            />
+                          </button>
+
+                          <button
+                            onClick={() => handleIncrement(item)}
+                            className={
+                              "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                            }
+                          >
+                            <Image
+                              src={"/icons/basket.svg"}
+                              alt={"heart"}
+                              width={18}
+                              height={18}
+                            />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </motion.table>
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
                 <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
