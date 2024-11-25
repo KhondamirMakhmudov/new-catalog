@@ -42,30 +42,7 @@ const Search = () => {
           "w-full max-w-[700px] grid grid-cols-12 border border-[#E6E5ED] rounded-[8px]   items-center relative"
         }
       >
-        <div className="col-span-8" onClick={() => setOpenSearch(!openSearch)}>
-          <button>
-            <Image
-              src={"/icons/search.svg"}
-              alt={"search"}
-              width={20}
-              height={20}
-              className={"ml-[16px] absolute top-[10px] bottom-0"}
-            />
-          </button>
-          <input
-            type={"text"}
-            placeholder={"Qidirmoq..."}
-            onChange={(e) => {
-              const value = e.target.value;
-              setNameValue(value);
-            }}
-            className={
-              "placeholder:text-[#B3B1C0] text-[#020E03] pl-[44px] w-full text-sm font-medium py-[9px] rounded-[8px] focus:border-0"
-            }
-          />
-        </div>
-
-        <div className="col-span-4 place-items-center">
+        <div className="col-span-3 place-items-center">
           <div className="">
             <button
               onClick={() => setOpenDepartment(!openDepartment)}
@@ -73,7 +50,6 @@ const Search = () => {
               aria-label="Toggle Department Dropdown"
               className="flex items-center gap-x-[10px]"
             >
-              <div className="w-[1px] h-[16px] bg-[#E6E5ED] mr-[12px]"></div>
               <p className="text-sm text-[#939699] ">{selectedDepartment}</p>
               <DownIcon
                 color="#939699"
@@ -81,11 +57,12 @@ const Search = () => {
                   openDepartment ? "rotate-180" : "rotate-0"
                 } transition-all duration-200`}
               />
+              <div className="w-[1px] h-[16px] bg-[#E6E5ED] mr-[12px]"></div>
             </button>
           </div>
           {openDepartment && (
             <motion.div
-              className={"absolute right-0 top-[40px] z-50"}
+              className={"absolute left-0 top-[40px] z-50"}
               initial={{ opacity: 0, translateY: "30px" }}
               animate={{ opacity: 1, translateY: 0 }}
               transition={{ duration: 0.2 }}
@@ -124,6 +101,28 @@ const Search = () => {
               </ul>
             </motion.div>
           )}
+        </div>
+        <div className="col-span-9" onClick={() => setOpenSearch(!openSearch)}>
+          <button>
+            <Image
+              src={"/icons/search.svg"}
+              alt={"search"}
+              width={20}
+              height={20}
+              className={"ml-[16px] absolute top-[10px] bottom-0"}
+            />
+          </button>
+          <input
+            type={"text"}
+            placeholder={"Qidirmoq..."}
+            onChange={(e) => {
+              const value = e.target.value;
+              setNameValue(value);
+            }}
+            className={
+              "placeholder:text-[#B3B1C0] text-[#020E03] pl-[44px] w-full text-sm font-medium py-[9px] rounded-[8px] focus:border-0"
+            }
+          />
         </div>
 
         {nameValue.trim() !== "" && (

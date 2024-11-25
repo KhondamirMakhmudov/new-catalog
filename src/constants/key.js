@@ -86,4 +86,7 @@ export const KEYS = {
   globalSearch: "globalSearch",
 
   classifierFast: "classifierFast",
+  showTable: "showTable",
+
+  monitoring: "monitoring",
 };

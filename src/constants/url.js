@@ -99,4 +99,5 @@ export const URLS = {
 
   globalSearch: "fastapi/global/search/",
   classifierFast: "fastapi/material_klassifikator",
+  monitoring: "fastapi/monitoring/region/filter/",
 };

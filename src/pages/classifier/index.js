@@ -12,12 +12,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import ContentLoader from "@/components/loader/content-loader";
 import Pagination from "@/components/pagination";
+import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const [count, setCount] = useState(0);
   const [search, setSearch] = useState("");
   const [volumed, setVolumed] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
+  const [groupId, setGroupId] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
@@ -26,15 +28,31 @@ const Index = () => {
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
 
-  const {
-    data: classifier,
-    isLoadingClassifier,
-    isFetchingClassifier,
-  } = useGetQuery({
-    key: KEYS.classifier,
-    url: URLS.classifier,
+  const { mutate: showTable } = usePostQuery({
+    listKeyId: KEYS.showTable,
   });
 
+  const onSubmit = (data) => {
+    const attribute = !volumed
+      ? { volume_ids: [setVolumed(data)] }
+      : !categoryId
+      ? { category_ids: [setCategoryId(data)] }
+      : !groupId
+      ? { group_ids: [setGroupId(data)] }
+      : { volume_ids: [setVolumed(data)] };
+
+    showTable(
+      {
+        url: URLS.classifierFast,
+        attributes: attribute,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
+        },
+      }
+    );
+  };
   const {
     data: materialVolume,
     isLoading,
@@ -125,7 +143,9 @@ const Index = () => {
                     <li
                       onClick={(e) => {
                         e.stopPropagation();
+                        onSubmit(get(volume, "id"));
                         setCategoryId(null);
+                        setGroupId(null);
                         setVolumed(get(volume, "id"));
                       }}
                       key={get(volume, "id")}
@@ -150,7 +170,7 @@ const Index = () => {
                             </div>
                           ) : (
                             <motion.ul
-                              className="ml-[10px]"
+                              className="ml-[16px]"
                               initial={{ opacity: 0, translateY: "20px" }}
                               animate={{ opacity: 1, translateY: "0px" }}
                               transition={{ duration: 0.1 }}
@@ -160,6 +180,7 @@ const Index = () => {
                                   <li
                                     onClick={(e) => {
                                       e.stopPropagation();
+                                      onSubmit(get(category, "id"));
                                       setCategoryId(get(category, "id"));
                                     }}
                                     key={get(category, "id")}
@@ -182,19 +203,18 @@ const Index = () => {
                                             <ContentLoader />
                                           </div>
                                         ) : (
-                                          <ul className="ml-[10px]">
+                                          <ul className="ml-[16px]">
                                             {get(materialGroup, "data")?.map(
                                               (group) => (
                                                 <li key={get(group, "id")}>
                                                   <div className="flex gap-x-[4px] items-center ">
-                                                    <input
-                                                      type="checkbox"
-                                                      onChange={() =>
-                                                        handleCheckboxChange(
-                                                          group
-                                                        )
+                                                    <Image
+                                                      src={
+                                                        "/icons/arrow_right.svg"
                                                       }
-                                                      className="form-checkbox  text-blue-600 border-gray-300 rounded"
+                                                      alt="arrow_right"
+                                                      width={16}
+                                                      height={16}
                                                     />
                                                     <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                                                       {get(group, "group_name")}
@@ -220,7 +240,7 @@ const Index = () => {
               </div>
             </div>
             <div className="col-span-9 tablet:mt-0 ">
-              <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+              {/* <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
                 <motion.table
                   className="w-full border-collapse border-[#D7D9E7]"
                   initial={{ opacity: 0, translateY: "30px" }}
@@ -390,7 +410,7 @@ const Index = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
