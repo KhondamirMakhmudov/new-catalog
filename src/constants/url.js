@@ -98,6 +98,6 @@ export const URLS = {
   mmechanoGroupFast: "fastapi/mmechano_groups/",
 
   globalSearch: "fastapi/global/search/",
-  classifierFast: "fastapi/material_klassifikator",
+  classifierFast: "fastapi/material_klassifikator/",
   monitoring: "fastapi/monitoring/region/filter/",
 };
