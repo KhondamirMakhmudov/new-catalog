@@ -8,15 +8,33 @@ import { URLS } from "@/constants/url";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { get } from "lodash";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BasketIcon from "@/components/icons/basket";
 import dayjs from "dayjs";
 import { NumericFormat } from "react-number-format";
+import { useCounter } from "@/context/counter";
+import usePostQuery from "@/hooks/api/usePostQuery";
+import Footer from "@/components/footer";
 
 const Index = () => {
   const [limit] = useState(9);
   const router = useRouter();
   const { code } = router.query;
+  const [soliqAveragePrice, setSoliqAveragePrice] = useState(null);
+  const [soliqProductCount, setSoliqProductCount] = useState(null);
+  const [hasPosted, setHasPosted] = useState(false);
+  const { state, dispatch } = useCounter();
+  const [minimum, setMinimum] = useState(0);
+  const [maximum, setMaximum] = useState(0);
+  const [average, setAverage] = useState(0);
+
+  const handleIncrement = (product) => {
+    dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
+    toast.success("Tanlagan mahsulotingiz savatchaga qo'shildi!", {
+      duration: 3000,
+      position: "top-left",
+    });
+  };
 
   const {
     data: techno,
@@ -34,18 +52,149 @@ const Index = () => {
     enabled: !!code,
   });
 
+  const { data: currency } = useGetQuery({
+    key: KEYS.currency,
+    url: URLS.currency,
+  });
+
+  //////// Max price //////////////////
+  useEffect(() => {
+    const results = get(technoAds, "data.results", []);
+
+    if (results.length === 0) {
+      setMaximum(0);
+      return;
+    }
+
+    let maxPrice = 0;
+
+    for (const obj of results) {
+      const price =
+        obj["techno_price"] *
+        get(currency, `data[${obj["techno_price_currency"]}]`, 1);
+
+      if (price > maxPrice) {
+        maxPrice = price;
+      }
+    }
+
+    // Use `toFixed(2)` only once outside the loop for optimization
+    setMaximum(maxPrice.toFixed(2));
+  }, [technoAds, currency]);
+
+  useEffect(() => {
+    const results = get(technoAds, "data.results", []);
+    const resultsLength = results.length;
+
+    if (resultsLength === 0) {
+      setAverage(0);
+      return;
+    }
+
+    let totalPrice = 0;
+
+    for (const obj of results) {
+      const price =
+        obj["techno_price"] *
+        get(currency, `data[${obj["techno_price_currency"]}]`, 1);
+      totalPrice += price;
+    }
+
+    const averagePrice = +(totalPrice / resultsLength).toFixed(2);
+    setAverage(averagePrice);
+  }, [technoAds, currency]);
+
+  ///////// Min Price ///////////////
+  useEffect(() => {
+    const results = get(technoAds, "data.results", []);
+
+    if (results.length === 0) {
+      setMinimum(false);
+      return;
+    }
+
+    let minPrice = Infinity;
+
+    for (const obj of results) {
+      const price =
+        obj["techno_price"] *
+        get(currency, `data[${obj["techno_price_currency"]}]`, 1);
+
+      if (price < minPrice) {
+        minPrice = price;
+      }
+    }
+
+    // Use `toFixed(2)` only once outside the loop for optimization
+    setMinimum(minPrice.toFixed(2));
+  }, [technoAds, currency]);
+
+  ////////// SOLIQ BILAN INTEGRATSIYA ///////////////
+
+  const { mutate: postSoliqMxik, isLoading: isLoadingSoliq } = usePostQuery({
+    listKeyId: KEYS.soliqPrice,
+  });
+
+  const postSoliqData = () => {
+    postSoliqMxik(
+      {
+        url: URLS.soliq,
+        attributes: {
+          mxik: get(techno, "data.mxik_soliq")?.split(".")[0],
+          fromDate: "01.10.2024",
+          toDate: "01.11.2024",
+        },
+      },
+      {
+        onSuccess: (data) => {
+          const productCount = get(data, "data.data").reduce(
+            (initialQuantity, currentQuantity) =>
+              initialQuantity + get(currentQuantity, "product_count"),
+            0
+          );
+          setSoliqProductCount(productCount);
+
+          const deliver = get(data, "data.data").map(
+            (item) => get(item, "delivery_sum") / get(item, "product_count")
+          );
+
+          const deliverSum = deliver.reduce(
+            (initialValue, currentValue) => initialValue + currentValue,
+            0
+          );
+
+          const averageDeliverySum = (
+            deliverSum / get(data, "data.data").length
+          ).toFixed(2);
+
+          console.log("Response data:", averageDeliverySum);
+          setSoliqAveragePrice(averageDeliverySum);
+          setHasPosted(true);
+        },
+        onError: (error) => {
+          console.error("Error posting data:", error);
+        },
+      }
+    );
+  };
+
+  //////////////////////////////////////////////////
+
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
 
-      <main className="container">
+      <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <Link href={"/"} className=" text-sm font-semibold">
             Bosh sahifa
           </Link>
           <RightIcon color="#BCBFC2" />
-          <Link className="text-[#262D33]text-sm font-semibold" href={"#"}>
-            Materiallar va jihozlar
+          <Link
+            className="text-[#262D33] text-sm font-semibold"
+            href={"/technos"}
+          >
+            Uskunalar va qurilmalar
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
@@ -106,6 +255,173 @@ const Index = () => {
                     <BasketIcon color="white" />
                     <p className="font-semibold text-white">Sotib oling</p>
                   </button>
+                </div>
+              </div>
+
+              <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
+                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                  <div className="flex gap-x-[10px] items-center">
+                    <div>
+                      <div
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        style={{
+                          backgroundImage: "url(/images/integration-1.png)",
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className="text-xs font-bold">
+                      Davlat soliq qo&apos;mitasi
+                    </p>
+                  </div>
+                  {!hasPosted ? (
+                    <button
+                      onClick={postSoliqData}
+                      className={
+                        "p-[9px] bg-[#EBF2FA] hover:bg-[#c4dbf7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200 w-full flex items-center justify-center"
+                      }
+                    >
+                      <Image
+                        src={"/icons/eye.svg"}
+                        alt={"eye"}
+                        width={20}
+                        height={20}
+                      />
+                    </button>
+                  ) : (
+                    <ul className="space-y-[8px] mt-[8px]">
+                      <li className="text-xs flex justify-between items-center">
+                        <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                        <p className="font-bold">{soliqProductCount}</p>
+                      </li>
+
+                      <li className="text-xs flex justify-between items-center">
+                        <p>Narxi:</p>
+
+                        <p className="font-bold">
+                          {soliqAveragePrice} so&apos;m
+                        </p>
+                      </li>
+                    </ul>
+                  )}
+                </div>
+
+                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                  <div className="flex gap-x-[10px] items-center">
+                    <div>
+                      <div
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        style={{
+                          backgroundImage: "url(/images/integration-2.png)",
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className="text-xs font-bold">Tovar xomashyo birjasi</p>
+                  </div>
+
+                  <ul className="space-y-[8px] mt-[8px]">
+                    <li className="text-xs flex justify-between items-center">
+                      <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                      <p className="font-bold">20</p>
+                    </li>
+
+                    <li className="text-xs flex justify-between items-center">
+                      <p>Narxi:</p>
+
+                      <p className="font-bold">12 000 000 so&apos;m</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                  <div className="flex gap-x-[10px] items-center">
+                    <div>
+                      <div
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:80px_80px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        style={{
+                          backgroundImage: "url(/images/integration-3.png)",
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className="text-xs font-bold">Statistika agentligi</p>
+                  </div>
+
+                  <ul className="space-y-[8px] mt-[8px]">
+                    <li className="text-xs flex justify-between items-center">
+                      <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                      <p className="font-bold">20</p>
+                    </li>
+
+                    <li className="text-xs flex justify-between items-center">
+                      <p>Narxi:</p>
+
+                      <p className="font-bold">12 000 000 so&apos;m</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                  <div className="flex gap-x-[10px] items-center">
+                    <div>
+                      <div
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:80px_80px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        style={{
+                          backgroundImage: "url(/images/integration-3.png)",
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className="text-xs font-bold">
+                      Davlat bojxona qo&apos;mitasi
+                    </p>
+                  </div>
+
+                  <ul className="space-y-[8px] mt-[8px]">
+                    <li className="text-xs flex justify-between items-center">
+                      <p>O&apos;tgan oydagi savdolar soni:</p>
+
+                      <p className="font-bold">20</p>
+                    </li>
+
+                    <li className="text-xs flex justify-between items-center">
+                      <p>Narxi:</p>
+
+                      <p className="font-bold">12 000 000 so&apos;m</p>
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                  <ul className="space-y-[13px] flex flex-col">
+                    <li className="flex justify-between items-end">
+                      <p className="text-xs font-bold">Maksimal narx:</p>
+                      <div class="flex-grow border-t border-dotted mx-2"></div>
+                      <p className="text-[#4B5157] text-xs font-medium">
+                        {maximum} so&apos;m
+                      </p>
+                    </li>
+
+                    <li className="flex justify-between items-end">
+                      <p className="text-xs font-bold">O&apos;rtacha narx:</p>
+                      <div class="flex-grow border-t border-dotted mx-2"></div>
+                      <p className="text-[#4B5157] text-xs font-medium">
+                        {average} so&apos;m
+                      </p>
+                    </li>
+
+                    <li className="flex justify-between items-end">
+                      <p className="text-xs font-bold">Minimal narx:</p>
+                      <div class="flex-grow border-t border-dotted mx-2"></div>
+                      <p className="text-[#4B5157] text-xs font-medium">
+                        {minimum} so&apos;m
+                      </p>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -271,6 +587,7 @@ const Index = () => {
                               </button>
 
                               <button
+                                onClick={() => handleIncrement(item)}
                                 className={
                                   "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
                                 }
@@ -311,6 +628,8 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 };

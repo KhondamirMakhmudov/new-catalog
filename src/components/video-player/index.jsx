@@ -13,13 +13,13 @@ const CustomVideoPlayer = ({ url }) => {
     return null;
   }
   return (
-    <div className={"relative w-full rounded-[12px] "}>
+    <div className={"relative rounded-[12px] "}>
       <ReactPlayer
         url={"/videos/catalog-video.mp4"}
-        style={{ borderRadius: "12px" }}
         controls
         width="100%"
         height="100%"
+        className="rounded-[12px]"
         playIcon={
           <Image
             src={"/icons/play-button.svg"}

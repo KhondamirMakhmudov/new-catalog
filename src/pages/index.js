@@ -4,7 +4,7 @@ import CustomVideoPlayer from "@/components/video-player";
 import Image from "next/image";
 import Link from "next/link";
 import { get } from "lodash";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Footer from "@/components/footer";
 import { motion } from "framer-motion";
 import Reveal from "@/components/reveal";
@@ -12,6 +12,12 @@ import MapOfUz from "@/components/icons/uz-map";
 import HorizontalBarChart from "@/components/bar";
 import ArrowRightButton from "@/components/buttons/arrow-right";
 import ScrollToTopButton from "@/components/scroll-to-top";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import ReactPlayer from "react-player";
+import AboutClassifier from "@/components/about-company";
 
 const integrationData = [
   {
@@ -42,6 +48,7 @@ const integrationData = [
 
 export default function Home() {
   const [openFAQ, setOpenFAQ] = useState(false);
+
   const toggleFAQ = () => {
     setOpenFAQ(!openFAQ);
   };
@@ -139,7 +146,7 @@ export default function Home() {
                         " z-20 py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
                       }
                     >
-                      <p className={"text-[#21201FCC]"}>Qarang</p>
+                      <p className={"text-[#21201FCC]"}>Batafsil</p>
                       <Image
                         src={"/icons/arrow-right.svg"}
                         alt={"arrow-right"}
@@ -187,7 +194,7 @@ export default function Home() {
                           "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Qarang</p>
+                        <p className={"text-[#21201FCC]"}>Batafsil</p>
                         <Image
                           src={"/icons/arrow-right.svg"}
                           alt={"arrow-right"}
@@ -269,29 +276,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal>
-            <div
-              className={
-                "grid grid-cols-12 gap-[39px] p-[24px] bg-[#F4F6FA] rounded-[30px] mt-[12px]"
-              }
-            >
-              <div className={"col-span-5 pl-[12px] flex flex-col "}>
-                <h1 className={"text-[#21201F] text-[32px] font-bold"}>
-                  Byudjetni qayta <br /> taqsimlash
-                </h1>
-                <p
-                  className={"text-[17px] text-[#21201FB2] font-medium flex-1"}
-                >
-                  Global strategiyani o&apos;zgartirish mahsulotning
-                  sublimatsiya qilingan hayot aylanishini tejaydi. Amaliyot aniq
-                  ko&apos;rsatib turibdi
-                </p>
-              </div>
-              <div className={"col-span-7 "}>
-                <div className="rounded-[12px]">
-                  <CustomVideoPlayer />
-                </div>
-              </div>
-            </div>
+            <AboutClassifier />
           </Reveal>
         </section>
         {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
@@ -576,7 +561,7 @@ export default function Home() {
                       </h2>
 
                       <Link
-                        href={"#"}
+                        href={"/integrations"}
                         className="inline-flex gap-x-[10px] bg-[#EBF1F9] rounded-[8px] py-[17px] px-[16px] mt-[10px]"
                       >
                         <p className="text-lg font-semibold text-[#0256BA]">
