@@ -9,6 +9,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import Link from "next/link";
 import dayjs from "dayjs";
+import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const {
@@ -16,6 +17,20 @@ const Index = () => {
     isLoading,
     isFetching,
   } = useGetQuery({ key: KEYS.orderListCompany, url: URLS.orderListCompany });
+
+  const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
+    listKeyId: "company-info-one",
+  });
+
+  const handleSendOrderStatus = (id, selectStatus) => {
+    const selectedId = +id;
+    sendOrderStatus({
+      url: `${URLS.sendOrderStatus}${selectedId}/`,
+      attributes: {
+        order_status: `${selectStatus}`,
+      },
+    });
+  };
 
   console.log(listOrders);
 
@@ -110,7 +125,79 @@ const Index = () => {
                     {get(item, "quantity")}
                   </td>
                   <td className=" font-medium text-xs py-[10px] text-center">
-                    {get(item, "order_status")}
+                    {get(item, "order_status") === "new_order" ? (
+                      <div className={"flex flex-col gap-y-2"}>
+                        <button
+                          onClick={() =>
+                            handleSendOrderStatus(get(item, "id"), "accepted")
+                          }
+                          className={
+                            "bg-green-600 hover:bg-green-700 active:bg-green-500 text-white py-2 px-8 rounded-[6px]"
+                          }
+                        >
+                          Qabul qilish
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleSendOrderStatus(get(item, "id"), "canceled")
+                          }
+                          className={
+                            "bg-red-600 hover:bg-red-700 active:bg-red-500 text-white py-2 px-8 rounded-[6px]"
+                          }
+                        >
+                          Bekor qilish
+                        </button>
+                      </div>
+                    ) : get(item, "order_status") === "accepted" ? (
+                      <div>
+                        <button
+                          onClick={() =>
+                            handleSendOrderStatus(get(item, "id"), "sent")
+                          }
+                          className={
+                            "bg-blue-600  hover:bg-blue-700 active:bg-blue-500 text-white py-2 px-8 rounded-[6px] w-full"
+                          }
+                        >
+                          Yuborish
+                        </button>
+                      </div>
+                    ) : get(item, "order_status") === "sent" ? (
+                      <div
+                        className={
+                          "flex flex-col items-center gap-y-2  rounded-[6px]"
+                        }
+                      >
+                        <div className={"flex items-center gap-x-2"}>
+                          <p>Mahsulot yo'lda</p>
+                        </div>
+                      </div>
+                    ) : get(item, "order_status") === "customer_canceled" ? (
+                      <div
+                        className={"flex items-center gap-x-2  rounded-[6px]"}
+                      >
+                        <p>Buyurtmachi mahsulotni bekor qildi</p>
+                      </div>
+                    ) : get(item, "order_status") === "customer_accepted" ? (
+                      <div
+                        className={"flex items-center gap-x-2  rounded-[6px]"}
+                      >
+                        <p>Mahsulot yetkazildi</p>
+                      </div>
+                    ) : get(item, "order_status") === "canceled" ? (
+                      <div
+                        className={"flex items-center gap-x-2  rounded-[6px]"}
+                      >
+                        <p>Buyurtmani bekor qildingiz</p>
+                      </div>
+                    ) : get(item, "order_status") === "on_way" ? (
+                      <div
+                        className={"flex items-center gap-x-2  rounded-[6px]"}
+                      >
+                        <p>Xabar yetkazildi</p>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </td>
                 </tr>
               ))}

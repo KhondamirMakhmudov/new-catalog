@@ -216,55 +216,43 @@ const MyMaterials = () => {
                 isNil(itemId) ? "hidden" : "visible"
               }`}
             >
-              <div className={"w-[550px] p-[30px] rounded-[5px] bg-white"}>
-                <div>
+              <div
+                className={
+                  "w-[480px] p-[30px] rounded-[5px] bg-white flex justify-center items-center flex-col"
+                }
+              >
+                <div className="p-[18px] rounded-full bg-[#FAEBEB] mx-auto inline-block ">
                   <Image
                     onClick={() => setItemId(null)}
-                    src={"/icons/closeModal.svg"}
-                    alt={"modalcloser"}
+                    src={"/images/info-circle.png"}
+                    alt={"circle"}
                     width={24}
                     height={24}
-                    className={"float-right block cursor-pointer"}
+                    className={"  cursor-pointer"}
                   />
                 </div>
+
+                <h1 className="font-bold text-[32px] mt-[10px] text-center">
+                  E’lonni o‘chirasizmi?
+                </h1>
+                <p className="font-medium text-[#75758B] text-center">
+                  E’lonni o‘chirish tugmasi bosilganidan keyin siz tanlagan
+                  e’lon o’chadi
+                </p>
                 <br />
 
-                <div className={"flex items-center gap-x-[15px]"}>
-                  <div className="rounded-full border border-gray-300 flex items-center justify-center w-16 h-16 flex-shrink-0 mx-auto">
-                    <Image
-                      src={"/images/warning.png"}
-                      alt={"warning"}
-                      width={30}
-                      height={30}
-                    />
-                  </div>
-                  <div className="mt-4 md:mt-0 md:ml-6  md:text-left">
-                    <p className="font-bold">E&apos;lonni o‘chirmoqchimisiz?</p>
-                    <p className="text-sm text-gray-700 mt-1">
-                      O&apos;chirish tugmasi bosilganidan so‘ng siz tanlagan
-                      e&apos;lon o‘chiriladi.
-                    </p>
-                  </div>
-                </div>
-
                 <div
-                  className={
-                    "text-center flex items-center gap-x-[20px] mt-[20px]"
-                  }
+                  className={"grid grid-cols-4 gap-x-[20px] mt-[20px] w-full"}
                 >
                   <button
                     onClick={() => deActivate(itemId)}
-                    className={
-                      "block w-full px-4 py-3 md:py-2 bg-red-200 hover:bg-red-400 duration-300 transition-all text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2"
-                    }
+                    className="text-[#DD2033] bg-[#FAEBEB] py-[14px] col-span-2 rounded-[12px] w-full"
                   >
                     O&apos;chirish
                   </button>
                   <button
+                    className="col-span-2 bg-[#0256BA] text-white rounded-[12px] w-full"
                     onClick={() => setItemId(null)}
-                    className={
-                      "block w-full  md:w-auto px-4 py-3 md:py-2 bg-gray-200 hover:bg-gray-400 transition-all duration-300 rounded-lg font-semibold text-sm  md:mt-0 md:order-1"
-                    }
                   >
                     Bekor qilish
                   </button>

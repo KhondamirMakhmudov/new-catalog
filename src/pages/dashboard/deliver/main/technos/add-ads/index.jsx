@@ -9,6 +9,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get, isEmpty, find, head, debounce } from "lodash";
 import Select from "react-select";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [search, setSearch] = useState("");
