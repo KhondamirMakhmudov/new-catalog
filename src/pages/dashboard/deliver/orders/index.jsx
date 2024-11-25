@@ -168,7 +168,7 @@ const Index = () => {
                         }
                       >
                         <div className={"flex items-center gap-x-2"}>
-                          <p>Mahsulot yo'lda</p>
+                          <p>Mahsulot yo&apos;lda</p>
                         </div>
                       </div>
                     ) : get(item, "order_status") === "customer_canceled" ? (
