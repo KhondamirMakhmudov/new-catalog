@@ -27,27 +27,23 @@ const Index = () => {
   const [nameValue, setNameValue] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
+  const [data, setData] = useState([]);
 
   const { mutate: showTable } = usePostQuery({
     listKeyId: KEYS.showTable,
   });
 
-  const onSubmit = (data) => {
-    const attribute = !volumed
-      ? { volume_ids: [setVolumed(data)] }
-      : !categoryId
-      ? { category_ids: [setCategoryId(data)] }
-      : !groupId
-      ? { group_ids: [setGroupId(data)] }
-      : { volume_ids: [setVolumed(data)] };
-
+  const onSubmit = (attrs={}) => {
     showTable(
       {
         url: URLS.classifierFast,
-        attributes: attribute,
+        attributes: {
+          ...attrs
+        },
       },
       {
-        onSuccess: () => {
+        onSuccess: (response) => {
+          setData(response);
           toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
         },
       }
@@ -71,6 +67,7 @@ const Index = () => {
     key: [KEYS.materialGroupFast, categoryId],
     url: `${URLS.materialGroupFast}${categoryId}`,
   });
+  console.log('volumed',volumed)
   return (
     <div className="bg-[#F7F7F7]">
       <Header />
@@ -143,10 +140,14 @@ const Index = () => {
                     <li
                       onClick={(e) => {
                         e.stopPropagation();
-                        onSubmit(get(volume, "id"));
                         setCategoryId(null);
                         setGroupId(null);
                         setVolumed(get(volume, "id"));
+                        onSubmit({
+                          volume_ids:[get(volume, "id")],
+                          category_ids:categoryId ? [categoryId] : undefined,
+                          group_ids:groupId ? [groupId] : undefined,
+                        });
                       }}
                       key={get(volume, "id")}
                       className=""
@@ -180,8 +181,12 @@ const Index = () => {
                                   <li
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      onSubmit(get(category, "id"));
                                       setCategoryId(get(category, "id"));
+                                      onSubmit({
+                                        volume_ids:[volumed],
+                                        category_ids:[get(category, "id")],
+                                        group_ids:groupId ? [groupId] : undefined,
+                                      });
                                     }}
                                     key={get(category, "id")}
                                   >
