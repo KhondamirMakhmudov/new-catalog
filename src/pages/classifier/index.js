@@ -34,7 +34,9 @@ const Index = () => {
     showTable(
       {
         url: URLS.classifierFast,
-        attributes: [...attrs],
+        attributes: {
+          ...attrs,
+        },
       },
       {
         onSuccess: (response) => {
