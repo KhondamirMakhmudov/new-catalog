@@ -289,8 +289,8 @@ const Index = () => {
 
             <div className="font-gilroy">
               <ul className="flex flex-wrap gap-[10px]">
-                {regions.map((item) => (
-                  <li>
+                {regions.map((item, index) => (
+                  <li key={index}>
                     <button className="text-[16px] text-[#62677A] border border-[#D1D3DA] p-[8px] rounded-[6px] bg-[#F2F5FB] font-semibold">
                       {item}
                     </button>
