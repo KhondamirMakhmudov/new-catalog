@@ -1,6 +1,6 @@
 import Header from "@/components/header";
 import Title from "@/components/title";
-import CustomVideoPlayer from "@/components/video-player";
+
 import Image from "next/image";
 import Link from "next/link";
 import { get } from "lodash";
@@ -13,10 +13,7 @@ import HorizontalBarChart from "@/components/bar";
 import ArrowRightButton from "@/components/buttons/arrow-right";
 import ScrollToTopButton from "@/components/scroll-to-top";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import ReactPlayer from "react-player";
+
 import AboutClassifier from "@/components/about-company";
 
 const integrationData = [
@@ -380,25 +377,27 @@ export default function Home() {
               </div>
 
               <div className={"grid grid-cols-12 gap-x-[20px] mt-[30px]"}>
-                <div
-                  className={
-                    "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
-                  }
-                  style={{ backgroundImage: `url(/images/school-bg.png)` }}
-                >
                   <div
-                    className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
-                  ></div>
-                  <div className="absolute bottom-0 p-[32px] text-white ">
-                    <h1 className={"text-[28px] font-bold "}>Maktab</h1>
-                    <p className="text-sm font-normal mt-[10px] line-clamp-2">
-                      Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
-                      biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
-                      va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
-                      urf-odatlar va keyingi sevgi haqida suhbatlashdik
-                    </p>
+                    className={
+                      "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
+                    }
+                    style={{ backgroundImage: `url(/images/school-bg.png)` }}
+                  >
+                    <Link href={'/loyihalar/1'}>
+                    <div
+                      className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
+                    ></div>
+                    <div className="absolute bottom-0 p-[32px] text-white ">
+                      <h1 className={"text-[28px] font-bold "}>Maktab</h1>
+                      <p className="text-sm font-normal mt-[10px] line-clamp-2">
+                        Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                        biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                        va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                        urf-odatlar va keyingi sevgi haqida suhbatlashdik
+                      </p>
+                    </div>
+                  </Link>
                   </div>
-                </div>
 
                 <div className={"col-span-6 space-y-[20px]"}>
                   <div
@@ -431,17 +430,11 @@ export default function Home() {
                     <Link href="/loyihalar/maktab">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Qarang</p>
-                        <Image
-                          src={"/icons/arrow-right.svg"}
-                          alt={"arrow-right"}
-                          width={20}
-                          height={20}
-                          className={"ml-[16px]"}
-                        />
+                        <p className={"text-[#21201FCC]"}>Batafsil</p>
+
                       </div>
                     </Link>
                   </div>
@@ -475,17 +468,11 @@ export default function Home() {
                     <Link href="/loyihalar/poliklinika">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] active:bg-[#0256BA] text-[#21201FCC] active:text-white inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Qarang</p>
-                        <Image
-                          src={"/icons/arrow-right.svg"}
-                          alt={"arrow-right"}
-                          width={20}
-                          height={20}
-                          className={"ml-[16px]"}
-                        />
+                        <p className={""}>Batafsil</p>
+
                       </div>
                     </Link>
                   </div>
@@ -566,7 +553,7 @@ export default function Home() {
 
                       <Link
                         href={"/integrations"}
-                        className="inline-flex gap-x-[10px] bg-[#EBF1F9] rounded-[8px] py-[17px] px-[16px] mt-[10px]"
+                        className="inline-flex gap-x-[10px] bg-[#EBF1F9] hover:bg-[#DEECFF] rounded-[8px] py-[17px] px-[16px] mt-[10px] transition-all duration-300"
                       >
                         <p className="text-lg font-semibold text-[#0256BA]">
                           Tanishib chiqish
@@ -599,7 +586,7 @@ export default function Home() {
               <ul
                 className={"grid grid-cols-12 gap-[12px] font-gilroy mt-[20px]"}
               >
-                <li className="col-span-12 py-[28px] px-[32px] bg-[#F7F7F7] rounded-[20px]">
+                <li className="col-span-12 py-[28px] px-[32px] bg-[#F7F7F7] rounded-[20px] cursor-pointer" onClick={toggleFAQ}>
                   <div className="flex justify-between">
                     <div className="flex-1">
                       <h4 className="text-[20px] text-[#020E03] font-bold">
@@ -607,16 +594,16 @@ export default function Home() {
                         distinctio. Nam libero tempore
                       </h4>
                       {openFAQ && (
-                        <p className="text-[17px] text-[#9392A0] mt-[10px]">
+                        <motion.p initial={{opacity: 0, translateY: "30px"}} animate={{opacity: 1, translateY: "0px"}} className="text-[17px] text-[#9392A0] mt-[10px]">
                           Sed ut perspiciatis, unde omnis iste natus error sit
                           voluptatem accusantium doloremque laudantium, totam
                           rem aperiam eaque ipsa, quae ab illo inventore
                           veritatis et quasi architecto beatae vitae dicta sunt,
                           explicabo. Nemo enim
-                        </p>
+                        </motion.p>
                       )}
                     </div>
-                    <button onClick={toggleFAQ}>
+                    <button >
                       <Image
                         src={
                           !openFAQ
@@ -653,7 +640,7 @@ export default function Home() {
             >
               <Link
                 href={"https://maps.app.goo.gl/nxPwsjmq6vi6hCPa7"}
-                className="py-[14px] px-[28px] text-sm font-medium font-gilroy text-white bg-[#0256BA] rounded-[12px]"
+                className="py-[14px] px-[28px] text-sm font-medium font-gilroy text-white bg-[#0256BA] hover:bg-[#1C73DA] rounded-[12px]"
               >
                 Google Maps ni ochish
               </Link>

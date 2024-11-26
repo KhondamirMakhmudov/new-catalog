@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import CustomerIcon from "@/components/icons/customer";
 import DeliverIcon from "@/components/icons/deliver";
 import RightIcon from "@/components/icons/right";
+import { motion } from "framer-motion";
 
 const Index = () => {
   const [selectPosition, setSelectPosition] = useState("");
@@ -34,18 +35,18 @@ const Index = () => {
         <section className="font-gilroy max-w-[456px] mx-auto mt-[130px]">
           <div className="  flex-col ">
             <div className="text-center">
-              <h1 className="text-[32px] font-bold  text-[#1A202C]">
+              <motion.h1 initial={{opacity: 0, translateY: "-50px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}} className="text-[32px] font-bold  text-[#1A202C]">
                 Qaysi turdagi foydalanuvchi bo&apos;lishni xohlayotganingizni
                 ko&apos;rsating
-              </h1>
-              <p className="text-base font-medium   text-[#718096]">
+              </motion.h1>
+              <motion.p initial={{opacity: 0, translateY: "-40px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}} className="text-base font-medium   text-[#718096]">
                 Oldingi media kampaniyalari natijalarini hisobga olgan holda,
                 xaridor konventsiyasi tarkibni to&apos;liq o&apos;zgartiradi
-              </p>
+              </motion.p>
             </div>
 
             <div className="flex space-x-[24px] my-[30px]">
-              <button
+              <motion.button  initial={{scale: 0.01}} animate={{ scale: 1}} transition={{duration: 0.01}}
                 onClick={() => handleSelection("client")}
                 className={`${
                   selectPosition === "client"
@@ -74,9 +75,10 @@ const Index = () => {
                 >
                   Siz qurilish materiallarini buyurtma qiluvchi kompaniyasiz
                 </p>
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                initial={{scale: 0.01}} animate={{ scale: 1}} transition={{duration: 0.07}}
                 onClick={() => handleSelection("deliver")}
                 className={`${
                   selectPosition === "deliver"
@@ -107,19 +109,23 @@ const Index = () => {
                 >
                   Siz qurilish materiallarini yetkazib beruvchi kompaniyasiz
                 </p>
-              </button>
+              </motion.button>
             </div>
             {selectPosition === "client" ? (
               <Link href={"/auth/login"} className="w-full  ">
-                <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
+                <motion.button
+                  initial={{opacity: 0, translateY: "30px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}}
+                  className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
                   Keyingi
-                </button>
+                </motion.button>
               </Link>
             ) : selectPosition === "deliver" ? (
               <Link href={"/auth/e-imzo"} className="w-full mt-[30px] ">
-                <button className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
+                  <motion.button
+                    initial={{opacity: 0, translateY: "30px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}}
+                    className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
                   Keyingi
-                </button>
+                </motion.button>
               </Link>
             ) : (
               ""

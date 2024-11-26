@@ -102,3 +102,12 @@ body {
 .works:hover p {
   color: white;
 }
+
+
+.loyiha-button {
+  background-color: white;
+}
+
+.loyiha-button:hover p {
+  color: #0256BA;
+}
