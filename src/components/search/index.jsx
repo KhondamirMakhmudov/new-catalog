@@ -153,7 +153,7 @@ const Search = () => {
                 alt={"search"}
                 width={20}
                 height={20}
-                className={" absolute top-[10px] bottom-0 ml-[165px]"}
+                className={" absolute top-[10px] bottom-0 ml-[175px]"}
               />
             </button>
             <input
@@ -164,7 +164,7 @@ const Search = () => {
                 setNameValue(value);
               }}
               className={
-                "placeholder:text-[#B3B1C0] text-[#020E03] pl-[194px] w-full text-sm font-medium py-[9px] rounded-[8px] focus:border-0"
+                "placeholder:text-[#B3B1C0] text-[#020E03] pl-[200px] w-full text-sm font-medium py-[9px] rounded-[8px] focus:border-0"
               }
             />
           </div>
