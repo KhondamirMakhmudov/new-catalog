@@ -22,11 +22,6 @@ const Index = () => {
   const [categoryId, setCategoryId] = useState(null);
   const [groupId, setGroupId] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(!false);
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(0);
-  const [regionName, setRegionName] = useState("");
-  const [nameValue, setNameValue] = useState("");
-  const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
 
@@ -34,7 +29,7 @@ const Index = () => {
     listKeyId: KEYS.showTable,
   });
 
-  const onSubmit = (attrs = {}) => {
+  const onSubmit = (attrs = { volume_ids: [1] }) => {
     showTable(
       {
         url: URLS.classifierFast,
@@ -218,7 +213,8 @@ const Index = () => {
                                                   key={get(group, "id")}
                                                   onClick={(e) => {
                                                     e.stopPropagation();
-
+                                                    setVolumed(null);
+                                                    setCategoryId(null);
                                                     setGroupId(
                                                       get(group, "id")
                                                     );

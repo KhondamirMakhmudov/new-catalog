@@ -254,52 +254,12 @@ const Index = () => {
           </motion.ul>
 
           <div className="grid grid-cols-12 gap-x-[30px] font-gilroy">
-            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
-              <div className="flex justify-between items-center">
-                <h4 className="font-extrabold">Mahsulot qidirish</h4>
-                <button onClick={() => setShowAllProjects(!showAllProjects)}>
-                  <RightIcon
-                    classname={`${
-                      !showAllProjects ? "rotate-90" : "-rotate-90"
-                    } transition-all duration-200`}
-                    color="#BCBFC2"
-                  />
-                </button>
-              </div>
-
-              <input
-                type="text"
-                className="py-[10px] px-[15px] border w-full mt-[20px] rounded-[8px]"
-                placeholder="Qidirish"
-              />
-            </div>
-
-            <div className="col-span-9">
+            <div className="col-span-12">
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                <div className="col-span-4">
+                <div className="col-span-12">
                   <h3 className="font-semibold text-sm mb-[6px] ">
-                    Sanani tanlash
+                    Mahsulot nomi
                   </h3>
-
-                  <input
-                    type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
-                </div>
-
-                <div className="col-span-4">
-                  <h3 className="font-semibold text-sm mb-[6px] ">Hudud</h3>
-
-                  <input
-                    type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
-                </div>
-
-                <div className="col-span-4">
-                  <h3 className="font-semibold text-sm mb-[6px] ">Shahar</h3>
 
                   <input
                     type="text"

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import DownIcon from "../icons/down";
@@ -9,6 +9,14 @@ import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import ContentLoader from "../loader/content-loader";
 
+const placeholderTexts = [
+  "Бетоны и смеси",
+  "Изделия из бетона, цемента и гипса",
+  "Конструкции и детали инженерных сооружений",
+  "Сухие строительные смеси и вяжущие",
+  "Металлопрокат и изделия металлические",
+];
+
 const Search = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openDepartment, setOpenDepartment] = useState(false);
@@ -16,12 +24,44 @@ const Search = () => {
   const [nameValue, setNameValue] = useState("");
   const [selectedDepartment, setSelectedDepartment] =
     useState("Bo'limlar bo'yicha");
+  // placeholder
+  const [placeholder, setPlaceholder] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [typingIndex, setTypingIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
   const handleSelect = (department, categoryValue) => {
     setSelectedDepartment(department);
     setOpenDepartment(false);
     setCategory(categoryValue);
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(
+      () => {
+        if (!deleting) {
+          setPlaceholder(
+            (prev) => prev + placeholderTexts[currentIndex][typingIndex]
+          );
+          setTypingIndex((prev) => prev + 1);
+          if (typingIndex === placeholderTexts[currentIndex].length - 1) {
+            setDeleting(true);
+          }
+        } else {
+          // Deleting logic
+          setPlaceholder((prev) => prev.slice(0, -1));
+          if (placeholder === "") {
+            setDeleting(false);
+            setTypingIndex(0);
+            setCurrentIndex((prev) => (prev + 1) % placeholderTexts.length);
+          }
+        }
+      },
+      deleting ? 50 : 70
+    );
+
+    return () => clearTimeout(timeout);
+  }, [placeholder, typingIndex, deleting, currentIndex]);
 
   const {
     data: globalSearch,
@@ -39,10 +79,10 @@ const Search = () => {
     <>
       <div
         className={
-          "w-full max-w-[700px] grid grid-cols-12 border border-[#E6E5ED] rounded-[8px]   items-center relative"
+          "w-full max-w-[700px] flex items-center border border-[#E6E5ED] rounded-[8px] relative"
         }
       >
-        <div className="col-span-3 place-items-center">
+        <div className="absolute place-items-center ml-[10px]">
           <div className="">
             <button
               onClick={() => setOpenDepartment(!openDepartment)}
@@ -102,27 +142,32 @@ const Search = () => {
             </motion.div>
           )}
         </div>
-        <div className="col-span-9" onClick={() => setOpenSearch(!openSearch)}>
-          <button>
-            <Image
-              src={"/icons/search.svg"}
-              alt={"search"}
-              width={20}
-              height={20}
-              className={"ml-[16px] absolute top-[10px] bottom-0"}
+        <div
+          className="col-span-9 flex-1 "
+          onClick={() => setOpenSearch(!openSearch)}
+        >
+          <div className="">
+            <button>
+              <Image
+                src={"/icons/search.svg"}
+                alt={"search"}
+                width={20}
+                height={20}
+                className={" absolute top-[10px] bottom-0 ml-[165px]"}
+              />
+            </button>
+            <input
+              type={"text"}
+              placeholder={placeholder}
+              onChange={(e) => {
+                const value = e.target.value;
+                setNameValue(value);
+              }}
+              className={
+                "placeholder:text-[#B3B1C0] text-[#020E03] pl-[194px] w-full text-sm font-medium py-[9px] rounded-[8px] focus:border-0"
+              }
             />
-          </button>
-          <input
-            type={"text"}
-            placeholder={"Qidirmoq..."}
-            onChange={(e) => {
-              const value = e.target.value;
-              setNameValue(value);
-            }}
-            className={
-              "placeholder:text-[#B3B1C0] text-[#020E03] pl-[44px] w-full text-sm font-medium py-[9px] rounded-[8px] focus:border-0"
-            }
-          />
+          </div>
         </div>
 
         {nameValue.trim() !== "" && (
