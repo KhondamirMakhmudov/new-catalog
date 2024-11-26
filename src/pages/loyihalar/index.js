@@ -2,6 +2,7 @@ import Header from "@/components/header";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const Index = () => {
   return (
@@ -26,7 +27,12 @@ const Index = () => {
           <h1 className="text-[32px] font-bold my-[16px]">Loyihalar</h1>
 
           <ul className="grid grid-cols-12 gap-[30px]">
-            <li className="col-span-6 bg-white  rounded-[30px]">
+            <motion.li
+              initial={{ scale: 0.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="col-span-6 bg-white  rounded-[30px]"
+            >
               <div
                 className={
                   " flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -69,9 +75,14 @@ const Index = () => {
                   </div>
                 </Link>
               </div>
-            </li>
+            </motion.li>
 
-            <li className="col-span-6 bg-white rounded-[30px]">
+            <motion.li
+              initial={{ scale: 0.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="col-span-6 bg-white rounded-[30px]"
+            >
               <div
                 className={
                   "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -116,9 +127,14 @@ const Index = () => {
                   </div>
                 </Link>
               </div>
-            </li>
+            </motion.li>
 
-            <li className="col-span-6 bg-white  rounded-[30px]">
+            <motion.li
+              initial={{ scale: 0.1 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.9 }}
+              className="col-span-6 bg-white  rounded-[30px]"
+            >
               <div
                 className={
                   "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -163,7 +179,7 @@ const Index = () => {
                   </div>
                 </Link>
               </div>
-            </li>
+            </motion.li>
           </ul>
         </section>
       </main>

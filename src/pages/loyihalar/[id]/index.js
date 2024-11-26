@@ -6,7 +6,6 @@ import { useState } from "react";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
-
 import { motion } from "framer-motion";
 import KindergardenProject from "@/components/model-projects/kindergarden";
 import SchoolProject from "@/components/model-projects/school";
@@ -59,7 +58,12 @@ const Index = () => {
         <section>
           <h1 className="text-[32px] font-bold my-[16px]">Maktab</h1>
           <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]">
+            <motion.div
+              initial={{ translateX: "-80px", opacity: 0 }}
+              animate={{ translateX: "0px", opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]"
+            >
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Boshqa loyihalar</h4>
                 <button onClick={() => setShowAllProjects(!showAllProjects)}>
@@ -178,7 +182,7 @@ const Index = () => {
                   </li>
                 </motion.ul>
               )}
-            </div>
+            </motion.div>
 
             <div className="col-span-9 font-gilroy">
               <div className="w-full border border-[#D7D9E7] rounded-[10px] mb-[50px]">

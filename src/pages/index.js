@@ -23,26 +23,33 @@ const integrationData = [
   {
     id: 1,
     title: "Soliq qo'mitasi",
+    image: "soliq.svg",
   },
   {
     id: 2,
     title: "Tovar-xom ashyo birjasi",
+    image: "birja.svg",
   },
   {
     id: 3,
-    title: "Statistika agentligi",
+    title: "Iqtisod va moliya vazirligi",
+    image: "ministry.svg",
   },
   {
     id: 4,
     title: "Bojxona qo'mitasi",
+    image: "bojxona.svg",
   },
   {
     id: 5,
     title: "Tartibga solish agentligi",
+    image: "ministry.svg",
   },
+
   {
     id: 6,
     title: "Statistika agentligi",
+    image: "statistics.svg",
   },
 ];
 
@@ -547,12 +554,9 @@ export default function Home() {
                     key={get(item, "id")}
                   >
                     <div
-                      className="bg-center bg-white border border-[#E6E5ED]  w-[110px] h-[110px] rounded-[16px]"
+                      className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED]  w-[110px] h-[110px] rounded-[16px]"
                       style={{
-                        backgroundImage: `url(/images/integration-${get(
-                          item,
-                          "id"
-                        )}.png)`,
+                        backgroundImage: `url(/icons/${get(item, "image")})`,
                       }}
                     ></div>
                     <div>

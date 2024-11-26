@@ -52,10 +52,12 @@ const Index = () => {
                   tab === "birja" ? "bg-[#E7EDF5]" : "bg-white"
                 } p-[10px] flex items-center gap-x-[8px] rounded-[12px] cursor-pointer`}
               >
-                <div
-                  className={`relative px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-center bg-cover border-[#E6E5ED] rounded-[10px] inline-block`}
-                  style={{ backgroundImage: "url(/images/integration-2.png)" }}
-                ></div>
+                <div className="bg-cover border-[#E6E5ED] rounded-[10px]  bg-white border">
+                  <div
+                    className={`relative  w-[44px] h-[44px] bg-no-repeat bg-center  `}
+                    style={{ backgroundImage: "url(/icons/birja.svg)" }}
+                  ></div>
+                </div>
 
                 <p
                   className={`flex-1 text-sm ${
@@ -88,7 +90,7 @@ const Index = () => {
               >
                 <div
                   className={`relative px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg- bg-contain border-[#E6E5ED] rounded-[10px] inline-block`}
-                  style={{ backgroundImage: "url(/images/integration-3.png)" }}
+                  style={{ backgroundImage: "url(/icons/ministry.svg)" }}
                 ></div>
 
                 <p
@@ -122,7 +124,7 @@ const Index = () => {
               >
                 <div
                   className={`relative px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg- bg-contain border-[#E6E5ED] rounded-[10px] inline-block`}
-                  style={{ backgroundImage: "url(/images/integration-3.png)" }}
+                  style={{ backgroundImage: "url(/icons/bojxona.svg)" }}
                 ></div>
 
                 <p
@@ -156,7 +158,7 @@ const Index = () => {
               >
                 <div
                   className={`relative px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg- bg-contain border-[#E6E5ED] rounded-[10px] inline-block`}
-                  style={{ backgroundImage: "url(/images/integration-3.png)" }}
+                  style={{ backgroundImage: "url(/icons/ministry.svg)" }}
                 ></div>
 
                 <p
@@ -189,7 +191,7 @@ const Index = () => {
               >
                 <div
                   className={`relative px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-center bg-cover border-[#E6E5ED] rounded-[10px] inline-block`}
-                  style={{ backgroundImage: "url(/images/integration-1.png)" }}
+                  style={{ backgroundImage: "url(/icons/soliq.svg)" }}
                 ></div>
 
                 <p
@@ -226,7 +228,7 @@ const Index = () => {
               >
                 <div
                   className={`relative px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg- bg-contain border-[#E6E5ED] rounded-[10px] inline-block`}
-                  style={{ backgroundImage: "url(/images/integration-3.png)" }}
+                  style={{ backgroundImage: "url(/icons/statistics.svg)" }}
                 ></div>
 
                 <p
