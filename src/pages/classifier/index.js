@@ -70,7 +70,7 @@ const Index = () => {
   });
   console.log("volumed", volumed);
   return (
-    <div className="bg-[#F7F7F7]">
+    <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
@@ -182,9 +182,9 @@ const Index = () => {
                                   <li
                                     onClick={(e) => {
                                       e.stopPropagation();
+
                                       setCategoryId(get(category, "id"));
                                       onSubmit({
-                                        volume_ids: [volumed],
                                         category_ids: [get(category, "id")],
                                         group_ids: groupId
                                           ? [groupId]
@@ -214,7 +214,21 @@ const Index = () => {
                                           <ul className="ml-[16px]">
                                             {get(materialGroup, "data")?.map(
                                               (group) => (
-                                                <li key={get(group, "id")}>
+                                                <li
+                                                  key={get(group, "id")}
+                                                  onClick={(e) => {
+                                                    e.stopPropagation();
+
+                                                    setGroupId(
+                                                      get(group, "id")
+                                                    );
+                                                    onSubmit({
+                                                      group_ids: [
+                                                        get(group, "id"),
+                                                      ],
+                                                    });
+                                                  }}
+                                                >
                                                   <div className="flex gap-x-[4px] items-center ">
                                                     <Image
                                                       src={
