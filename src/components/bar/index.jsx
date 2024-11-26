@@ -2,9 +2,25 @@ import React from "react";
 import dynamic from "next/dynamic";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 import { useState, useEffect } from "react";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import { get } from "lodash";
 
 const HorizontalBarChart = () => {
+  const { data: company, isLoading } = useGetQuery({
+    key: KEYS.companyCount,
+    url: URLS.companyCount,
+  });
   const [isClient, setIsClient] = useState(false);
+
+  const regions = get(company, "data")?.map((item) => get(item, "region"));
+  console.log(regions);
+
+  const companyCounts = get(company, "data")?.map((item) =>
+    get(item, "company_count")
+  );
+  console.log(companyCounts);
 
   useEffect(() => {
     setIsClient(true);
@@ -24,21 +40,7 @@ const HorizontalBarChart = () => {
       enabled: false,
     },
     xaxis: {
-      categories: [
-        "Andijon",
-        "Buxoro",
-        "Farg'ona",
-        "Jizzax",
-        "Xorazm",
-        "Namangan",
-        "Navoiy",
-        "Qashqadaryo",
-        "Qoraqalpog'iston",
-        "Samarqand",
-        "Sirdaryo",
-        "Surxondaryo",
-        "Toshkent sh.",
-      ],
+      categories: regions,
       tickAmount: 12, // Maximum value on x-axis (for example, 12)
     },
     yaxis: {
@@ -64,7 +66,7 @@ const HorizontalBarChart = () => {
 
   const series = [
     {
-      data: [12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1], // Data values
+      data: companyCounts, // Data values
     },
   ];
 

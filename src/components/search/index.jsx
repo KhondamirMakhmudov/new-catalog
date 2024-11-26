@@ -20,6 +20,7 @@ const placeholderTexts = [
 const Search = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openDepartment, setOpenDepartment] = useState(false);
+  const [limit, setLimit] = useState(50);
   const [category, setCategory] = useState("");
   const [nameValue, setNameValue] = useState("");
   const [selectedDepartment, setSelectedDepartment] =
@@ -73,6 +74,7 @@ const Search = () => {
     params: {
       name_value: nameValue,
       category: category,
+      limit: limit,
     },
   });
   return (
@@ -198,6 +200,14 @@ const Search = () => {
                         <div className="w-full h-[1px] bg-[#E6E5ED] my-[16px]"></div>
                       </li>
                     ))}
+                    <li>
+                      <button
+                        onClick={() => setLimit((prev) => prev + 50)}
+                        className="text-white bg-[#0256BA] hover:bg-[#1C73DA] w-full py-[8px] rounded-[12px] transition-all duration-200"
+                      >
+                        Ko&apos;roq
+                      </button>
+                    </li>
                   </ul>
                 )}
 

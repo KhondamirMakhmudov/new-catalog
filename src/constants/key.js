@@ -89,4 +89,5 @@ export const KEYS = {
   showTable: "showTable",
 
   monitoring: "monitoring",
+  companyCount: "companyCount",
 };

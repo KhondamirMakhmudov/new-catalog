@@ -377,15 +377,13 @@ export default function Home() {
                   className={
                     "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
                   }
-                  style={{ backgroundImage: `url(/images/kindergarden.png)` }}
+                  style={{ backgroundImage: `url(/images/school-bg.png)` }}
                 >
                   <div
                     className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
                   ></div>
                   <div className="absolute bottom-0 p-[32px] text-white ">
-                    <h1 className={"text-[28px] font-bold "}>
-                      Bolalar bog&apos;chasi
-                    </h1>
+                    <h1 className={"text-[28px] font-bold "}>Maktab</h1>
                     <p className="text-sm font-normal mt-[10px] line-clamp-2">
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
                       biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
@@ -403,7 +401,7 @@ export default function Home() {
                   >
                     <div className="absolute bottom-0 right-0 p-[24px]">
                       <Image
-                        src={"/images/school.png"}
+                        src={"/images/kindergarten.png"}
                         alt={"school"}
                         width={150}
                         height={120}
@@ -411,7 +409,7 @@ export default function Home() {
                       />
                     </div>
                     <h1 className="text-[28px] font-bold text-[#21201F]">
-                      Maktab
+                      Bolalar bog&apos;chasi
                     </h1>
                     <p
                       className={
@@ -516,16 +514,18 @@ export default function Home() {
               </h1>
             </Reveal>
             <Reveal>
-              <div className="grid grid-cols-12 gap-x-[30px] bg-white p-[30px] rounded-[20px] mt-[20px]">
-                <div className="col-span-6">
-                  <HorizontalBarChart />
-                </div>
-                <div className="col-span-6">
-                  <div>
-                    <MapOfUz />
+              <Link href={"/monitoring"}>
+                <div className="grid grid-cols-12 gap-x-[30px] bg-white p-[30px] rounded-[20px] mt-[20px]">
+                  <div className="col-span-6">
+                    <HorizontalBarChart />
+                  </div>
+                  <div className="col-span-6">
+                    <div>
+                      <MapOfUz />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </Reveal>
           </div>
         </section>

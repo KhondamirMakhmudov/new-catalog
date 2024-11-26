@@ -37,9 +37,9 @@ const Header = ({ id }) => {
                 <Link href={"/integrations"}>Integratsiya</Link>
               </li>
 
-              <li onClick={() => scrollToSection("about-classifier")}>
+              {/* <li onClick={() => scrollToSection("about-classifier")}>
                 <p>Klassifikator bu</p>
-              </li>
+              </li> */}
 
               <li>
                 <Link href={"/contacts"}>Kontaktlar</Link>

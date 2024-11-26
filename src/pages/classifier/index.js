@@ -14,6 +14,7 @@ import ContentLoader from "@/components/loader/content-loader";
 import Pagination from "@/components/pagination";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import toast from "react-hot-toast";
+import Footer from "@/components/footer";
 
 const Index = () => {
   const [count, setCount] = useState(0);
@@ -29,13 +30,11 @@ const Index = () => {
     listKeyId: KEYS.showTable,
   });
 
-  const onSubmit = (attrs = { volume_ids: [1] }) => {
+  const onSubmit = (attrs) => {
     showTable(
       {
         url: URLS.classifierFast,
-        attributes: {
-          ...attrs,
-        },
+        attributes: [...attrs],
       },
       {
         onSuccess: (response) => {
@@ -348,6 +347,8 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 };

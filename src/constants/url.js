@@ -99,5 +99,7 @@ export const URLS = {
 
   globalSearch: "fastapi/global/search/",
   classifierFast: "fastapi/material_klassifikator/",
-  monitoring: "fastapi/monitoring/region/filter/",
+  monitoring: "fastapi/monitoring/regions/",
+
+  companyCount: "fastapi/monitoring/region_by_filter_company/",
 };
