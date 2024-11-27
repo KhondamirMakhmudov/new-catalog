@@ -7,7 +7,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { get } from "lodash";
+import { get, debounce } from "lodash";
 import { useState, useEffect } from "react";
 import BasketIcon from "@/components/icons/basket";
 import dayjs from "dayjs";
@@ -27,6 +27,8 @@ const Index = () => {
   const [minimum, setMinimum] = useState(0);
   const [maximum, setMaximum] = useState(0);
   const [average, setAverage] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const handleIncrement = (product) => {
     dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
@@ -46,11 +48,54 @@ const Index = () => {
     enabled: !!code,
   });
 
+  const { data: soliqData } = useGetQuery({
+    key: KEYS.soliqDatas,
+    url: URLS.soliqDatas,
+    params: {
+      mxik_code: get(techno, "data.mxik_soliq")?.split(".")[0],
+    },
+  });
+  // Soliqdan ma'lumotlarni olib joylash
+  useEffect(() => {
+    const soliqDataArray = get(soliqData, "data.data", []);
+
+    const productCount = soliqDataArray.reduce(
+      (initialQuantity, currentQuantity) =>
+        initialQuantity + get(currentQuantity, "product_count"),
+      0
+    );
+    setSoliqProductCount(productCount);
+
+    const deliver = soliqDataArray.map(
+      (item) => get(item, "delivery_sum") / get(item, "product_count")
+    );
+
+    const deliverSum = deliver.reduce(
+      (initialValue, currentValue) => initialValue + currentValue,
+      0
+    );
+
+    const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(2);
+
+    setSoliqAveragePrice(averageDeliverySum);
+  });
+
   const { data: technoAds, isLoading: isLoadingMaterialAds } = useGetQuery({
     key: [KEYS.technosAds, code],
     url: `${URLS.technosAds}${code}/`,
     enabled: !!code,
   });
+  // Korxona bo'yicha qidirihs
+  useEffect(() => {
+    if (get(technoAds, "data.results", [])) {
+      const searchResults = get(technoAds, "data.results", []).filter((item) =>
+        get(item, "company_name")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(searchResults);
+    }
+  }, [searchQuery, technoAds]);
 
   const { data: currency } = useGetQuery({
     key: KEYS.currency,
@@ -237,35 +282,14 @@ const Index = () => {
                 </h2>
               </div>
 
-              <div className="col-span-7 ">
-                <div className="flex float-right space-x-[12px]">
-                  <button
-                    className={
-                      "p-[12px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                    }
-                  >
-                    <Image
-                      src={"/icons/heart.svg"}
-                      alt={"heart"}
-                      width={24}
-                      height={24}
-                    />
-                  </button>
-                  <button className="bg-[#0256BA] flex gap-x-[10px] items-center py-[12px] px-[20px] rounded-[12px]">
-                    <BasketIcon color="white" />
-                    <p className="font-semibold text-white">Sotib oling</p>
-                  </button>
-                </div>
-              </div>
-
               <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
                 <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
-                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:40px_40px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
                         style={{
-                          backgroundImage: "url(/images/integration-1.png)",
+                          backgroundImage: "url(/icons/soliq.svg)",
                         }}
                       ></div>
                     </div>
@@ -274,46 +298,29 @@ const Index = () => {
                       Davlat soliq qo&apos;mitasi
                     </p>
                   </div>
-                  {!hasPosted ? (
-                    <button
-                      onClick={postSoliqData}
-                      className={
-                        "p-[9px] bg-[#EBF2FA] hover:bg-[#c4dbf7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200 w-full flex items-center justify-center"
-                      }
-                    >
-                      <Image
-                        src={"/icons/eye.svg"}
-                        alt={"eye"}
-                        width={20}
-                        height={20}
-                      />
-                    </button>
-                  ) : (
-                    <ul className="space-y-[8px] mt-[8px]">
-                      <li className="text-xs flex justify-between items-center">
-                        <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                        <p className="font-bold">{soliqProductCount}</p>
-                      </li>
+                  <ul className="space-y-[8px] mt-[8px]">
+                    <li className="text-xs flex justify-between items-center">
+                      <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                      <li className="text-xs flex justify-between items-center">
-                        <p>Narxi:</p>
+                      <p className="font-bold">{soliqProductCount}</p>
+                    </li>
 
-                        <p className="font-bold">
-                          {soliqAveragePrice} so&apos;m
-                        </p>
-                      </li>
-                    </ul>
-                  )}
+                    <li className="text-xs flex justify-between items-center">
+                      <p>Narxi:</p>
+
+                      <p className="font-bold">{soliqAveragePrice} so&apos;m</p>
+                    </li>
+                  </ul>
                 </div>
 
                 <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
-                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:120px_80px] bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:40px_40px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
                         style={{
-                          backgroundImage: "url(/images/integration-2.png)",
+                          backgroundImage: "url(/icons/birja.svg)",
                         }}
                       ></div>
                     </div>
@@ -340,9 +347,9 @@ const Index = () => {
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
-                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:80px_80px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:40px_40px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
                         style={{
-                          backgroundImage: "url(/images/integration-3.png)",
+                          backgroundImage: "url(/icons/statistics.svg)",
                         }}
                       ></div>
                     </div>
@@ -369,9 +376,9 @@ const Index = () => {
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
-                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:80px_80px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:40px_40px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
                         style={{
-                          backgroundImage: "url(/images/integration-3.png)",
+                          backgroundImage: "url(/icons/bojxona.svg)",
                         }}
                       ></div>
                     </div>
@@ -434,45 +441,21 @@ const Index = () => {
               </div>
               <div className="col-span-12">
                 <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                  <div className="col-span-4">
+                  <div className="col-span-12">
                     <h3 className="font-semibold text-sm mb-[6px] ">
-                      Sana tanlash
+                      Korxona nomi
                     </h3>
 
                     <div className="relative flex border rounded-[8px] px-[12px]">
-                      <Image
-                        src={"/icons/calendar.svg"}
-                        alt={"heart"}
-                        width={24}
-                        height={24}
-                        className=""
-                      />
                       <input
+                        onChange={debounce(function (e) {
+                          setSearchQuery(e.target.value);
+                        }, 500)}
                         type="text"
-                        placeholder="Tanlash"
-                        className="  w-full p-[10px]  "
+                        placeholder="Qidirish"
+                        className="w-full p-[10px]"
                       />
                     </div>
-                  </div>
-
-                  <div className="col-span-4">
-                    <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
-
-                    <input
-                      type="text"
-                      placeholder="Tanlash"
-                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                    />
-                  </div>
-
-                  <div className="col-span-4">
-                    <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
-
-                    <input
-                      type="text"
-                      placeholder="Tanlash"
-                      className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                    />
                   </div>
                 </div>
               </div>

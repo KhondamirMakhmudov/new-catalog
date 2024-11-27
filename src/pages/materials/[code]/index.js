@@ -50,6 +50,38 @@ const Index = () => {
     enabled: !!code,
   });
 
+  const { data: soliqData } = useGetQuery({
+    key: KEYS.soliqDatas,
+    url: URLS.soliqDatas,
+    params: {
+      mxik_code: get(material, "data.mxik_soliq")?.split(".")[0],
+    },
+  });
+  // Soliqdan ma'lumotlarni olib joylash
+  useEffect(() => {
+    const soliqDataArray = get(soliqData, "data.data", []);
+
+    const productCount = soliqDataArray.reduce(
+      (initialQuantity, currentQuantity) =>
+        initialQuantity + get(currentQuantity, "product_count"),
+      0
+    );
+    setSoliqProductCount(productCount);
+
+    const deliver = soliqDataArray.map(
+      (item) => get(item, "delivery_sum") / get(item, "product_count")
+    );
+
+    const deliverSum = deliver.reduce(
+      (initialValue, currentValue) => initialValue + currentValue,
+      0
+    );
+
+    const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(2);
+
+    setSoliqAveragePrice(averageDeliverySum);
+  });
+
   const {
     data: materialAds,
     isLoading: isLoadingMaterialAds,
@@ -149,57 +181,6 @@ const Index = () => {
     setMinimum(minPrice.toFixed(2));
   }, [materialAds, currency]);
 
-  ////////// SOLIQ BILAN INTEGRATSIYA ///////////////
-
-  const { mutate: postSoliqMxik, isLoading: isLoadingSoliq } = usePostQuery({
-    listKeyId: KEYS.soliqPrice,
-  });
-
-  const postSoliqData = () => {
-    postSoliqMxik(
-      {
-        url: URLS.soliq,
-        attributes: {
-          mxik: get(material, "data.mxik_soliq")?.split(".")[0],
-          fromDate: "01.10.2024",
-          toDate: "01.11.2024",
-        },
-      },
-      {
-        onSuccess: (data) => {
-          const productCount = get(data, "data.data").reduce(
-            (initialQuantity, currentQuantity) =>
-              initialQuantity + get(currentQuantity, "product_count"),
-            0
-          );
-          setSoliqProductCount(productCount);
-
-          const deliver = get(data, "data.data").map(
-            (item) => get(item, "delivery_sum") / get(item, "product_count")
-          );
-
-          const deliverSum = deliver.reduce(
-            (initialValue, currentValue) => initialValue + currentValue,
-            0
-          );
-
-          const averageDeliverySum = (
-            deliverSum / get(data, "data.data").length
-          ).toFixed(2);
-
-          console.log("Response data:", averageDeliverySum);
-          setSoliqAveragePrice(averageDeliverySum);
-          setHasPosted(true);
-        },
-        onError: (error) => {
-          console.error("Error posting data:", error);
-        },
-      }
-    );
-  };
-
-  //////////////////////////////////////////////////
-
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
@@ -261,31 +242,6 @@ const Index = () => {
                         {get(material, "data.material_name")}
                       </h2>
                     </div>
-
-                    <div className="">
-                      <div className="flex items-center space-x-[12px]">
-                        <button
-                          className={
-                            "p-[12px] bg-[#EBF2FA] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                          }
-                        >
-                          {" "}
-                          <Image
-                            src={"/icons/heart.svg"}
-                            alt={"heart"}
-                            width={24}
-                            height={24}
-                            className="inline"
-                          />
-                        </button>
-                        <button className="bg-[#0256BA] flex gap-x-[10px] items-center py-[12px] px-[20px] rounded-[12px]">
-                          <BasketIcon color="white" />
-                          <p className="font-semibold text-white">
-                            Sotib oling
-                          </p>
-                        </button>
-                      </div>
-                    </div>
                   </div>
 
                   <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
@@ -304,37 +260,22 @@ const Index = () => {
                           Davlat soliq qo&apos;mitasi
                         </p>
                       </div>
-                      {!hasPosted ? (
-                        <button
-                          onClick={postSoliqData}
-                          className={
-                            "p-[9px] bg-[#EBF2FA] hover:bg-[#c4dbf7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200 w-full flex items-center justify-center"
-                          }
-                        >
-                          <Image
-                            src={"/icons/eye.svg"}
-                            alt={"eye"}
-                            width={20}
-                            height={20}
-                          />
-                        </button>
-                      ) : (
-                        <ul className="space-y-[8px] mt-[8px]">
-                          <li className="text-xs flex justify-between items-center">
-                            <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                            <p className="font-bold">{soliqProductCount}</p>
-                          </li>
+                      <ul className="space-y-[8px] mt-[8px]">
+                        <li className="text-xs flex justify-between items-center">
+                          <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                          <li className="text-xs flex justify-between items-center">
-                            <p>Narxi:</p>
+                          <p className="font-bold">{soliqProductCount}</p>
+                        </li>
 
-                            <p className="font-bold">
-                              {soliqAveragePrice} so&apos;m
-                            </p>
-                          </li>
-                        </ul>
-                      )}
+                        <li className="text-xs flex justify-between items-center">
+                          <p>Narxi:</p>
+
+                          <p className="font-bold">
+                            {soliqAveragePrice} so&apos;m
+                          </p>
+                        </li>
+                      </ul>
                     </div>
 
                     <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
@@ -483,7 +424,7 @@ const Index = () => {
                         Korxona nomi
                       </h3>
 
-                      <div className="relative flex border rounded-[8px] px-[12px]">
+                      <div className="relative flex border rounded-[8px] ">
                         <input
                           onChange={debounce(function (e) {
                             setSearchQuery(e.target.value);

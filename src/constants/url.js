@@ -103,4 +103,5 @@ export const URLS = {
 
   companyCount: "fastapi/monitoring/region_by_filter_company/",
   defaultClassifier: "fastapi/material_klassifikator_volume_ids/1/",
+  soliqDatas: "fastapi/soliq_data/",
 };

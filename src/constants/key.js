@@ -92,4 +92,6 @@ export const KEYS = {
   companyCount: "companyCount",
 
   defaultClassifier: "defaultClassifier",
+
+  soliqDatas: "soliqDatas",
 };
