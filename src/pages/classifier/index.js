@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import { URLS } from "@/constants/url";
@@ -26,11 +26,25 @@ const Index = () => {
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
   const [posted, setPosted] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const { data: defaultClassifier } = useGetQuery({
     key: KEYS.defaultClassifier,
     url: URLS.defaultClassifier,
   });
+
+  useEffect(() => {
+    if (get(defaultClassifier, "data.materials", [])) {
+      const searchResults = get(defaultClassifier, "data.materials", []).filter(
+        (item) =>
+          get(item, "material_name")
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(searchResults);
+    }
+  }, [searchQuery, defaultClassifier]);
 
   const { mutate: showTable } = usePostQuery({
     listKeyId: KEYS.showTable,
@@ -98,19 +112,10 @@ const Index = () => {
                   <label className={""} htmlFor="#">
                     Qidiruv
                   </label>
-                  <p className={"text-sm text-[#516164]"}>
-                    *
-                    <NumericFormat
-                      value={count}
-                      displayType={"text"}
-                      thousandSeparator={" "}
-                    />{" "}
-                    natija topildi
-                  </p>
                 </div>
                 <input
                   onChange={debounce(function (e) {
-                    setSearch(e.target.value);
+                    setSearchQuery(e.target.value);
                   }, 500)}
                   placeholder={"Kerakli mahsulot nomini yozing"}
                   className={
@@ -118,7 +123,7 @@ const Index = () => {
                   }
                   type="text"
                 />
-                {search && search.length < 4 && (
+                {searchQuery && searchQuery.length < 4 && (
                   <span className={"text-red-500 text-xs font-light"}>
                     Kamida 4 ta belgi kiriting
                   </span>
@@ -138,132 +143,142 @@ const Index = () => {
                 </button>
               </div>
 
-              <div className="mt-[16px]">
-                <ul className="cursor-pointer">
-                  {get(materialVolume, "data")?.map((volume) => (
-                    <li
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setCategoryId(null);
-                        setGroupId(null);
-                        setVolumed(get(volume, "id"));
-                        onSubmit({
-                          volume_ids: [get(volume, "id")],
-                          category_ids: categoryId ? [categoryId] : undefined,
-                          group_ids: groupId ? [groupId] : undefined,
-                        });
-                      }}
-                      key={get(volume, "id")}
-                      className=""
-                    >
-                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                        <Image
-                          src={"/icons/arrow_right.svg"}
-                          alt="arrow_right"
-                          width={16}
-                          height={16}
-                        />
-                        <p className="text-xs font-medium text-[#475467]">
-                          {get(volume, "volume_name")}
-                        </p>
-                      </div>
-                      {volumed === get(volume, "id") && ( // Only show categories for selected volume
-                        <>
-                          {isLoadingCategory ? (
-                            <div>
-                              <ContentLoader />
-                            </div>
-                          ) : (
-                            <motion.ul
-                              className="ml-[16px]"
-                              initial={{ opacity: 0, translateY: "20px" }}
-                              animate={{ opacity: 1, translateY: "0px" }}
-                              transition={{ duration: 0.1 }}
-                            >
-                              {get(materialCategory, "data")?.map(
-                                (category) => (
-                                  <li
-                                    onClick={(e) => {
-                                      e.stopPropagation();
+              {showAllProjects && (
+                <motion.div
+                  initial={{ opacity: 0, translateY: "30px" }}
+                  animate={{ opacity: 1, translateY: "0" }}
+                  transition={{ duration: 0.4 }}
+                  className="mt-[16px]"
+                >
+                  <ul className="cursor-pointer">
+                    {get(materialVolume, "data")?.map((volume) => (
+                      <li
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCategoryId(null);
+                          setGroupId(null);
+                          setVolumed(get(volume, "id"));
+                          onSubmit({
+                            volume_ids: [get(volume, "id")],
+                            category_ids: categoryId ? [categoryId] : undefined,
+                            group_ids: groupId ? [groupId] : undefined,
+                          });
+                        }}
+                        key={get(volume, "id")}
+                        className=""
+                      >
+                        <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                          <Image
+                            src={"/icons/arrow_right.svg"}
+                            alt="arrow_right"
+                            width={16}
+                            height={16}
+                          />
+                          <p className="text-xs font-medium text-[#475467]">
+                            {get(volume, "volume_name")}
+                          </p>
+                        </div>
+                        {volumed === get(volume, "id") && ( // Only show categories for selected volume
+                          <>
+                            {isLoadingCategory ? (
+                              <div>
+                                <ContentLoader />
+                              </div>
+                            ) : (
+                              <motion.ul
+                                className="ml-[16px]"
+                                initial={{ opacity: 0, translateY: "20px" }}
+                                animate={{ opacity: 1, translateY: "0px" }}
+                                transition={{ duration: 0.1 }}
+                              >
+                                {get(materialCategory, "data")?.map(
+                                  (category) => (
+                                    <li
+                                      onClick={(e) => {
+                                        e.stopPropagation();
 
-                                      setCategoryId(get(category, "id"));
-                                      onSubmit({
-                                        category_ids: [get(category, "id")],
-                                        group_ids: groupId
-                                          ? [groupId]
-                                          : undefined,
-                                      });
-                                    }}
-                                    key={get(category, "id")}
-                                  >
-                                    <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                                      <Image
-                                        src={"/icons/arrow_right.svg"}
-                                        alt="arrow_right"
-                                        width={16}
-                                        height={16}
-                                      />
-                                      <p className="text-xs font-medium text-[#475467]">
-                                        {get(category, "category_name")}
-                                      </p>
-                                    </div>
-                                    {categoryId === get(category, "id") && (
-                                      <>
-                                        {isLoadingGroup ? (
-                                          <div>
-                                            <ContentLoader />
-                                          </div>
-                                        ) : (
-                                          <ul className="ml-[16px]">
-                                            {get(materialGroup, "data")?.map(
-                                              (group) => (
-                                                <li
-                                                  key={get(group, "id")}
-                                                  onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    setVolumed(null);
-                                                    setCategoryId(null);
-                                                    setGroupId(
-                                                      get(group, "id")
-                                                    );
-                                                    onSubmit({
-                                                      group_ids: [
-                                                        get(group, "id"),
-                                                      ],
-                                                    });
-                                                  }}
-                                                >
-                                                  <div className="flex gap-x-[4px] items-center ">
-                                                    <Image
-                                                      src={
-                                                        "/icons/arrow_right.svg"
-                                                      }
-                                                      alt="arrow_right"
-                                                      width={16}
-                                                      height={16}
-                                                    />
-                                                    <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                                                      {get(group, "group_name")}
-                                                    </p>
-                                                  </div>
-                                                </li>
-                                              )
-                                            )}
-                                          </ul>
-                                        )}
-                                      </>
-                                    )}
-                                  </li>
-                                )
-                              )}
-                            </motion.ul>
-                          )}
-                        </>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                                        setCategoryId(get(category, "id"));
+                                        onSubmit({
+                                          category_ids: [get(category, "id")],
+                                          group_ids: groupId
+                                            ? [groupId]
+                                            : undefined,
+                                        });
+                                      }}
+                                      key={get(category, "id")}
+                                    >
+                                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                        <Image
+                                          src={"/icons/arrow_right.svg"}
+                                          alt="arrow_right"
+                                          width={16}
+                                          height={16}
+                                        />
+                                        <p className="text-xs font-medium text-[#475467]">
+                                          {get(category, "category_name")}
+                                        </p>
+                                      </div>
+                                      {categoryId === get(category, "id") && (
+                                        <>
+                                          {isLoadingGroup ? (
+                                            <div>
+                                              <ContentLoader />
+                                            </div>
+                                          ) : (
+                                            <ul className="ml-[16px]">
+                                              {get(materialGroup, "data")?.map(
+                                                (group) => (
+                                                  <li
+                                                    key={get(group, "id")}
+                                                    onClick={(e) => {
+                                                      e.stopPropagation();
+                                                      setVolumed(null);
+                                                      setCategoryId(null);
+                                                      setGroupId(
+                                                        get(group, "id")
+                                                      );
+                                                      onSubmit({
+                                                        group_ids: [
+                                                          get(group, "id"),
+                                                        ],
+                                                      });
+                                                    }}
+                                                  >
+                                                    <div className="flex gap-x-[4px] items-center ">
+                                                      <Image
+                                                        src={
+                                                          "/icons/arrow_right.svg"
+                                                        }
+                                                        alt="arrow_right"
+                                                        width={16}
+                                                        height={16}
+                                                      />
+                                                      <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                                        {get(
+                                                          group,
+                                                          "group_name"
+                                                        )}
+                                                      </p>
+                                                    </div>
+                                                  </li>
+                                                )
+                                              )}
+                                            </ul>
+                                          )}
+                                        </>
+                                      )}
+                                    </li>
+                                  )
+                                )}
+                              </motion.ul>
+                            )}
+                          </>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
             </div>
             <div className="col-span-9 tablet:mt-0 ">
               {!posted ? (
@@ -301,39 +316,37 @@ const Index = () => {
                     </thead>
 
                     <tbody>
-                      {get(defaultClassifier, "data.materials")?.map(
-                        (item, index) => (
-                          <tr
-                            key={index}
-                            className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                          >
-                            <td className=" font-medium text-xs py-[10px]  text-center">
-                              {index + 1}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px]  text-start">
-                              {get(item, "material_csr_code")}
-                            </td>
+                      {filteredData?.map((item, index) => (
+                        <tr
+                          key={index}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]  text-start">
+                            {get(item, "material_csr_code")}
+                          </td>
 
-                            <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                              {get(item, "material_name")}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                              {get(item, "materil_gost")}
-                            </td>
-                            <td className=" font-medium text-xs py-[10px] text-center">
-                              <div className="flex space-x-[4px]">
-                                <Image
-                                  src={"/icons/measure-basket.svg"}
-                                  alt="measure-basket"
-                                  width={16}
-                                  height={16}
-                                />
-                                <p>{get(item, "material_measure")}</p>
-                              </div>
-                            </td>
-                          </tr>
-                        )
-                      )}
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                            {get(item, "material_name")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                            {get(item, "materil_gost")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/measure-basket.svg"}
+                                alt="measure-basket"
+                                width={16}
+                                height={16}
+                              />
+                              <p>{get(item, "material_measure")}</p>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </motion.table>
                   <div className="w-full h-[1px] text-[#E2E2EA] "></div>

@@ -66,6 +66,7 @@ const HorizontalBarChart = () => {
 
   const series = [
     {
+      name: "Korxonalar soni",
       data: companyCounts,
     },
   ];

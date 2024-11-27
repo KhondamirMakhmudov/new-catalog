@@ -8,6 +8,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import ContentLoader from "../loader/content-loader";
+import SimpleLoader from "../loader/simple-loader";
 
 const placeholderTexts = [
   "Бетоны и смеси",
@@ -21,10 +22,11 @@ const Search = () => {
   const [openSearch, setOpenSearch] = useState(false);
   const [openDepartment, setOpenDepartment] = useState(false);
   const [limit, setLimit] = useState(50);
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("material");
   const [nameValue, setNameValue] = useState("");
-  const [selectedDepartment, setSelectedDepartment] =
-    useState("Bo'limlar bo'yicha");
+  const [selectedDepartment, setSelectedDepartment] = useState(
+    "Material va jihozlar"
+  );
   // placeholder
   const [placeholder, setPlaceholder] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -180,7 +182,7 @@ const Search = () => {
             className="w-full max-w-[700px] max-h-[432px] px-[12px]  overflow-y-scroll absolute h-[200px] bg-white bottom-0 top-[50px] z-30 rounded-[8px] border border-[#E6E5ED]"
           >
             {isLoading || isFetching ? (
-              <ContentLoader />
+              <SimpleLoader />
             ) : (
               <div>
                 {category === "material" && (
