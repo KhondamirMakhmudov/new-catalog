@@ -11,6 +11,7 @@ import KindergardenProject from "@/components/model-projects/kindergarden";
 import SchoolProject from "@/components/model-projects/school";
 import MedicineProject from "@/components/model-projects/medicine";
 import { useRouter } from "next/router";
+import Footer from "@/components/footer";
 
 const Index = () => {
   const router = useRouter();
@@ -34,10 +35,10 @@ const Index = () => {
   };
 
   return (
-    <div className="bg-[#F7F7F7] ">
+    <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
 
-      <main className="container">
+      <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
@@ -196,6 +197,8 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      <Footer/>
     </div>
   );
 };

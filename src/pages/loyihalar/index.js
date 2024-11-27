@@ -3,13 +3,14 @@ import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Footer from "@/components/footer";
 
 const Index = () => {
   return (
-    <div className="bg-[#F7F7F7] h-screen">
+    <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
 
-      <main className="container">
+      <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
@@ -183,6 +184,8 @@ const Index = () => {
           </ul>
         </section>
       </main>
+
+      <Footer/>
     </div>
   );
 };
