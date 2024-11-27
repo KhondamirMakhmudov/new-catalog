@@ -14,7 +14,7 @@ const Index = () => {
     setSelectBar(nav);
   };
   return (
-    <div className="bg-[#F7F7F7]">
+    <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
 
       <main className="container">

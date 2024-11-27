@@ -25,6 +25,12 @@ const Index = () => {
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const [page, setPage] = useState(1);
   const [data, setData] = useState([]);
+  const [posted, setPosted] = useState(false);
+
+  const { data: defaultClassifier } = useGetQuery({
+    key: KEYS.defaultClassifier,
+    url: URLS.defaultClassifier,
+  });
 
   const { mutate: showTable } = usePostQuery({
     listKeyId: KEYS.showTable,
@@ -41,6 +47,7 @@ const Index = () => {
       {
         onSuccess: (response) => {
           setData(response);
+          setPosted(true);
           toast.success("Mavjud", { position: "top-right" });
         },
       }
@@ -259,92 +266,183 @@ const Index = () => {
               </div>
             </div>
             <div className="col-span-9 tablet:mt-0 ">
-              <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
-                <motion.table
-                  className="w-full border-collapse border-[#D7D9E7]"
-                  initial={{ opacity: 0, translateY: "30px" }}
-                  animate={{ opacity: 1, translateY: "0" }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <thead className="text-black text-start rounded-[10px]">
-                    <tr className="rounded-[10px]">
-                      <th
-                        className={
-                          "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
-                        }
-                      >
-                        №
-                      </th>
+              {!posted ? (
+                <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+                  <motion.table
+                    className="w-full border-collapse border-[#D7D9E7]"
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0" }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <thead className="text-black text-start rounded-[10px]">
+                      <tr className="rounded-[10px]">
+                        <th
+                          className={
+                            "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                          }
+                        >
+                          №
+                        </th>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Resurs kodi
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Resurs nomi
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        GOST
-                      </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs kodi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs nomi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          GOST
+                        </th>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        O&apos;lchov birligi
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {get(data, "data.materials")?.map((item, index) => (
-                      <tr
-                        key={index}
-                        className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                      >
-                        <td className=" font-medium text-xs py-[10px]  text-center">
-                          {index + 1}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]  text-start">
-                          {get(item, "material_csr_code")}
-                        </td>
-
-                        <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                          {get(item, "material_name")}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                          {get(item, "materil_gost")}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px] text-center">
-                          <div className="flex space-x-[4px]">
-                            <Image
-                              src={"/icons/measure-basket.svg"}
-                              alt="measure-basket"
-                              width={16}
-                              height={16}
-                            />
-                            <p>{get(item, "material_measure")}</p>
-                          </div>
-                        </td>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          O&apos;lchov birligi
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </motion.table>
-                <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-                <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-[#9392A0]">
-                      {" "}
-                      {get(data, "data.count")} tadan 1-12 tasi
-                      ko&apos;rsatilgan
-                    </p>
-                  </div>
+                    </thead>
 
-                  <div>
-                    <Pagination
-                      pageCount={get(data, "data.total_pages")}
-                      page={page}
-                      setPage={(prev) => setPage(prev)}
-                    />
+                    <tbody>
+                      {get(defaultClassifier, "data.materials")?.map(
+                        (item, index) => (
+                          <tr
+                            key={index}
+                            className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                          >
+                            <td className=" font-medium text-xs py-[10px]  text-center">
+                              {index + 1}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px]  text-start">
+                              {get(item, "material_csr_code")}
+                            </td>
+
+                            <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                              {get(item, "material_name")}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                              {get(item, "materil_gost")}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] text-center">
+                              <div className="flex space-x-[4px]">
+                                <Image
+                                  src={"/icons/measure-basket.svg"}
+                                  alt="measure-basket"
+                                  width={16}
+                                  height={16}
+                                />
+                                <p>{get(item, "material_measure")}</p>
+                              </div>
+                            </td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </motion.table>
+                  <div className="w-full h-[1px] text-[#E2E2EA] "></div>
+                  <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-[#9392A0]">
+                        {" "}
+                        {get(data, "data.count")} tadan 1-12 tasi
+                        ko&apos;rsatilgan
+                      </p>
+                    </div>
+
+                    <div>
+                      <Pagination
+                        pageCount={get(data, "data.total_pages")}
+                        page={page}
+                        setPage={(prev) => setPage(prev)}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+                  <motion.table
+                    className="w-full border-collapse border-[#D7D9E7]"
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0" }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <thead className="text-black text-start rounded-[10px]">
+                      <tr className="rounded-[10px]">
+                        <th
+                          className={
+                            "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                          }
+                        >
+                          №
+                        </th>
+
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs kodi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs nomi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          GOST
+                        </th>
+
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          O&apos;lchov birligi
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {get(data, "data.materials")?.map((item, index) => (
+                        <tr
+                          key={index}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]  text-start">
+                            {get(item, "material_csr_code")}
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                            {get(item, "material_name")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                            {get(item, "materil_gost")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/measure-basket.svg"}
+                                alt="measure-basket"
+                                width={16}
+                                height={16}
+                              />
+                              <p>{get(item, "material_measure")}</p>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </motion.table>
+                  <div className="w-full h-[1px] text-[#E2E2EA] "></div>
+                  <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-[#9392A0]">
+                        {" "}
+                        {get(data, "data.count")} tadan 1-12 tasi
+                        ko&apos;rsatilgan
+                      </p>
+                    </div>
+
+                    <div>
+                      <Pagination
+                        pageCount={get(data, "data.total_pages")}
+                        page={page}
+                        setPage={(prev) => setPage(prev)}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

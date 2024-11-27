@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { NumericFormat } from "react-number-format";
 import Pagination from "@/components/pagination";
 import { useState } from "react";
+import Link from "next/link";
 const BirjaComponent = () => {
   const { data: birja, isLoading } = useGetQuery({
     key: KEYS.apiBirja,
@@ -31,6 +32,9 @@ const BirjaComponent = () => {
             </th>
 
             <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+              Mahsulot kodi
+            </th>
+            <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
               Mahsulot nomi
             </th>
 
@@ -48,6 +52,11 @@ const BirjaComponent = () => {
             <tr key={index} className="text-sm odd:bg-[#EDF4FC] even:bg-white">
               <td className=" font-medium text-xs py-[10px] rounded-bl-[10px] text-center rounded">
                 {index + 1}
+              </td>
+              <td className=" font-medium text-xs py-[10px] hover:underline transition-all duration-200">
+                <Link href={`/materials/${get(item, "constructioncode")}`}>
+                  {get(item, "constructioncode")}
+                </Link>
               </td>
               <td className=" font-medium text-xs py-[10px]">
                 {get(item, "name")}

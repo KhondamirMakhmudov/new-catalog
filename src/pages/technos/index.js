@@ -351,7 +351,7 @@ const Index = () => {
                                 thousandSeparator={" "}
                                 className="bg-transparent"
                                 value={
-                                  Number.isInteger(get(item, "material_price"))
+                                  Number.isInteger(get(item, "techno_price"))
                                     ? get(item, "techno_price")
                                     : parseFloat(
                                         get(item, "techno_price")

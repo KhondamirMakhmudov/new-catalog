@@ -90,4 +90,6 @@ export const KEYS = {
 
   monitoring: "monitoring",
   companyCount: "companyCount",
+
+  defaultClassifier: "defaultClassifier",
 };

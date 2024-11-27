@@ -144,6 +144,3 @@ const MapOfUz = ({ color = "#EBF1F9", props }) => {
 };
 
 export default MapOfUz;
-
-{
-}

@@ -14,10 +14,10 @@ const HorizontalBarChart = () => {
   });
   const [isClient, setIsClient] = useState(false);
 
-  const regions = get(company, "data")?.map((item) => get(item, "region"));
+  const regions = get(company, "data", [])?.map((item) => get(item, "region"));
   console.log(regions);
 
-  const companyCounts = get(company, "data")?.map((item) =>
+  const companyCounts = get(company, "data", [])?.map((item) =>
     get(item, "company_count")
   );
   console.log(companyCounts);
@@ -28,12 +28,12 @@ const HorizontalBarChart = () => {
   const options = {
     chart: {
       type: "bar",
-      toolbar: { show: false },
+      toolbar: { show: true },
     },
     plotOptions: {
       bar: {
         horizontal: true,
-        barHeight: "70%", // Adjust the bar height as needed
+        barHeight: "70%",
       },
     },
     dataLabels: {
@@ -41,7 +41,7 @@ const HorizontalBarChart = () => {
     },
     xaxis: {
       categories: regions,
-      tickAmount: 12, // Maximum value on x-axis (for example, 12)
+      tickAmount: 12,
     },
     yaxis: {
       labels: {
@@ -53,20 +53,20 @@ const HorizontalBarChart = () => {
     },
     grid: {
       xaxis: {
-        lines: { show: true }, // Show grid lines
+        lines: { show: true },
       },
     },
     tooltip: {
       enabled: true,
     },
     fill: {
-      colors: ["#0256BA"], // Adjust color as needed
+      colors: ["#0256BA"],
     },
   };
 
   const series = [
     {
-      data: companyCounts, // Data values
+      data: companyCounts,
     },
   ];
 

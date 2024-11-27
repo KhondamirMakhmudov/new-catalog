@@ -7,6 +7,8 @@ import { InstagramIcon } from "@/components/icons/social-media/instagram";
 import { FacebookIcon } from "@/components/icons/social-media/facebook";
 import { YoutubeIcon } from "@/components/icons/social-media/youtube";
 import Reveal from "@/components/reveal";
+import Image from "next/image";
+import ArrowRightButton from "@/components/buttons/arrow-right";
 
 const Index = () => {
   return (
@@ -37,9 +39,9 @@ const Index = () => {
 
                 <Link
                   className="text-lg font-bold "
-                  href={"tel:+998 95 133 55 55"}
+                  href={"tel:+998 +998 71 210 11 04"}
                 >
-                  +998 95 133 55 55
+                  +998 71 210 11 04
                 </Link>
               </div>
 
@@ -56,7 +58,7 @@ const Index = () => {
                   Yuridik shaxslar uchun
                 </h1>
 
-                <p className="text-lg font-bold ">+998 95 133 55 55</p>
+                <p className="text-lg font-bold ">6006</p>
               </div>
 
               <div>
@@ -66,30 +68,53 @@ const Index = () => {
 
                 <div>
                   <ul className="space-x-[12px] mt-[16px]">
-                    <li className="p-[9px] bg-[#EBF1F9] inline-block rounded-[12px]">
-                      <Link href={"#"}>
+                    <li className="p-[9px] bg-[#EBF1F9] hover:bg-[#DEECFF] cursor-pointer transition-all duration-300 inline-block rounded-[12px]">
+                      <Link href={"https://t.me/tmsiti"}>
                         <TelegramIcon color="#0256BA" />
                       </Link>
                     </li>
 
-                    <li className="p-[9px] bg-[#EBF1F9] inline-block rounded-[12px]">
+                    <li className="p-[9px] bg-[#EBF1F9] hover:bg-[#DEECFF] cursor-pointer transition-all duration-300 inline-block rounded-[12px]">
                       <Link href={"#"}>
                         <InstagramIcon color="#0256BA" />
                       </Link>
                     </li>
 
-                    <li className="p-[9px] bg-[#EBF1F9] inline-block rounded-[12px]">
+                    <li className="p-[9px] bg-[#EBF1F9] hover:bg-[#DEECFF] cursor-pointer transition-all duration-300 inline-block rounded-[12px]">
                       <Link href={"#"}>
                         <FacebookIcon color="#0256BA" />
                       </Link>
                     </li>
 
-                    <li className="p-[9px] bg-[#EBF1F9] inline-block rounded-[12px]">
-                      <Link href={"#"}>
+                    <li className="p-[9px] bg-[#EBF1F9] hover:bg-[#DEECFF] cursor-pointer transition-all duration-300 inline-block rounded-[12px]">
+                      <Link href={"https://www.youtube.com/@tmsiti"}>
                         <YoutubeIcon color="#0256BA" />
                       </Link>
                     </li>
                   </ul>
+
+                  <div className="bg-[#E2E8F0] w-full h-[1px] my-[20px]"></div>
+
+                  <div className="flex justify-between items-center">
+                    <Image
+                      src={"/icons/tmsiti.svg"}
+                      alt="tmsiti"
+                      width={249}
+                      height={48}
+                    />
+
+                    <Link href={"https://tmsiti.uz/"}>
+                      <button className="py-[13px] px-[24px] border border-[#DFDFDF] rounded-[12px] text-[#4B4B4B] flex items-center gap-x-[12px] font-medium">
+                        <p className="">Saytga o‘tish</p>
+                        <Image
+                          src={"/icons/arrow-right.svg"}
+                          alt="arrow-right"
+                          width={20}
+                          height={20}
+                        />
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
