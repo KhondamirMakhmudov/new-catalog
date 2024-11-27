@@ -81,6 +81,7 @@ const MinistryComponent = () => {
               <td className=" font-medium text-xs py-[10px] text-center">
                 <NumericFormat
                   thousandSeparator={" "}
+                  displayType="text"
                   value={get(item, "productPrice")}
                   className="bg-transparent"
                 />

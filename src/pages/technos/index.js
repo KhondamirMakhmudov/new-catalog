@@ -347,8 +347,9 @@ const Index = () => {
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
                               <NumericFormat
+                                displayType="text"
                                 thousandSeparator={" "}
-                                className="bg-transparent max-w-[100px]"
+                                className="bg-transparent"
                                 value={
                                   Number.isInteger(get(item, "material_price"))
                                     ? get(item, "techno_price")

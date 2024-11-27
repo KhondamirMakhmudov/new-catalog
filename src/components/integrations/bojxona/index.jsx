@@ -91,6 +91,7 @@ const BojxonaComponent = () => {
               <td className=" font-medium text-xs py-[10px] text-start">
                 <NumericFormat
                   thousandSeparator={" "}
+                  displayType="text"
                   value={(
                     get(item, "value") *
                     1000 *

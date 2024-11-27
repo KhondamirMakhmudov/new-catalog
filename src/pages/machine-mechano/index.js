@@ -330,6 +330,7 @@ const Index = () => {
                             <td className=" font-medium text-xs py-[10px] ">
                               <NumericFormat
                                 thousandSeparator={" "}
+                                displayType="text"
                                 className="bg-transparent max-w-[100px]"
                                 value={
                                   Number.isInteger(get(item, "material_price"))

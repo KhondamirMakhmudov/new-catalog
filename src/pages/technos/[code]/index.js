@@ -566,9 +566,10 @@ const Index = () => {
                           </td>
                           <td className=" font-medium text-xs py-[10px] ">
                             <NumericFormat
+                              displayType="text"
                               value={get(item, "techno_price")}
                               thousandSeparator={" "}
-                              className="bg-transparent max-w-[100px]"
+                              className="bg-transparent "
                             />
                           </td>
                           <td className=" font-medium text-xs py-[10px] ">

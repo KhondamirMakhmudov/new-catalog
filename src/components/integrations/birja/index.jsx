@@ -54,6 +54,7 @@ const BirjaComponent = () => {
               </td>
               <td className=" font-medium text-xs py-[10px]">
                 <NumericFormat
+                  displayType="text"
                   thousandSeparator={" "}
                   value={get(item, "price")}
                   className="bg-transparent"
