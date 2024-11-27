@@ -15,6 +15,7 @@ import TSAComponent from "@/components/integrations/tsa";
 import MinistryComponent from "@/components/integrations/iqtisod";
 import BirjaComponent from "@/components/integrations/birja";
 import BojxonaComponent from "@/components/integrations/bojxona";
+import SoliqComponent from "@/components/integrations/soliq";
 
 const Index = () => {
   const [tab, setTab] = useState("birja");
@@ -257,24 +258,11 @@ const Index = () => {
 
           <div className="grid grid-cols-12 gap-x-[30px] font-gilroy">
             <div className="col-span-12">
-              <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                <div className="col-span-12">
-                  <h3 className="font-semibold text-sm mb-[6px] ">
-                    Mahsulot nomi
-                  </h3>
-
-                  <input
-                    type="text"
-                    placeholder="Tanlash"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
-                </div>
-              </div>
-
               {tab === "tsa" && <TSAComponent />}
               {tab === "iqtisod" && <MinistryComponent />}
               {tab == "birja" && <BirjaComponent />}
               {tab == "bojxona" && <BojxonaComponent />}
+              {tab == "soliq" && <SoliqComponent />}
             </div>
           </div>
         </section>

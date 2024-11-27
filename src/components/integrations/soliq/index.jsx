@@ -1,32 +1,33 @@
-import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import { get, debounce } from "lodash";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { URLS } from "@/constants/url";
 import { KEYS } from "@/constants/key";
+import { motion } from "framer-motion";
 import { NumericFormat } from "react-number-format";
 import Pagination from "@/components/pagination";
-
-const TSAComponent = () => {
+import { useState, useEffect } from "react";
+const SoliqComponent = () => {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const { data: technicsTSA, isLoadingTSA } = useGetQuery({
-    key: KEYS.technicTSA,
-    url: URLS.technicTSA,
-    params: { page: page },
+
+  const { data: soliqData } = useGetQuery({
+    key: KEYS.soliqDatas,
+    url: URLS.soliqDatas,
+    params: {
+      mxik_code: "06806001001000001",
+    },
   });
 
   useEffect(() => {
-    if (get(technicsTSA, "data.results", [])) {
-      const searchResults = get(technicsTSA, "data.results", []).filter(
-        (item) =>
-          get(item, "name").toLowerCase().includes(searchQuery.toLowerCase())
+    if (get(soliqData, "data.data", [])) {
+      const searchResults = get(soliqData, "data.data", []).filter((item) =>
+        get(item, "mxik_code").toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredData(searchResults);
     }
-  }, [searchQuery, technicsTSA]);
+  }, [searchQuery, soliqData]);
+
   return (
     <>
       <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
@@ -60,13 +61,19 @@ const TSAComponent = () => {
                 №
               </th>
               <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                Mahsulot nomi
+                STIR raqam
+              </th>
+              <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                Mxik kodi
               </th>
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                Gost
+                Mahsulotlar soni
               </th>
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                Kompaniya nomi
+                Faktura sanasi
+              </th>
+              <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                Yetkazib berish narxi
               </th>
               <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
                 Narxi (so’m)
@@ -84,12 +91,18 @@ const TSAComponent = () => {
                   {index + 1}
                 </td>
                 <td className=" font-medium text-xs py-[10px]">
-                  {get(item, "name")}
+                  {get(item, "tin")}
                 </td>
                 <td className=" font-medium text-xs py-[10px]">
-                  {get(item, "gost")}
+                  {get(item, "mxik_code")}
                 </td>
-                <td className="text-start font-medium text-xs py-[10px]">
+                <td className=" font-medium text-xs py-[10px]">
+                  {get(item, "product_count")}
+                </td>
+                <td className=" font-medium text-xs py-[10px]">
+                  {get(item, "factura_date")}
+                </td>
+                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
                   {get(item, "company_name")}
                 </td>
 
@@ -97,7 +110,7 @@ const TSAComponent = () => {
                   <NumericFormat
                     thousandSeparator={" "}
                     displayType="text"
-                    value={get(item, "price")}
+                    value={get(item, "productPrice")}
                     className="bg-transparent"
                   />
                 </td>
@@ -107,26 +120,13 @@ const TSAComponent = () => {
         </motion.table>
         <div className="w-full h-[1px] text-[#E2E2EA] "></div>
         <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
-          <div>
-            <p className="text-sm text-[#9392A0]">
-              {" "}
-              {get(technicsTSA, "data.count")} tadan{" "}
-              {get(technicsTSA, "data.current_page_number")}-
-              {get(technicsTSA, "data.items_per_page")} tasi ko&apos;rsatilgan
-            </p>
-          </div>
+          <div></div>
 
-          <div>
-            <Pagination
-              page={page}
-              pageCount={get(technicsTSA, "data.total_pages")}
-              setPage={(prev) => setPage(prev)}
-            />
-          </div>
+          <div></div>
         </div>
       </div>
     </>
   );
 };
 
-export default TSAComponent;
+export default SoliqComponent;
