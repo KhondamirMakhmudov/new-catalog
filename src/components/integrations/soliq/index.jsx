@@ -78,6 +78,9 @@ const SoliqComponent = () => {
               <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
                 Narxi (so’m)
               </th>
+              <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
+                Narxi
+              </th>
             </tr>
           </thead>
 
@@ -102,8 +105,17 @@ const SoliqComponent = () => {
                 <td className=" font-medium text-xs py-[10px]">
                   {get(item, "factura_date")}
                 </td>
+
                 <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                  {get(item, "company_name")}
+                  {get(item, "delivery_sum")}
+                </td>
+
+                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
+                  {get(item, "vat_sum")}
+                </td>
+
+                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
+                  {get(item, "delivery_sum_with_vat")}
                 </td>
 
                 <td className=" font-medium text-xs py-[10px] text-center">

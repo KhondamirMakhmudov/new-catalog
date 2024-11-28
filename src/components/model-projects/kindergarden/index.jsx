@@ -74,8 +74,10 @@ const KindergardenProject = () => {
                 <td className=" font-medium text-xs py-[10px]  text-center">
                   {index + 1}
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
-                  {get(item, "name")}
+                <td className=" font-medium text-xs py-[10px] text-[#0256BA]">
+                  <Link href={`/materials/${get(item, "name")}`}>
+                    {get(item, "name")}
+                  </Link>
                 </td>
                 <td className=" font-medium text-xs py-[10px]">
                   {get(item, "code")}
@@ -95,7 +97,6 @@ const KindergardenProject = () => {
       <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
         <div>
           <p className="text-sm text-[#9392A0]">
-            {" "}
             {get(kinderGarden, "data.count")} tadan 1-{limit} tasi
             ko&apos;rsatilgan
           </p>

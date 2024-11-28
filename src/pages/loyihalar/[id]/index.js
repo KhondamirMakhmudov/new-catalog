@@ -57,7 +57,7 @@ const Index = () => {
         </section>
 
         <section>
-          <h1 className="text-[32px] font-bold my-[16px]">Maktab</h1>
+          <h1 className="text-[32px] font-bold my-[16px]">Barcha loyihalar</h1>
           <div className="grid grid-cols-12 gap-x-[30px]">
             <motion.div
               initial={{ translateX: "-80px", opacity: 0 }}
@@ -198,7 +198,7 @@ const Index = () => {
         </section>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };

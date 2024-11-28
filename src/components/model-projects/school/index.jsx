@@ -6,6 +6,7 @@ import { get } from "lodash";
 import { useState } from "react";
 import ContentLoader from "@/components/loader/content-loader";
 import ProjectPagination from "@/components/pagination/loyihalar-pagination";
+import Link from "next/link";
 
 const SchoolProject = () => {
   const [limit] = useState(24);
@@ -49,10 +50,10 @@ const SchoolProject = () => {
                 №
               </th>
               <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                Mahsulot nomi
+                Mahsulot kodi
               </th>
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                Mahsulot Kodi
+                Mahsulot nomi
               </th>
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                 O&apos;lchov Birligi
@@ -72,10 +73,12 @@ const SchoolProject = () => {
                 <td className=" font-medium text-xs py-[10px]  text-center">
                   {index + 1}
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
-                  {get(item, "name")}
+                <td className=" font-medium text-xs py-[10px] text-[#0256BA]">
+                  <Link href={`/materials/${get(item, "name")}`}>
+                    {get(item, "name")}
+                  </Link>
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
+                <td className=" font-medium text-xs py-[10px] ">
                   {get(item, "code")}
                 </td>
                 <td className=" font-medium text-xs py-[10px] text-center">

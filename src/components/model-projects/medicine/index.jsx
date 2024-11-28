@@ -7,6 +7,7 @@ import { get } from "lodash";
 import { useState } from "react";
 import ContentLoader from "@/components/loader/content-loader";
 import ProjectPagination from "@/components/pagination/loyihalar-pagination";
+import Link from "next/link";
 
 const MedicineProject = () => {
   const [limit] = useState(24);
@@ -73,8 +74,10 @@ const MedicineProject = () => {
                 <td className=" font-medium text-xs py-[10px]  text-center">
                   {index + 1}
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
-                  {get(item, "name")}
+                <td className=" font-medium text-xs py-[10px] text-[#0256BA]">
+                  <Link href={`/materials/${get(item, "name")}`}>
+                    {get(item, "name")}
+                  </Link>
                 </td>
                 <td className=" font-medium text-xs py-[10px]">
                   {get(item, "code")}
