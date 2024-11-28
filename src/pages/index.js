@@ -13,7 +13,6 @@ import HorizontalBarChart from "@/components/bar";
 import ArrowRightButton from "@/components/buttons/arrow-right";
 import ScrollToTopButton from "@/components/scroll-to-top";
 
-
 import AboutClassifier from "@/components/about-company";
 
 const integrationData = [
@@ -273,16 +272,153 @@ export default function Home() {
             </div>
           </Reveal>
         </motion.section>
-        {/* Klassifikator haqida */}
-        <section className={"container pb-[60px]"} id="about-classifier">
-          <Reveal>
-            <Title>Klassifikator haqida</Title>
-          </Reveal>
+
+        {/* ////////// Namunaviy loyihalar /////////// */}
+        <section
+          style={{ backgroundImage: `url(/images/bg-namunaviy-loyihalar.png)` }}
+          className="min-h-[879px] bg-no-repeat bg-cover relative z-10 "
+        >
+          <div
+            className={`absolute top-0 bottom-0 left-0 right-0 bg-[#1764C0] bg-opacity-70 -z-10`}
+          ></div>
 
           <Reveal>
-            <AboutClassifier />
+            <div className="container">
+              <div>
+                <div className="z-40 text-white pt-[42px]">
+                  <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
+                    Namunaviy loyihalar
+                  </h1>
+                  <p>
+                    Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan
+                    shunchaki qo&apos;g&apos;irchoq matn-bu shunchaki
+                    ishlatilgan qo&apos;g&apos;irchoq matn
+                  </p>
+                </div>
+              </div>
+
+              <div className={"grid grid-cols-12 gap-x-[20px] mt-[30px]"}>
+                <div
+                  className={
+                    "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
+                  }
+                  style={{ backgroundImage: `url(/images/school-bg.png)` }}
+                >
+                  <Link href={"/loyihalar/1"}>
+                    <div
+                      className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
+                    ></div>
+                    <div className="absolute bottom-0 p-[32px] text-white ">
+                      <h1 className={"text-[28px] font-bold "}>Maktab</h1>
+                      <p className="text-sm font-normal mt-[10px] line-clamp-2">
+                        Biz to&apos;y rejalashtiruvchisi bilan erta
+                        suhbatlashdik biz to&apos;y rejalashtiruvchisi Rano
+                        Artykova bilan kelin va kuyovlar o&apos;rtasidagi
+                        ziddiyatlar, keraksiz urf-odatlar va keyingi sevgi
+                        haqida suhbatlashdik
+                      </p>
+                    </div>
+                  </Link>
+                </div>
+
+                <div className={"col-span-6 space-y-[20px]"}>
+                  <div
+                    className={
+                      "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
+                    }
+                  >
+                    <div className="absolute bottom-0 right-0 p-[24px]">
+                      <Image
+                        src={"/images/kindergarten.png"}
+                        alt={"school"}
+                        width={150}
+                        height={120}
+                        className={"ml-[16px]"}
+                      />
+                    </div>
+                    <h1 className="text-[28px] font-bold text-[#21201F]">
+                      Bolalar bog&apos;chasi
+                    </h1>
+                    <p
+                      className={
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                      }
+                    >
+                      Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                      biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                      va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                      urf-odatlar va keyingi sevgi haqida suhbatlashdik
+                    </p>
+                    <Link href="/loyihalar/maktab">
+                      <div
+                        className={
+                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                        }
+                      >
+                        <p className={"text-[#21201FCC]"}>Batafsil</p>
+                      </div>
+                    </Link>
+                  </div>
+                  <div
+                    className={
+                      "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
+                    }
+                  >
+                    <div className="absolute bottom-0 right-0 p-[24px]">
+                      <Image
+                        src={"/images/medicine.png"}
+                        alt={"medicine"}
+                        width={150}
+                        height={120}
+                        className={"ml-[16px]"}
+                      />
+                    </div>
+                    <h1 className="text-[28px] font-bold text-[#21201F]">
+                      Poliklinika
+                    </h1>
+                    <p
+                      className={
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                      }
+                    >
+                      Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                      biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                      va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                      urf-odatlar va keyingi sevgi haqida suhbatlashdik
+                    </p>
+                    <Link href="/loyihalar/poliklinika">
+                      <div
+                        className={
+                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] active:bg-[#0256BA] text-[#21201FCC] active:text-white inline-flex rounded-[8px] transition-all duration-300"
+                        }
+                      >
+                        <p className={""}>Batafsil</p>
+                      </div>
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="col-span-12 mt-[30px] backdrop-blur-lg">
+                  <div className="backdrop-blur bg-transparent">
+                    <Link
+                      href={"/loyihalar"}
+                      className="flex gap-x-[12px] text-white py-[19px] w-full  justify-center border border-[#699EDB] rounded-[16px] "
+                    >
+                      <p>Hammasini tomosha qiling (952)</p>
+                      <Image
+                        src={"/icons/right.svg"}
+                        alt={"arrow-right"}
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </Reveal>
         </section>
+
         {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
         <section className="relative py-[60px]">
           <div className="absolute z-10 left-0 bottom-0">
@@ -352,150 +488,15 @@ export default function Home() {
             </div>
           </Reveal>
         </section>
-        {/* ////////// Namunaviy loyihalar /////////// */}
-        <section
-          style={{ backgroundImage: `url(/images/bg-namunaviy-loyihalar.png)` }}
-          className="min-h-[879px] bg-no-repeat bg-cover relative z-10 "
-        >
-          <div
-            className={`absolute top-0 bottom-0 left-0 right-0 bg-[#1764C0] bg-opacity-70 -z-10`}
-          ></div>
+
+        {/* Klassifikator haqida */}
+        <section className={"container pb-[60px]"} id="about-classifier">
+          <Reveal>
+            <Title>Klassifikator haqida</Title>
+          </Reveal>
 
           <Reveal>
-            <div className="container">
-              <div>
-                <div className="z-40 text-white pt-[42px]">
-                  <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
-                    Namunaviy loyihalar
-                  </h1>
-                  <p>
-                    Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan
-                    shunchaki qo&apos;g&apos;irchoq matn-bu shunchaki
-                    ishlatilgan qo&apos;g&apos;irchoq matn
-                  </p>
-                </div>
-              </div>
-
-              <div className={"grid grid-cols-12 gap-x-[20px] mt-[30px]"}>
-                  <div
-                    className={
-                      "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
-                    }
-                    style={{ backgroundImage: `url(/images/school-bg.png)` }}
-                  >
-                    <Link href={'/loyihalar/1'}>
-                    <div
-                      className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
-                    ></div>
-                    <div className="absolute bottom-0 p-[32px] text-white ">
-                      <h1 className={"text-[28px] font-bold "}>Maktab</h1>
-                      <p className="text-sm font-normal mt-[10px] line-clamp-2">
-                        Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
-                        biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
-                        va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
-                        urf-odatlar va keyingi sevgi haqida suhbatlashdik
-                      </p>
-                    </div>
-                  </Link>
-                  </div>
-
-                <div className={"col-span-6 space-y-[20px]"}>
-                  <div
-                    className={
-                      "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
-                    }
-                  >
-                    <div className="absolute bottom-0 right-0 p-[24px]">
-                      <Image
-                        src={"/images/kindergarten.png"}
-                        alt={"school"}
-                        width={150}
-                        height={120}
-                        className={"ml-[16px]"}
-                      />
-                    </div>
-                    <h1 className="text-[28px] font-bold text-[#21201F]">
-                      Bolalar bog&apos;chasi
-                    </h1>
-                    <p
-                      className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
-                      }
-                    >
-                      Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
-                      biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
-                      va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
-                      urf-odatlar va keyingi sevgi haqida suhbatlashdik
-                    </p>
-                    <Link href="/loyihalar/maktab">
-                      <div
-                        className={
-                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
-                        }
-                      >
-                        <p className={"text-[#21201FCC]"}>Batafsil</p>
-
-                      </div>
-                    </Link>
-                  </div>
-                  <div
-                    className={
-                      "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
-                    }
-                  >
-                    <div className="absolute bottom-0 right-0 p-[24px]">
-                      <Image
-                        src={"/images/medicine.png"}
-                        alt={"medicine"}
-                        width={150}
-                        height={120}
-                        className={"ml-[16px]"}
-                      />
-                    </div>
-                    <h1 className="text-[28px] font-bold text-[#21201F]">
-                      Poliklinika
-                    </h1>
-                    <p
-                      className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
-                      }
-                    >
-                      Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
-                      biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
-                      va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
-                      urf-odatlar va keyingi sevgi haqida suhbatlashdik
-                    </p>
-                    <Link href="/loyihalar/poliklinika">
-                      <div
-                        className={
-                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] active:bg-[#0256BA] text-[#21201FCC] active:text-white inline-flex rounded-[8px] transition-all duration-300"
-                        }
-                      >
-                        <p className={""}>Batafsil</p>
-
-                      </div>
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="col-span-12 mt-[30px] backdrop-blur-lg">
-                  <div className="backdrop-blur bg-transparent">
-                    <Link
-                      href={"/loyihalar"}
-                      className="flex gap-x-[12px] text-white py-[19px] w-full  justify-center border border-[#699EDB] rounded-[16px] "
-                    >
-                      <p>Hammasini tomosha qiling (952)</p>
-                      <Image
-                        src={"/icons/right.svg"}
-                        alt={"arrow-right"}
-                        width={20}
-                        height={20}
-                      />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <AboutClassifier />
           </Reveal>
         </section>
 
@@ -586,7 +587,10 @@ export default function Home() {
               <ul
                 className={"grid grid-cols-12 gap-[12px] font-gilroy mt-[20px]"}
               >
-                <li className="col-span-12 py-[28px] px-[32px] bg-[#F7F7F7] rounded-[20px] cursor-pointer" onClick={toggleFAQ}>
+                <li
+                  className="col-span-12 py-[28px] px-[32px] bg-[#F7F7F7] rounded-[20px] cursor-pointer"
+                  onClick={toggleFAQ}
+                >
                   <div className="flex justify-between">
                     <div className="flex-1">
                       <h4 className="text-[20px] text-[#020E03] font-bold">
@@ -594,7 +598,11 @@ export default function Home() {
                         distinctio. Nam libero tempore
                       </h4>
                       {openFAQ && (
-                        <motion.p initial={{opacity: 0, translateY: "30px"}} animate={{opacity: 1, translateY: "0px"}} className="text-[17px] text-[#9392A0] mt-[10px]">
+                        <motion.p
+                          initial={{ opacity: 0, translateY: "30px" }}
+                          animate={{ opacity: 1, translateY: "0px" }}
+                          className="text-[17px] text-[#9392A0] mt-[10px]"
+                        >
                           Sed ut perspiciatis, unde omnis iste natus error sit
                           voluptatem accusantium doloremque laudantium, totam
                           rem aperiam eaque ipsa, quae ab illo inventore
@@ -603,7 +611,7 @@ export default function Home() {
                         </motion.p>
                       )}
                     </div>
-                    <button >
+                    <button>
                       <Image
                         src={
                           !openFAQ

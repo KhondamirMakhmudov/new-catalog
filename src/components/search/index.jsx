@@ -161,7 +161,7 @@ const Search = () => {
               />
             </button>
             <input
-              type={"text"}
+              type={"search"}
               placeholder={placeholder}
               onChange={(e) => {
                 const value = e.target.value;
