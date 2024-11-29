@@ -123,48 +123,46 @@ export default function Home() {
 
           <Reveal>
             <div className={"grid grid-cols-12 gap-[20px] mt-[20px]"}>
-              <Link href={"/materials"} className="col-span-6">
-                <div
-                  className={
-                    " p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
-                  }
-                >
-                  {/* materiasl */}
-                  <div className={"z-30"}>
-                    <h1 className={"font-bold text-[24px] text-[#21201F]"}>
-                      Material va jihozlar
-                    </h1>
-                    <p
+              <div
+                className={
+                  "col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
+                }
+              >
+                {/* machine-mechano */}
+                <div className={"z-30"}>
+                  <h1 className={"font-bold text-[24px] text-[#21201F]"}>
+                    Material va jihozlar
+                  </h1>
+                  <p
+                    className={
+                      "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
+                    }
+                  >
+                    Global strategiyani o&apos;zgartirish mahsulotning
+                    sublimatsiya qilingan hayot aylanishini tejaydi. Amaliyot
+                    aniq
+                  </p>
+
+                  <Link href="/materials">
+                    <div
                       className={
-                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
+                        " z-20 py-[13px] px-[24px] text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                       }
                     >
-                      Global strategiyani o&apos;zgartirish mahsulotning
-                      sublimatsiya qilingan hayot aylanishini tejaydi. Amaliyot
-                      aniq
-                    </p>
-
-                    <Link href="/materials">
-                      <div
-                        className={
-                          " z-20 py-[13px] px-[24px]  items-center border border-[#D7D9DC] bg-transparent hover:bg-[#0256BA] text-[#21201FCC] hover:text-white inline-flex rounded-[8px] transition-all duration-300"
-                        }
-                      >
-                        <p className={""}>Batafsil</p>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className={"absolute bg-section bottom-0 -z-30"}>
-                    <Image
-                      src={"/images/materials.png"}
-                      alt={"materials"}
-                      width={910}
-                      height={485}
-                      className={"ml-[16px]"}
-                    />
-                  </div>
+                      <p className={""}>Batafsil</p>
+                    </div>
+                  </Link>
                 </div>
-              </Link>
+                <div className={"absolute bg-section bottom-0 -z-30"}>
+                  <Image
+                    src={"/images/materials.png"}
+                    alt={"materials"}
+                    width={910}
+                    height={485}
+                    className={"ml-[16px]"}
+                  />
+                </div>
+              </div>
 
               <div className={"col-span-6"}>
                 {/* machine-mechano */}
@@ -189,10 +187,10 @@ export default function Home() {
                     <Link href="/machine-mechano">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] bg-transparent hover:bg-[#0256BA] text-[#21201FCC] hover:text-white inline-flex rounded-[8px] transition-all duration-300 -z-30"
+                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30 text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] transition-all duration-300"
                         }
                       >
-                        <p className={""}>Batafsil</p>
+                        <p>Batafsil</p>
                       </div>
                     </Link>
                   </div>
@@ -274,7 +272,7 @@ export default function Home() {
             <div className="container">
               <div>
                 <div className="z-40 text-white pt-[42px]">
-                  <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
+                  <h1 className="text-[#FFFFFF] text-[32px] font-bold">
                     Namunaviy loyihalar
                   </h1>
                   <p className="opacity-0">
@@ -292,31 +290,27 @@ export default function Home() {
                   }
                   style={{ backgroundImage: `url(/images/school-bg.png)` }}
                 >
-                  <Link href={"/loyihalar/1"}>
-                    <div
-                      className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
-                    ></div>
-                    <div className="absolute bottom-0 p-[32px] text-white ">
-                      <h1 className={"text-[28px] font-bold "}>Maktab</h1>
-
-                      <p className="text-sm font-normal mt-[10px] line-clamp-2 opacity-0">
-                        Biz to&apos;y rejalashtiruvchisi bilan erta
-                        suhbatlashdik biz to&apos;y rejalashtiruvchisi Rano
-                        Artykova bilan kelin va kuyovlar o&apos;rtasidagi
-                        ziddiyatlar, keraksiz urf-odatlar va keyingi sevgi
-                        haqida suhbatlashdik
-                      </p>
-                      <Link href="/loyihalar/maktab">
-                        <div
-                          className={
-                            "  py-[13px] px-[24px]   bg-white hover:bg-[#0256BA] text-[#0256BA] hover:text-white  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
-                          }
-                        >
-                          <p className={""}>Batafsil</p>
-                        </div>
-                      </Link>
-                    </div>
-                  </Link>
+                  <div
+                    className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
+                  ></div>
+                  <div className="absolute bottom-0 p-[32px] text-white ">
+                    <h1 className={"text-[28px] font-bold "}>Maktab</h1>
+                    <p className="text-sm font-normal mt-[10px] line-clamp-2 opacity-0">
+                      Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
+                      biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
+                      va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
+                      urf-odatlar va keyingi sevgi haqida suhbatlashdik
+                    </p>
+                    <Link href="/loyihalar/1">
+                      <div
+                        className={
+                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                        }
+                      >
+                        <p className={"text-[#21201FCC]"}>Batafsil</p>
+                      </div>
+                    </Link>
+                  </div>
                 </div>
 
                 <div className={"col-span-6 space-y-[20px]"}>
@@ -339,7 +333,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
                       }
                     >
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
@@ -350,10 +344,10 @@ export default function Home() {
                     <Link href="/loyihalar/maktab">
                       <div
                         className={
-                          "  py-[13px] px-[24px]   bg-transparent hover:bg-[#0256BA] text-[#21201FCC] hover:text-white  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
-                        <p className={""}>Batafsil</p>
+                        <p className={"text-[#21201FCC]"}>Batafsil</p>
                       </div>
                     </Link>
                   </div>
@@ -376,7 +370,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
                       }
                     >
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
@@ -573,7 +567,7 @@ export default function Home() {
         </section>
 
         {/* Tez-tez so'raladigan savollar */}
-        {/* <section className="bg-white">
+        <section className="bg-white">
           <div className="container py-[42px]">
             <Reveal>
               <h1 className="text-[32px] font-bold">
@@ -634,7 +628,7 @@ export default function Home() {
               </ul>
             </Reveal>
           </div>
-        </section> */}
+        </section>
 
         {/* Address */}
         <section className="container">

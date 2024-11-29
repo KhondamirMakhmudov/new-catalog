@@ -15,12 +15,10 @@ const HorizontalBarChart = () => {
   const [isClient, setIsClient] = useState(false);
 
   const regions = get(company, "data", [])?.map((item) => get(item, "region"));
-  console.log(regions);
 
   const companyCounts = get(company, "data", [])?.map((item) =>
     get(item, "company_count")
   );
-  console.log(companyCounts);
 
   useEffect(() => {
     setIsClient(true);

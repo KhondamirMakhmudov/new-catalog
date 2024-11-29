@@ -94,4 +94,5 @@ export const KEYS = {
   defaultClassifier: "defaultClassifier",
 
   soliqDatas: "soliqDatas",
+  birjaData: "birjaData",
 };

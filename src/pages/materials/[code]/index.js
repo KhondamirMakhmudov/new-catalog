@@ -7,14 +7,14 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { get, debounce } from "lodash";
+import { get, debounce, isEmpty } from "lodash";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
 import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 import Footer from "@/components/footer";
-import { NumericFormat } from "react-number-format";
+import SimpleLoader from "@/components/loader/simple-loader";
 
 const Index = () => {
   const [limit] = useState(9);
@@ -22,6 +22,8 @@ const Index = () => {
   const { code } = router.query;
   const [soliqAveragePrice, setSoliqAveragePrice] = useState(null);
   const [soliqProductCount, setSoliqProductCount] = useState(null);
+  const [birjaAveragePrice, setBirjaAveragePrice] = useState(null);
+  const [birjaProductCount, setBirjaProductCount] = useState(null);
   const [hasPosted, setHasPosted] = useState(false);
   const { state, dispatch } = useCounter();
   const [minimum, setMinimum] = useState(0);
@@ -48,7 +50,52 @@ const Index = () => {
     enabled: !!code,
   });
 
-  const { data: soliqData } = useGetQuery({
+  const {
+    data: birja,
+    isLoading: isLoadingBirja,
+    isFetching: isFetchingBirja,
+  } = useGetQuery({
+    key: KEYS.birjaData,
+    url: URLS.birjaData,
+    params: {
+      crs_code: get(material, "data.material_csr_code"),
+    },
+  });
+  // Birjadan ma'lumotlarni olish va hisob - kitob
+  useEffect(() => {
+    if (!isEmpty(get(birja, "data.filtered_data", []))) {
+      const birjaDataArray = get(birja, "data.filtered_data", []);
+
+      const productCount = birjaDataArray.reduce(
+        (initialQuantity, currentQuantity) =>
+          initialQuantity + get(currentQuantity, "total_count"),
+        0
+      );
+
+      const averageProductCountBirja =
+        productCount / get(birja, "data.filtered_data", []).length;
+      setBirjaProductCount(averageProductCountBirja.toFixed(0));
+
+      const TotalPriceBirja = birjaDataArray.reduce(
+        (initialQuantity, currentQuantity) =>
+          initialQuantity + get(currentQuantity, "price"),
+        0
+      );
+      const averagePriceBirja =
+        TotalPriceBirja / get(birja, "data.filtered_data", []).length;
+
+      setBirjaAveragePrice(averagePriceBirja.toFixed(2));
+    } else {
+      setBirjaAveragePrice(0);
+      setBirjaProductCount(0);
+    }
+  }, [birja]);
+
+  const {
+    data: soliqData,
+    isLoading: isLoadingSoliq,
+    isFetching: isFetchingSoliq,
+  } = useGetQuery({
     key: KEYS.soliqDatas,
     url: URLS.soliqDatas,
     params: {
@@ -57,28 +104,35 @@ const Index = () => {
   });
   // Soliqdan ma'lumotlarni olib joylash
   useEffect(() => {
-    const soliqDataArray = get(soliqData, "data.data", []);
+    if (!isEmpty(get(soliqData, "data.data", []))) {
+      const soliqDataArray = get(soliqData, "data.data", []);
 
-    const productCount = soliqDataArray.reduce(
-      (initialQuantity, currentQuantity) =>
-        initialQuantity + get(currentQuantity, "product_count"),
-      0
-    );
-    setSoliqProductCount(productCount.toFixed(2));
+      const productCount = soliqDataArray.reduce(
+        (initialQuantity, currentQuantity) =>
+          initialQuantity + get(currentQuantity, "product_count"),
+        0
+      );
+      setSoliqProductCount(productCount.toFixed(2));
 
-    const deliver = soliqDataArray.map(
-      (item) => get(item, "delivery_sum") / get(item, "product_count")
-    );
+      const deliver = soliqDataArray.map(
+        (item) => get(item, "delivery_sum") / get(item, "product_count")
+      );
 
-    const deliverSum = deliver.reduce(
-      (initialValue, currentValue) => initialValue + currentValue,
-      0
-    );
+      const deliverSum = deliver.reduce(
+        (initialValue, currentValue) => initialValue + currentValue,
+        0
+      );
 
-    const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(2);
+      const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(
+        2
+      );
 
-    setSoliqAveragePrice(averageDeliverySum);
-  });
+      setSoliqAveragePrice(averageDeliverySum);
+    } else {
+      setSoliqAveragePrice(0);
+      setSoliqProductCount(0);
+    }
+  }, [soliqData]);
 
   const {
     data: materialAds,
@@ -259,21 +313,25 @@ const Index = () => {
                         </p>
                       </div>
 
-                      <ul className="space-y-[8px] mt-[8px]">
-                        <li className="text-xs flex justify-between items-center">
-                          <p>O&apos;tgan oydagi savdolar soni:</p>
+                      {isLoadingSoliq || isFetchingSoliq ? (
+                        <SimpleLoader />
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                          <p className="font-bold">{soliqProductCount}</p>
-                        </li>
+                            <p className="font-bold">{soliqProductCount}</p>
+                          </li>
 
-                        <li className="text-xs flex justify-between items-center">
-                          <p>Narxi:</p>
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
 
-                          <p className="font-bold">
-                            {soliqAveragePrice} so&apos;m
-                          </p>
-                        </li>
-                      </ul>
+                            <p className="font-bold">
+                              {soliqAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
                     </div>
 
                     <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
@@ -292,19 +350,25 @@ const Index = () => {
                         </p>
                       </div>
 
-                      <ul className="space-y-[8px] mt-[8px]">
-                        <li className="text-xs flex justify-between items-center">
-                          <p>O&apos;tgan oydagi savdolar soni:</p>
+                      {isLoadingBirja || isFetchingBirja ? (
+                        <SimpleLoader />
+                      ) : (
+                        <ul className="space-y-[8px] mt-[8px]">
+                          <li className="text-xs flex justify-between items-center">
+                            <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                          <p className="font-bold">20</p>
-                        </li>
+                            <p className="font-bold">{birjaProductCount}</p>
+                          </li>
 
-                        <li className="text-xs flex justify-between items-center">
-                          <p>Narxi:</p>
+                          <li className="text-xs flex justify-between items-center">
+                            <p>Narxi:</p>
 
-                          <p className="font-bold">12 000 000 so&apos;m</p>
-                        </li>
-                      </ul>
+                            <p className="font-bold">
+                              {birjaAveragePrice} so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
                     </div>
 
                     <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
@@ -327,13 +391,13 @@ const Index = () => {
                         <li className="text-xs flex justify-between items-center">
                           <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                          <p className="font-bold">20</p>
+                          <p className="font-bold">0</p>
                         </li>
 
                         <li className="text-xs flex justify-between items-center">
                           <p>Narxi:</p>
 
-                          <p className="font-bold">12 000 000 so&apos;m</p>
+                          <p className="font-bold">0 so&apos;m</p>
                         </li>
                       </ul>
                     </div>
@@ -358,13 +422,13 @@ const Index = () => {
                         <li className="text-xs flex justify-between items-center">
                           <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                          <p className="font-bold">20</p>
+                          <p className="font-bold">0</p>
                         </li>
 
                         <li className="text-xs flex justify-between items-center">
                           <p>Narxi:</p>
 
-                          <p className="font-bold">12 000 000 so&apos;m</p>
+                          <p className="font-bold">0 so&apos;m</p>
                         </li>
                       </ul>
                     </div>
@@ -373,7 +437,7 @@ const Index = () => {
                       <ul className="space-y-[13px] flex flex-col">
                         <li className="flex justify-between items-end">
                           <p className="text-xs font-bold">Maksimal narx:</p>
-                          <div class="flex-grow border-t border-dotted mx-2"></div>
+                          <div className="flex-grow border-t border-dotted mx-2"></div>
                           <p className="text-[#4B5157] text-xs font-medium">
                             {maximum}
                             so&apos;m
@@ -384,7 +448,7 @@ const Index = () => {
                           <p className="text-xs font-bold">
                             O&apos;rtacha narx:
                           </p>
-                          <div class="flex-grow border-t border-dotted mx-2"></div>
+                          <div className="flex-grow border-t border-dotted mx-2"></div>
                           <p className="text-[#4B5157] text-xs font-medium">
                             {average}
                             so&apos;m
@@ -393,7 +457,7 @@ const Index = () => {
 
                         <li className="flex justify-between items-end">
                           <p className="text-xs font-bold">Minimal narx:</p>
-                          <div class="flex-grow border-t border-dotted mx-2"></div>
+                          <div className="flex-grow border-t border-dotted mx-2"></div>
                           <p className="text-[#4B5157] text-xs font-medium">
                             {minimum}
                             so&apos;m
