@@ -12,6 +12,7 @@ import dayjs from "dayjs";
 import { NumericFormat } from "react-number-format";
 import { useCounter } from "@/context/counter";
 import Footer from "@/components/footer";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   const [limit] = useState(9);
