@@ -76,7 +76,7 @@ const Index = () => {
     const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(2);
 
     setSoliqAveragePrice(averageDeliverySum);
-  });
+  }, [soliqData]);
 
   const { data: technoAds, isLoading: isLoadingMaterialAds } = useGetQuery({
     key: [KEYS.technosAds, code],

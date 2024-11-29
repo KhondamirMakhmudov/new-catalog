@@ -75,7 +75,7 @@ const Index = () => {
     const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(2);
 
     setSoliqAveragePrice(averageDeliverySum);
-  });
+  }, [soliqData]);
 
   useEffect(() => {
     if (get(machineMechanosAds, "data.results", [])) {
