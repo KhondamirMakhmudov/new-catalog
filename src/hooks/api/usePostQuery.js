@@ -8,7 +8,11 @@ import { useTranslation } from "react-i18next";
 const postRequest = (url, attributes, config = {}) =>
   request.post(url, attributes, config);
 
-const usePostQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
+const usePostQuery = ({
+  hideSuccessToast = false,
+  listKeyId = null,
+  hideErrorToast = false,
+}) => {
   const { t } = useTranslation();
 
   const queryClient = useQueryClient();
@@ -41,7 +45,9 @@ const usePostQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
             toast.error(val, { position: "top-right" });
           });
         } else {
-          toast.error(t(data?.response?.data?.message) || t("ERROR"));
+          if (!hideErrorToast) {
+            toast.error(t(data?.response?.data?.message) || t("ERROR"));
+          }
         }
       },
     }

@@ -74,7 +74,10 @@ const Index = () => {
     url: URLS.currency,
   });
 
-  const { mutate: getMaterial } = usePostQuery({ listKeyId: KEYS.getMaterial });
+  const { mutate: getMaterial } = usePostQuery({
+    listKeyId: KEYS.getMaterial,
+    hideSuccessToast: true,
+  });
 
   const handleCheckboxChange = (item) => {
     const isSelected = !selectedItems[item.id];
@@ -256,6 +259,22 @@ const Index = () => {
                 </div>
 
                 <div className="col-span-4">
+                  <h3 className="font-semibold text-sm mb-[6px] ">
+                    Mahsulot nomi
+                  </h3>
+
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setNameValue(value);
+                    }}
+                    placeholder="Qidirish"
+                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
+                  />
+                </div>
+
+                <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
 
                   <div className="flex gap-x-[2px] items-center">
@@ -279,22 +298,6 @@ const Index = () => {
                       className="py-[10px] px-[15px] border w-full  rounded-[8px]"
                     />
                   </div>
-                </div>
-
-                <div className="col-span-4">
-                  <h3 className="font-semibold text-sm mb-[6px] ">
-                    Mahsulot nomi
-                  </h3>
-
-                  <input
-                    type="text"
-                    onChange={(e) => {
-                      const value = e.target.value;
-                      setNameValue(value);
-                    }}
-                    placeholder="Qidirish"
-                    className="py-[10px] px-[15px] border w-full  rounded-[8px]"
-                  />
                 </div>
               </div>
               {materialLoading && isFetchingMaterials ? (

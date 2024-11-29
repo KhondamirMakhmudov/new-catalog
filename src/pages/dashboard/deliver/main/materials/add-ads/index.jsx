@@ -35,6 +35,7 @@ const Index = () => {
 
   const { mutate: addAds, isLoading } = usePostQuery({
     listKeyId: KEYS.myMaterials,
+    hideSuccessToast: true,
   });
 
   useEffect(() => {

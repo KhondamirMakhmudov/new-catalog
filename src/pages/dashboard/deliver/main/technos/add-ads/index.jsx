@@ -36,6 +36,7 @@ const Index = () => {
 
   const { mutate: addAds, isLoading } = usePostQuery({
     listKeyId: KEYS.myTechnos,
+    hideSuccessToast: true,
   });
 
   useEffect(() => {

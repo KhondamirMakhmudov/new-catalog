@@ -21,6 +21,7 @@ const Index = () => {
   } = useForm();
   const { mutate: confirmCodeForNewPassword, isLoading } = usePostQuery({
     listKeyId: KEYS.newPasswordConfirm,
+    hideSuccessToast: true,
   });
 
   useEffect(() => {

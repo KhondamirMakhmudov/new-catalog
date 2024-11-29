@@ -61,6 +61,7 @@ const Index = () => {
 
   const { mutate: showMonitoring } = usePostQuery({
     listKeyId: KEYS.monitoring,
+    hideSuccessToast: true,
   });
 
   const handleRegionClick = (regionId) => {
@@ -77,11 +78,11 @@ const Index = () => {
   const handleButtonClick = (element) => {
     setSelectedElements((prevElements) => {
       if (prevElements.includes(element)) {
-        return prevElements; // Do nothing if already submitted
+        return prevElements;
       }
 
       const updatedElements = [...prevElements, element];
-      onSubmit(updatedElements, element); // Call onSubmit for this button
+      onSubmit(updatedElements, element);
       return updatedElements;
     });
   };
@@ -94,7 +95,6 @@ const Index = () => {
       {
         onSuccess: (response) => {
           setData(response);
-          toast.success("Mavjud", { position: "top-right" });
         },
       }
     );

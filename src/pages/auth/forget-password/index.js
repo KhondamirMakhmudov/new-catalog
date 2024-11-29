@@ -18,6 +18,7 @@ const Index = () => {
   } = useForm();
   const { mutate: forgetPassword, isLoading } = usePostQuery({
     listKeyId: KEYS.forgetPassword,
+    hideSuccessToast: true,
   });
 
   const onSubmit = (data) => {

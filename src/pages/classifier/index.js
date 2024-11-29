@@ -48,6 +48,8 @@ const Index = () => {
 
   const { mutate: showTable } = usePostQuery({
     listKeyId: KEYS.showTable,
+    hideSuccessToast: true,
+    hideErrorToast: true,
   });
 
   const onSubmit = (attrs) => {

@@ -575,7 +575,7 @@ export default function Home() {
         </section>
 
         {/* Tez-tez so'raladigan savollar */}
-        <section className="bg-white">
+        {/* <section className="bg-white">
           <div className="container py-[42px]">
             <Reveal>
               <h1 className="text-[32px] font-bold">
@@ -636,7 +636,7 @@ export default function Home() {
               </ul>
             </Reveal>
           </div>
-        </section>
+        </section> */}
 
         {/* Address */}
         <section className="container">

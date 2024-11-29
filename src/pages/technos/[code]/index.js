@@ -8,12 +8,9 @@ import { URLS } from "@/constants/url";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { get, debounce } from "lodash";
-import { useState, useEffect } from "react";
-import BasketIcon from "@/components/icons/basket";
 import dayjs from "dayjs";
 import { NumericFormat } from "react-number-format";
 import { useCounter } from "@/context/counter";
-import usePostQuery from "@/hooks/api/usePostQuery";
 import Footer from "@/components/footer";
 
 const Index = () => {
@@ -173,57 +170,6 @@ const Index = () => {
     // Use `toFixed(2)` only once outside the loop for optimization
     setMinimum(minPrice.toFixed(2));
   }, [technoAds, currency]);
-
-  ////////// SOLIQ BILAN INTEGRATSIYA ///////////////
-
-  const { mutate: postSoliqMxik, isLoading: isLoadingSoliq } = usePostQuery({
-    listKeyId: KEYS.soliqPrice,
-  });
-
-  const postSoliqData = () => {
-    postSoliqMxik(
-      {
-        url: URLS.soliq,
-        attributes: {
-          mxik: get(techno, "data.mxik_soliq")?.split(".")[0],
-          fromDate: "01.10.2024",
-          toDate: "01.11.2024",
-        },
-      },
-      {
-        onSuccess: (data) => {
-          const productCount = get(data, "data.data").reduce(
-            (initialQuantity, currentQuantity) =>
-              initialQuantity + get(currentQuantity, "product_count"),
-            0
-          );
-          setSoliqProductCount(productCount);
-
-          const deliver = get(data, "data.data").map(
-            (item) => get(item, "delivery_sum") / get(item, "product_count")
-          );
-
-          const deliverSum = deliver.reduce(
-            (initialValue, currentValue) => initialValue + currentValue,
-            0
-          );
-
-          const averageDeliverySum = (
-            deliverSum / get(data, "data.data").length
-          ).toFixed(2);
-
-          console.log("Response data:", averageDeliverySum);
-          setSoliqAveragePrice(averageDeliverySum);
-          setHasPosted(true);
-        },
-        onError: (error) => {
-          console.error("Error posting data:", error);
-        },
-      }
-    );
-  };
-
-  //////////////////////////////////////////////////
 
   return (
     <div className="bg-[#F7F7F7] min-h-screen">

@@ -9,10 +9,8 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { get, debounce } from "lodash";
 import { useState, useEffect } from "react";
-import BasketIcon from "@/components/icons/basket";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
-import usePostQuery from "@/hooks/api/usePostQuery";
 import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 import Footer from "@/components/footer";
@@ -66,7 +64,7 @@ const Index = () => {
         initialQuantity + get(currentQuantity, "product_count"),
       0
     );
-    setSoliqProductCount(productCount);
+    setSoliqProductCount(productCount.toFixed(2));
 
     const deliver = soliqDataArray.map(
       (item) => get(item, "delivery_sum") / get(item, "product_count")

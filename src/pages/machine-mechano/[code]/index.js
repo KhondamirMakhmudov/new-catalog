@@ -9,10 +9,7 @@ import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { get, debounce } from "lodash";
 import { useState, useEffect } from "react";
-import BasketIcon from "@/components/icons/basket";
-import Selected from "@/components/buttons/selected";
 import dayjs from "dayjs";
-import usePostQuery from "@/hooks/api/usePostQuery";
 import toast from "react-hot-toast";
 import { useCounter } from "@/context/counter";
 import Footer from "@/components/footer";
@@ -103,55 +100,6 @@ const Index = () => {
       duration: 3000,
       position: "top-left",
     });
-  };
-
-  ////////// SOLIQ BILAN INTEGRATSIYA ///////////////
-
-  const { mutate: postSoliqMxik, isLoading: isLoadingSoliq } = usePostQuery({
-    listKeyId: KEYS.soliqPrice,
-  });
-
-  const postSoliqData = () => {
-    postSoliqMxik(
-      {
-        url: URLS.soliq,
-        attributes: {
-          mxik: get(machineMechano, "data.mxik_soliq")?.split(".")[0],
-          fromDate: "01.10.2024",
-          toDate: "01.11.2024",
-        },
-      },
-      {
-        onSuccess: (data) => {
-          const productCount = get(data, "data.data").reduce(
-            (initialQuantity, currentQuantity) =>
-              initialQuantity + get(currentQuantity, "product_count"),
-            0
-          );
-          setSoliqProductCount(productCount);
-
-          const deliver = get(data, "data.data").map(
-            (item) => get(item, "delivery_sum") / get(item, "product_count")
-          );
-
-          const deliverSum = deliver.reduce(
-            (initialValue, currentValue) => initialValue + currentValue,
-            0
-          );
-
-          const averageDeliverySum = (
-            deliverSum / get(data, "data.data").length
-          ).toFixed(2);
-
-          console.log("Response data:", averageDeliverySum);
-          setSoliqAveragePrice(averageDeliverySum);
-          setHasPosted(true);
-        },
-        onError: (error) => {
-          console.error("Error posting data:", error);
-        },
-      }
-    );
   };
 
   //////// Max price //////////////////

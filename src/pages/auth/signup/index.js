@@ -19,6 +19,7 @@ const Index = () => {
 
   const { mutate: signupRequest, isLoading } = usePostQuery({
     listKeyId: KEYS.signup,
+    hideSuccessToast: true,
   });
 
   const onSubmit = (data) => {

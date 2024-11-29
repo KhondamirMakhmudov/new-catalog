@@ -51,7 +51,6 @@ const Search = () => {
             setDeleting(true);
           }
         } else {
-          // Deleting logic
           setPlaceholder((prev) => prev.slice(0, -1));
           if (placeholder === "") {
             setDeleting(false);
@@ -230,6 +229,14 @@ const Search = () => {
                         <div className="w-full h-[1px] bg-[#E6E5ED] my-[16px]"></div>
                       </li>
                     ))}
+                    <li>
+                      <button
+                        onClick={() => setLimit((prev) => prev + 50)}
+                        className="text-white bg-[#0256BA] hover:bg-[#1C73DA] w-full py-[8px] rounded-[12px] transition-all duration-200"
+                      >
+                        Ko&apos;roq
+                      </button>
+                    </li>
                   </ul>
                 )}
 
@@ -250,6 +257,14 @@ const Search = () => {
                         <div className="w-full h-[1px] bg-[#E6E5ED] my-[16px]"></div>
                       </li>
                     ))}
+                    <li>
+                      <button
+                        onClick={() => setLimit((prev) => prev + 50)}
+                        className="text-white bg-[#0256BA] hover:bg-[#1C73DA] w-full py-[8px] rounded-[12px] transition-all duration-200"
+                      >
+                        Ko&apos;roq
+                      </button>
+                    </li>
                   </ul>
                 )}
               </div>

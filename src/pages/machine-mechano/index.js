@@ -65,7 +65,10 @@ const Index = () => {
     url: URLS.currency,
   });
 
-  const { mutate: getMaterial } = usePostQuery({ listKeyId: KEYS.getMaterial });
+  const { mutate: getMaterial } = usePostQuery({
+    listKeyId: KEYS.getMaterial,
+    hideSuccessToast: true,
+  });
 
   const handleCheckboxChange = (item) => {
     const isSelected = !selectedItems[item.id];

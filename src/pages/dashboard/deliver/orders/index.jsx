@@ -20,6 +20,7 @@ const Index = () => {
 
   const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
     listKeyId: "company-info-one",
+    hideSuccessToast: true,
   });
 
   const handleSendOrderStatus = (id, selectStatus) => {

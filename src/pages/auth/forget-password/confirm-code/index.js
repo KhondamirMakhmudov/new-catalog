@@ -20,6 +20,7 @@ const Index = () => {
   } = useForm();
   const { mutate: confirmCodeFromEmail, isLoading } = usePostQuery({
     listKeyId: KEYS.confirmCode,
+    hideSuccessToast: true,
   });
 
   const onSubmit = (data) => {

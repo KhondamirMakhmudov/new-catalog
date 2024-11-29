@@ -37,6 +37,7 @@ const Index = () => {
 
   const { mutate: sendOrder, isLoading: isLoadingOrder } = usePostQuery({
     listKeyId: "order-one",
+    hideSuccessToast: true,
   });
 
   const handleIncrement = (product) => {

@@ -44,6 +44,7 @@ const Index = () => {
 
   const { mutate: addAds, isLoading } = usePostQuery({
     listKeyId: KEYS.myWork,
+    hideSuccessToast: true,
   });
 
   useEffect(() => {
