@@ -72,8 +72,11 @@ const Index = () => {
         0
       );
 
-      const averageProductCountBirja =
-        productCount / get(birja, "data.filtered_data", []).length;
+      const averageProductCountBirja = get(
+        birja,
+        "data.filtered_data",
+        []
+      ).length;
       setBirjaProductCount(averageProductCountBirja.toFixed(0));
 
       const TotalPriceBirja = birjaDataArray.reduce(
