@@ -82,7 +82,7 @@ export default function Home() {
               </motion.h1>
 
               <motion.p
-                className={"max-w-[458px]"}
+                className={"max-w-[458px] opacity-0"}
                 initial={{ scale: 0.11 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.3 }}
@@ -123,53 +123,48 @@ export default function Home() {
 
           <Reveal>
             <div className={"grid grid-cols-12 gap-[20px] mt-[20px]"}>
-              <div
-                className={
-                  "col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
-                }
-              >
-                {/* machine-mechano */}
-                <div className={"z-30"}>
-                  <h1 className={"font-bold text-[24px] text-[#21201F]"}>
-                    Material va jihozlar
-                  </h1>
-                  <p
-                    className={
-                      "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
-                    }
-                  >
-                    Global strategiyani o&apos;zgartirish mahsulotning
-                    sublimatsiya qilingan hayot aylanishini tejaydi. Amaliyot
-                    aniq
-                  </p>
-
-                  <Link href="/materials">
-                    <div
+              <Link href={"/materials"} className="col-span-6">
+                <div
+                  className={
+                    " p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
+                  }
+                >
+                  {/* materiasl */}
+                  <div className={"z-30"}>
+                    <h1 className={"font-bold text-[24px] text-[#21201F]"}>
+                      Material va jihozlar
+                    </h1>
+                    <p
                       className={
-                        " z-20 py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
                       }
                     >
-                      <p className={"text-[#21201FCC]"}>Batafsil</p>
-                      <Image
-                        src={"/icons/arrow-right.svg"}
-                        alt={"arrow-right"}
-                        width={20}
-                        height={20}
-                        className={"ml-[16px]"}
-                      />
-                    </div>
-                  </Link>
+                      Global strategiyani o&apos;zgartirish mahsulotning
+                      sublimatsiya qilingan hayot aylanishini tejaydi. Amaliyot
+                      aniq
+                    </p>
+
+                    <Link href="/materials">
+                      <div
+                        className={
+                          " z-20 py-[13px] px-[24px]  items-center border border-[#D7D9DC] bg-transparent hover:bg-[#0256BA] text-[#21201FCC] hover:text-white inline-flex rounded-[8px] transition-all duration-300"
+                        }
+                      >
+                        <p className={""}>Batafsil</p>
+                      </div>
+                    </Link>
+                  </div>
+                  <div className={"absolute bg-section bottom-0 -z-30"}>
+                    <Image
+                      src={"/images/materials.png"}
+                      alt={"materials"}
+                      width={910}
+                      height={485}
+                      className={"ml-[16px]"}
+                    />
+                  </div>
                 </div>
-                <div className={"absolute bg-section bottom-0 -z-30"}>
-                  <Image
-                    src={"/images/materials.png"}
-                    alt={"materials"}
-                    width={910}
-                    height={485}
-                    className={"ml-[16px]"}
-                  />
-                </div>
-              </div>
+              </Link>
 
               <div className={"col-span-6"}>
                 {/* machine-mechano */}
@@ -184,7 +179,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
+                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
                       }
                     >
                       Global strategiyani o&apos;zgartirish <br />{" "}
@@ -194,17 +189,10 @@ export default function Home() {
                     <Link href="/machine-mechano">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30"
+                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] bg-transparent hover:bg-[#0256BA] text-[#21201FCC] hover:text-white inline-flex rounded-[8px] transition-all duration-300 -z-30"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Batafsil</p>
-                        <Image
-                          src={"/icons/arrow-right.svg"}
-                          alt={"arrow-right"}
-                          width={20}
-                          height={20}
-                          className={"ml-[16px]"}
-                        />
+                        <p className={""}>Batafsil</p>
                       </div>
                     </Link>
                   </div>
@@ -234,7 +222,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
+                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
                       }
                     >
                       Global strategiyani o&apos;zgartirish tejaydi
@@ -257,7 +245,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px]"
+                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
                       }
                     >
                       Global strategiyani o&apos;zgartirish tejaydi
@@ -289,7 +277,7 @@ export default function Home() {
                   <h1 className="text-[#FFFFFF] text-[32px] font-bold ">
                     Namunaviy loyihalar
                   </h1>
-                  <p>
+                  <p className="opacity-0">
                     Lorem Ipsum-bu Lorem Ipsum tomonidan ishlatiladigan
                     shunchaki qo&apos;g&apos;irchoq matn-bu shunchaki
                     ishlatilgan qo&apos;g&apos;irchoq matn
@@ -310,13 +298,23 @@ export default function Home() {
                     ></div>
                     <div className="absolute bottom-0 p-[32px] text-white ">
                       <h1 className={"text-[28px] font-bold "}>Maktab</h1>
-                      <p className="text-sm font-normal mt-[10px] line-clamp-2">
+
+                      <p className="text-sm font-normal mt-[10px] line-clamp-2 opacity-0">
                         Biz to&apos;y rejalashtiruvchisi bilan erta
                         suhbatlashdik biz to&apos;y rejalashtiruvchisi Rano
                         Artykova bilan kelin va kuyovlar o&apos;rtasidagi
                         ziddiyatlar, keraksiz urf-odatlar va keyingi sevgi
                         haqida suhbatlashdik
                       </p>
+                      <Link href="/loyihalar/maktab">
+                        <div
+                          className={
+                            "  py-[13px] px-[24px]   bg-white hover:bg-[#0256BA] text-[#0256BA] hover:text-white  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                          }
+                        >
+                          <p className={""}>Batafsil</p>
+                        </div>
+                      </Link>
                     </div>
                   </Link>
                 </div>
@@ -341,7 +339,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                       }
                     >
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
@@ -352,10 +350,10 @@ export default function Home() {
                     <Link href="/loyihalar/maktab">
                       <div
                         className={
-                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                          "  py-[13px] px-[24px]   bg-transparent hover:bg-[#0256BA] text-[#21201FCC] hover:text-white  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Batafsil</p>
+                        <p className={""}>Batafsil</p>
                       </div>
                     </Link>
                   </div>
@@ -378,7 +376,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                       }
                     >
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik

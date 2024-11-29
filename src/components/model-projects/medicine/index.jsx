@@ -59,9 +59,9 @@ const MedicineProject = () => {
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                 O&apos;lchov Birligi
               </th>
-              <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
+              {/* <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
                 Narxi
-              </th>
+              </th> */}
             </tr>
           </thead>
 
@@ -85,9 +85,9 @@ const MedicineProject = () => {
                 <td className=" font-medium text-xs py-[10px] text-center">
                   {get(item, "measure")}
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
+                {/* <td className=" font-medium text-xs py-[10px]">
                   {get(item, "price")}
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

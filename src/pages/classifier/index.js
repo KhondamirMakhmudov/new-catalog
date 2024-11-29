@@ -169,18 +169,22 @@ const Index = () => {
                         key={get(volume, "id")}
                         className=""
                       >
-                        <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                        <div className="flex gap-x-[4px] items-center hover:bg-[#8bbffa] bg-transparent transition-all duration-200">
                           <Image
-                            src={"/icons/arrow_right.svg"}
+                            src={
+                              volumed !== get(volume, "id")
+                                ? "/icons/add-circle.svg"
+                                : "/icons/minus-circle.svg"
+                            }
                             alt="arrow_right"
-                            width={16}
-                            height={16}
+                            width={20}
+                            height={20}
                           />
-                          <p className="text-xs font-medium text-[#475467]">
+                          <p className="text-sm font-semibold text-[#24539b]">
                             {get(volume, "volume_name")}
                           </p>
                         </div>
-                        {volumed === get(volume, "id") && ( // Only show categories for selected volume
+                        {volumed === get(volume, "id") && (
                           <>
                             {isLoadingCategory ? (
                               <div>
@@ -188,7 +192,7 @@ const Index = () => {
                               </div>
                             ) : (
                               <motion.ul
-                                className="ml-[16px]"
+                                className="ml-[19px]"
                                 initial={{ opacity: 0, translateY: "20px" }}
                                 animate={{ opacity: 1, translateY: "0px" }}
                                 transition={{ duration: 0.1 }}
@@ -211,12 +215,16 @@ const Index = () => {
                                     >
                                       <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                                         <Image
-                                          src={"/icons/arrow_right.svg"}
+                                          src={
+                                            categoryId !== get(category, "id")
+                                              ? "/icons/add-circle.svg"
+                                              : "/icons/minus-circle.svg"
+                                          }
                                           alt="arrow_right"
-                                          width={16}
-                                          height={16}
+                                          width={18}
+                                          height={18}
                                         />
-                                        <p className="text-xs font-medium text-[#475467]">
+                                        <p className="text-[13px] font-semibold text-[#4a89e7]">
                                           {get(category, "category_name")}
                                         </p>
                                       </div>
@@ -227,15 +235,14 @@ const Index = () => {
                                               <ContentLoader />
                                             </div>
                                           ) : (
-                                            <ul className="ml-[16px]">
+                                            <ul className="ml-[19px]">
                                               {get(materialGroup, "data")?.map(
                                                 (group) => (
                                                   <li
                                                     key={get(group, "id")}
                                                     onClick={(e) => {
                                                       e.stopPropagation();
-                                                      setVolumed(null);
-                                                      setCategoryId(null);
+
                                                       setGroupId(
                                                         get(group, "id")
                                                       );
@@ -249,7 +256,7 @@ const Index = () => {
                                                     <div className="flex gap-x-[4px] items-center ">
                                                       <Image
                                                         src={
-                                                          "/icons/arrow_right.svg"
+                                                          "/icons/checked.svg"
                                                         }
                                                         alt="arrow_right"
                                                         width={16}
@@ -413,8 +420,15 @@ const Index = () => {
                           <td className=" font-medium text-xs py-[10px]  text-center">
                             {index + 1}
                           </td>
-                          <td className=" font-medium text-xs py-[10px]  text-start">
-                            {get(item, "material_csr_code")}
+                          <td className=" font-medium text-xs py-[10px] text-[#0256BA]  text-start">
+                            <Link
+                              href={`materials/${get(
+                                item,
+                                "material_csr_code"
+                              )}`}
+                            >
+                              {get(item, "material_csr_code")}
+                            </Link>
                           </td>
 
                           <td className=" font-medium text-xs py-[10px] max-w-[200px]">

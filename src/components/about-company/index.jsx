@@ -38,7 +38,11 @@ const AboutClassifier = () => {
         <h1 className={"text-[#21201F] text-[32px] font-bold"}>
           Byudjetni qayta <br /> taqsimlash
         </h1>
-        <p className={"text-[17px] text-[#21201FB2] font-medium flex-1"}>
+        <p
+          className={
+            "text-[17px] text-[#21201FB2] font-medium flex-1 opacity-0"
+          }
+        >
           Global strategiyani o&apos;zgartirish mahsulotning sublimatsiya
           qilingan hayot aylanishini tejaydi. Amaliyot aniq ko&apos;rsatib
           turibdi

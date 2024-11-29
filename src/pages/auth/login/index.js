@@ -1,6 +1,6 @@
 import RightIcon from "@/components/icons/right";
 import { KEYS } from "@/constants/key";
-import usePostQuery from "@/hooks/api/usePostQuery";
+x;
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
