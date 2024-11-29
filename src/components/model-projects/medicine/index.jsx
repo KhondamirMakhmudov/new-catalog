@@ -1,4 +1,3 @@
-import Pagination from "@/components/pagination";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
