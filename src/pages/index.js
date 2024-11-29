@@ -304,10 +304,10 @@ export default function Home() {
                     <Link href="/loyihalar/1">
                       <div
                         className={
-                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                          "  py-[13px] px-[24px]  text-white hover:text-[#0256BA] bg-[#0256BA] hover:bg-white items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Batafsil</p>
+                        <p className={""}>Batafsil</p>
                       </div>
                     </Link>
                   </div>
@@ -333,7 +333,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                       }
                     >
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
@@ -370,7 +370,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                        "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                       }
                     >
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
