@@ -12,8 +12,8 @@ import MapOfUz from "@/components/icons/uz-map";
 import HorizontalBarChart from "@/components/bar";
 import ArrowRightButton from "@/components/buttons/arrow-right";
 import ScrollToTopButton from "@/components/scroll-to-top";
-
 import AboutClassifier from "@/components/about-company";
+import FondStock from "@/components/fondStock";
 
 const integrationData = [
   {
@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <>
       <Header />
-
+      <FondStock />
       <main className="bg-white">
         <ScrollToTopButton />
         <section

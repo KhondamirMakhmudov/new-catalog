@@ -345,10 +345,10 @@ const Index = () => {
                     </thead>
 
                     <tbody>
-                      {get(materialsFast, "data.materials")?.map(
+                      {get(materialsFast, "data.materials", [])?.map(
                         (item, index) => (
                           <tr
-                            key={index}
+                            key={get(item, "id")}
                             className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                           >
                             <td className=" font-medium text-xs py-[10px]  text-center">

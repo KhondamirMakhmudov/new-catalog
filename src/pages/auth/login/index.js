@@ -10,7 +10,6 @@ import { URLS } from "@/constants/url";
 import { get } from "lodash";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
-
 import Header from "@/components/header";
 
 const Index = () => {
