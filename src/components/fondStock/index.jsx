@@ -8,6 +8,7 @@ import { get, head } from "lodash";
 
 import { NumericFormat } from "react-number-format";
 import ContentLoader from "../loader/content-loader";
+import SimpleLoader from "../loader/simple-loader";
 
 const FondStock = () => {
   const {
@@ -22,7 +23,7 @@ const FondStock = () => {
   return (
     <>
       {isLoading || isFetching ? (
-        <ContentLoader />
+        <SimpleLoader />
       ) : (
         <div className={` bg-[#2C2727] transition-all duration-500`}>
           <div>
