@@ -27,6 +27,7 @@ const Index = () => {
   const [nameValue, setNameValue] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
+  const [selectedDate, setSelectedDate] = useState("");
   const { state, dispatch } = useCounter();
   const [tableData, setTableData] = useState([]);
 
@@ -46,6 +47,7 @@ const Index = () => {
       page: page,
       page_size: 12,
       name_value: nameValue || undefined,
+      date: selectedDate || undefined,
     },
     enabled: true,
   });
@@ -305,10 +307,9 @@ const Index = () => {
                   <input
                     type="text"
                     placeholder="Kiriting"
-                    value={regionName}
                     onChange={(e) => {
                       const value = e.target.value;
-                      setRegionName(value);
+                      setSelectedDate(value);
                     }}
                     className="py-[10px] pl-[15px] border w-full rounded-[8px]"
                   />

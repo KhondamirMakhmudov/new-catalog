@@ -15,6 +15,7 @@ import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 import Footer from "@/components/footer";
 import SimpleLoader from "@/components/loader/simple-loader";
+import { NumericFormat } from "react-number-format";
 
 const Index = () => {
   const [limit] = useState(9);
@@ -659,17 +660,20 @@ const Index = () => {
                               )}
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
-                              {(
-                                get(item, "material_price") *
-                                get(
-                                  currency,
-                                  `data[${get(
-                                    item,
-                                    "material_price_currency",
-                                    1
-                                  )}]`
-                                )
-                              ).toFixed(2)}
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                value={(
+                                  get(item, "material_price") *
+                                  get(
+                                    currency,
+                                    `data[${get(
+                                      item,
+                                      "material_price_currency",
+                                      1
+                                    )}]`
+                                  )
+                                ).toFixed(2)}
+                              />
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
                               <div className="flex items-center gap-x-[4px]">
