@@ -358,7 +358,7 @@ const Index = () => {
                               {get(item, "material_region_name")}
                             </td>
 
-                            <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
+                            <td className=" font-medium text-xs text-[#0256BA] py-[10px]  text-start max-w-[200px]">
                               <Link
                                 href={`/company/${get(item, "company_stir")}`}
                                 className="underline-0 hover:underline transition-all duration-300"
@@ -367,7 +367,7 @@ const Index = () => {
                               </Link>
                             </td>
 
-                            <td className=" font-medium text-xs py-[10px]">
+                            <td className=" font-medium text-xs text-[#0256BA] py-[10px]">
                               <Link
                                 href={`/materials/${get(
                                   item,
@@ -399,10 +399,26 @@ const Index = () => {
                                 className="bg-transparent max-w-[100px]"
                                 value={
                                   Number.isInteger(get(item, "material_price"))
-                                    ? get(item, "material_price")
+                                    ? get(item, "material_price") *
+                                      get(
+                                        currency,
+                                        `data[${get(
+                                          item,
+                                          "material_price_currency"
+                                        )}]`,
+                                        1
+                                      )
                                     : parseFloat(
                                         get(item, "material_price")
-                                      ).toFixed(2)
+                                      ).toFixed(2) *
+                                      get(
+                                        currency,
+                                        `data[${get(
+                                          item,
+                                          "material_price_currency"
+                                        )}]`,
+                                        1
+                                      )
                                 }
                               />
                             </td>

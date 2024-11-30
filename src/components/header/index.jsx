@@ -15,7 +15,7 @@ const Header = ({ id }) => {
     section.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <header>
+    <header className="sticky top-0 z-50">
       <div className={"text-white bg-[#0256BA] py-[13px]   font-gilroy"}>
         <div className="container ">
           {/* top of the header. will be component in next time */}
@@ -46,7 +46,7 @@ const Header = ({ id }) => {
               </li>
             </ul>
             <div className={"flex items-center"}>
-              <div className={"flex gap-x-[10px]"}>
+              {/* <div className={"flex gap-x-[10px]"}>
                 <h4>Toshkent shahri</h4>
                 <Image
                   src={"/icons/down.svg"}
@@ -54,9 +54,9 @@ const Header = ({ id }) => {
                   width={18}
                   height={18}
                 />
-              </div>
+              </div> */}
 
-              <div className={"bg-[#4885CD] w-[1px] h-[11px] mx-[13px]"}></div>
+              {/* <div className={"bg-[#4885CD] w-[1px] h-[11px] mx-[13px]"}></div> */}
 
               <Lang />
             </div>

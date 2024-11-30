@@ -276,7 +276,7 @@ export default function Home() {
                     <Link href="/loyihalar/1">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  text-white hover:text-[#0256BA] bg-[#0256BA] hover:bg-white items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                          "  py-[14px] px-[24px]  hover:text-white text-[#21201FCC] hover:bg-[#0256BA] bg-white items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
                         <p className={""}>Batafsil</p>
@@ -316,10 +316,10 @@ export default function Home() {
                     <Link href="/loyihalar/maktab">
                       <div
                         className={
-                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                          "  py-[14px] px-[24px]  border border-[#D7D9DC]  text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] items-center inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
-                        <p className={"text-[#21201FCC]"}>Batafsil</p>
+                        <p>Batafsil</p>
                       </div>
                     </Link>
                   </div>
@@ -353,7 +353,7 @@ export default function Home() {
                     <Link href="/loyihalar/poliklinika">
                       <div
                         className={
-                          "  py-[13px] px-[24px] loyiha-button  hover:border-[#D7E4F3] items-center border border-[#D7D9DC] active:bg-[#0256BA] text-[#21201FCC] active:text-white inline-flex rounded-[8px] transition-all duration-300"
+                          "  py-[14px] px-[24px] border border-[#D7D9DC]  text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] items-center inline-flex rounded-[8px] transition-all duration-300"
                         }
                       >
                         <p className={""}>Batafsil</p>

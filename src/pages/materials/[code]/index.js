@@ -31,6 +31,7 @@ const Index = () => {
   const [average, setAverage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [gost, setGost] = useState(false);
 
   const handleIncrement = (product) => {
     dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
@@ -265,7 +266,7 @@ const Index = () => {
                 <ContentLoader />
               ) : (
                 <div className="grid grid-cols-12 bg-white p-[20px] border border-[#E4E7F5] rounded-[12px] gap-y-[30px] font-gilroy">
-                  <div className="col-span-12 flex justify-between items-center">
+                  <div className="col-span-7 flex justify-between items-center">
                     <div className="">
                       <div className="flex gap-x-[20px] mb-[12px]">
                         <div className="flex gap-x-[6px]">
@@ -298,9 +299,49 @@ const Index = () => {
                       </h2>
                     </div>
                   </div>
+                  <div className="col-span-5">
+                    <motion.button
+                      initial={{ scale: 0.01 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      onClick={() => setGost(true)}
+                      className={`p-[12px] rounded-[8px] bg-[#EBF2FA]  float-right active:scale-110 scale-100 transition-all duration-300 ${
+                        !gost ? "inline-block" : "hidden"
+                      }`}
+                    >
+                      <Image
+                        src={"/icons/file.svg"}
+                        alt="file"
+                        width={24}
+                        height={24}
+                      />
+                    </motion.button>
+
+                    {gost && (
+                      <motion.div
+                        className="float-right"
+                        initial={{ scale: 0.01 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        {get(material, "data.materil_gost") === null ? (
+                          <p>Ma&apos;lumot mavjud emas</p>
+                        ) : (
+                          <p className="text-sm max-w-[200px]">
+                            {get(material, "data.materil_gost")}
+                          </p>
+                        )}
+                      </motion.div>
+                    )}
+                  </div>
 
                   <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
-                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                    <motion.div
+                      initial={{ scale: 0.01 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                    >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
                           <div
@@ -335,9 +376,14 @@ const Index = () => {
                           </li>
                         </ul>
                       )}
-                    </div>
+                    </motion.div>
 
-                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                    <motion.div
+                      initial={{ scale: 0.01 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                    >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
                           <div
@@ -372,9 +418,14 @@ const Index = () => {
                           </li>
                         </ul>
                       )}
-                    </div>
+                    </motion.div>
 
-                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                    <motion.div
+                      initial={{ scale: 0.01 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                    >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
                           <div
@@ -403,9 +454,14 @@ const Index = () => {
                           <p className="font-bold">0 so&apos;m</p>
                         </li>
                       </ul>
-                    </div>
+                    </motion.div>
 
-                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                    <motion.div
+                      initial={{ scale: 0.01 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                    >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
                           <div
@@ -434,40 +490,49 @@ const Index = () => {
                           <p className="font-bold">0 so&apos;m</p>
                         </li>
                       </ul>
-                    </div>
+                    </motion.div>
 
-                    <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
-                      <ul className="space-y-[13px] flex flex-col">
-                        <li className="flex justify-between items-end">
-                          <p className="text-xs font-bold">Maksimal narx:</p>
-                          <div className="flex-grow border-t border-dotted mx-2"></div>
-                          <p className="text-[#4B5157] text-xs font-medium">
-                            {maximum}
-                            so&apos;m
-                          </p>
-                        </li>
+                    <motion.div
+                      initial={{ scale: 0.01 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                    >
+                      {isLoadingMaterialAds || isFetchingMaterialAds ? (
+                        <SimpleLoader />
+                      ) : (
+                        <ul className="space-y-[13px] flex flex-col">
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Maksimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {maximum}
+                              so&apos;m
+                            </p>
+                          </li>
 
-                        <li className="flex justify-between items-end">
-                          <p className="text-xs font-bold">
-                            O&apos;rtacha narx:
-                          </p>
-                          <div className="flex-grow border-t border-dotted mx-2"></div>
-                          <p className="text-[#4B5157] text-xs font-medium">
-                            {average}
-                            so&apos;m
-                          </p>
-                        </li>
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">
+                              O&apos;rtacha narx:
+                            </p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {average}
+                              so&apos;m
+                            </p>
+                          </li>
 
-                        <li className="flex justify-between items-end">
-                          <p className="text-xs font-bold">Minimal narx:</p>
-                          <div className="flex-grow border-t border-dotted mx-2"></div>
-                          <p className="text-[#4B5157] text-xs font-medium">
-                            {minimum}
-                            so&apos;m
-                          </p>
-                        </li>
-                      </ul>
-                    </div>
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Minimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {minimum}
+                              so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      )}
+                    </motion.div>
                   </div>
                 </div>
               )}
@@ -496,7 +561,7 @@ const Index = () => {
                           }, 500)}
                           type="text"
                           placeholder="Qidiring"
-                          className="  w-full p-[10px]  "
+                          className="  w-full p-[10px]  rounded-[8px]"
                         />
                       </div>
                     </div>
@@ -594,7 +659,17 @@ const Index = () => {
                               )}
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
-                              {get(item, "material_price").toFixed(2)}
+                              {(
+                                get(item, "material_price") *
+                                get(
+                                  currency,
+                                  `data[${get(
+                                    item,
+                                    "material_price_currency",
+                                    1
+                                  )}]`
+                                )
+                              ).toFixed(2)}
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
                               <div className="flex items-center gap-x-[4px]">

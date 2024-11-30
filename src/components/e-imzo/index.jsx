@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import { toast } from "react-hot-toast";
 import Image from "next/image";
+import SimpleLoader from "../loader/simple-loader";
 
 const ESIGN = ({
   setOpen = () => {},
@@ -51,7 +52,11 @@ const ESIGN = ({
   };
   return (
     <>
-      {loading && <div>Loading</div>}
+      {loading && (
+        <div>
+          <SimpleLoader />
+        </div>
+      )}
 
       {isArray(keys) && !isEmpty(keys) && (
         <div className="container font-gilroy  text-[#1F2937] cursor-pointer ">
@@ -153,42 +158,65 @@ const ESIGN = ({
 
       {isEqual(error, "NOT_INSTALLED") ? (
         <>
-          <div className={"!text-start !font-semibold mb-[20px]"}>
-            <h4 className={"text-base"}>ERI urnatilmagan.</h4>
-          </div>
-          <div className={"!text-start text-sm "}>
-            <p>Xatoni hal qilish uchun quyidagilarni bajaring:</p>
+          <div className="ml-[90px]">
+            <div
+              className={
+                "!text-start flex items-center gap-x-[10px] p-[10px] text-[#DD2033] bg-[#BA020214] rounded-[12px] !font-semibold mb-[20px]"
+              }
+            >
+              <Image
+                onClick={() => setItemId(null)}
+                src={"/images/info-circle.png"}
+                alt={"circle"}
+                width={24}
+                height={24}
+                className={"  cursor-pointer"}
+              />
+              <h4 className={"text-base"}>ERI o&apos;rnatilmagan.</h4>
+            </div>
+            <div className={"!text-start text-xs text-[#718096]"}>
+              <p>Xatoni hal qilish uchun quyidagilarni bajaring:</p>
 
-            <ol className={"list-decimal ml-[20px]"}>
-              <li>
-                ERI kalitlari C:\DSKEYS yoki D:\DSKEYS manzilida
-                joylashganligini hamda ushbu kalitlar aynan sizga tegishligini
-                tekshiring
-              </li>
+              <ol className={"list-decimal ml-[20px]"}>
+                <li>
+                  ERI kalitlari C:\DSKEYS yoki D:\DSKEYS manzilida
+                  joylashganligini hamda ushbu kalitlar aynan sizga tegishligini
+                  tekshiring
+                </li>
+                <li>
+                  Antivirus dasturi kalitlardan foydalanishni
+                  ta&apos;qiqlamayotganligini tekshiring
+                </li>
 
-              <li>
-                Antivirus dasturi kalitlardan foydalanishni
-                ta&apos;qiqlamayotganligini tekshiring
-              </li>
+                <li>
+                  Korporativ kompyuterlarni ko&apos;llash holatida tashkilot
+                  siyosati sizga ERI kalitlaridan foydalanishga ruxsat
+                  berayotganiga ishonch hosil qiling
+                </li>
+              </ol>
 
-              <li>
-                Korporativ kompyuterlarni ko&apos;llash holatida tashkilot
-                siyosati sizga ERI kalitlaridan foydalanishga ruxsat
-                berayotganiga ishonch hosil qiling
-              </li>
-            </ol>
+              <p className={"mt-[20px] text-[#525D8A]"}>
+                E-Imzo modulini o&apos;rnatish bo&apos;yicha yo&apos;riqnoma va
+                yuzaga kelishi mumkin bo&apos;lgan muammolar bilan{" "}
+                <Link
+                  href={"https://e-imzo.uz/#instructions"}
+                  className={"text-[#017EFA] underline"}
+                >
+                  shu yerda
+                </Link>{" "}
+                tanishishingiz mumkin
+              </p>
 
-            <p className={"mt-[20px] text-[#525D8A]"}>
-              E-Imzo modulini o&apos;rnatish bo&apos;yicha yo&apos;riqnoma va
-              yuzaga kelishi mumkin bo&apos;lgan muammolar bilan{" "}
-              <Link
-                href={"https://e-imzo.uz/#instructions"}
-                className={"text-[#017EFA] underline"}
-              >
-                shu yerda
-              </Link>{" "}
-              tanishishingiz mumkin
-            </p>
+              <div className="flex justify-center items-center">
+                <Image
+                  src={"/icons/key-not-found.svg"}
+                  alt="key-not-found"
+                  width={492}
+                  height={492}
+                  className="mt-[40px]"
+                />
+              </div>
+            </div>
           </div>
         </>
       ) : isEqual(error, "KEY_NOT_FOUND") ? (
@@ -244,7 +272,7 @@ const ESIGN = ({
 
             <div className="flex justify-center items-center">
               <Image
-                src={"/images/key-not-found.png"}
+                src={"/icons/key-not-found.svg"}
                 alt="key-not-found"
                 width={492}
                 height={492}
