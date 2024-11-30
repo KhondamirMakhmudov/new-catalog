@@ -6,7 +6,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { get } from "lodash";
+import { get, debounce } from "lodash";
 import Reveal from "@/components/reveal";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -181,6 +181,9 @@ const Index = () => {
                   <div className="flex flex-col font-gilroy col-span-10 gap-y-[3px]">
                     <label className="font-semibold">Mahsulot nomi</label>
                     <input
+                      onChange={debounce(function (e) {
+                        setSearchQuery(e.target.value);
+                      }, 500)}
                       type="text"
                       className="py-[10px] px-[15px]  border  w-full rounded-[8px] font-gilroy"
                       placeholder="Qidirish"
@@ -228,7 +231,7 @@ const Index = () => {
                   </thead>
 
                   <tbody>
-                    {get(companyAds, "data.results", []).map((item, index) => (
+                    {filteredData.map((item, index) => (
                       <tr
                         key={index}
                         className="text-sm odd:bg-[#EDF4FC] even:bg-white"
@@ -239,7 +242,7 @@ const Index = () => {
                         <td className=" font-medium text-xs py-[10px]">
                           {get(item, "material_region")}
                         </td>
-                        <td className=" font-medium text-xs py-[10px]">
+                        <td className=" font-medium text-[#0256BA] text-xs py-[10px]">
                           <Link
                             href={`/materials/${get(item, "material_name")}`}
                             className="underline-0 hover:underline transition-all duration-300"
@@ -247,7 +250,7 @@ const Index = () => {
                             {get(item, "material_csr_code")}
                           </Link>
                         </td>
-                        <td className=" font-medium text-xs py-[10px]">
+                        <td className=" font-medium text-xs py-[10px] max-w-[150px]">
                           {get(item, "material_name")}
                         </td>
                         <td className=" font-medium text-xs py-[10px] text-center">
