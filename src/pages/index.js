@@ -65,46 +65,42 @@ export default function Home() {
         <section
           style={{ backgroundImage: `url(/images/bg-image.png)` }}
           className={
-            "w-full relative min-h-[666px] h-full object-cover bg-cover bg-no-repeat font-anybody z-10"
+            "w-full relative min-h-[666px] h-full object-cover bg-cover bg-no-repeat font-anybody z-10 flex items-center justify-center"
           }
         >
-          <div className={"translate-y-1/2"}>
-            <div
-              className={"container  text-[#ffffff] flex flex-col gap-y-[20px]"}
+          <div className={"container  text-[#ffffff]  "}>
+            <motion.h1
+              initial={{ scale: 0.11 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className={"text-[42px] font-bold uppercase z-40"}
             >
-              <motion.h1
-                initial={{ scale: 0.11 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
-                className={"text-[42px] font-bold uppercase z-40"}
-              >
-                Byudjetni qayta <br /> taqsimlash
-              </motion.h1>
+              Qurilish resurslari <br /> milliy klassifikatori
+            </motion.h1>
 
+            <motion.p
+              className={"max-w-[458px] opacity-0"}
+              initial={{ scale: 0.11 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              Global strategiyani o&apos;zgartirish mahsulotning <br />{" "}
+              sublimatsiya qilingan hayot aylanishini tejaydi. <br /> Amaliyot
+              aniq ko&apos;rsatib turibdi
+            </motion.p>
+
+            <Link href={"#"}>
               <motion.p
-                className={"max-w-[458px] opacity-0"}
                 initial={{ scale: 0.11 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.3 }}
+                className={
+                  "bg-white text-[#21201F] py-[14px] px-[28px] font-semibold font-gilroy rounded-[12px] inline-block opacity-0"
+                }
               >
-                Global strategiyani o&apos;zgartirish mahsulotning <br />{" "}
-                sublimatsiya qilingan hayot aylanishini tejaydi. <br /> Amaliyot
-                aniq ko&apos;rsatib turibdi
+                Ko&apos;proq bilib oling
               </motion.p>
-
-              <Link href={"#"}>
-                <motion.p
-                  initial={{ scale: 0.11 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className={
-                    "bg-white text-[#21201F] py-[14px] px-[28px] font-semibold font-gilroy rounded-[12px] inline-block"
-                  }
-                >
-                  Ko&apos;proq bilib oling
-                </motion.p>
-              </Link>
-            </div>
+            </Link>
           </div>
           <div
             className={`absolute top-0 bottom-0 left-0 right-0 bg-image-gradient -z-10 `}

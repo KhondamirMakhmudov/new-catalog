@@ -333,8 +333,15 @@ const Index = () => {
                           <td className=" font-medium text-xs py-[10px]  text-center">
                             {index + 1}
                           </td>
-                          <td className=" font-medium text-xs py-[10px]  text-start">
-                            {get(item, "material_csr_code")}
+                          <td className=" font-medium text-xs py-[10px] text-[#0256BA]  text-start">
+                            <Link
+                              href={`materials/${get(
+                                item,
+                                "material_csr_code"
+                              )}`}
+                            >
+                              {get(item, "material_csr_code")}
+                            </Link>
                           </td>
 
                           <td className=" font-medium text-xs py-[10px] max-w-[200px]">
