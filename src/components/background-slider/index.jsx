@@ -3,12 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-const backgrounds = [
-  "/images/background1.jpg",
-  "/images/background2.jpg",
-  "/images/background3.jpg",
-  "/images/background4.png",
-];
+const backgrounds = ["/images/background1.jpg", "/images/background4.png"];
 
 const BackgroundSlider = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
