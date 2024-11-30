@@ -243,7 +243,7 @@ const Index = () => {
 
             <div className="col-span-9 space-y-[16px]">
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                <div className="col-span-4">
+                <div className="col-span-2">
                   <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
 
                   <input
@@ -298,6 +298,20 @@ const Index = () => {
                       className="py-[10px] px-[15px] border w-full  rounded-[8px]"
                     />
                   </div>
+                </div>
+                <div className="col-span-2">
+                  <h3 className="font-semibold text-sm mb-[6px] ">Sana</h3>
+
+                  <input
+                    type="text"
+                    placeholder="Kiriting"
+                    value={regionName}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setRegionName(value);
+                    }}
+                    className="py-[10px] pl-[15px] border w-full rounded-[8px]"
+                  />
                 </div>
               </div>
               {materialLoading && isFetchingMaterials ? (

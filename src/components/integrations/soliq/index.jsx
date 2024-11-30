@@ -107,22 +107,28 @@ const SoliqComponent = () => {
                 </td>
 
                 <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                  {get(item, "delivery_sum")}
-                </td>
-
-                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                  {get(item, "vat_sum")}
-                </td>
-
-                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                  {get(item, "delivery_sum_with_vat")}
-                </td>
-
-                <td className=" font-medium text-xs py-[10px] text-center">
                   <NumericFormat
                     thousandSeparator={" "}
                     displayType="text"
-                    value={get(item, "productPrice")}
+                    value={get(item, "delivery_sum")}
+                    className="bg-transparent"
+                  />
+                </td>
+
+                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
+                  <NumericFormat
+                    thousandSeparator={" "}
+                    displayType="text"
+                    value={get(item, "vat_sum")}
+                    className="bg-transparent"
+                  />
+                </td>
+
+                <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
+                  <NumericFormat
+                    thousandSeparator={" "}
+                    displayType="text"
+                    value={get(item, "delivery_sum_with_vat")}
                     className="bg-transparent"
                   />
                 </td>

@@ -1,4 +1,4 @@
-import { get, debounce } from "lodash";
+import { get, debounce, drop } from "lodash";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { URLS } from "@/constants/url";
 import { KEYS } from "@/constants/key";
@@ -78,20 +78,20 @@ const MinistryComponent = () => {
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                 Kompaniya nomi
               </th>
-              <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
+              <th className=" text-center text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
                 Narxi (so’m)
               </th>
             </tr>
           </thead>
 
           <tbody>
-            {filteredData.map((item, index) => (
+            {drop(filteredData, 5).map((item, index) => (
               <tr
-                key={index}
+                key={get(item, "id")}
                 className="text-sm odd:bg-[#EDF4FC] even:bg-white"
               >
                 <td className=" font-medium text-xs py-[10px]  text-center">
-                  {index + 1}
+                  {get(item, "id")}
                 </td>
                 <td className=" font-medium text-xs py-[10px]">
                   {get(item, "productCode")}

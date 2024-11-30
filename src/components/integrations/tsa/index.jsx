@@ -68,7 +68,7 @@ const TSAComponent = () => {
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                 Kompaniya nomi
               </th>
-              <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
+              <th className=" text-center text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
                 Narxi (so’m)
               </th>
             </tr>
@@ -81,19 +81,19 @@ const TSAComponent = () => {
                 className="text-sm odd:bg-[#EDF4FC] even:bg-white"
               >
                 <td className=" font-medium text-xs py-[10px]  text-center">
-                  {index + 1}
+                  {get(item, "id")}
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
+                <td className=" font-medium text-xs py-[10px] max-w-[300px]">
                   {get(item, "name")}
                 </td>
-                <td className=" font-medium text-xs py-[10px]">
+                <td className=" font-medium text-xs py-[10px] max-w-[300px]">
                   {get(item, "gost")}
                 </td>
                 <td className="text-start font-medium text-xs py-[10px]">
                   {get(item, "company_name")}
                 </td>
 
-                <td className=" font-medium text-xs py-[10px] text-center">
+                <td className=" font-medium  text-xs py-[10px] text-center">
                   <NumericFormat
                     thousandSeparator={" "}
                     displayType="text"

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { get } from "lodash";
 import Reveal from "@/components/reveal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Pagination from "@/components/pagination";
 import { NumericFormat } from "react-number-format";
@@ -17,6 +17,8 @@ import MyAdsAll from "@/layouts/dashboard/deliver/components/myAds-page/my-ads";
 import CompanyFilterAds from "@/layouts/dashboard/deliver/components/company-filter/companeFilter";
 const Index = () => {
   const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const router = useRouter();
   const { stir } = router.query;
@@ -42,6 +44,17 @@ const Index = () => {
     },
     enabled: !!stir,
   });
+
+  useEffect(() => {
+    if (get(companyAds, "data.results", [])) {
+      const searchResults = get(companyAds, "data.results", []).filter((item) =>
+        get(item, "material_name")
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())
+      );
+      setFilteredData(searchResults);
+    }
+  }, [searchQuery, companyAds]);
 
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
@@ -132,8 +145,7 @@ const Index = () => {
             <div className="col-span-12">
               <Reveal>
                 <div
-                  className=" min-h-[164px] w-full bg-center bg-no-repeat
-            bg-cover rounded-[20px] flex items-center justify-center"
+                  className=" min-h-[164px] w-full bg-center bg-no-repeat bg-cover rounded-[20px] flex items-center justify-center"
                   style={{ backgroundImage: `url(/images/address.png)` }}
                 >
                   <Link
@@ -157,29 +169,24 @@ const Index = () => {
           </div>
 
           <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
-              <div className="flex justify-between items-center">
-                <h4 className="font-extrabold">Mahsulot qidirish</h4>
-                <button onClick={() => setShowAllProjects(!showAllProjects)}>
-                  <RightIcon
-                    classname={`${
-                      !showAllProjects ? "rotate-90" : "-rotate-90"
-                    } transition-all duration-200`}
-                    color="#BCBFC2"
-                  />
-                </button>
-              </div>
-
-              <input
-                type="text"
-                className="py-[10px] px-[15px] border w-full mt-[20px] rounded-[8px]"
-                placeholder="Qidirish"
-              />
-            </div>
-
-            <div className="col-span-9 space-y-[16px]">
+            <div className="col-span-12  space-y-[16px]">
               <div>
-                <CompanyFilterAds></CompanyFilterAds>
+                <div className="grid grid-cols-12 items-end gap-x-[30px]">
+                  <button
+                    className={`col-span-2 py-[10px] px-[20px] font-gilroy bg-[#0256BA] text-white border-none rounded-[8px] text-sm `}
+                  >
+                    Barcha e&apos;lonlar
+                  </button>
+
+                  <div className="flex flex-col font-gilroy col-span-10 gap-y-[3px]">
+                    <label className="font-semibold">Mahsulot nomi</label>
+                    <input
+                      type="text"
+                      className="py-[10px] px-[15px]  border  w-full rounded-[8px] font-gilroy"
+                      placeholder="Qidirish"
+                    />
+                  </div>
+                </div>
               </div>
               <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
                 <motion.table
@@ -237,7 +244,7 @@ const Index = () => {
                             href={`/materials/${get(item, "material_name")}`}
                             className="underline-0 hover:underline transition-all duration-300"
                           >
-                            {get(item, "material_name")}
+                            {get(item, "material_csr_code")}
                           </Link>
                         </td>
                         <td className=" font-medium text-xs py-[10px]">
@@ -293,16 +300,17 @@ const Index = () => {
                 <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
                   <div>
                     <p className="text-sm text-[#9392A0]">
-                      {" "}
-                      {get(companyAds, "data.count")} tadan 1-tasi
+                      {get(companyAds, "data.count")} tadan{" "}
+                      {get(companyAds, "data.current_page_number")}-
+                      {get(companyAds, "data.items_per_page")} tasi
                       ko&apos;rsatilgan
                     </p>
                   </div>
 
                   <div>
                     <Pagination
-                      pageCount={page}
-                      setPage={() => setPage(page)}
+                      pageCount={get(companyAds, "data.total_pages")}
+                      setPage={setPage}
                     />
                   </div>
                 </div>
