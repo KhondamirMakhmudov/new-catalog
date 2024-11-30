@@ -660,20 +660,7 @@ const Index = () => {
                               )}
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
-                              <NumericFormat
-                                thousandSeparator={" "}
-                                value={(
-                                  get(item, "material_price") *
-                                  get(
-                                    currency,
-                                    `data[${get(
-                                      item,
-                                      "material_price_currency",
-                                      1
-                                    )}]`
-                                  )
-                                ).toFixed(2)}
-                              />
+                              {get(item, "material_price")}
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
                               <div className="flex items-center gap-x-[4px]">
