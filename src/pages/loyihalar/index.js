@@ -51,7 +51,7 @@ const Index = () => {
                 <h1 className="text-[28px] font-bold text-[#21201F]">Maktab</h1>
                 <p
                   className={
-                    "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                    "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                   }
                 >
                   Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik biz
@@ -59,20 +59,13 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="/loyihalar/maktab">
+                <Link href="/loyihalar/1">
                   <div
                     className={
-                      "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                      "  py-[14px] px-[24px]  hover:text-white text-[#21201FCC] hover:bg-[#0256BA] bg-white items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                     }
                   >
-                    <p className={"text-[#21201FCC]"}>Qarang</p>
-                    <Image
-                      src={"/icons/arrow-right.svg"}
-                      alt={"arrow-right"}
-                      width={20}
-                      height={20}
-                      className={"ml-[16px]"}
-                    />
+                    <p className={""}>Batafsil</p>
                   </div>
                 </Link>
               </div>
@@ -103,7 +96,7 @@ const Index = () => {
                 </h1>
                 <p
                   className={
-                    "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                    "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                   }
                 >
                   Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik biz
@@ -111,20 +104,13 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="/loyihalar/poliklinika">
+                <Link href="/loyihalar/1">
                   <div
                     className={
-                      "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                      "  py-[14px] px-[24px]  hover:text-white text-[#21201FCC] hover:bg-[#0256BA] bg-white items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                     }
                   >
-                    <p className={"text-[#21201FCC]"}>Qarang</p>
-                    <Image
-                      src={"/icons/arrow-right.svg"}
-                      alt={"arrow-right"}
-                      width={20}
-                      height={20}
-                      className={"ml-[16px]"}
-                    />
+                    <p className={""}>Batafsil</p>
                   </div>
                 </Link>
               </div>
@@ -155,7 +141,7 @@ const Index = () => {
                 </h1>
                 <p
                   className={
-                    "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px]"
+                    "text-sm font-normal text-[#9392A0] line-clamp-3 flex-1 mt-[10px] opacity-0"
                   }
                 >
                   Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik biz
@@ -163,20 +149,13 @@ const Index = () => {
                   kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz urf-odatlar va
                   keyingi sevgi haqida suhbatlashdik
                 </p>
-                <Link href="loyihalar/bogcha">
+                <Link href="/loyihalar/1">
                   <div
                     className={
-                      "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+                      "  py-[14px] px-[24px]  hover:text-white text-[#21201FCC] hover:bg-[#0256BA] bg-white items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
                     }
                   >
-                    <p className={"text-[#21201FCC]"}>Qarang</p>
-                    <Image
-                      src={"/icons/arrow-right.svg"}
-                      alt={"arrow-right"}
-                      width={20}
-                      height={20}
-                      className={"ml-[16px]"}
-                    />
+                    <p className={""}>Batafsil</p>
                   </div>
                 </Link>
               </div>
@@ -185,7 +164,7 @@ const Index = () => {
         </section>
       </main>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };
