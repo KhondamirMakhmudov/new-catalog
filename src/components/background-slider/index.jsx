@@ -11,7 +11,7 @@ const backgrounds = [
 ];
 
 const BackgroundSlider = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [progress, setProgress] = useState(0);
 
   const handlePrevious = () => {
