@@ -17,6 +17,22 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 
+const regions = [
+  { id: 1, name: "Toshkent" },
+  { id: 2, name: "Andijon" },
+  { id: 3, name: "Buxoro" },
+  { id: 4, name: "Fargona" },
+  { id: 5, name: "Jizzax" },
+  { id: 6, name: "Xorazm" },
+  { id: 7, name: "Namangan" },
+  { id: 8, name: "Navoiy" },
+  { id: 9, name: "Qashqadaryo" },
+  { id: 10, name: "Qoraqalpog'iston" },
+  { id: 11, name: "Samarqand" },
+  { id: 12, name: "Sirdaryo" },
+  { id: 13, name: "Surxondaryo" },
+];
+
 const Index = () => {
   const [volumed, setVolumed] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
@@ -30,6 +46,7 @@ const Index = () => {
   const [selectedDate, setSelectedDate] = useState("");
   const { state, dispatch } = useCounter();
   const [tableData, setTableData] = useState([]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const [limit] = useState(24);
   const [offset, setOffset] = useState(1);
@@ -245,19 +262,51 @@ const Index = () => {
 
             <div className="col-span-9 space-y-[16px]">
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                <div className="col-span-2">
+                <div className="col-span-2 self-stretch">
                   <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
 
-                  <input
-                    type="text"
+                  <div
+                    className="border rounded-[8px] py-[12px] px-[15px] cursor-pointer bg-white flex justify-between text-[#939699]"
+                    onClick={() => setDropdownOpen((prev) => !prev)}
+                  >
+                    <p className="text-sm">{regionName || "Hudud"}</p>
+                    <RightIcon
+                      classname={`${
+                        !dropdownOpen ? "rotate-90" : "-rotate-90"
+                      } transition-all duration-200`}
+                      color="#BCBFC2"
+                    />
+                  </div>
+                  {dropdownOpen && (
+                    <div className="absolute border bg-white rounded-[8px] mt-1 max-h-60 overflow-y-auto shadow-lg">
+                      {regions.map((region) => (
+                        <div
+                          key={get(region, "id")}
+                          className="px-4 py-2 text-sm cursor-pointer hover:bg-gray-100"
+                          onClick={() => {
+                            setRegionName(get(region, "name"));
+                            setDropdownOpen(false);
+                          }}
+                        >
+                          {get(region, "name")}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* <select
                     placeholder="Kiriting"
                     value={regionName}
                     onChange={(e) => {
                       const value = e.target.value;
                       setRegionName(value);
                     }}
-                    className="py-[10px] pl-[15px] border w-full rounded-[8px]"
-                  />
+                    className="py-[10px]  border w-full rounded-[8px]"
+                  >
+                    {regions.map((item) => (
+                      <option key={get(item, "id")}>{get(item, "name")}</option>
+                    ))}
+                  </select> */}
                 </div>
 
                 <div className="col-span-4">

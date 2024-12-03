@@ -63,7 +63,7 @@ const Index = () => {
       crs_code: get(material, "data.material_csr_code"),
     },
   });
-  // Birjadan ma'lumotlarni olish va hisob - kitob
+
   useEffect(() => {
     if (!isEmpty(get(birja, "data.filtered_data", []))) {
       const birjaDataArray = get(birja, "data.filtered_data", []);

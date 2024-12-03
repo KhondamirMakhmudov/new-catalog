@@ -104,7 +104,7 @@ const Index = () => {
                       va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
                       urf-odatlar va keyingi sevgi haqida suhbatlashdik
                     </p>
-                    <Link href="https://catalog.tmsiti.uz/works">
+                    <Link href="/loyihalar">
                       <div
                         className={
                           "  py-[7px] px-[13px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
@@ -151,7 +151,7 @@ const Index = () => {
                       va kuyovlar o&apos;rtasidagi ziddiyatlar, keraksiz
                       urf-odatlar va keyingi sevgi haqida suhbatlashdik
                     </p>
-                    <Link href="https://catalog.tmsiti.uz/works">
+                    <Link href="/loyihalar">
                       <div
                         className={
                           "  py-[7px] px-[13px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
