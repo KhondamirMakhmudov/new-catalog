@@ -173,10 +173,14 @@ const Index = () => {
                     >
                       <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                         <Image
-                          src={"/icons/arrow_right.svg"}
+                          src={
+                            volumed !== get(volume, "id")
+                              ? "/icons/add-circle.svg"
+                              : "/icons/minus-circle.svg"
+                          }
                           alt="arrow_right"
-                          width={16}
-                          height={16}
+                          width={20}
+                          height={20}
                         />
                         <p className="text-xs font-medium text-[#475467]">
                           {get(volume, "volume_name")}
@@ -206,10 +210,14 @@ const Index = () => {
                                   >
                                     <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
                                       <Image
-                                        src={"/icons/arrow_right.svg"}
+                                        src={
+                                          categoryId !== get(category, "id")
+                                            ? "/icons/add-circle.svg"
+                                            : "/icons/minus-circle.svg"
+                                        }
                                         alt="arrow_right"
-                                        width={16}
-                                        height={16}
+                                        width={18}
+                                        height={18}
                                       />
                                       <p className="text-xs font-medium text-[#475467]">
                                         {get(category, "category_name")}
