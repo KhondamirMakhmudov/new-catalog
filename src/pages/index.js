@@ -15,7 +15,7 @@ import ScrollToTopButton from "@/components/scroll-to-top";
 import AboutClassifier from "@/components/about-company";
 import FondStock from "@/components/fondStock";
 import BackgroundSlider from "@/components/background-slider";
-import { useSearchParams } from "next/navigation";
+
 const integrationData = [
   {
     id: 1,
@@ -51,31 +51,6 @@ const integrationData = [
 ];
 
 export default function Home() {
-  const [openFAQ, setOpenFAQ] = useState(false);
-  const playerRef = useRef(null);
-  const [currentVideo, setCurrentVideo] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [isMounted, setIsMounted] = useState(false);
-  const searchParams = useSearchParams();
-  const search = searchParams.get("code");
-  console.log(search);
-  const handlePrevious = () => {
-    setCurrentVideo((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentVideo((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
-  };
-
-  const handleProgress = (state) => {
-    const progressPercentage = state.played * 100;
-    setProgress(progressPercentage);
-  };
-
-  const toggleFAQ = () => {
-    setOpenFAQ(!openFAQ);
-  };
-
   return (
     <>
       <Header />
@@ -268,8 +243,14 @@ export default function Home() {
                   <div
                     className={`absolute top-0 bottom-0 left-0 right-0 bg-black bg-opacity-20 rounded-[30px] -z-10`}
                   ></div>
+                  <h1
+                    className={
+                      "text-[28px] absolute font-bold text-white left-8 top-8"
+                    }
+                  >
+                    Maktab
+                  </h1>
                   <div className="absolute bottom-0 p-[32px] text-white ">
-                    <h1 className={"text-[28px] font-bold "}>Maktab</h1>
                     <p className="text-sm font-normal mt-[10px] line-clamp-2 opacity-0">
                       Biz to&apos;y rejalashtiruvchisi bilan erta suhbatlashdik
                       biz to&apos;y rejalashtiruvchisi Rano Artykova bilan kelin
