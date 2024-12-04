@@ -9,31 +9,14 @@ import { KEYS } from "@/constants/key";
 import { get } from "lodash";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 
 const CustomerDashboard = ({ children }) => {
-  const searchParams = useSearchParams();
-  const search = searchParams.get("code");
-  console.log(search);
   const { data: session } = useSession();
   const token = useSettingsStore((state) => get(state, "token", null));
 
   const setToken = useSettingsStore((state) =>
     get(state, "setToken", () => {})
   );
-
-  const {
-    data: customer,
-    isLoading,
-    isFetching,
-  } = useGetQuery({
-    key: KEYS.oneIdCustomer,
-    url: URLS.oneIdCustomer,
-    params: {
-      code: search,
-    },
-  });
-  console.log(customer);
 
   useEffect(() => {
     if (get(session, "user.token")) {

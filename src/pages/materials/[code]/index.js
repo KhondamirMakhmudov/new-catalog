@@ -21,11 +21,10 @@ const Index = () => {
   const [limit] = useState(9);
   const router = useRouter();
   const { code } = router.query;
-  const [soliqAveragePrice, setSoliqAveragePrice] = useState(null);
+  const [soliqAveragePrice, setSoliqAveragePrice] = useState(0);
   const [soliqProductCount, setSoliqProductCount] = useState(null);
   const [birjaAveragePrice, setBirjaAveragePrice] = useState(null);
   const [birjaProductCount, setBirjaProductCount] = useState(null);
-  const [hasPosted, setHasPosted] = useState(false);
   const { state, dispatch } = useCounter();
   const [minimum, setMinimum] = useState(0);
   const [maximum, setMaximum] = useState(0);
@@ -63,7 +62,7 @@ const Index = () => {
       crs_code: get(material, "data.material_csr_code"),
     },
   });
-
+  // Birja
   useEffect(() => {
     if (!isEmpty(get(birja, "data.filtered_data", []))) {
       const birjaDataArray = get(birja, "data.filtered_data", []);
@@ -114,26 +113,36 @@ const Index = () => {
 
       const productCount = soliqDataArray.reduce(
         (initialQuantity, currentQuantity) =>
-          initialQuantity + get(currentQuantity, "product_count"),
+          initialQuantity + get(currentQuantity, "product_count", 0), // Default to 0
         0
       );
+      console.log("Product Count:", productCount);
       setSoliqProductCount(productCount.toFixed(2));
 
-      const deliver = soliqDataArray.map(
-        (item) => get(item, "delivery_sum") / get(item, "product_count")
+      const validItems = soliqDataArray.filter(
+        (item) => get(item, "product_count", 0) > 0
       );
+
+      const deliver = validItems.map(
+        (item) => get(item, "delivery_sum", 0) / get(item, "product_count", 1)
+      );
+      console.log("Deliver Array:", deliver);
 
       const deliverSum = deliver.reduce(
         (initialValue, currentValue) => initialValue + currentValue,
         0
       );
+      console.log("Deliver Sum:", deliverSum);
 
-      const averageDeliverySum = (deliverSum / soliqDataArray.length).toFixed(
-        2
-      );
+      const averageDeliverySum =
+        soliqDataArray.length > 0
+          ? (deliverSum / soliqDataArray.length).toFixed(2)
+          : 0;
+      console.log("Average Delivery Sum:", averageDeliverySum);
 
       setSoliqAveragePrice(averageDeliverySum);
     } else {
+      console.log("No Data Found");
       setSoliqAveragePrice(0);
       setSoliqProductCount(0);
     }
@@ -363,16 +372,29 @@ const Index = () => {
                       ) : (
                         <ul className="space-y-[8px] mt-[8px]">
                           <li className="text-xs flex justify-between items-center">
-                            <p>O&apos;tgan oydagi savdolar soni:</p>
+                            <p>
+                              O&apos;tgan oydagi savdolar <br /> soni:
+                            </p>
 
-                            <p className="font-bold">{soliqProductCount}</p>
+                            <p className="font-bold">
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                value={soliqProductCount}
+                                displayType="text"
+                              />
+                            </p>
                           </li>
 
                           <li className="text-xs flex justify-between items-center">
                             <p>Narxi:</p>
 
                             <p className="font-bold">
-                              {soliqAveragePrice} so&apos;m
+                              <NumericFormat
+                                value={soliqAveragePrice}
+                                thousandSeparator={" "}
+                                displayType="text"
+                              />{" "}
+                              so&apos;m
                             </p>
                           </li>
                         </ul>
@@ -407,14 +429,23 @@ const Index = () => {
                           <li className="text-xs flex justify-between items-center">
                             <p>O&apos;tgan oydagi savdolar soni:</p>
 
-                            <p className="font-bold">{birjaProductCount}</p>
+                            <p className="font-bold">
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                value={birjaProductCount}
+                                displayType="text"
+                              />
+                            </p>
                           </li>
 
                           <li className="text-xs flex justify-between items-center">
                             <p>Narxi:</p>
-
                             <p className="font-bold">
-                              {birjaAveragePrice} so&apos;m
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                value={birjaAveragePrice}
+                                displayType="text"
+                              />
                             </p>
                           </li>
                         </ul>

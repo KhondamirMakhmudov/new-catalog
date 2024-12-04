@@ -10,12 +10,15 @@ import { useSearchParams } from "next/navigation";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
   const [selectBar, setSelectBar] = useState("");
   const searchParams = useSearchParams();
   const search = searchParams.get("code");
-  console.log(search);
+  const { data: session } = useSession();
+  console.log(session, "session");
+  console.log(search, "search");
 
   const {
     data: customer,
