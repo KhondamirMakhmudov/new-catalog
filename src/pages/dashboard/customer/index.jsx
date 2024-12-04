@@ -8,6 +8,8 @@ import Image from "next/image";
 import SidebarCustomer from "@/layouts/dashboard/customer/components/sidebar";
 import { useSearchParams } from "next/navigation";
 import useGetQuery from "@/hooks/api/useGetQuery";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
 
 const Index = () => {
   const [selectBar, setSelectBar] = useState("");
