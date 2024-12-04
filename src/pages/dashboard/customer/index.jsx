@@ -7,6 +7,7 @@ import ArrowRightButton from "@/components/buttons/arrow-right";
 import Image from "next/image";
 import SidebarCustomer from "@/layouts/dashboard/customer/components/sidebar";
 import { useSearchParams } from "next/navigation";
+import useGetQuery from "@/hooks/api/useGetQuery";
 
 const Index = () => {
   const [selectBar, setSelectBar] = useState("");
