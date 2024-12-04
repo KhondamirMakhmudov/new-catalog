@@ -28,6 +28,18 @@ const Index = () => {
     url: URLS.currency,
   });
 
+  const {
+    data: customer,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.oneIdCustomer,
+    url: URLS.oneIdCustomer,
+    params: {
+      code: search,
+    },
+  });
+
   const { data: user } = useGetQuery({
     key: KEYS.getCustomer,
     url: URLS.getCustomer,
@@ -107,8 +119,8 @@ const Index = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     forEach(entries(state), (item) => {
-      const customer = parseInt(get(user, "data.id"), 10);
-      const phone = get(user, "data.phone");
+      const customer = parseInt(get(customer, "data.id"), 10);
+      const phone = "+998933169850";
 
       const attributes = {
         customer: customer,
