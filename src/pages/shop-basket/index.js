@@ -45,6 +45,7 @@ const Index = () => {
     headers: { token: token ?? `${get(session, "user.token")}` },
     enabled: !!(get(session, "user.token") || token),
   });
+  console.log(customerOneId);
 
   const { mutate: sendOrder, isLoading: isLoadingOrder } = usePostQuery({
     listKeyId: "order-one",
