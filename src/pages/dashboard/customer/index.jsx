@@ -6,9 +6,26 @@ import DeliverIcon from "@/components/icons/deliver";
 import ArrowRightButton from "@/components/buttons/arrow-right";
 import Image from "next/image";
 import SidebarCustomer from "@/layouts/dashboard/customer/components/sidebar";
+import { useSearchParams } from "next/navigation";
 
 const Index = () => {
   const [selectBar, setSelectBar] = useState("");
+  const searchParams = useSearchParams();
+  const search = searchParams.get("code");
+  console.log(search);
+
+  const {
+    data: customer,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.oneIdCustomer,
+    url: URLS.oneIdCustomer,
+    params: {
+      code: search,
+    },
+  });
+  console.log(customer);
 
   const handleSelectBar = (nav) => {
     setSelectBar(nav);
