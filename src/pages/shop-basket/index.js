@@ -15,6 +15,7 @@ import { forEach, get, head, isEmpty, last, entries } from "lodash";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { NumericFormat } from "react-number-format";
 import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
 
 const Index = () => {
   const { state, dispatch } = useCounter();
