@@ -7,7 +7,7 @@ const CatalogButton = ({ dropdown }) => {
   return (
     <div>
       <button
-        onClick={() => setOpenDepartment(!openDepartment)}
+        onMouseEnter={() => setOpenDepartment(true)}
         className={
           "flex items-center gap-x-[8px] text-white px-[14px] py-[10px] rounded-[8px] bg-[#0256BA]"
         }
@@ -23,6 +23,7 @@ const CatalogButton = ({ dropdown }) => {
       </button>{" "}
       {openDepartment && (
         <motion.div
+          onMouseLeave={() => setOpenDepartment(false)}
           className={"absolute z-50"}
           initial={{ opacity: 0, translateY: "30px" }}
           animate={{ opacity: 1, translateY: 0 }}

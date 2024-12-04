@@ -95,4 +95,6 @@ export const KEYS = {
 
   soliqDatas: "soliqDatas",
   birjaData: "birjaData",
+
+  fastApiLogin: "fastApiLogin",
 };

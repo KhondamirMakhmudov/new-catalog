@@ -159,113 +159,123 @@ const Index = () => {
                 </button>
               </div>
 
-              <div className="mt-[16px]">
-                <ul className="cursor-pointer">
-                  {get(materialVolume, "data")?.map((volume) => (
-                    <li
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setCategoryId(null);
-                        setVolumed(get(volume, "id"));
-                      }}
-                      key={get(volume, "id")}
-                      className=""
-                    >
-                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                        <Image
-                          src={
-                            volumed !== get(volume, "id")
-                              ? "/icons/add-circle.svg"
-                              : "/icons/minus-circle.svg"
-                          }
-                          alt="arrow_right"
-                          width={20}
-                          height={20}
-                        />
-                        <p className="text-xs font-medium text-[#475467]">
-                          {get(volume, "volume_name")}
-                        </p>
-                      </div>
-                      {volumed === get(volume, "id") && ( // Only show categories for selected volume
-                        <>
-                          {isLoadingCategory ? (
-                            <div>
-                              <ContentLoader />
-                            </div>
-                          ) : (
-                            <motion.ul
-                              className="ml-[10px]"
-                              initial={{ opacity: 0, translateY: "20px" }}
-                              animate={{ opacity: 1, translateY: "0px" }}
-                              transition={{ duration: 0.1 }}
-                            >
-                              {get(materialCategory, "data")?.map(
-                                (category) => (
-                                  <li
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      setCategoryId(get(category, "id"));
-                                    }}
-                                    key={get(category, "id")}
-                                  >
-                                    <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                                      <Image
-                                        src={
-                                          categoryId !== get(category, "id")
-                                            ? "/icons/add-circle.svg"
-                                            : "/icons/minus-circle.svg"
-                                        }
-                                        alt="arrow_right"
-                                        width={18}
-                                        height={18}
-                                      />
-                                      <p className="text-xs font-medium text-[#475467]">
-                                        {get(category, "category_name")}
-                                      </p>
-                                    </div>
-                                    {categoryId === get(category, "id") && (
-                                      <>
-                                        {isLoadingGroup ? (
-                                          <div>
-                                            <ContentLoader />
-                                          </div>
-                                        ) : (
-                                          <ul className="ml-[10px]">
-                                            {get(materialGroup, "data")?.map(
-                                              (group) => (
-                                                <li key={get(group, "id")}>
-                                                  <div className="flex gap-x-[4px] items-center ">
-                                                    <input
-                                                      type="checkbox"
-                                                      onChange={() =>
-                                                        handleCheckboxChange(
-                                                          group
-                                                        )
-                                                      }
-                                                      className="form-checkbox  text-blue-600 border-gray-300 rounded"
-                                                    />
-                                                    <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
-                                                      {get(group, "group_name")}
-                                                    </p>
-                                                  </div>
-                                                </li>
-                                              )
-                                            )}
-                                          </ul>
-                                        )}
-                                      </>
-                                    )}
-                                  </li>
-                                )
-                              )}
-                            </motion.ul>
-                          )}
-                        </>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {showAllProjects && (
+                <motion.div
+                  initial={{ opacity: 0, translateY: "30px" }}
+                  animate={{ opacity: 1, translateY: "0" }}
+                  transition={{ duration: 0.4 }}
+                  className="mt-[16px]"
+                >
+                  <ul className="cursor-pointer">
+                    {get(materialVolume, "data")?.map((volume) => (
+                      <li
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCategoryId(null);
+                          setVolumed(get(volume, "id"));
+                        }}
+                        key={get(volume, "id")}
+                        className=""
+                      >
+                        <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                          <Image
+                            src={
+                              volumed !== get(volume, "id")
+                                ? "/icons/add-circle.svg"
+                                : "/icons/minus-circle.svg"
+                            }
+                            alt="arrow_right"
+                            width={20}
+                            height={20}
+                          />
+                          <p className="text-sm font-semibold text-[#24539b]">
+                            {get(volume, "volume_name")}
+                          </p>
+                        </div>
+                        {volumed === get(volume, "id") && ( // Only show categories for selected volume
+                          <>
+                            {isLoadingCategory ? (
+                              <div>
+                                <ContentLoader />
+                              </div>
+                            ) : (
+                              <motion.ul
+                                className="ml-[10px]"
+                                initial={{ opacity: 0, translateY: "20px" }}
+                                animate={{ opacity: 1, translateY: "0px" }}
+                                transition={{ duration: 0.1 }}
+                              >
+                                {get(materialCategory, "data")?.map(
+                                  (category) => (
+                                    <li
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        setCategoryId(get(category, "id"));
+                                      }}
+                                      key={get(category, "id")}
+                                    >
+                                      <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                        <Image
+                                          src={
+                                            categoryId !== get(category, "id")
+                                              ? "/icons/add-circle.svg"
+                                              : "/icons/minus-circle.svg"
+                                          }
+                                          alt="arrow_right"
+                                          width={18}
+                                          height={18}
+                                        />
+                                        <p className="text-[13px] font-semibold text-[#4a89e7]">
+                                          {get(category, "category_name")}
+                                        </p>
+                                      </div>
+                                      {categoryId === get(category, "id") && (
+                                        <>
+                                          {isLoadingGroup ? (
+                                            <div>
+                                              <ContentLoader />
+                                            </div>
+                                          ) : (
+                                            <ul className="ml-[10px]">
+                                              {get(materialGroup, "data")?.map(
+                                                (group) => (
+                                                  <li key={get(group, "id")}>
+                                                    <div className="flex gap-x-[4px] items-center ">
+                                                      <input
+                                                        type="checkbox"
+                                                        onChange={() =>
+                                                          handleCheckboxChange(
+                                                            group
+                                                          )
+                                                        }
+                                                        className="form-checkbox  text-blue-600 border-gray-300 rounded"
+                                                      />
+                                                      <p className="text-xs font-medium text-[#475467] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                                                        {get(
+                                                          group,
+                                                          "group_name"
+                                                        )}
+                                                      </p>
+                                                    </div>
+                                                  </li>
+                                                )
+                                              )}
+                                            </ul>
+                                          )}
+                                        </>
+                                      )}
+                                    </li>
+                                  )
+                                )}
+                              </motion.ul>
+                            )}
+                          </>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
             </div>
 
             <div className="col-span-9 space-y-[16px]">

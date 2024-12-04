@@ -6,15 +6,30 @@ import CustomerIcon from "@/components/icons/customer";
 import DeliverIcon from "@/components/icons/deliver";
 import RightIcon from "@/components/icons/right";
 import { motion } from "framer-motion";
+import { URLS } from "@/constants/url";
+import { KEYS } from "@/constants/key";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { get } from "lodash";
+import { useSearchParams } from "next/navigation";
 
 const Index = () => {
   const [selectPosition, setSelectPosition] = useState("");
   const [isScaled, setIsScaled] = useState(false);
+  const searchParams = useSearchParams();
+  const search = searchParams.get("code");
+  console.log(search);
 
   const handleSelection = (select) => {
     setSelectPosition(select);
     setIsScaled(!isScaled);
   };
+
+  const { data: oneIdLogin } = useGetQuery({
+    key: KEYS.fastApiLogin,
+    url: URLS.fastApiLogin,
+  });
+  console.log(oneIdLogin);
+
   return (
     <>
       <Header />
@@ -35,18 +50,31 @@ const Index = () => {
         <section className="font-gilroy max-w-[456px] mx-auto mt-[130px]">
           <div className="  flex-col ">
             <div className="text-center">
-              <motion.h1 initial={{opacity: 0, translateY: "-50px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}} className="text-[32px] font-bold  text-[#1A202C]">
+              <motion.h1
+                initial={{ opacity: 0, translateY: "-50px" }}
+                animate={{ opacity: 1, translateY: "0px" }}
+                transition={{ duration: 0.3 }}
+                className="text-[32px] font-bold  text-[#1A202C]"
+              >
                 Qaysi turdagi foydalanuvchi bo&apos;lishni xohlayotganingizni
                 ko&apos;rsating
               </motion.h1>
-              <motion.p initial={{opacity: 0, translateY: "-40px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}} className="text-base font-medium   text-[#718096]">
+              <motion.p
+                initial={{ opacity: 0, translateY: "-40px" }}
+                animate={{ opacity: 1, translateY: "0px" }}
+                transition={{ duration: 0.3 }}
+                className="text-base font-medium   text-[#718096]"
+              >
                 Oldingi media kampaniyalari natijalarini hisobga olgan holda,
                 xaridor konventsiyasi tarkibni to&apos;liq o&apos;zgartiradi
               </motion.p>
             </div>
 
             <div className="flex space-x-[24px] my-[30px]">
-              <motion.button  initial={{scale: 0.01}} animate={{ scale: 1}} transition={{duration: 0.01}}
+              <motion.button
+                initial={{ scale: 0.01 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.01 }}
                 onClick={() => handleSelection("client")}
                 className={`${
                   selectPosition === "client"
@@ -78,7 +106,9 @@ const Index = () => {
               </motion.button>
 
               <motion.button
-                initial={{scale: 0.01}} animate={{ scale: 1}} transition={{duration: 0.07}}
+                initial={{ scale: 0.01 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.07 }}
                 onClick={() => handleSelection("deliver")}
                 className={`${
                   selectPosition === "deliver"
@@ -112,18 +142,27 @@ const Index = () => {
               </motion.button>
             </div>
             {selectPosition === "client" ? (
-              <Link href={"/auth/login"} className="w-full  ">
+              <Link
+                href={`${get(oneIdLogin, "data.auth_url")}`}
+                className="w-full  "
+              >
                 <motion.button
-                  initial={{opacity: 0, translateY: "30px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}}
-                  className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
+                  initial={{ opacity: 0, translateY: "30px" }}
+                  animate={{ opacity: 1, translateY: "0px" }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]"
+                >
                   Keyingi
                 </motion.button>
               </Link>
             ) : selectPosition === "deliver" ? (
               <Link href={"/auth/e-imzo"} className="w-full mt-[30px] ">
-                  <motion.button
-                    initial={{opacity: 0, translateY: "30px"}} animate={{opacity: 1, translateY: "0px"}} transition={{duration: 0.3}}
-                    className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]">
+                <motion.button
+                  initial={{ opacity: 0, translateY: "30px" }}
+                  animate={{ opacity: 1, translateY: "0px" }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]"
+                >
                   Keyingi
                 </motion.button>
               </Link>
@@ -133,6 +172,8 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      <div></div>
 
       {/* <footer className="container font-gilroy py-[48px]">
         <div className="flex justify-between">

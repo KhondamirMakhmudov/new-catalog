@@ -105,4 +105,5 @@ export const URLS = {
   defaultClassifier: "fastapi/material_klassifikator_volume_ids/1/",
   soliqDatas: "fastapi/soliq_data/",
   birjaData: "fastapi/birja_data/",
+  fastApiLogin: "fastapi/auth/login",
 };
