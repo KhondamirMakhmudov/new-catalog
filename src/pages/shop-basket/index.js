@@ -18,6 +18,9 @@ import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
 
 const Index = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("code");
+  console.log(search);
   const { state, dispatch } = useCounter();
   const { data: session } = useSession();
   const token = useSettingsStore((state) => get(state, "token", null));
