@@ -42,8 +42,6 @@ const Index = () => {
     params: {
       code: search,
     },
-    headers: { token: token ?? `${get(session, "user.token")}` },
-    enabled: !!(get(session, "user.token") || token),
   });
   console.log(customerOneId);
 
