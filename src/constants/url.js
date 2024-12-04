@@ -106,4 +106,5 @@ export const URLS = {
   soliqDatas: "fastapi/soliq_data/",
   birjaData: "fastapi/birja_data/",
   fastApiLogin: "fastapi/auth/login",
+  oneIdCustomer: "fastapi/auth/callback/",
 };

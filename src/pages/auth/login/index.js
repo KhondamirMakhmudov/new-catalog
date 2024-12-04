@@ -11,14 +11,29 @@ import { get } from "lodash";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import Header from "@/components/header";
+import { useSearchParams } from "next/navigation";
 
 const Index = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get("code");
+  console.log(search);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const {
+    data: customer,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.oneIdCustomer,
+    url: URLS.oneIdCustomer,
+    params: {
+      code: search,
+    },
+  });
   const router = useRouter();
   const { data: session } = useSession();
 

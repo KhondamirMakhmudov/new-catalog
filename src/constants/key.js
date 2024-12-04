@@ -97,4 +97,5 @@ export const KEYS = {
   birjaData: "birjaData",
 
   fastApiLogin: "fastApiLogin",
+  oneIdCustomer: "oneIdCustomer",
 };
