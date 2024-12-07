@@ -64,6 +64,7 @@ const Index = () => {
     hideSuccessToast: true,
   });
 
+  // Add region to array
   const handleRegionClick = (regionId) => {
     setSelectedRegion(regionId);
 
@@ -72,6 +73,17 @@ const Index = () => {
         return [...prevRegions, regionId];
       }
       return prevRegions;
+    });
+  };
+
+  // Delete region from array
+  const handleRegionDelete = (regionId) => {
+    setSelectedElements((prevRegions) => {
+      const updatedRegions = prevRegions.filter(
+        (region) => region !== regionId
+      );
+      onSubmit(updatedRegions);
+      return updatedRegions;
     });
   };
 
@@ -423,10 +435,16 @@ const Index = () => {
 
             <div className="font-gilroy">
               <ul className="flex flex-wrap gap-[10px]">
-                {regions.map((item, index) => (
+                {selectedElements.map((item, index) => (
                   <li key={index}>
-                    <button className="text-[16px] text-[#62677A] border border-[#D1D3DA] p-[8px] rounded-[6px] bg-[#F2F5FB] font-semibold">
+                    <button className="relative group bg-[#F2F5FB] border border-[#D1D3DA] text-[#62677A] hover:text-white rounded-lg px-4 py-2 flex items-center justify-center transition hover:bg-blue-700">
                       {item}
+                      <span
+                        onClick={() => handleRegionDelete(item)}
+                        className="ml-2 flex items-center justify-center w-5 h-5 rounded-full  text-white font-bold cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      >
+                        ✕
+                      </span>
                     </button>
                   </li>
                 ))}
