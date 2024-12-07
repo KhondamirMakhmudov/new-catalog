@@ -14,16 +14,6 @@ const nextConfig = {
     // NEXTAUTH_URL: "http://localhost:3000",
     NEXTAUTH_SECRET: "Ey7nTKnggBc0bRN8WUjyShw2qzOZ6KW4fUyqcKBePxY=",
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/",
-        permanent: true,
-        basePath: false,
-      },
-    ];
-  },
 
   async headers() {
     return [
