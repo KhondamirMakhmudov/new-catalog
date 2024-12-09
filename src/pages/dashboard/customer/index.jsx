@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import RightIcon from "@/components/icons/right";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DeliverIcon from "@/components/icons/deliver";
 import ArrowRightButton from "@/components/buttons/arrow-right";
 import Image from "next/image";
@@ -20,7 +20,7 @@ const Index = () => {
   const searchParams = useSearchParams();
   const search = searchParams.get("code");
 
-  
+
   const { data: session } = useSession();
   console.log(session, "session");
   console.log(search, "search");
@@ -59,7 +59,7 @@ const Index = () => {
     }
   
 
-  }, [search])
+  }, [search, router])
   
 
   const handleSelectBar = (nav) => {
