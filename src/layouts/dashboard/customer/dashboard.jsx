@@ -19,8 +19,8 @@ const CustomerDashboard = ({ children }) => {
   );
 
   useEffect(() => {
-    if (get(session, "user.token")) {
-      setToken(get(session, "user.token"));
+    if (get(session, "data.token")) {
+      setToken(get(session, "data.token"));
     }
   }, [session, setToken]);
   return (
