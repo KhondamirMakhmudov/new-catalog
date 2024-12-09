@@ -18,7 +18,7 @@ const Index = () => {
   const router = useRouter();
   const [selectBar, setSelectBar] = useState("");
   const searchParams = useSearchParams();
-  const code = searchParams.get("code");
+  // const code = searchParams.get("code");
 
 
   const { data: session } = useSession();
@@ -38,28 +38,48 @@ const Index = () => {
   // });
   // console.log(customer);
 
+
+
   useEffect(() => {
+    const code = searchParams.get("code");
+
     if (code) {
-      // Call the credentials provider with the code
-      signIn("credentials", {
-        code, // Pass the code from the query string
-        redirect: false, // Handle redirection manually
+      // Fetch token from the OneID API
+      fetch(`https://backend.mkinfo.uz/fastapi/auth/callback/?code=${code}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
       })
-        .then((result) => {
-          if (result?.ok) {
-            // Redirect to the appropriate page based on the role or logic
-            router.push("/dashboard/customer/main");
-          } else {
-            // Handle login error
-            console.error("Login failed:", result?.error);
-            alert("Login failed. Please try again.");
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch OneID data");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.token) {
+            // Log in using NextAuth
+            signIn("credentials", {
+              redirect: false,
+              token: data.token, // Pass the token to the credentials provider
+              id: data.id,
+              full_name: data.full_name,
+              pin: data.pin,
+              role: data.role,
+            }).then((signInResult) => {
+              if (signInResult?.ok) {
+                // Redirect to the dashboard
+                router.push("/dashboard/customer");
+              } else {
+                console.error("Login failed:", signInResult?.error);
+              }
+            });
           }
         })
-        .catch((err) => console.error("Sign-in error:", err));
+        .catch((error) => {
+          console.error("Error during OneID login:", error);
+        });
     }
-  
-
-  }, [code, router])
+  }, [searchParams, router]);
   
 
   const handleSelectBar = (nav) => {
