@@ -41,45 +41,25 @@ const Index = () => {
 
 
   useEffect(() => {
-
-
     if (code) {
-      // Fetch token from the OneID API
-      fetch(`https://backend.mkinfo.uz/fastapi/auth/callback/?code=${code}`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
+      // Call the credentials provider with the code
+      signIn("credentials", {
+        code, // Pass the code from the query string
+        redirect: false, // Handle redirection manually
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Failed to fetch OneID data");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (data.token) {
-            // Log in using NextAuth
-            signIn("credentials", {
-              redirect: false,
-              token: data.token, // Pass the token to the credentials provider
-              id: data.id,
-              full_name: data.full_name,
-              pin: data.pin,
-              role: data.role,
-            }).then((signInResult) => {
-              if (signInResult?.ok) {
-                // Redirect to the dashboard
-                router.push("/dashboard/customer");
-              } else {
-                console.error("Login failed:", signInResult?.error);
-              }
-            });
+        .then((result) => {
+          if (result?.ok) {
+            // Redirect to the appropriate page based on the role or logic
+            router.push("/dashboard");
+          } else {
+            // Handle login error
+            console.error("Login failed:", result?.error);
+            alert("Login failed. Please try again.");
           }
         })
-        .catch((error) => {
-          console.error("Error during OneID login:", error);
-        });
+        .catch((err) => console.error("Sign-in error:", err));
     }
-  }, [searchParams, router]);
+  }, [code, router]);
   
 
   const handleSelectBar = (nav) => {
