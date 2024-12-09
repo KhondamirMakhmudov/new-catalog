@@ -18,12 +18,12 @@ const Index = () => {
   const router = useRouter();
   const [selectBar, setSelectBar] = useState("");
   const searchParams = useSearchParams();
-  const search = searchParams.get("code");
+  const code = searchParams.get("code");
 
 
   const { data: session } = useSession();
   console.log(session, "session");
-  console.log(search, "search");
+  console.log(code, "code");
 
   // const {
   //   data: customer,
@@ -39,10 +39,10 @@ const Index = () => {
   // console.log(customer);
 
   useEffect(() => {
-    if (search) {
+    if (code) {
       // Call the credentials provider with the code
       signIn("credentials", {
-        search, // Pass the code from the query string
+        code, // Pass the code from the query string
         redirect: false, // Handle redirection manually
       })
         .then((result) => {
