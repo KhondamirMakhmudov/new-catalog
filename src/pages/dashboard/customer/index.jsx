@@ -50,7 +50,7 @@ const Index = () => {
         .then((result) => {
           if (result?.ok) {
             // Redirect to the appropriate page based on the role or logic
-            router.push("/dashboard");
+            router.push("/dashboard/customer/");
           } else {
             // Handle login error
             console.error("Login failed:", result?.error);
