@@ -23,7 +23,7 @@ const Index = () => {
 
   const { data: session } = useSession();
   console.log(session, "session");
-  console.log(code, "code");
+  // console.log(code, "code");
 
   // const {
   //   data: customer,
