@@ -18,12 +18,12 @@ const Index = () => {
   const router = useRouter();
   const [selectBar, setSelectBar] = useState("");
   const searchParams = useSearchParams();
-  // const code = searchParams.get("code");
+  const code = searchParams.get("code");
 
 
   const { data: session } = useSession();
   console.log(session, "session");
-  // console.log(code, "code");
+  console.log(code, "code");
 
   // const {
   //   data: customer,
@@ -41,7 +41,7 @@ const Index = () => {
 
 
   useEffect(() => {
-    const code = searchParams.get("code");
+
 
     if (code) {
       // Fetch token from the OneID API
