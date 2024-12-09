@@ -59,7 +59,7 @@ const Index = () => {
     }
   
 
-  }, [search, router])
+  }, [code, router])
   
 
   const handleSelectBar = (nav) => {
