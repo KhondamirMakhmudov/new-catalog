@@ -28,45 +28,65 @@ export const authOptions = {
         } else return null;
       },
     }),
+
     CredentialsProvider({
-      id: "credentials",
-      name: "credentials",
+      name: "Credentials",
       credentials: {
-        email: {},
-        password: {},
-        captcha_response: {},
-        captcha_key: {},
+        code: { label: "Code", type: "text" },
       },
-      async authorize(credentials, req) {
-        debugger;
-        const { email, password, captcha_response, captcha_key } = credentials;
-        const res = await fetch("https://backend-market.tmsiti.uz/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-            captcha_response,
-            captcha_key,
-          }),
-        });
+      async authorize(credentials) {
+        try {
+          const res = await fetch(
+            `https://backend.mkinfo.uz/fastapi/auth/callback/?code=${credentials.code}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
 
-        const user = await res.json();
+          if (!res.ok) throw new Error("Failed to fetch");
 
-        if (res.ok) {
-          return user;
-        } else return null;
+          const data = await res.json();
+
+          if (data.token) {
+            return {
+              token: data.token,
+              id: data.id,
+              full_name: data.full_name,
+              pin: data.pin,
+              role: data.role,
+            };
+          } else {
+            return null; // Authentication failed
+          }
+        } catch (error) {
+          console.error("Authentication error:", error);
+          return null;
+        }
       },
     }),
+    
+
   ],
   callbacks: {
     async jwt({ token, user }) {
-      return { ...token, ...user };
+      if (user) {
+        token.accessToken = user.token;
+        token.id = user.id;
+        token.full_name = user.full_name;
+        token.pin = user.pin;
+        token.role = user.role;
+      }
+      return token;
     },
-    async session({ session, token, user }) {
-      session.user = token;
+    async session({ session, token }) {
+      session.user = {
+        id: token.id,
+        full_name: token.full_name,
+        pin: token.pin,
+        role: token.role,
+      };
+      session.accessToken = token.accessToken;
       return session;
     },
   },
