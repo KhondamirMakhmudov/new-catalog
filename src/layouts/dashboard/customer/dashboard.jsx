@@ -13,6 +13,8 @@ import { useEffect } from "react";
 const CustomerDashboard = ({ children }) => {
   const { data: session } = useSession();
   console.log(session);
+  console.log(get(session, "data.accessToken"), "accesstoken of data");
+  console.log(get(session, "accessToken"), "accesstoken");
 
   const token = useSettingsStore((state) => get(state, "token", null));
 
