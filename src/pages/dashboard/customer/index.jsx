@@ -12,14 +12,13 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import CustomerDashboard from "@/layouts/dashboard/customer/dashboard";
 
 const Index = () => {
-
   const router = useRouter();
   const [selectBar, setSelectBar] = useState("");
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
-
 
   const { data: session } = useSession();
   console.log(session, "session");
@@ -38,8 +37,6 @@ const Index = () => {
   // });
   // console.log(customer);
 
-
-
   useEffect(() => {
     if (code) {
       // Call the credentials provider with the code
@@ -48,6 +45,7 @@ const Index = () => {
         redirect: false, // Handle redirection manually
       })
         .then((result) => {
+          console.log("Sign-in Result:", result);
           if (result?.ok) {
             // Redirect to the appropriate page based on the role or logic
             router.push("/dashboard/customer/");
@@ -60,48 +58,13 @@ const Index = () => {
         .catch((err) => console.error("Sign-in error:", err));
     }
   }, [code, router]);
-  
+
+  console.log("Code from query string:", code);
 
   const handleSelectBar = (nav) => {
     setSelectBar(nav);
   };
-  return (
-    <div className="bg-[#F7F7F7] min-h-screen">
-      <Header />
-
-      <main className="container">
-        <section className="my-[16px] flex items-center space-x-[12px] font-gilroy">
-          <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
-            Bosh sahifa
-          </Link>
-          <RightIcon color="#BCBFC2" />
-          <Link
-            className="text-[#262D33] text-sm font-semibold"
-            href={"/select-position"}
-          >
-            Kirish
-          </Link>
-          <RightIcon color="#BCBFC2" />
-          <Link
-            className="text-[#262D33] text-sm font-semibold"
-            href={"/auth/login"}
-          >
-            Login
-          </Link>
-          <RightIcon color="#BCBFC2" />
-          <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Buyurtmachi
-          </Link>
-        </section>
-
-        <section>
-          <div className="grid grid-cols-12 ">
-            <SidebarCustomer />
-          </div>
-        </section>
-      </main>
-    </div>
-  );
+  return <CustomerDashboard></CustomerDashboard>;
 };
 
 export default Index;

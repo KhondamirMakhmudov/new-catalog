@@ -415,7 +415,7 @@ export default function Home() {
                     435-son qarori
                   </p>
 
-                  <Link href="https://catalog.tmsiti.uz/">
+                  <Link href="#">
                     <div
                       className={
                         "  py-[13px] px-[52px]  justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"

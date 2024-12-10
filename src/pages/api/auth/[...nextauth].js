@@ -47,6 +47,7 @@ export const authOptions = {
           if (!res.ok) throw new Error("Failed to fetch");
 
           const data = await res.json();
+          console.log("Parsed Data:", data);
 
           if (data.token) {
             return {
@@ -65,8 +66,6 @@ export const authOptions = {
         }
       },
     }),
-    
-
   ],
   callbacks: {
     async jwt({ token, user }) {
