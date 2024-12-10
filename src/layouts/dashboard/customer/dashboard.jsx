@@ -13,7 +13,7 @@ import { useEffect } from "react";
 const CustomerDashboard = ({ children }) => {
   const { data: session } = useSession();
   console.log(session);
-  
+
   const token = useSettingsStore((state) => get(state, "token", null));
 
   const setToken = useSettingsStore((state) =>
@@ -21,8 +21,8 @@ const CustomerDashboard = ({ children }) => {
   );
 
   useEffect(() => {
-    if (get(session, "data.token")) {
-      setToken(get(session, "data.token"));
+    if (get(session, "data.accessToken")) {
+      setToken(get(session, "data.accessToken"));
     }
   }, [session, setToken]);
   return (
