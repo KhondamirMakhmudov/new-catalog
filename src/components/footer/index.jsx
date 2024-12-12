@@ -120,8 +120,8 @@ const Footer = () => {
                         height={24}
                       />
                     </div>
-                    <Link href={"tel:+998 93 222 29 82"}>
-                      <p className="text-sm font-bold">+998 93 222 29 82</p>
+                    <Link href={"tel:+998 71 244-51-84"}>
+                      <p className="text-sm font-bold">+998 71 244-51-84</p>
                       <p>09:00 dan 21:00 gacha</p>
                     </Link>
                   </div>
