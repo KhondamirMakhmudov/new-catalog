@@ -13,6 +13,8 @@ import { useEffect } from "react";
 const DeliverDashboard = ({ children }) => {
   const { data: session } = useSession();
 
+  console.log(session, "delivery session");
+
   const setToken = useSettingsStore((state) =>
     get(state, "setToken", () => {})
   );
