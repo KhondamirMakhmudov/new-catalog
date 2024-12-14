@@ -441,7 +441,7 @@ const Index = () => {
                       {item}
                       <span
                         onClick={() => handleRegionDelete(item)}
-                        className="ml-2 flex items-center justify-center w-5 h-5 rounded-full  text-white font-bold cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        className="ml-2 flex items-center justify-center w-5 h-5 rounded-full  text-[#62677A] group-hover:text-white font-bold cursor-pointer   duration-300"
                       >
                         ✕
                       </span>

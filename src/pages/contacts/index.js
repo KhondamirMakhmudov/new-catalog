@@ -8,7 +8,7 @@ import { FacebookIcon } from "@/components/icons/social-media/facebook";
 import { YoutubeIcon } from "@/components/icons/social-media/youtube";
 import Reveal from "@/components/reveal";
 import Image from "next/image";
-import ArrowRightButton from "@/components/buttons/arrow-right";
+import { motion } from "framer-motion";
 
 const Index = () => {
   return (
@@ -31,7 +31,12 @@ const Index = () => {
             Kontaktlar
           </h1>
           <div className="grid grid-cols-12 gap-x-[24px]">
-            <div className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-5 space-y-[30px]">
+            <motion.div
+              initial={{ opacity: 0, translateX: "-40px" }}
+              animate={{ opacity: 1, translateX: "0px" }}
+              transition={{ duration: 0.5 }}
+              className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-5 space-y-[30px]"
+            >
               <div>
                 <h1 className="text-sm text-[#718096] mb-[10px]">
                   Asosiy aloqa
@@ -117,9 +122,14 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-7">
+            <motion.div
+              initial={{ opacity: 0, translateX: "40px" }}
+              animate={{ opacity: 1, translateX: "0px" }}
+              transition={{ duration: 0.5 }}
+              className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-7"
+            >
               <h3 className="text-[24px] font-bold mb-[20px]">
                 Ariza qoldirish
               </h3>
@@ -161,7 +171,7 @@ const Index = () => {
                   Yuborish
                 </button>
               </form>
-            </div>
+            </motion.div>
 
             <div className="col-span-12 mt-[60px]">
               {" "}
