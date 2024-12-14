@@ -16,7 +16,7 @@ const Login = () => {
 
   return (
     <>
-      {!get(session, "user.token") || !get(session, "accessToken") ? (
+      {!get(session, "accessToken") ? (
         <Link href={"/select-position"}>
           <button
             className={
