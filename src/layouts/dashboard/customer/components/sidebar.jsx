@@ -8,6 +8,9 @@ import CompanyIcon from "@/components/icons/about-company";
 import DeliverOrderIcon from "@/components/icons/deliver-order";
 import Image from "next/image";
 import LogOut from "@/components/buttons/logout";
+import MainCustomerIcon from "@/components/icons/main-customer";
+import CustomerOrderIcon from "@/components/icons/customer-order";
+import CustomerProfileIcon from "@/components/icons/customer-profile";
 
 const SidebarCustomer = () => {
   const [selectBar, setSelectBar] = useState("");
@@ -36,7 +39,7 @@ const SidebarCustomer = () => {
                     : "bg-white"
                 } inline-block rounded-full`}
               >
-                <DeliverIcon
+                <MainCustomerIcon
                   color={
                     router.pathname === "/dashboard/customer/main"
                       ? "white"
@@ -72,7 +75,7 @@ const SidebarCustomer = () => {
                     : "bg-white"
                 } inline-block rounded-full`}
               >
-                <MyAdsIcon
+                <CustomerOrderIcon
                   color={
                     router.pathname === "/dashboard/customer/orders"
                       ? "white"
@@ -108,7 +111,7 @@ const SidebarCustomer = () => {
                     : "bg-white"
                 } inline-block rounded-full`}
               >
-                <DeliverOrderIcon
+                <CustomerProfileIcon
                   color={
                     router.pathname === "/dashboard/customer/profile"
                       ? "white"
