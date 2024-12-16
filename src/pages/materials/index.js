@@ -68,7 +68,7 @@ const Index = () => {
     },
     enabled: true,
   });
-
+  // material volume
   const {
     data: materialVolume,
     isLoading,
@@ -77,12 +77,12 @@ const Index = () => {
     key: KEYS.materialVolumeFast,
     url: URLS.materialVolumeFast,
   });
-
+  // material category
   const { data: materialCategory, isLoading: isLoadingCategory } = useGetQuery({
     key: [KEYS.materialCategoryFast, volumed],
     url: `${URLS.materialCategoryFast}${volumed}`,
   });
-
+  // material group
   const { data: materialGroup, isLoading: isLoadingGroup } = useGetQuery({
     key: [KEYS.materialGroupFast, categoryId],
     url: `${URLS.materialGroupFast}${categoryId}`,

@@ -21,6 +21,7 @@ const Index = () => {
 
   const handleSelection = (select) => {
     setSelectPosition(select);
+
     setIsScaled(!isScaled);
   };
 

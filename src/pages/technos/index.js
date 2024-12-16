@@ -319,14 +319,20 @@ const Index = () => {
                               {get(item, "techno_region_name")}
                             </td>
 
-                            <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
-                              {get(item, "company_name")}
+                            <td className=" font-medium text-xs py-[10px] text-[#0256BA] hover:underline  text-start max-w-[200px]">
+                              {
+                                <Link
+                                  href={`/company/${get(item, "company_stir")}`}
+                                >
+                                  {get(item, "company_name")}
+                                </Link>
+                              }
                             </td>
 
                             <td className=" font-medium text-xs py-[10px]">
                               <Link
                                 href={`/technos/${get(item, "techno_name_id")}`}
-                                className="underline-0 hover:underline transition-all duration-300"
+                                className="underline-0 hover:underline text-[#0256BA] transition-all duration-300"
                               >
                                 {get(item, "techno_name_id")}
                               </Link>

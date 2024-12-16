@@ -27,6 +27,7 @@ const Index = () => {
   const [average, setAverage] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const [gost, setGost] = useState(false);
 
   const handleIncrement = (product) => {
     dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
@@ -197,7 +198,7 @@ const Index = () => {
         <section className="mt-[16px] ">
           <div>
             <div className="grid grid-cols-12 bg-white p-[20px] border border-[#E4E7F5] rounded-[12px] gap-y-[30px] font-gilroy">
-              <div className="col-span-5 ">
+              <div className="col-span-7 ">
                 <div className="flex gap-x-[20px] mb-[12px]">
                   <div className="flex gap-x-[6px]">
                     <Image
@@ -227,6 +228,42 @@ const Index = () => {
                 <h2 className="text-lg font-semibold">
                   {get(techno, "data.techno_name")}
                 </h2>
+              </div>
+
+              <div className="col-span-5">
+                <motion.button
+                  initial={{ scale: 0.01 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={() => setGost(true)}
+                  className={`p-[12px] rounded-[8px] bg-[#EBF2FA]  float-right active:scale-110 scale-100 transition-all duration-300 ${
+                    !gost ? "inline-block" : "hidden"
+                  }`}
+                >
+                  <Image
+                    src={"/images/gost.png"}
+                    alt="file"
+                    width={34}
+                    height={34}
+                  />
+                </motion.button>
+
+                {gost && (
+                  <motion.div
+                    className="float-right"
+                    initial={{ scale: 0.01 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {get(machineMechano, "data.materil_gost") === null ? (
+                      <p>Ma&apos;lumot mavjud emas</p>
+                    ) : (
+                      <p className="text-sm max-w-[200px]">
+                        {get(machineMechano, "data.materil_gost")}
+                      </p>
+                    )}
+                  </motion.div>
+                )}
               </div>
 
               <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
@@ -351,6 +388,20 @@ const Index = () => {
                 </div>
 
                 <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                  <div className="flex gap-x-[10px] items-center">
+                    <div>
+                      <div
+                        className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:40px_40px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                        style={{
+                          backgroundImage: "url(/images/max-min.png)",
+                        }}
+                      ></div>
+                    </div>
+
+                    <p className="text-xs font-bold">
+                      Tadbirkorlik subyektlari
+                    </p>
+                  </div>
                   <ul className="space-y-[13px] flex flex-col">
                     <li className="flex justify-between items-end">
                       <p className="text-xs font-bold">Maksimal narx:</p>

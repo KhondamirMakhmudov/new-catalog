@@ -320,10 +320,10 @@ const Index = () => {
                       }`}
                     >
                       <Image
-                        src={"/icons/file.svg"}
+                        src={"/images/gost.png"}
                         alt="file"
-                        width={24}
-                        height={24}
+                        width={34}
+                        height={34}
                       />
                     </motion.button>
 
@@ -530,6 +530,20 @@ const Index = () => {
                       transition={{ duration: 0.2 }}
                       className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
                     >
+                      <div className="flex gap-x-[10px] items-center">
+                        <div>
+                          <div
+                            className={`relative  px-[1px] py-[6px] bg-white border w-[44px] h-[44px] bg-[length:40px_40px] bg-no-repeat bg-center  border-[#E6E5ED] rounded-[10px] inline-block`}
+                            style={{
+                              backgroundImage: "url(/images/max-min.png)",
+                            }}
+                          ></div>
+                        </div>
+
+                        <p className="text-xs font-bold">
+                          Tadbirkorlik subyektlari
+                        </p>
+                      </div>
                       {isLoadingMaterialAds || isFetchingMaterialAds ? (
                         <SimpleLoader />
                       ) : (
@@ -691,7 +705,13 @@ const Index = () => {
                               )}
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
-                              {get(item, "material_price")}
+                              {
+                                <NumericFormat
+                                  thousandSeparator={" "}
+                                  displayType="text"
+                                  value={get(item, "material_price").toFixed(1)}
+                                />
+                              }
                             </td>
                             <td className=" font-medium text-xs py-[10px] ">
                               <div className="flex items-center gap-x-[4px]">
