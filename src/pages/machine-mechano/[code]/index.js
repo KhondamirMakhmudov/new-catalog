@@ -483,7 +483,7 @@ const Index = () => {
                           Hudud
                         </th>
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          Kompaniya nomi
+                          Korxona nomi
                         </th>
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                           Resurs kodi

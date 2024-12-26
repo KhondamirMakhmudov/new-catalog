@@ -62,7 +62,7 @@ const Index = () => {
       min_price: minValue || undefined,
       max_price: maxValue || undefined,
       page: page,
-      page_size: 12,
+      page_size: 20,
       name_value: nameValue || undefined,
       date: selectedDate || undefined,
     },
@@ -405,7 +405,7 @@ const Index = () => {
                           Hudud
                         </th>
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          Kompaniya
+                          Korxona nomi
                         </th>
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                           Resurs kodi
@@ -434,7 +434,7 @@ const Index = () => {
                             className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                           >
                             <td className=" font-medium text-xs py-[10px]  text-center">
-                              {index + 1}
+                              {(page - 1) * 20 + index + 1}
                             </td>
                             <td className=" font-medium text-xs py-[10px]  text-start">
                               {get(item, "material_region_name")}
@@ -565,7 +565,7 @@ const Index = () => {
                     <div>
                       <p className="text-sm text-[#9392A0]">
                         {" "}
-                        {get(materialsFast, "data.count")} tadan 1-12 tasi
+                        {get(materialsFast, "data.count")} tadan 20 tasi
                         ko&apos;rsatilgan
                       </p>
                     </div>
