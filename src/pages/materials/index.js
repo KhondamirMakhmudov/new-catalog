@@ -416,13 +416,26 @@ const Index = () => {
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                           O&apos;lchov birligi
                         </th>
-                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          Narxi (so’m)
+                        <th
+                          className="text-[10px]   bg-white text-gray-900  font-bold text-center"
+                          colSpan={2}
+                        >
+                          Narxi
                         </th>
 
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                           Oxirgi o&apos;zgarish
                         </th>
+                      </tr>
+                      <tr className="">
+                        <th colSpan={6}></th>
+                        <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold ">
+                          QQSsiz
+                        </th>
+                        <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold">
+                          QQS
+                        </th>
+                        <th></th>
                       </tr>
                     </thead>
 
@@ -474,7 +487,7 @@ const Index = () => {
                                 <p>{get(item, "material_measure")}</p>
                               </div>
                             </td>
-                            <td className=" font-medium text-xs py-[10px] ">
+                            <td className=" font-medium text-[10px] py-[10px] ">
                               <NumericFormat
                                 thousandSeparator={" "}
                                 displayType="text"
@@ -501,6 +514,42 @@ const Index = () => {
                                         )}]`,
                                         1
                                       )
+                                }
+                              />
+                            </td>
+                            <td className=" font-medium text-[10px] py-[10px] ">
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                displayType="text"
+                                className="bg-transparent max-w-[100px]"
+                                value={
+                                  Number.isInteger(get(item, "material_price"))
+                                    ? (
+                                        get(item, "material_price") *
+                                        get(
+                                          currency,
+                                          `data[${get(
+                                            item,
+                                            "material_price_currency"
+                                          )}]`,
+                                          1
+                                        ) *
+                                        0.12
+                                      ).toFixed(2)
+                                    : (
+                                        parseFloat(
+                                          get(item, "material_price")
+                                        ).toFixed(2) *
+                                        get(
+                                          currency,
+                                          `data[${get(
+                                            item,
+                                            "material_price_currency"
+                                          )}]`,
+                                          1
+                                        ) *
+                                        0.12
+                                      ).toFixed(2)
                                 }
                               />
                             </td>
