@@ -488,7 +488,7 @@ const Index = () => {
                           className="text-[10px]   bg-white text-gray-900  font-bold text-center"
                           colSpan={2}
                         >
-                          Narxi (so'm)
+                          Narxi (so&apos;m)
                         </th>
 
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
