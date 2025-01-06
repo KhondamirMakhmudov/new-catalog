@@ -9,7 +9,7 @@ export const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { company_name, company_stir, company_ceo } = credentials;
-        const res = await fetch("https://backend-market.tmsiti.uz/api/imzo", {
+        const res = await fetch("https://backend.mkinfo.uz/api/imzo", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
