@@ -17,6 +17,7 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 import Calendar from "react-calendar";
+import { useRouter } from "next/router";
 
 import "react-calendar/dist/Calendar.css";
 const regions = [
@@ -33,6 +34,7 @@ const regions = [
   { id: 11, name: "Samarqand" },
   { id: 12, name: "Sirdaryo" },
   { id: 13, name: "Surxondaryo" },
+  { id: 14, name: "Rossiya federatsiyasi" },
 ];
 
 const Index = () => {
@@ -54,6 +56,7 @@ const Index = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showCalendarEnd, setShowCalendarEnd] = useState(false);
+  const router = useRouter();
 
   const handleStartChange = (date) => {
     const formattedDate = date.toISOString().split("T")[0];
@@ -153,6 +156,14 @@ const Index = () => {
 
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <button
+            onClick={() => router.back()}
+            className="text-[#262D33] text-sm font-semibold"
+          >
+            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+              <RightIcon color="white" />
+            </div>
+          </button>
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
           </Link>
@@ -318,7 +329,7 @@ const Index = () => {
                     />
                   </div>
                   {dropdownOpen && (
-                    <div className="absolute border bg-white rounded-[8px] mt-1 max-h-60 overflow-y-auto shadow-lg">
+                    <div className="absolute border bg-white rounded-[8px] mt-1 max-h-60 overflow-y-auto shadow-lg z-50">
                       {regions.map((region) => (
                         <div
                           key={get(region, "id")}

@@ -206,7 +206,7 @@ const Search = () => {
                         onClick={() => setLimit((prev) => prev + 50)}
                         className="text-white bg-[#0256BA] hover:bg-[#1C73DA] w-full py-[8px] rounded-[12px] transition-all duration-200"
                       >
-                        Ko&apos;roq
+                        Ko&apos;proq
                       </button>
                     </li>
                   </ul>
@@ -234,7 +234,7 @@ const Search = () => {
                         onClick={() => setLimit((prev) => prev + 50)}
                         className="text-white bg-[#0256BA] hover:bg-[#1C73DA] w-full py-[8px] rounded-[12px] transition-all duration-200"
                       >
-                        Ko&apos;roq
+                        Ko&apos;proq
                       </button>
                     </li>
                   </ul>
@@ -262,7 +262,7 @@ const Search = () => {
                         onClick={() => setLimit((prev) => prev + 50)}
                         className="text-white bg-[#0256BA] hover:bg-[#1C73DA] w-full py-[8px] rounded-[12px] transition-all duration-200"
                       >
-                        Ko&apos;roq
+                        Ko&apos;proq
                       </button>
                     </li>
                   </ul>

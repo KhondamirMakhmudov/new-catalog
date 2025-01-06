@@ -253,6 +253,14 @@ const Index = () => {
 
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <button
+            onClick={() => router.back()}
+            className="text-[#262D33] text-sm font-semibold"
+          >
+            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+              <RightIcon color="white" />
+            </div>
+          </button>
           <Link href={"/"} className=" text-sm font-semibold">
             Bosh sahifa
           </Link>

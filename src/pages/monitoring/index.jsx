@@ -14,7 +14,8 @@ import Image from "next/image";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { useState, useEffect } from "react";
 import Pagination from "@/components/pagination";
-import toast from "react-hot-toast";
+
+import { useRouter } from "next/router";
 const Index = () => {
   const [data, setData] = useState([]);
   const [regions, setRegions] = useState([]);
@@ -24,6 +25,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [selectedElements, setSelectedElements] = useState([]);
+  const router = useRouter();
 
   const regionsData = {
     tashkent: { name: "Toshkent" },
@@ -129,6 +131,14 @@ const Index = () => {
 
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <button
+            onClick={() => router.back()}
+            className="text-[#262D33] text-sm font-semibold"
+          >
+            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+              <RightIcon color="white" />
+            </div>
+          </button>
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
           </Link>

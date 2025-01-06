@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import Header from "@/components/header";
 import CustomerIcon from "@/components/icons/customer";
@@ -11,10 +10,13 @@ import { KEYS } from "@/constants/key";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { get } from "lodash";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Index = () => {
+  const router = useRouter();
   const [selectPosition, setSelectPosition] = useState("");
   const [isScaled, setIsScaled] = useState(false);
+
   const searchParams = useSearchParams();
   const search = searchParams.get("code");
   console.log(search);
@@ -37,6 +39,14 @@ const Index = () => {
 
       <main className="container">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <button
+            onClick={() => router.back()}
+            className="text-[#262D33] text-sm font-semibold"
+          >
+            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+              <RightIcon color="white" />
+            </div>
+          </button>
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
           </Link>

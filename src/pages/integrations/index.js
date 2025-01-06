@@ -16,8 +16,10 @@ import MinistryComponent from "@/components/integrations/iqtisod";
 import BirjaComponent from "@/components/integrations/birja";
 import BojxonaComponent from "@/components/integrations/bojxona";
 import SoliqComponent from "@/components/integrations/soliq";
+import { useRouter } from "next/router";
 
 const Index = () => {
+  const router = useRouter();
   const [tab, setTab] = useState("birja");
   const [showAllProjects, setShowAllProjects] = useState(!false);
   const selectProject = (tab) => {
@@ -30,6 +32,14 @@ const Index = () => {
 
       <main className="container mb-[30px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <button
+            onClick={() => router.back()}
+            className="text-[#262D33] text-sm font-semibold"
+          >
+            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+              <RightIcon color="white" />
+            </div>
+          </button>
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
           </Link>

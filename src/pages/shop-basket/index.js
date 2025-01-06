@@ -16,16 +16,16 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import { NumericFormat } from "react-number-format";
 import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 const Index = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get("code");
   console.log(search);
   const { state, dispatch } = useCounter();
   const { data: session } = useSession();
   const token = useSettingsStore((state) => get(state, "token", null));
-
-  console.log(state);
 
   const { data: currency } = useGetQuery({
     key: KEYS.currency,
@@ -169,6 +169,14 @@ const Index = () => {
 
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+          <button
+            onClick={() => router.back()}
+            className="text-[#262D33] text-sm font-semibold"
+          >
+            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+              <RightIcon color="white" />
+            </div>
+          </button>
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
             Bosh sahifa
           </Link>
