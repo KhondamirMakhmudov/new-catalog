@@ -16,7 +16,9 @@ import ContentLoader from "@/components/loader/content-loader";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
+import Calendar from "react-calendar";
 
+import "react-calendar/dist/Calendar.css";
 const regions = [
   { id: 1, name: "Toshkent" },
   { id: 2, name: "Andijon" },
@@ -40,13 +42,30 @@ const Index = () => {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(0);
   const [regionName, setRegionName] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [nameValue, setNameValue] = useState("");
   const [selectedItems, setSelectedItems] = useState({});
   const [page, setPage] = useState(1);
   const [selectedDate, setSelectedDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const { state, dispatch } = useCounter();
   const [tableData, setTableData] = useState([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendarEnd, setShowCalendarEnd] = useState(false);
+
+  const handleStartChange = (date) => {
+    const formattedDate = date.toISOString().split("T")[0];
+    setStartDate(formattedDate);
+    setShowCalendar(false);
+  };
+
+  const handleEndChange = (date) => {
+    const formattedDate = date.toISOString().split("T")[0];
+    setEndDate(formattedDate);
+    setShowCalendarEnd(false);
+  };
 
   const [limit] = useState(24);
   const [offset, setOffset] = useState(1);
@@ -62,7 +81,10 @@ const Index = () => {
       min_price: minValue || undefined,
       max_price: maxValue || undefined,
       page: page,
+      start_date: startDate || undefined,
+      end_date: endDate || undefined,
       page_size: 20,
+      company_name: companyName || undefined,
       name_value: nameValue || undefined,
       date: selectedDate || undefined,
     },
@@ -280,7 +302,7 @@ const Index = () => {
 
             <div className="col-span-9 space-y-[16px]">
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                <div className="col-span-2 self-stretch">
+                <div className="col-span-4 self-stretch">
                   <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
 
                   <div
@@ -368,15 +390,61 @@ const Index = () => {
                     />
                   </div>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Sana</h3>
+                  <div className="flex gap-x-[2px] items-center">
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Boshlanishi"
+                        value={startDate}
+                        readOnly
+                        onClick={() => {
+                          setShowCalendar(!showCalendar);
+                        }}
+                        className="py-[10px] pl-[15px] border w-full rounded-[8px] cursor-pointer"
+                      />
 
+                      {showCalendar && (
+                        <div className="absolute z-10 bg-white -left-[100px] shadow-md mt-2">
+                          <Calendar onChange={handleStartChange} />
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="h-[1px] w-full max-w-[8px] bg-[#BCBFC2]"></div>
+
+                    <div className="relative">
+                      <input
+                        type="text"
+                        placeholder="Tugashi"
+                        value={endDate}
+                        readOnly
+                        onClick={() => {
+                          setShowCalendarEnd(!showCalendarEnd);
+                        }}
+                        className="py-[10px] pl-[15px] border w-full rounded-[8px] cursor-pointer"
+                      />
+
+                      {showCalendarEnd && (
+                        <div className="absolute z-10 bg-white left-[90px] shadow-md mt-2">
+                          <Calendar onChange={handleEndChange} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-span-8">
+                  <h3 className="font-semibold text-sm mb-[6px] ">
+                    Korxona nomi
+                  </h3>
                   <input
                     type="text"
                     placeholder="Kiriting"
                     onChange={(e) => {
                       const value = e.target.value;
-                      setSelectedDate(value);
+                      setCompanyName(value);
                     }}
                     className="py-[10px] pl-[15px] border w-full rounded-[8px]"
                   />
@@ -420,7 +488,7 @@ const Index = () => {
                           className="text-[10px]   bg-white text-gray-900  font-bold text-center"
                           colSpan={2}
                         >
-                          Narxi
+                          Narxi (so'm)
                         </th>
 
                         <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
