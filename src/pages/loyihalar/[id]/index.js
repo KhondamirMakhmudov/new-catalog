@@ -27,8 +27,6 @@ const Index = () => {
     url: URLS.kindergarden,
   });
 
-  console.log(kinderGarden);
-
   const selectProject = (tab) => {
     router.push(`/loyihalar/${tab}`);
     setTab(tab);
