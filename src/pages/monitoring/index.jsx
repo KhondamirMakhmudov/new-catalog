@@ -199,7 +199,7 @@ const Index = () => {
                           "Qoraqalpogiston Respublikasi"
                         )
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#FED6BC "
                       }
                     />
                     <path
@@ -217,7 +217,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Navoiy")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#FFFADD"
                       }
                     />
                     <path
@@ -235,7 +235,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Buxoro")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#DEF7FE"
                       }
                     />
                     <path
@@ -253,7 +253,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Qashqadaryo")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#C3FBD8"
                       }
                     />
                     <path
@@ -271,7 +271,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Jizzax")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#FDEED9"
                       }
                     />
                     <path
@@ -289,7 +289,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Surxondaryo")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#B5F2EA"
                       }
                     />
                     <path
@@ -307,7 +307,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Toshkent")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#C6D8FF"
                       }
                     />
                     <path
@@ -321,7 +321,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Toshkent shahar")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#AFEEEE"
                       }
                       d="M401.5 171C399 172 399 175.5 399 175.5C399 175.5 400.609 177.718 402 177.5C402.965 177.349 403.488 176.831 404 176C404.422 175.314 404.5 174 404.5 174C405 172 402.33 170.668 401.5 171Z"
                     />
@@ -340,7 +340,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Samarqand")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#B0C4DE"
                       }
                     />
                     <path
@@ -358,7 +358,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Namangan")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#87CEEB"
                       }
                     />
                     <path
@@ -376,7 +376,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Fargona")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#66CDAA"
                       }
                     />
                     <path
@@ -394,7 +394,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Xorazm")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#FFE4B5"
                       }
                     />
                     <path
@@ -412,7 +412,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Andijon")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#2E8B57"
                       }
                     />
                     <path
@@ -430,7 +430,7 @@ const Index = () => {
                       fill={
                         selectedElements.includes("Sirdaryo")
                           ? "#0256BA"
-                          : "#EBF1F9"
+                          : "#9370DB"
                       }
                     />
                   </g>

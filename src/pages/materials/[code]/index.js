@@ -378,30 +378,32 @@ const Index = () => {
                       {isLoadingSoliq || isFetchingSoliq ? (
                         <SimpleLoader />
                       ) : (
-                        <ul className="space-y-[8px] mt-[8px]">
-                          <li className="text-xs flex justify-between items-center">
-                            <p>
-                              O&apos;tgan oydagi savdolar <br /> soni:
-                            </p>
-
-                            <p className="font-bold">
-                              <NumericFormat
-                                thousandSeparator={" "}
-                                value={soliqProductCount}
-                                displayType="text"
-                              />
+                        <ul className="space-y-[13px] flex flex-col">
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Maksimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(soliqData, "data.max_sum", 0)}
+                              so&apos;m
                             </p>
                           </li>
 
-                          <li className="text-xs flex justify-between items-center">
-                            <p>Narxi:</p>
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">
+                              O&apos;rtacha narx:
+                            </p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(soliqData, "data.midle_sum", 0)}
+                              so&apos;m
+                            </p>
+                          </li>
 
-                            <p className="font-bold">
-                              <NumericFormat
-                                value={soliqAveragePrice}
-                                thousandSeparator={" "}
-                                displayType="text"
-                              />{" "}
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Minimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(soliqData, "data.min_sum", 0)}
                               so&apos;m
                             </p>
                           </li>
