@@ -15,7 +15,7 @@ import Footer from "@/components/footer";
 
 const Index = () => {
   const router = useRouter();
-  const [tab, setTab] = useState("maktab");
+  const [tab, setTab] = useState("bogcha");
   const [showAllProjects, setShowAllProjects] = useState(!false);
 
   const {
@@ -92,27 +92,25 @@ const Index = () => {
                   animate={{ opacity: 1, translateY: "0" }}
                   transition={{ duration: 0.3 }}
                 >
-                  <li onClick={() => selectProject("maktab")}>
+                  <li onClick={() => selectProject("bogcha")}>
                     <div
                       className={`${
-                        tab === "maktab" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
+                        tab === "bogcha" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
                       } p-[10px] flex items-center gap-x-[8px] rounded-[12px] cursor-pointer`}
                     >
-                      <div
-                        className={` px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block`}
-                      >
+                      <div className=" px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block">
                         <Image
-                          src={"/images/school.png"}
-                          alt={"school"}
+                          src={"/images/kindergarten.png"}
+                          alt={"kindergarten"}
                           width={42}
                           height={42}
                         />
                       </div>
 
-                      <p className="flex-1">Maktab</p>
+                      <p className="flex-1">Bog&apos;cha</p>
 
                       <div className="bg-[#9AA8BC] inline-block rounded-full">
-                        {tab === "maktab" ? (
+                        {tab === "bogcha" ? (
                           <Image
                             src={"/icons/checked.svg"}
                             alt="checked"
@@ -158,25 +156,27 @@ const Index = () => {
                     </div>
                   </li>
 
-                  <li onClick={() => selectProject("bogcha")}>
+                  <li onClick={() => selectProject("maktab")}>
                     <div
                       className={`${
-                        tab === "bogcha" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
+                        tab === "maktab" ? "bg-[#E7EDF5]" : "bg-[#F7F7F7]"
                       } p-[10px] flex items-center gap-x-[8px] rounded-[12px] cursor-pointer`}
                     >
-                      <div className=" px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block">
+                      <div
+                        className={` px-[1px] py-[6px] bg-white border border-[#E6E5ED] rounded-[10px] inline-block`}
+                      >
                         <Image
-                          src={"/images/kindergarten.png"}
-                          alt={"kindergarten"}
+                          src={"/images/school.png"}
+                          alt={"school"}
                           width={42}
                           height={42}
                         />
                       </div>
 
-                      <p className="flex-1">Bog&apos;cha</p>
+                      <p className="flex-1">Maktab</p>
 
                       <div className="bg-[#9AA8BC] inline-block rounded-full">
-                        {tab === "bogcha" ? (
+                        {tab === "maktab" ? (
                           <Image
                             src={"/icons/checked.svg"}
                             alt="checked"
