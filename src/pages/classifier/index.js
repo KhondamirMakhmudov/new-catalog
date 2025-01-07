@@ -169,7 +169,10 @@ const Index = () => {
                           e.stopPropagation();
                           setCategoryId(null);
                           setGroupId(null);
-                          setVolumed(get(volume, "id"));
+                          const clickedVolume = get(volume, "id");
+                          setVolumed((prev) =>
+                            prev === clickedVolume ? null : clickedVolume
+                          );
                           onSubmit({
                             volume_ids: [get(volume, "id")],
                             category_ids: categoryId ? [categoryId] : undefined,
@@ -213,7 +216,15 @@ const Index = () => {
                                       onClick={(e) => {
                                         e.stopPropagation();
 
-                                        setCategoryId(get(category, "id"));
+                                        const clickedCategoryId = get(
+                                          category,
+                                          "id"
+                                        );
+                                        setCategoryId((prevCategoryId) =>
+                                          prevCategoryId === clickedCategoryId
+                                            ? null
+                                            : clickedCategoryId
+                                        );
                                         onSubmit({
                                           category_ids: [get(category, "id")],
                                           group_ids: groupId

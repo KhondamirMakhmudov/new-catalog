@@ -133,18 +133,27 @@ const Index = () => {
                       <li
                         onClick={(e) => {
                           e.stopPropagation();
-                          setCategoryId(get(category, "id"));
+                          const clickedCategoryId = get(category, "id");
+                          setCategoryId((prevCategoryId) =>
+                            prevCategoryId === clickedCategoryId
+                              ? null
+                              : clickedCategoryId
+                          );
                         }}
                         key={get(category, "id")}
                       >
-                        <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200">
+                        <div className="flex gap-x-[4px] hover:bg-[#EDF4FC] bg-transparent transition-all duration-200 items-center">
                           <Image
-                            src={"/icons/arrow_right.svg"}
+                            src={
+                              categoryId !== get(category, "id")
+                                ? "/icons/add-circle.svg"
+                                : "/icons/minus-circle.svg"
+                            }
                             alt="arrow_right"
-                            width={16}
-                            height={16}
+                            width={20}
+                            height={20}
                           />
-                          <p className="text-xs font-medium text-[#475467]">
+                          <p className="text-sm font-semibold text-[#24539b]">
                             {get(category, "category_name")}
                           </p>
                         </div>

@@ -205,7 +205,10 @@ const Index = () => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setCategoryId(null);
-                          setVolumed(get(volume, "id"));
+                          const clickedVolume = get(volume, "id");
+                          setVolumed((prev) =>
+                            prev === clickedVolume ? null : clickedVolume
+                          );
                         }}
                         key={get(volume, "id")}
                         className=""
@@ -243,7 +246,15 @@ const Index = () => {
                                     <li
                                       onClick={(e) => {
                                         e.stopPropagation();
-                                        setCategoryId(get(category, "id"));
+                                        const clickedCategoryId = get(
+                                          category,
+                                          "id"
+                                        );
+                                        setCategoryId((prevCategoryId) =>
+                                          prevCategoryId === clickedCategoryId
+                                            ? null
+                                            : clickedCategoryId
+                                        );
                                       }}
                                       key={get(category, "id")}
                                     >
@@ -276,6 +287,9 @@ const Index = () => {
                                                     <div className="flex gap-x-[4px] items-center ">
                                                       <input
                                                         type="checkbox"
+                                                        onClick={(e) =>
+                                                          e.stopPropagation()
+                                                        }
                                                         onChange={() =>
                                                           handleCheckboxChange(
                                                             group
