@@ -71,7 +71,7 @@ const MedicineProject = () => {
                 className="text-sm odd:bg-[#EDF4FC] even:bg-white"
               >
                 <td className=" font-medium text-xs py-[10px]  text-center">
-                  {index + 1}
+                  {offset + index + 1}
                 </td>
                 <td className=" font-medium text-xs py-[10px] text-[#0256BA]">
                   <Link href={`/materials/${get(item, "name")}`}>

@@ -383,7 +383,7 @@ const Index = () => {
                             <p className="text-xs font-bold">Maksimal narx:</p>
                             <div className="flex-grow border-t border-dotted mx-2"></div>
                             <p className="text-[#4B5157] text-xs font-medium">
-                              {get(soliqData, "data.max_sum", 0)}
+                              {get(soliqData, "data.max_sum", 0).toFixed(2)}
                               so&apos;m
                             </p>
                           </li>
@@ -394,7 +394,7 @@ const Index = () => {
                             </p>
                             <div className="flex-grow border-t border-dotted mx-2"></div>
                             <p className="text-[#4B5157] text-xs font-medium">
-                              {get(soliqData, "data.midle_sum", 0)}
+                              {get(soliqData, "data.midle_sum", 0).toFixed(2)}
                               so&apos;m
                             </p>
                           </li>
@@ -403,7 +403,7 @@ const Index = () => {
                             <p className="text-xs font-bold">Minimal narx:</p>
                             <div className="flex-grow border-t border-dotted mx-2"></div>
                             <p className="text-[#4B5157] text-xs font-medium">
-                              {get(soliqData, "data.min_sum", 0)}
+                              {get(soliqData, "data.min_sum", 0).toFixed(2)}
                               so&apos;m
                             </p>
                           </li>
@@ -435,27 +435,33 @@ const Index = () => {
                       {isLoadingBirja || isFetchingBirja ? (
                         <SimpleLoader />
                       ) : (
-                        <ul className="space-y-[8px] mt-[8px]">
-                          <li className="text-xs flex justify-between items-center">
-                            <p>O&apos;tgan oydagi savdolar soni:</p>
-
-                            <p className="font-bold">
-                              <NumericFormat
-                                thousandSeparator={" "}
-                                value={birjaProductCount}
-                                displayType="text"
-                              />
+                        <ul className="space-y-[13px] flex flex-col">
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Maksimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(birja, "data.max_sum", 0).toFixed(2)}
+                              so&apos;m
                             </p>
                           </li>
 
-                          <li className="text-xs flex justify-between items-center">
-                            <p>Narxi:</p>
-                            <p className="font-bold">
-                              <NumericFormat
-                                thousandSeparator={" "}
-                                value={birjaAveragePrice}
-                                displayType="text"
-                              />
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">
+                              O&apos;rtacha narx:
+                            </p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(birja, "data.midle_sum", 0).toFixed(2)}
+                              so&apos;m
+                            </p>
+                          </li>
+
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Minimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(birja, "data.min_sum", 0).toFixed(2)}
+                              so&apos;m
                             </p>
                           </li>
                         </ul>
