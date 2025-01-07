@@ -89,13 +89,15 @@ const MinistryComponent = () => {
             </thead>
 
             <tbody>
-              {drop(filteredData, 5).map((item, index) => (
+              {filteredData.map((item, index) => (
                 <tr
                   key={get(item, "id")}
                   className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                 >
                   <td className=" font-medium text-xs py-[10px]  text-center">
-                    {index + 1}
+                    {(page - 1) * get(ministry, "data.items_per_page", 0) +
+                      index +
+                      1}
                   </td>
                   <td className=" font-medium text-xs py-[10px]">
                     {get(item, "productCode")}
