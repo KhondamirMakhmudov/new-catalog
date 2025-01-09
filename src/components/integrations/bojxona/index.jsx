@@ -33,8 +33,6 @@ const BojxonaComponent = () => {
     },
   });
 
-  const calculateIndex = (index) => (page - 1) * limit + index + 1;
-
   useEffect(() => {
     if (get(customs, "data.results", [])) {
       const searchResults = get(customs, "data.results", []).filter((item) =>
@@ -103,7 +101,7 @@ const BojxonaComponent = () => {
                   className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                 >
                   <td className=" font-medium text-xs py-[10px]  text-center">
-                    {calculateIndex(index)}
+                    {index + 1}
                   </td>
                   <td className=" font-medium text-xs py-[10px]">
                     {get(item, "codeTiftn")}

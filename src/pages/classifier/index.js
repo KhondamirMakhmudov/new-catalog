@@ -339,7 +339,7 @@ const Index = () => {
                           GOST
                         </th>
 
-                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                        <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
                           O&apos;lchov birligi
                         </th>
                       </tr>
@@ -485,7 +485,7 @@ const Index = () => {
                     <div>
                       <p className="text-sm text-[#9392A0]">
                         {" "}
-                        {get(data, "data.count")} tadan 1-12 tasi
+                        {get(data, "data.total_items")} tadan 1-12 tasi
                         ko&apos;rsatilgan
                       </p>
                     </div>
@@ -493,8 +493,8 @@ const Index = () => {
                     <div>
                       <Pagination
                         pageCount={get(data, "data.total_pages")}
-                        page={page}
-                        setPage={(prev) => setPage(prev)}
+                        page={get(data, "data.current_page")}
+                        setPage={(prev) => setPage(prev + 1)}
                       />
                     </div>
                   </div>

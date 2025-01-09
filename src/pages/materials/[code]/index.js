@@ -32,6 +32,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [gost, setGost] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleIncrement = (product) => {
     dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
@@ -106,6 +107,7 @@ const Index = () => {
       mxik_code: get(material, "data.mxik_soliq")?.split(".")[0],
     },
   });
+
   // Soliqdan ma'lumotlarni olib joylash
   useEffect(() => {
     if (!isEmpty(get(soliqData, "data.data", []))) {
@@ -247,6 +249,45 @@ const Index = () => {
     setMinimum(minPrice.toFixed(2));
   }, [materialAds, currency]);
 
+  ///// Tavsiyaviy narx
+  console.log("Maximum:", maximum);
+  console.log("Average:", average);
+  console.log("Minimum:", minimum);
+
+  console.log("soliq max", get(soliqData, "data.max_sum", 0).toFixed(2));
+  console.log("soliq midle", get(soliqData, "data.midle_sum", 0).toFixed(2));
+  console.log("soliq min", get(soliqData, "data.min_sum", 0).toFixed(2));
+
+  console.log("birja max", get(birja, "data.max_sum", 0).toFixed(2));
+  console.log("birja midle", get(birja, "data.middle_sum", 0).toFixed(2));
+  console.log("birja min", get(birja, "data.min_sum", 0).toFixed(2));
+
+  const recommendedPriceMax = (
+    (Number(get(soliqData, "data.max_sum", 0).toFixed(2)) +
+      +maximum +
+      +get(birja, "data.max_sum", 0).toFixed(2)) /
+    3
+  ).toFixed(2);
+
+  const recommendedPriceAverage = (
+    +get(soliqData, "data.midle_sum", 0).toFixed(2) +
+    +average +
+    +get(birja, "data.middle_sum", 0).toFixed(2) / 3
+  ).toFixed(2);
+
+  const recommendedPriceMin = (
+    +get(soliqData, "data.min_sum", 0).toFixed(2) +
+    +minimum +
+    +get(birja, "data.min_sum", 0).toFixed(2) / 3
+  ).toFixed(2);
+
+  console.log(
+    "sum",
+    Number(get(soliqData, "data.max_sum", 0).toFixed(2)) +
+      Number(maximum) +
+      Number(get(birja, "data.max_sum", 0).toFixed(2))
+  );
+
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
@@ -284,9 +325,9 @@ const Index = () => {
                 <ContentLoader />
               ) : (
                 <div className="grid grid-cols-12 bg-white p-[20px] border border-[#E4E7F5] rounded-[12px] gap-y-[30px] font-gilroy">
-                  <div className="col-span-7 flex justify-between items-center">
+                  <div className="col-span-9 flex justify-between items-center">
                     <div className="">
-                      <div className="flex gap-x-[20px] mb-[12px]">
+                      <div className="flex gap-x-[20px] items-center mb-[12px]">
                         <div className="flex gap-x-[6px]">
                           <Image
                             src={"/icons/clock.svg"}
@@ -310,6 +351,42 @@ const Index = () => {
                             #{get(material, "data.material_csr_code")}
                           </p>
                         </div>
+
+                        <div className="flex gap-x-[6px]">
+                          <Image
+                            src={"/icons/file.svg"}
+                            alt="clock"
+                            width={16}
+                            height={16}
+                          />
+                          <p className="text-xs font-medium ">
+                            Maksimal narx: {recommendedPriceMax} so&apos;m
+                          </p>
+                        </div>
+
+                        <div className="flex gap-x-[6px]">
+                          <Image
+                            src={"/icons/file.svg"}
+                            alt="clock"
+                            width={16}
+                            height={16}
+                          />
+                          <p className="text-xs font-medium ">
+                            O&apos;rtacha narx:{recommendedPriceMax} so&apos;m
+                          </p>
+                        </div>
+
+                        <div className="flex gap-x-[6px]">
+                          <Image
+                            src={"/icons/file.svg"}
+                            alt="clock"
+                            width={16}
+                            height={16}
+                          />
+                          <p className="text-xs font-medium ">
+                            Minimum narx: {recommendedPriceMax} so&apos;m
+                          </p>
+                        </div>
                       </div>
 
                       <h2 className="text-lg font-semibold">
@@ -317,7 +394,7 @@ const Index = () => {
                       </h2>
                     </div>
                   </div>
-                  <div className="col-span-5">
+                  <div className="col-span-3">
                     <motion.button
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
@@ -352,6 +429,63 @@ const Index = () => {
                       </motion.div>
                     )}
                   </div>
+
+                  {/* <div className="col-span-3 border p-[10px] rounded-[6px]">
+                    <button
+                      onClick={() => setShow(!show)}
+                      className="flex justify-between w-full items-center "
+                    >
+                      <p className="font-base text-[#BCBFC2]">
+                        Tavsiyaviy narxi
+                      </p>
+                      <RightIcon
+                        classname={`${
+                          !show ? "rotate-90" : "-rotate-90"
+                        } transition-all duration-200`}
+                        color="#BCBFC2"
+                      />
+                    </button>
+
+                    {show && (
+                      <motion.div
+                        className="mt-[10px]"
+                        initial={{ opacity: 0, translateY: "30px" }}
+                        animate={{ opacity: 1, translateY: "0" }}
+                        transition={{ duration: 0.4 }}
+                      >
+                        <ul className="space-y-[13px] flex flex-col">
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Maksimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(soliqData, "data.max_sum", 0).toFixed(2)}
+                              so&apos;m
+                            </p>
+                          </li>
+
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">
+                              O&apos;rtacha narx:
+                            </p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(soliqData, "data.midle_sum", 0).toFixed(2)}
+                              so&apos;m
+                            </p>
+                          </li>
+
+                          <li className="flex justify-between items-end">
+                            <p className="text-xs font-bold">Minimal narx:</p>
+                            <div className="flex-grow border-t border-dotted mx-2"></div>
+                            <p className="text-[#4B5157] text-xs font-medium">
+                              {get(soliqData, "data.min_sum", 0).toFixed(2)}
+                              so&apos;m
+                            </p>
+                          </li>
+                        </ul>
+                      </motion.div>
+                    )}
+                  </div> */}
 
                   <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
                     <motion.div
@@ -451,7 +585,7 @@ const Index = () => {
                             </p>
                             <div className="flex-grow border-t border-dotted mx-2"></div>
                             <p className="text-[#4B5157] text-xs font-medium">
-                              {get(birja, "data.midle_sum", 0).toFixed(2)}
+                              {get(birja, "data.middle_sum", 0).toFixed(2)}
                               so&apos;m
                             </p>
                           </li>

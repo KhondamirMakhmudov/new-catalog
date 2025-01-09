@@ -16,6 +16,34 @@ const HorizontalBarChart = () => {
 
   const regions = get(company, "data", [])?.map((item) => get(item, "region"));
 
+  const regionColors = [
+    { region: "Toshkent shahri", regionColor: "#0256BA" },
+    { region: "Navoiy", regionColor: "#123456" },
+    { region: "Toshkent", regionColor: "#654321" },
+    { region: "Buxoro", regionColor: "#abcdef" },
+    { region: "Namangan", regionColor: "#fedcba" },
+    { region: "Samarqand", regionColor: "#ff5733" },
+    { region: "Jizzax", regionColor: "#33ff57" },
+    { region: "Fargona", regionColor: "#57ff33" },
+    { region: "Xorazm", regionColor: "#33aaff" },
+    { region: "Surxondaryo", regionColor: "#aa33ff" },
+    { region: "Sirdaryo", regionColor: "#ffaa33" },
+    { region: "Qashqadaryo", regionColor: "#33ffaa" },
+    { region: "Rossiya federatsiyasi", regionColor: "#ff33aa" },
+    { region: "Andijon", regionColor: "#aaff33" },
+    { region: "Qoraqalpogiston Respublikasi", regionColor: "#aa33ff" },
+  ];
+
+  const getRegionColor = (region) => {
+    const regionObj = regionColors.find((r) => r.region === region);
+    return regionObj ? regionObj.regionColor : "#0256BA";
+  };
+
+  const filteredRegionColors = regions.map((region) => {
+    const regionObj = regionColors.find((r) => r.region === region);
+    return regionObj ? regionObj.regionColor : "#0256BA";
+  });
+
   const companyCounts = get(company, "data", [])?.map((item) =>
     get(item, "company_count")
   );
@@ -58,7 +86,7 @@ const HorizontalBarChart = () => {
       enabled: true,
     },
     fill: {
-      colors: ["#0256BA"],
+      colors: filteredRegionColors,
     },
   };
 
