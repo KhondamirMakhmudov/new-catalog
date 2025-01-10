@@ -58,7 +58,7 @@ const HorizonChart = () => {
           <XAxis type="number" />
           <YAxis dataKey="region" type="category" width={150} interval={0} />
           <Tooltip
-            formatter={(value, name) => [`${value}`, "Custom Label"]}
+            formatter={(value, name) => [`${value}`, "Korxonalar soni"]}
             labelFormatter={(label) => `Region: ${label}`}
           />
           <Bar dataKey="companyCount" fill="#8884d8" isAnimationActive={true}>
