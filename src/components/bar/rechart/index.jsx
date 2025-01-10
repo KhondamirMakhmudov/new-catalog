@@ -36,7 +36,7 @@ const HorizonChart = () => {
     Sirdaryo: "#9370DB",
     Qashqadaryo: "#C3FBD8",
     "Rossiya federatsiyasi": "#ff33aa",
-    Andijon: "#aaff33",
+    Andijon: "#2E8B57",
     "Qoraqalpogiston Respublikasi": "#D7B59F",
   };
 
@@ -57,7 +57,10 @@ const HorizonChart = () => {
           <CartesianGrid />
           <XAxis type="number" />
           <YAxis dataKey="region" type="category" width={150} interval={0} />
-          <Tooltip />
+          <Tooltip
+            formatter={(value, name) => [`${value}`, "Custom Label"]}
+            labelFormatter={(label) => `Region: ${label}`}
+          />
           <Bar dataKey="companyCount" fill="#8884d8" isAnimationActive={true}>
             {chartData.map((entry, index) => (
               <cell key={`cell-${index}`} fill={entry.fill} />
