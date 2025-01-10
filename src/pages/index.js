@@ -15,6 +15,7 @@ import ScrollToTopButton from "@/components/scroll-to-top";
 import AboutClassifier from "@/components/about-company";
 import FondStock from "@/components/fondStock";
 import BackgroundSlider from "@/components/background-slider";
+import HorizonChart from "@/components/bar/rechart";
 
 const integrationData = [
   {
@@ -460,7 +461,7 @@ export default function Home() {
               <Link href={"/monitoring"}>
                 <div className="grid grid-cols-12 gap-x-[30px] bg-white p-[30px] rounded-[20px] mt-[20px]">
                   <div className="col-span-6">
-                    <HorizontalBarChart />
+                    <HorizonChart />
                   </div>
                   <div className="col-span-6">
                     <div>

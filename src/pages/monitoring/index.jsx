@@ -18,6 +18,7 @@ import Pagination from "@/components/pagination";
 import { useRouter } from "next/router";
 import HorizonChart from "@/components/bar/rechart";
 const Index = () => {
+  const limit = 24;
   const [data, setData] = useState([]);
   const [regions, setRegions] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState(null);
@@ -62,11 +63,6 @@ const Index = () => {
     setTooltip(null);
   };
 
-  const { mutate: showMonitoring } = usePostQuery({
-    listKeyId: KEYS.monitoring,
-    hideSuccessToast: true,
-  });
-
   // Add region to array
   const handleRegionClick = (regionId) => {
     setSelectedRegion(regionId);
@@ -79,6 +75,26 @@ const Index = () => {
     });
   };
 
+  const { mutate: showMonitoring } = usePostQuery({
+    listKeyId: KEYS.monitoring,
+    hideSuccessToast: true,
+  });
+
+  const onSubmit = (updatedElements) => {
+    const urlWithPage = `${URLS.monitoring}?page=${page}&limit=${limit}`;
+    showMonitoring(
+      {
+        url: urlWithPage,
+        attributes: updatedElements,
+      },
+      {
+        onSuccess: (response) => {
+          setData(response);
+        },
+      }
+    );
+  };
+
   // Delete region from array
   const handleRegionDelete = (regionId) => {
     setSelectedElements((prevRegions) => {
@@ -86,6 +102,7 @@ const Index = () => {
         (region) => region !== regionId
       );
       onSubmit(updatedRegions);
+
       return updatedRegions;
     });
   };
@@ -98,22 +115,12 @@ const Index = () => {
 
       const updatedElements = [...prevElements, element];
       onSubmit(updatedElements, element);
+
       return updatedElements;
     });
   };
-  const onSubmit = (updatedElements) => {
-    showMonitoring(
-      {
-        url: URLS.monitoring,
-        attributes: updatedElements,
-      },
-      {
-        onSuccess: (response) => {
-          setData(response);
-        },
-      }
-    );
-  };
+
+  console.log(data, "data.data");
 
   useEffect(() => {
     if ((data, "data.data", [])) {
@@ -526,7 +533,7 @@ const Index = () => {
               </thead>
 
               <tbody>
-                {filteredData?.map((item, index) => (
+                {get(data, "data.data", [])?.map((item, index) => (
                   <tr
                     key={index}
                     className="text-sm odd:bg-[#EDF4FC] even:bg-white"
@@ -617,7 +624,7 @@ const Index = () => {
 
               <div>
                 <Pagination
-                  pageCount={get(data, "data.count") / get(data, "data.limit")}
+                  pageCount={Math.ceil(get(data, "data.count", 1) / limit)}
                   page={get(data, "data.page")}
                   setPage={(prev) => setPage(prev + 1)}
                 />

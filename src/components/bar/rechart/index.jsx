@@ -51,7 +51,10 @@ const HorizonChart = () => {
   }, [company]);
 
   return (
-    <div style={{ width: "100%", height: "400px" }} className="text-xs">
+    <div
+      style={{ width: "100%", height: "400px" }}
+      className="text-xs font-gilroy"
+    >
       <ResponsiveContainer>
         <BarChart data={chartData} layout="vertical">
           <CartesianGrid />
@@ -59,7 +62,7 @@ const HorizonChart = () => {
           <YAxis dataKey="region" type="category" width={150} interval={0} />
           <Tooltip
             formatter={(value, name) => [`${value}`, "Korxonalar soni"]}
-            labelFormatter={(label) => `Region: ${label}`}
+            labelFormatter={(label) => `Mintaqa: ${label}`}
           />
           <Bar dataKey="companyCount" fill="#8884d8" isAnimationActive={true}>
             {chartData.map((entry, index) => (
