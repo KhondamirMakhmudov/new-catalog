@@ -16,6 +16,7 @@ import { useState, useEffect } from "react";
 import Pagination from "@/components/pagination";
 
 import { useRouter } from "next/router";
+import HorizonChart from "@/components/bar/rechart";
 const Index = () => {
   const [data, setData] = useState([]);
   const [regions, setRegions] = useState([]);
@@ -155,7 +156,7 @@ const Index = () => {
           <div className=" bg-white p-[30px] rounded-[20px]">
             <div className="grid grid-cols-12 gap-x-[30px]  ">
               <div className="col-span-6">
-                <HorizontalBarChart />
+                <HorizonChart />
               </div>
 
               {tooltip && (
