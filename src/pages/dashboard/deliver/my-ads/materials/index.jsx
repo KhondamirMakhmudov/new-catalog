@@ -207,7 +207,7 @@ const MyMaterials = () => {
                 <Pagination
                   page={page}
                   pageCount={get(myMaterials, "data.total_pages", 0)}
-                  setPage={(prev) => setPage(prev + 1)}
+                  setPage={setPage}
                 />
               </div>
             </div>
