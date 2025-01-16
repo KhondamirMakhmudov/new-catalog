@@ -20,16 +20,12 @@ const Pagination = ({ page = 1, pageCount = 1, setPage = () => {} }) => {
           </button>
         }
         previousLabel={
-          <button
-            className="bg-[#EAF0F8] p-[6px] rounded-[8px]"
-            disabled={page === pageCount}
-          >
+          <button className="bg-[#EAF0F8] p-[6px] rounded-[8px]">
             <Image
               src={"/icons/arrow-right-paginate.svg"}
               alt="navigation"
               width={20}
               height={20}
-              disabled={page === 1}
               className=" "
             />
           </button>
