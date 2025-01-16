@@ -102,7 +102,7 @@ const MyMaterials = () => {
                     className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                   >
                     <td className=" font-medium text-xs py-[10px]  text-center">
-                      {index + 1}
+                      {(page - 1) * pageSize + index + 1}
                     </td>
                     <td className=" font-medium text-xs py-[10px] max-w-[200px]">
                       {get(item, "company_name")}
