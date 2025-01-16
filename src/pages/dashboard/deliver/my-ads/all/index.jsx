@@ -19,7 +19,7 @@ const MyMaterials = () => {
     key: KEYS.myMaterials,
     url: URLS.myMaterials,
     params: {
-      page,
+      page: page,
       page_size: pageSize,
     },
   });
