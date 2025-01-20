@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { get, isEmpty, find, head } from "lodash";
 import usePutQuery from "@/hooks/api/usePutQuery";
 import Title from "@/components/title";
+import toast from "react-hot-toast";
 
 const Index = () => {
   const [search, setSearch] = useState("");
@@ -135,12 +136,12 @@ const Index = () => {
                 type={"number"}
                 defaultValue={get(oldData, "data.material_price")}
                 {...register("material_price", { required: true })}
-                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
+                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-tl-[12px] rounded-bl-[12px]"
                 required={true}
               />
 
               <select
-                className={"p-[16px]"}
+                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-tr-[12px] rounded-br-[12px]"
                 defaultValue={get(oldData, "data.material_price_currency")}
                 {...register("material_price_currency")}
               >
