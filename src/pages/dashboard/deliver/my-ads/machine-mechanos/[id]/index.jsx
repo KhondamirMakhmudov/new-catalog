@@ -13,7 +13,6 @@ import Title from "@/components/title";
 import toast from "react-hot-toast";
 
 const Index = () => {
-  const { t } = useTranslation();
   const [search, setSearch] = useState();
   const [machineMechano, setMachineMechano] = useState({});
   const [machineMechanoValue, setMachineMechanoValue] = useState(false);
