@@ -48,7 +48,7 @@ const HorizonChart = () => {
       fill: regionColors[get(item, "region")] || "#0256BA", // Default color if not in the list
     }));
     setChartData(regions);
-  }, [company]);
+  }, [company, regionColors]);
 
   return (
     <div
