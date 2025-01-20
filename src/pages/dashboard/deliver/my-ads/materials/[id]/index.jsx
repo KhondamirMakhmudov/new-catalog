@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { get, isEmpty, find, head } from "lodash";
 import usePutQuery from "@/hooks/api/usePutQuery";
+import Title from "@/components/title";
 
 const Index = () => {
   const [search, setSearch] = useState("");
@@ -108,6 +109,7 @@ const Index = () => {
   return (
     <DeliverDashboard>
       <MainContent>
+        <Title>E&apos;lonni tahrirlash</Title>
         <form
           className={"grid grid-cols-12 gap-x-[30px]"}
           onSubmit={handleSubmit(onSubmit)}
@@ -121,7 +123,8 @@ const Index = () => {
               defaultValue={get(oldData, "data.material_description")}
               rows={5}
               className={
-                "py-[15px] px-[20px] w-full shadow-xl rounded-[5px] my-[10px]"
+                (className =
+                  "py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]")
               }
             ></textarea>
           </div>
@@ -135,7 +138,7 @@ const Index = () => {
                 type={"number"}
                 defaultValue={get(oldData, "data.material_price")}
                 {...register("material_price", { required: true })}
-                className={"py-[15px] px-[20px] w-full shadow-xl  my-[10px]"}
+                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
                 required={true}
               />
 
@@ -158,9 +161,7 @@ const Index = () => {
             </h4>
             <input
               placeholder={"*qidiruv natijasiga ko’ra avtomatik to’ldiriladi"}
-              className={
-                "py-[15px] px-[20px] w-full shadow-xl rounded-[5px] my-[10px]"
-              }
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
               {...register("material_measure")}
               defaultValue={get(oldData, "data.material_measure")}
               disabled={true}
@@ -175,9 +176,7 @@ const Index = () => {
               type={"number"}
               defaultValue={get(oldData, "data.material_amount")}
               {...register("material_amount", { required: true })}
-              className={
-                "py-[15px] px-[20px] w-full shadow-xl rounded-[5px] my-[10px]"
-              }
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
@@ -188,9 +187,7 @@ const Index = () => {
             </h4>
             <input
               placeholder={"*qidiruv natijasiga ko’ra avtomatik to’ldiriladi"}
-              className={
-                "py-[15px] px-[20px] w-full shadow-xl rounded-[5px] my-[10px]"
-              }
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
               defaultValue={get(oldData, "data.material_measure")}
               {...register("material_amount_measure")}
               disabled={true}
@@ -207,9 +204,7 @@ const Index = () => {
                 placeholder={"Mahsulot sertifikati blank raqami"}
                 defaultValue={get(oldData, "data.sertificate_blank_num")}
                 {...register("sertificate_blank_num", { required: true })}
-                className={
-                  "py-[15px] px-[20px] w-full shadow-xl rounded-[5px] my-[10px]"
-                }
+                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
                 required={true}
               />
             </div>
@@ -223,9 +218,7 @@ const Index = () => {
                 placeholder={"Mahsulot sertifikati reestr raqami"}
                 {...register("sertificate_reestr_num", { required: true })}
                 defaultValue={get(oldData, "data.sertificate_reestr_num")}
-                className={
-                  "py-[15px] px-[20px] w-full shadow-xl rounded-[5px] my-[10px]"
-                }
+                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
                 required={true}
               />
             </div>
