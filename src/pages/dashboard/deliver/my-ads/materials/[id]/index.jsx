@@ -142,6 +142,7 @@ const Index = () => {
           </div>
 
           <div className={"col-span-3 "}>
+            <h4 className={"text-[#28366D] text-base "}>Valyuta</h4>
             <select
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
               defaultValue={get(oldData, "data.material_price_currency")}
