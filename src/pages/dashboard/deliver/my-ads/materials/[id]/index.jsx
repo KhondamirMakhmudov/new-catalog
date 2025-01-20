@@ -243,3 +243,5 @@ const Index = () => {
     </DeliverDashboard>
   );
 };
+
+export default Index;
