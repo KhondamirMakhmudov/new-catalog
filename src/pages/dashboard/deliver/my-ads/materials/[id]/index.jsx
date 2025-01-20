@@ -130,30 +130,31 @@ const Index = () => {
           {/* Material narxi */}
           <div className={"col-span-6 "}>
             <h4 className={"text-[#28366D] text-base "}>Material narxi</h4>
-            <div className={"flex items-center rounded-[5px]"}>
-              <input
-                placeholder={""}
-                type={"number"}
-                defaultValue={get(oldData, "data.material_price")}
-                {...register("material_price", { required: true })}
-                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-tl-[12px] rounded-bl-[12px]"
-                required={true}
-              />
 
-              <select
-                className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-tr-[12px] rounded-br-[12px]"
-                defaultValue={get(oldData, "data.material_price_currency")}
-                {...register("material_price_currency")}
-              >
-                <option>UZS</option>
-                <option>USD</option>
-                <option>RUB</option>
-              </select>
-            </div>
+            <input
+              placeholder={""}
+              type={"number"}
+              defaultValue={get(oldData, "data.material_price")}
+              {...register("material_price", { required: true })}
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
+              required={true}
+            />
+          </div>
+
+          <div className={"col-span-3 "}>
+            <select
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
+              defaultValue={get(oldData, "data.material_price_currency")}
+              {...register("material_price_currency")}
+            >
+              <option>UZS</option>
+              <option>USD</option>
+              <option>RUB</option>
+            </select>
           </div>
 
           {/* Material o'lchov birligi */}
-          <div className={"col-span-6"}>
+          <div className={"col-span-3"}>
             <h4 className={"text-[#28366D] text-base "}>
               Material o’lchov birligi
             </h4>
