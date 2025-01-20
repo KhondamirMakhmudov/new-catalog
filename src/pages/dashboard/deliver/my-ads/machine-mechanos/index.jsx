@@ -164,7 +164,7 @@ const MyMaterials = () => {
                     <td>
                       <div className="flex gap-x-[4px]">
                         <Link
-                          href={`/machine-mechanos/${get(
+                          href={`/machine-mechano/${get(
                             item,
                             "mmechano_code"
                           )}`}
@@ -178,9 +178,7 @@ const MyMaterials = () => {
                             />
                           </button>
                         </Link>
-                        <Link
-                          href={`${URLS.machinesMechanos}${get(item, "id")}`}
-                        >
+                        <Link href={`machines-mechanos/${get(item, "id")}`}>
                           <button className="bg-[#DAE8F7] rounded-[8px] p-[5px]">
                             <Image
                               src={"/icons/edit.svg"}
