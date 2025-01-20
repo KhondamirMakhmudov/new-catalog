@@ -164,7 +164,7 @@ const MyMaterials = () => {
                     <td>
                       <div className="flex gap-x-[4px]">
                         <Link
-                          href={`/machine-mechano/${get(
+                          href={`/machine-mechanos/${get(
                             item,
                             "mmechano_code"
                           )}`}
