@@ -178,7 +178,7 @@ const MyMaterials = () => {
                             />
                           </button>
                         </Link>
-                        <Link href={`machines-mechanos/${get(item, "id")}`}>
+                        <Link href={`machine-mechanos/${get(item, "id")}`}>
                           <button className="bg-[#DAE8F7] rounded-[8px] p-[5px]">
                             <Image
                               src={"/icons/edit.svg"}
