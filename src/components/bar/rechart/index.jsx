@@ -21,34 +21,36 @@ const HorizonChart = () => {
 
   const [chartData, setChartData] = useState([]);
 
-  // Region colors
-  const regionColors = {
-    "Toshkent shahri": "#AFEEEE",
-    Navoiy: "#F5F0D4",
-    Toshkent: "#C6D8FF",
-    Buxoro: "#abcdef",
-    Namangan: "#87CEEB",
-    Samarqand: "#B0C4DE",
-    Jizzax: "#FDEED9",
-    Fargona: "#66CDAA",
-    Xorazm: "#FFE4B5",
-    Surxondaryo: "#B5F2EA",
-    Sirdaryo: "#9370DB",
-    Qashqadaryo: "#C3FBD8",
-    "Rossiya federatsiyasi": "#ff33aa",
-    Andijon: "#2E8B57",
-    "Qoraqalpogiston Respublikasi": "#D7B59F",
-  };
+  const regionColors = useMemo(
+    () => ({
+      "Toshkent shahri": "#AFEEEE",
+      Navoiy: "#F5F0D4",
+      Toshkent: "#C6D8FF",
+      Buxoro: "#abcdef",
+      Namangan: "#87CEEB",
+      Samarqand: "#B0C4DE",
+      Jizzax: "#FDEED9",
+      Fargona: "#66CDAA",
+      Xorazm: "#FFE4B5",
+      Surxondaryo: "#B5F2EA",
+      Sirdaryo: "#9370DB",
+      Qashqadaryo: "#C3FBD8",
+      "Rossiya federatsiyasi": "#ff33aa",
+      Andijon: "#2E8B57",
+      "Qoraqalpogiston Respublikasi": "#D7B59F",
+    }),
+    []
+  ); // Memoize to avoid re-creation on every render
 
   useEffect(() => {
-    // Transform company data into a format suitable for recharts
     const regions = get(company, "data", []).map((item) => ({
       region: get(item, "region"),
       companyCount: get(item, "company_count"),
-      fill: regionColors[get(item, "region")] || "#0256BA", // Default color if not in the list
+      fill: regionColors[get(item, "region")] || "#0256BA",
     }));
+
     setChartData(regions);
-  }, [company, regionColors]);
+  }, [company, regionColors]); // Include both dependencies
 
   return (
     <div
