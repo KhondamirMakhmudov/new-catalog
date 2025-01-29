@@ -316,7 +316,7 @@ export default function Home() {
                     <div className="absolute bottom-0 right-0 p-[24px]">
                       <Image
                         src={"/images/medicine.png"}
-                        alt={"medicine"}
+                        alt={"medicine_img"}
                         width={150}
                         height={120}
                         className={"ml-[16px]"}
