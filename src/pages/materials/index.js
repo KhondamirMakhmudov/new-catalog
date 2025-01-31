@@ -179,9 +179,21 @@ const Index = () => {
         </section>
 
         <section>
-          <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-            Material va jihozlar
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="font-bold text-[32px] my-[16px] font-anybody">
+              Material va jihozlar
+            </h1>
+
+            <button className="flex gap-x-[10px] bg-[#00733B] hover:bg-[#00733bf1] scale-100 active:scale-90 py-[9px] px-[20px] items-center rounded-[8px] transform-all duration-200">
+              <Image
+                src={"/icons/excel.svg"}
+                alt="excel"
+                width={24}
+                height={24}
+              />
+              <p className="text-sm font-gilroy text-white ">Excel yuklash</p>
+            </button>
+          </div>
 
           <div className="grid grid-cols-12 gap-x-[30px]">
             <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">

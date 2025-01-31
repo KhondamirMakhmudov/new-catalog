@@ -8,6 +8,7 @@ import Login from "../buttons/login";
 import Search from "../search";
 import Lang from "../lang";
 import Link from "next/link";
+import Documents from "../documents";
 
 const Header = ({ id }) => {
   const scrollToSection = (id) => {
@@ -36,6 +37,10 @@ const Header = ({ id }) => {
               <li>
                 <Link href={"/integrations"}>Integratsiya</Link>
               </li>
+              {/* 
+              <li>
+                <Documents />
+              </li> */}
 
               {/* <li onClick={() => scrollToSection("about-classifier")}>
                 <p>Klassifikator bu</p>
