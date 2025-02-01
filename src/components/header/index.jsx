@@ -37,10 +37,10 @@ const Header = ({ id }) => {
               <li>
                 <Link href={"/integrations"}>Integratsiya</Link>
               </li>
-              {/* 
+
               <li>
                 <Documents />
-              </li> */}
+              </li>
 
               {/* <li onClick={() => scrollToSection("about-classifier")}>
                 <p>Klassifikator bu</p>

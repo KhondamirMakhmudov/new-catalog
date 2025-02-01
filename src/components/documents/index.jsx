@@ -1,10 +1,14 @@
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 const Documents = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div>
-      <button className="flex gap-x-[5px]">
+    <div className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex gap-x-[5px] items-center"
+      >
         <p>Me&apos;yoriy hujjatlar</p>
         <Image
           src={"/icons/down.svg"}
@@ -18,32 +22,32 @@ const Documents = () => {
       </button>
 
       {open && (
-        <ul className=" space-y-[4px] p-[12px] rounded-[8px] border border-[#E6E5ED] bg-white text-xs">
+        <ul className="absolute space-y-[4px] p-[12px] w-[200px] rounded-[8px] border border-[#E6E5ED] bg-white text-xs z-50">
           <li>
-            <Link href={"/materials"}>
+            <Link href={"/normative-documents/shnk"}>
               <button className="bg-[#F7F7F7] hover:bg-[#F4F7FB] transition-all duration-200 text-black w-full p-[8px] text-start rounded-[4px]">
-                Material va jihozlar
+                Shaharsozlik normalari va qoidalari
               </button>
             </Link>
           </li>
           <li>
-            <Link href={"/machine-mechano"}>
+            <Link href={"/normative-documents/building-regulations"}>
               <button className="bg-[#F7F7F7] hover:bg-[#F4F7FB] transition-all duration-200 text-black w-full p-[8px] text-start rounded-[4px]">
-                Mashina va mexanizmlar
+                Qurilish reglamentlari
               </button>
             </Link>
           </li>
           <li>
-            <Link href={"/technos"}>
+            <Link href={"/normative-documents/estimated-resource-norms"}>
               <button className="bg-[#F7F7F7] hover:bg-[#F4F7FB] transition-all duration-200 text-black w-full p-[8px] text-start rounded-[4px]">
-                Uskuna va qurilmalar
+                Smeta resurs normalari
               </button>
             </Link>
           </li>
           <li>
-            <Link href={"/works"}>
+            <Link href={"/normative-documents/methodical-guides"}>
               <button className="bg-[#F7F7F7] hover:bg-[#F4F7FB] transition-all duration-200 text-black w-full p-[8px] text-start rounded-[4px]">
-                Qurilish ishlari
+                Metodik qo'llanmalar
               </button>
             </Link>
           </li>
