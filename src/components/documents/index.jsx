@@ -47,7 +47,7 @@ const Documents = () => {
           <li>
             <Link href={"/normative-documents/methodical-guides"}>
               <button className="bg-[#F7F7F7] hover:bg-[#F4F7FB] transition-all duration-200 text-black w-full p-[8px] text-start rounded-[4px]">
-                Metodik qo'llanmalar
+                Metodik qo&apos;llanmalar
               </button>
             </Link>
           </li>
