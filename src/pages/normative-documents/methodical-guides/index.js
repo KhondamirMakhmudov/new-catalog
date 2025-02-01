@@ -24,13 +24,13 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Metodik qo'llanmalar
+            Metodik qo&apos;llanmalar
           </Link>
         </section>
 
         <section>
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-            Metodik qo'llanmalar
+            Metodik qo&apos;llanmalar
           </h1>
         </section>
       </main>
