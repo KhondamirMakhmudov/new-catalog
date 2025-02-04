@@ -98,4 +98,5 @@ export const KEYS = {
 
   fastApiLogin: "fastApiLogin",
   oneIdCustomer: "oneIdCustomer",
+  shnk: "shnk",
 };

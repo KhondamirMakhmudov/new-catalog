@@ -1,10 +1,36 @@
 import Header from "@/components/header";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import RightIcon from "@/components/icons/right";
 
-const Index = () => {
-  const router = useRouter();
+import RightIcon from "@/components/icons/right";
+import { head } from "lodash";
+import { useEffect, useState } from "react";
+import parse from "html-react-parser";
+import Footer from "@/components/footer";
+
+const Index = ({ data }) => {
+  const [responseData, setResponseData] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://doc.mkinfo.uz/app_main/api/document/"
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setResponseData(data);
+      } catch (error) {
+        setError(error.message);
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
@@ -32,8 +58,21 @@ const Index = () => {
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
             Shaharsozlik normalari va qoidalari
           </h1>
+
+          {head(
+            responseData?.map((item) => (
+              <div
+                className="bg-white p-[30px] rounded-[20px] border-spacing-24 font-gilroy"
+                key={item.id}
+              >
+                {parse(item.document)}
+              </div>
+            ))
+          )}
         </section>
       </main>
+
+      <Footer />
     </div>
   );
 };
