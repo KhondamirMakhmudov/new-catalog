@@ -8,6 +8,7 @@ import Pagination from "@/components/pagination";
 import { useState, useEffect } from "react";
 import SimpleLoader from "@/components/loader/simple-loader";
 import ContentLoader from "@/components/loader/content-loader";
+import Link from "next/link";
 const SoliqComponent = () => {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -18,10 +19,10 @@ const SoliqComponent = () => {
     isLoading,
     isFetching,
   } = useGetQuery({
-    key: KEYS.soliqDatas,
-    url: URLS.soliqDatas,
+    key: KEYS.soliqDataNew,
+    url: URLS.soliqDataNew,
     params: {
-      mxik_code: "06806001001000001",
+      page: page,
     },
   });
 
@@ -70,76 +71,45 @@ const SoliqComponent = () => {
                   №
                 </th>
                 <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                  STIR raqam
+                  Material kodi
                 </th>
                 <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                  Material nomi
+                </th>
+                <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                   Mxik kodi
                 </th>
                 <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                  Mahsulotlar soni
-                </th>
-                <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                  Faktura sanasi
-                </th>
-                <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                  Yetkazib berish narxi
-                </th>
-                <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
-                  Narxi (so’m)
-                </th>
-                <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
-                  Narxi
+                  O&apos;lchov birligi
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {filteredData.map((item, index) => (
+              {get(soliqData, "data.results", []).map((item, index) => (
                 <tr
                   key={index}
                   className="text-sm odd:bg-[#EDF4FC] even:bg-white"
                 >
                   <td className=" font-medium text-xs py-[10px]  text-center">
-                    {index + 1}
+                    {(page - 1) * 20 + index + 1}
+                  </td>
+                  <td className=" font-medium text-xs text-[#0256BA] py-[10px]">
+                    <Link
+                      href={`/materials/${get(item, "material_csr_code")}`}
+                      className="underline-0 hover:underline transition-all duration-300"
+                    >
+                      {get(item, "material_csr_code")}
+                    </Link>
                   </td>
                   <td className=" font-medium text-xs py-[10px]">
-                    {get(item, "tin")}
+                    {get(item, "material_name")}
                   </td>
                   <td className=" font-medium text-xs py-[10px]">
                     {get(item, "mxik_code")}
                   </td>
-                  <td className=" font-medium text-xs py-[10px]">
-                    {get(item, "product_count")}
-                  </td>
-                  <td className=" font-medium text-xs py-[10px]">
-                    {get(item, "factura_date")}
-                  </td>
-
-                  <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                    <NumericFormat
-                      thousandSeparator={" "}
-                      displayType="text"
-                      value={get(item, "delivery_sum")}
-                      className="bg-transparent"
-                    />
-                  </td>
-
-                  <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                    <NumericFormat
-                      thousandSeparator={" "}
-                      displayType="text"
-                      value={get(item, "vat_sum")}
-                      className="bg-transparent"
-                    />
-                  </td>
-
-                  <td className="text-start font-medium text-xs py-[10px] max-w-[200px]">
-                    <NumericFormat
-                      thousandSeparator={" "}
-                      displayType="text"
-                      value={get(item, "delivery_sum_with_vat")}
-                      className="bg-transparent"
-                    />
+                  <td className=" font-medium text-center text-xs py-[10px]">
+                    {get(item, "material_measure")}
                   </td>
                 </tr>
               ))}
@@ -147,9 +117,20 @@ const SoliqComponent = () => {
           </motion.table>
           <div className="w-full h-[1px] text-[#E2E2EA] "></div>
           <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
-            <div></div>
+            <div>
+              <p className="text-sm text-[#9392A0]">
+                {" "}
+                {get(soliqData, "data.count")} tadan 20 tasi ko&apos;rsatilgan
+              </p>
+            </div>
 
-            <div></div>
+            <div>
+              <Pagination
+                pageCount={get(soliqData, "data.total_pages")}
+                page={page}
+                setPage={(prev) => setPage(prev)}
+              />
+            </div>
           </div>
         </div>
       )}
