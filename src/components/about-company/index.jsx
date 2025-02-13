@@ -41,8 +41,8 @@ const AboutClassifier = () => {
           Byudjetni qayta <br /> taqsimlash
         </h1>
         <p className="text-[17px] text-[#21201FB2] font-medium flex-1 opacity-0">
-          Global strategiyani o'zgartirish mahsulotning sublimatsiya qilingan
-          hayot aylanishini tejaydi.
+          Global strategiyani o&apos;zgartirish mahsulotning sublimatsiya
+          qilingan hayot aylanishini tejaydi.
         </p>
         <div className="flex items-center gap-x-[16px]">
           <div className="h-1 bg-gray-200 rounded-full w-full">
