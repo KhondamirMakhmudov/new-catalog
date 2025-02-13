@@ -76,7 +76,7 @@ export default function Home() {
             <div className={"grid grid-cols-12 gap-[20px] mt-[20px]"}>
               <div
                 className={
-                  "col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
+                  "col-span-12 md:col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
                 }
               >
                 {/* machine-mechano */}
@@ -115,7 +115,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={"col-span-6"}>
+              <div className={"col-span-12 md:col-span-6"}>
                 {/* machine-mechano */}
                 <div
                   className={
@@ -157,11 +157,13 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className={"flex gap-x-[20px] mt-[20px]"}>
+                <div
+                  className={"flex md:flex-row flex-col gap-[20px] mt-[20px]"}
+                >
                   {/* uskunalar va qurilmalar */}
                   <div
                     className={
-                      "border works flex-col border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
+                      "border works flex-col border-[#D9DADB] md:w-1/2 w-full p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
                     }
                   >
                     <h1
@@ -184,7 +186,7 @@ export default function Home() {
                   {/* Qurilish ishlari */}
                   <div
                     className={
-                      "border works border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
+                      "border works border-[#D9DADB] md:w-1/2 w-fulls p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
                     }
                   >
                     <h1
@@ -234,10 +236,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={"grid grid-cols-12 gap-x-[20px] mt-[30px]"}>
+              <div className={"grid grid-cols-12 gap-[20px] mt-[30px]"}>
                 <div
                   className={
-                    "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
+                    "col-span-12 md:col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
                   }
                   style={{ backgroundImage: `url(/images/school-bg.png)` }}
                 >
@@ -270,7 +272,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className={"col-span-6 space-y-[20px]"}>
+                <div className={"col-span-12 md:col-span-6 space-y-[20px]"}>
                   <div
                     className={
                       "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -347,7 +349,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="col-span-12 mt-[30px] backdrop-blur-lg">
+                <div className="col-span-12 my-[30px] backdrop-blur-lg">
                   <div className="backdrop-blur bg-transparent">
                     <Link
                       href={"/loyihalar"}
@@ -369,45 +371,52 @@ export default function Home() {
         </section>
 
         {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
-        <section className="relative py-[60px]">
-          <div className="absolute z-10 left-0 bottom-0">
+        <section className="relative py-[60px] z-10">
+          <div className="absolute z-10 -left-10 md:left-0 md:bottom-0">
             <Image
               src={"/images/bg-eco-2.png"}
               alt={"eco-logo"}
               width={270}
               height={430}
-              className={""}
+              className={"w-ful h-[300px] md:h-[430px]"}
             />
           </div>
 
-          <div className="absolute z-10 right-0 bottom-0">
+          <div className="absolute -z-10 -right-6 overflow--x-hidden md:right-0 bottom-0">
             <Image
               src={"/images/bg-eco-1.png"}
               alt={"eco-logo"}
               width={270}
               height={430}
+              className={"w-ful h-[300px] md:h-[430px]"}
             />
           </div>
 
           <Reveal>
             <div className="container">
-              <div className="grid grid-cols-12 gap-x-[30px]  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
-                <div className="col-span-6 w-[600px]">
+              <div className="grid grid-cols-12 gap-[30px] z-50  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
+                <div className="col-span-12 md:col-span-6 max-w-[600px] w-full">
                   <Image
                     src={"/images/eco-logo.png"}
                     alt={"eco-logo"}
                     width={600}
                     height={436}
-                    className={"w-full h-[436px] rounded-[20px]"}
+                    className={
+                      "w-full md:h-[436px] rounded-[20px] object-cover"
+                    }
                   />
                 </div>
-                <div className="col-span-6 flex items-start justify-center flex-col">
-                  <h1 className={"font-bold text-[42px] text-[#21201F]"}>
-                    Ekologiya va atrof-muhitni muhofaza qilish boshqar
+                <div className="col-span-12 md:col-span-6 flex items-start justify-center flex-col">
+                  <h1
+                    className={
+                      "font-bold text-[20px] md:text-[42px] text-[#21201F]"
+                    }
+                  >
+                    Ekologiya va atrof-muhitni muhofaza qilish boshqarmasi
                   </h1>
                   <p
                     className={
-                      "font-medium text-[#21201FB2] text-[21px] mt-[16px] mb-[24px]"
+                      "font-medium text-[#21201FB2] text-base md:text-[21px] mt-[16px] mb-[24px]"
                     }
                   >
                     O‘zbekiston Respublikasi Vazirlar Mahkamasining 27.05.2019
@@ -460,10 +469,10 @@ export default function Home() {
             <Reveal>
               <Link href={"/monitoring"}>
                 <div className="grid grid-cols-12 gap-x-[30px] bg-white p-[30px] rounded-[20px] mt-[20px]">
-                  <div className="col-span-6">
+                  <div className="col-span-12 md:col-span-6">
                     <HorizonChart />
                   </div>
-                  <div className="col-span-6">
+                  <div className="col-span-12 md:col-span-6">
                     <div>
                       <MapOfUz />
                     </div>
@@ -487,7 +496,7 @@ export default function Home() {
               <div className="grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
                 {integrationData.map((item) => (
                   <div
-                    className="col-span-4 flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]"
+                    className="col-span-12 md:col-span-6 lg:col-span-4 flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]"
                     key={get(item, "id")}
                   >
                     <div

@@ -17,7 +17,11 @@ const Header = ({ id }) => {
   };
   return (
     <header className="sticky top-0 z-50">
-      <div className={"text-white bg-[#0256BA] py-[13px]   font-gilroy"}>
+      <div
+        className={
+          "hidden md:block text-white bg-[#0256BA] py-[13px]   font-gilroy"
+        }
+      >
         <div className="container ">
           {/* top of the header. will be component in next time */}
           <div className={"flex justify-between"}>
@@ -83,10 +87,10 @@ const Header = ({ id }) => {
             <li>
               <WebAccess />
             </li>
-            <li>
+            <li className="hidden md:block">
               <Selected />
             </li>
-            <li>
+            <li className="hidden md:block">
               <Basket />
             </li>
           </ul>

@@ -9,17 +9,17 @@ import Reveal from "../reveal";
 const Footer = () => {
   return (
     <footer>
-      <div className="container bg-[#125EC2] pt-[42px] pb-[12px] px-[42px] rounded-[20px] mt-[4px] max-w-[1340px]">
+      <div className="container bg-[#125EC2] pt-[42px] pb-[12px] px-[42px] rounded-[20px] mt-[4px] ">
         <Reveal>
-          <div className="grid grid-cols-12">
-            <div className="col-span-2">
+          <div className="grid grid-cols-12 gap-[20px]">
+            <div className="col-span-12 md:col-span-2">
               <h1 className="uppercase text-white text-sm font-bold font-gilroy">
                 Qurilish resurslari
                 <br />
                 milliy klassifikatori
               </h1>
 
-              <div className="mt-[42px]">
+              <div className="hidden md:inline-block mt-[42px]">
                 <p className="font-gilroy text-sm text-[#B3CCEA]">
                   Biz haqimizda ijtimoiy <br /> tarmoqlarda kuzating
                 </p>
@@ -52,7 +52,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <div className="col-span-2 font-gilroy">
+            <div className="col-span-6 md:col-span-2 font-gilroy">
               <ul className="text-[#B9D0EC] text-xs space-y-[8px]">
                 <li>
                   <h4 className="text-white font-semibold !text-sm">
@@ -104,7 +104,7 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="col-span-2 font-gilroy">
+            <div className="col-span-12 md:col-span-2 font-gilroy">
               <h4 className="text-sm font-semibold text-white">
                 Murojaat uchun
               </h4>
@@ -142,6 +142,38 @@ const Footer = () => {
                   </Link>
                 </div>
               </div>
+            </div>
+
+            <div className="col-span-12 md:hidden mt-[42px]">
+              <p className="font-gilroy text-sm text-[#B3CCEA]">
+                Biz haqimizda ijtimoiy <br /> tarmoqlarda kuzating
+              </p>
+
+              <ul className="space-x-[12px] mt-[16px]">
+                <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
+                  <Link href={"#"}>
+                    <TelegramIcon />
+                  </Link>
+                </li>
+
+                <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
+                  <Link href={"#"}>
+                    <InstagramIcon />
+                  </Link>
+                </li>
+
+                <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
+                  <Link href={"#"}>
+                    <FacebookIcon />
+                  </Link>
+                </li>
+
+                <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
+                  <Link href={"#"}>
+                    <YoutubeIcon />
+                  </Link>
+                </li>
+              </ul>
             </div>
 
             <div className="col-span-12 py-[14px] w-full text-center text-white font-gilroy bg-[#FFFFFF0A] rounded-[8px] mt-[54px]">

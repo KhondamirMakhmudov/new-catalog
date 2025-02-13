@@ -9,7 +9,7 @@ const CatalogButton = ({ dropdown }) => {
       <button
         onMouseEnter={() => setOpenDepartment(true)}
         className={
-          "flex items-center gap-x-[8px] text-white px-[14px] py-[10px] rounded-[8px] bg-[#0256BA]"
+          "hidden md:flex items-center gap-x-[8px] text-white px-[14px] py-[10px] rounded-[8px] bg-[#0256BA]"
         }
       >
         <Image

@@ -15,7 +15,7 @@ const Login = () => {
   console.log(session, "session");
 
   return (
-    <>
+    <div className="hidden md:block">
       {!get(session, "accessToken") ? (
         <Link href={"/select-position"}>
           <button
@@ -49,7 +49,7 @@ const Login = () => {
           <p>Shaxsiy kabinet</p>
         </button>
       )}
-    </>
+    </div>
   );
 };
 
