@@ -18,6 +18,7 @@ import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 import Calendar from "react-calendar";
 import { useRouter } from "next/router";
+import * as XLSX from "xlsx";
 
 import "react-calendar/dist/Calendar.css";
 const regions = [
@@ -95,6 +96,33 @@ const Index = () => {
     },
     enabled: true,
   });
+
+  const exportToExcel = (data) => {
+    if (!data || data.length === 0) {
+      alert("Yuklab olish uchun ma'lumot mavjud emas!");
+      return;
+    }
+
+    const formattedData = data.map((item, index) => ({
+      "№": index + 1,
+      Hudud: item.material_region_name,
+      "Korxona nomi": item.company_name,
+      "Resurs kodi": item.material_name_id,
+      "Resurs nomi": item.material_name,
+      "O‘lchov birligi": item.material_measure,
+      "Narxi (QQSsiz)": item.material_price,
+      "Narxi (QQS)": (item.material_price * 1.12).toFixed(2),
+      "Oxirgi o‘zgarish": dayjs(item.material_updated_date).format(
+        "DD.MM.YYYY HH:mm"
+      ),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Materials");
+
+    XLSX.writeFile(workbook, "materials.xlsx");
+  };
   // material volume
   const {
     data: materialVolume,
@@ -184,7 +212,10 @@ const Index = () => {
               Material va jihozlar
             </h1>
 
-            <button className="flex gap-x-[10px] bg-[#00733B] hover:bg-[#00733bf1] scale-100 active:scale-90 py-[9px] px-[20px] items-center rounded-[8px] transform-all duration-200">
+            <button
+              onClick={() => exportToExcel(materialsFast?.data?.materials)}
+              className="flex gap-x-[10px] bg-[#00733B] hover:bg-[#00733bf1] scale-100 active:scale-90 py-[9px] px-[20px] items-center rounded-[8px] transform-all duration-200"
+            >
               <Image
                 src={"/icons/excel.svg"}
                 alt="excel"
