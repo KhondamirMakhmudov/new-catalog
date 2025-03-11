@@ -55,7 +55,7 @@ const SchoolProject = () => {
               <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
                 Mahsulot nomi
               </th>
-              <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+              <th className=" text-start text-[10px]  rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
                 O&apos;lchov Birligi
               </th>
               {/* <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
@@ -93,7 +93,7 @@ const SchoolProject = () => {
         </motion.table>
       )}
       <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-      <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+      <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex flex-col lg:flex-row items-center justify-between">
         <div>
           <p className="text-sm text-[#9392A0]">
             {" "}

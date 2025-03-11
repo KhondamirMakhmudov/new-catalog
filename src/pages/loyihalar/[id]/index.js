@@ -37,39 +37,45 @@ const Index = () => {
       <Header />
 
       <main className="container mb-[46px]">
-        <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+        <section className="mt-[16px] flex items-center space-x-[5px] lg:space-x-[12px] font-gilroy">
           <button
             onClick={() => router.back()}
-            className="text-[#262D33] text-sm font-semibold"
+            className="text-[#262D33]  font-semibold"
           >
             <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
               <RightIcon color="white" />
             </div>
           </button>
-          <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
+          <Link
+            href={"/"}
+            className="text-[#262D33] text-xs lg:text-sm font-semibold"
+          >
             Bosh sahifa
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link
-            className="text-[#262D33] text-sm font-semibold"
+            className="text-[#262D33] text-xs lg:text-sm font-semibold"
             href={"/loyihalar"}
           >
             Loyihalar
           </Link>
           <RightIcon color="#BCBFC2" />
-          <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
+          <Link
+            className="text-[#0256BA] text-xs lg:text-sm font-semibold"
+            href={"#"}
+          >
             Barcha loyihalar
           </Link>
         </section>
 
         <section>
           <h1 className="text-[32px] font-bold my-[16px]">Barcha loyihalar</h1>
-          <div className="grid grid-cols-12 gap-x-[30px]">
+          <div className="grid grid-cols-12 gap-[30px]">
             <motion.div
               initial={{ translateX: "-80px", opacity: 0 }}
               animate={{ translateX: "0px", opacity: 1 }}
               transition={{ duration: 0.3 }}
-              className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]"
+              className="col-span-12 lg:col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px]"
             >
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Boshqa loyihalar</h4>
@@ -191,8 +197,8 @@ const Index = () => {
               )}
             </motion.div>
 
-            <div className="col-span-9 font-gilroy">
-              <div className="w-full border border-[#D7D9E7] rounded-[10px] mb-[50px]">
+            <div className="col-span-12 lg:col-span-9 font-gilroy">
+              <div className="border border-[#D7D9E7] rounded-[10px] mb-[50px]">
                 {tab === "bogcha" && <KindergardenProject />}
 
                 {tab === "maktab" && <SchoolProject />}
