@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import { Navigation } from "swiper/modules";
 
 const videos = [
   { url: "/videos/catalog-video.mp4", title: "Klassifikator haqida" },
@@ -57,6 +58,9 @@ const AboutClassifier = () => {
   return (
     <div className="grid grid-cols-12  p-[24px] bg-[#F4F6FA] rounded-[30px] mt-[12px]">
       <div className="col-span-12 md:col-span-12 pl-[12px] flex flex-col">
+        <h1 className="text-[#21201F] text-[32px] font-bold">
+          Byudjetni qayta taqsimlash
+        </h1>
         <p className="text-[17px] text-[#21201FB2] font-medium flex-1 opacity-0">
           Global strategiyani o&apos;zgartirish mahsulotning sublimatsiya
           qilingan hayot aylanishini tejaydi.
@@ -117,10 +121,6 @@ const AboutClassifier = () => {
             slidesPerView={3}
             navigation
             modules={[Navigation]}
-            breakpoints={{
-              640: { slidesPerView: 1.5 },
-              768: { slidesPerView: 2 }, // Bu md: dan kattaroq ekranda yashiriladi
-            }}
             className="mySwiper"
           >
             {videos.map((video, index) => (

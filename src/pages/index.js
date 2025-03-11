@@ -18,6 +18,7 @@ import BackgroundSlider from "@/components/background-slider";
 import HorizonChart from "@/components/bar/rechart";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import { Navigation } from "swiper/modules";
 const integrationData = [
   {
     id: 1,
