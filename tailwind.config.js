@@ -28,7 +28,7 @@ module.exports = {
       },
 
       fontFamily: {
-        anybody: ["AnyBody", "sans-serif"],
+        anybody: ["Anybody", "sans-serif"],
       },
 
       fontFamily: {

@@ -9,6 +9,7 @@ import Search from "../search";
 import Lang from "../lang";
 import Link from "next/link";
 import Documents from "../documents";
+import MobileMenu from "../mobile-menu";
 
 const Header = ({ id }) => {
   const scrollToSection = (id) => {
@@ -74,7 +75,9 @@ const Header = ({ id }) => {
       </div>
 
       <div
-        className={"bg-white py-[20px] font-gilroy rounded-b-[24px] shadow-xl"}
+        className={
+          "bg-white py-[20px] font-gilroy lg:rounded-b-[24px] border border-[#E4E9F6] shadow-xl"
+        }
       >
         <div className={"container flex items-center justify-between"}>
           <Brand />
@@ -86,6 +89,10 @@ const Header = ({ id }) => {
           <ul className={"flex gap-x-[12px]"}>
             <li>
               <WebAccess />
+            </li>
+            <li>
+              {" "}
+              <MobileMenu />
             </li>
             <li className="hidden md:block">
               <Selected />

@@ -42,7 +42,7 @@ const Index = () => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.9 }}
-              className="col-span-6 bg-white  rounded-[30px]"
+              className="col-span-12 lg:col-span-6 bg-white  rounded-[30px]"
             >
               <div
                 className={
@@ -86,7 +86,7 @@ const Index = () => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="col-span-6 bg-white  rounded-[30px]"
+              className="col-span-12 lg:col-span-6 bg-white  rounded-[30px]"
             >
               <div
                 className={
@@ -129,7 +129,7 @@ const Index = () => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="col-span-6 bg-white rounded-[30px]"
+              className="col-span-12 lg:col-span-6 bg-white rounded-[30px]"
             >
               <div
                 className={
