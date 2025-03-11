@@ -16,7 +16,8 @@ import AboutClassifier from "@/components/about-company";
 import FondStock from "@/components/fondStock";
 import BackgroundSlider from "@/components/background-slider";
 import HorizonChart from "@/components/bar/rechart";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 const integrationData = [
   {
     id: 1,
@@ -76,7 +77,7 @@ export default function Home() {
             <div className={"grid grid-cols-12 gap-[20px] mt-[20px]"}>
               <div
                 className={
-                  "col-span-12 md:col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
+                  "col-span-12 md:col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] max-h-[200px] md:max-h-[300px] lg:max-h-[480px] h-full  overflow-hidden section z-10"
                 }
               >
                 {/* machine-mechano */}
@@ -86,7 +87,7 @@ export default function Home() {
                   </h1>
                   <p
                     className={
-                      "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
+                      "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0 lg:block hidden"
                     }
                   >
                     Global strategiyani o&apos;zgartirish mahsulotning
@@ -97,20 +98,20 @@ export default function Home() {
                   <Link href="/materials">
                     <div
                       className={
-                        " z-20 py-[13px] px-[24px] text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                        " z-20 py-[13px] px-[24px] text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300 mt-[20px] lg:mt-0"
                       }
                     >
                       <p className={""}>Batafsil</p>
                     </div>
                   </Link>
                 </div>
-                <div className={"absolute bg-section bottom-0 -z-30"}>
+                <div className={"absolute bg-section bottom-0 -z-10"}>
                   <Image
                     src={"/images/materials.png"}
                     alt={"materials"}
                     width={910}
                     height={485}
-                    className={"ml-[16px]"}
+                    className={"ml-[16px] xl:blur-0 blur-sm"}
                   />
                 </div>
               </div>
@@ -119,7 +120,7 @@ export default function Home() {
                 {/* machine-mechano */}
                 <div
                   className={
-                    "bg-[#FFE7DB] px-[32px] pt-[32px] pb-[34px] max-h-[230px] h-full rounded-[16px] section overflow-hidden cursor-pontiner"
+                    "bg-[#FFE7DB] px-[32px] pt-[32px] pb-[34px] max-h-[200px] md:max-h-[230px] h-full rounded-[16px] section overflow-hidden cursor-pontiner z-10"
                   }
                 >
                   <div className={"z-30"}>
@@ -128,7 +129,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
+                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0 lg:block hidden"
                       }
                     >
                       Global strategiyani o&apos;zgartirish <br />{" "}
@@ -138,7 +139,7 @@ export default function Home() {
                     <Link href="/machine-mechano">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30 text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] transition-all duration-300"
+                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30 text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] transition-all duration-300 mt-[20px] lg:mt-0"
                         }
                       >
                         <p>Batafsil</p>
@@ -146,13 +147,13 @@ export default function Home() {
                     </Link>
                   </div>
 
-                  <div className={"absolute bg-section bottom-0 right-0"}>
+                  <div className={"absolute bg-section bottom-0 right-0 -z-10"}>
                     <Image
                       src={"/images/machine-mechano.png"}
                       alt={"machine-mechano"}
                       width={274}
                       height={297}
-                      className={"ml-[16px]"}
+                      className={"ml-[16px] xl:blur-0 blur-sm"}
                     />
                   </div>
                 </div>
@@ -487,20 +488,70 @@ export default function Home() {
         <section className="bg-white">
           <div className="container py-[42px]">
             <Reveal>
-              <h1 className="text-[32px] font-bold">
+              <h1 className="text-[30px] lg:text-[32px] font-bold">
                 Integratsiya bo&apos;yicha sheriklar
               </h1>
             </Reveal>
 
+            {/* Mobil uchun Swiper */}
             <Reveal>
-              <div className="grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
+              <div className="md:hidden mt-[20px]">
+                <Swiper
+                  spaceBetween={24}
+                  slidesPerView={1.2}
+                  breakpoints={{
+                    640: { slidesPerView: 1.5 },
+                    768: { slidesPerView: 2 }, // Bu md: dan kattaroq ekranda yashiriladi
+                  }}
+                >
+                  {integrationData.map((item) => (
+                    <SwiperSlide key={get(item, "id")}>
+                      <div className="flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]">
+                        <div
+                          className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED] w-[110px] h-[110px] rounded-[16px]"
+                          style={{
+                            backgroundImage: `url(/icons/${get(
+                              item,
+                              "image"
+                            )})`,
+                          }}
+                        ></div>
+                        <div>
+                          <h2 className="text-[20px] font-bold">
+                            {get(item, "title")}
+                          </h2>
+                          <Link
+                            href={"/integrations"}
+                            className="inline-flex gap-x-[10px] bg-[#EBF1F9] hover:bg-[#DEECFF] rounded-[8px] py-[17px] px-[16px] mt-[10px] transition-all duration-300"
+                          >
+                            <p className="text-sm lg:text-lg font-semibold text-[#0256BA]">
+                              Tanishib chiqish
+                            </p>
+                            <Image
+                              src={"/icons/integration-arrow-right.svg"}
+                              alt={"school"}
+                              width={20}
+                              height={20}
+                            />
+                          </Link>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </Reveal>
+
+            {/* Katta ekran uchun Grid */}
+            <Reveal>
+              <div className="hidden md:grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
                 {integrationData.map((item) => (
                   <div
                     className="col-span-12 md:col-span-6 lg:col-span-4 flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]"
                     key={get(item, "id")}
                   >
                     <div
-                      className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED]  w-[110px] h-[110px] rounded-[16px]"
+                      className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED] w-[110px] h-[110px] rounded-[16px]"
                       style={{
                         backgroundImage: `url(/icons/${get(item, "image")})`,
                       }}
@@ -509,12 +560,11 @@ export default function Home() {
                       <h2 className="text-[20px] font-bold">
                         {get(item, "title")}
                       </h2>
-
                       <Link
                         href={"/integrations"}
                         className="inline-flex gap-x-[10px] bg-[#EBF1F9] hover:bg-[#DEECFF] rounded-[8px] py-[17px] px-[16px] mt-[10px] transition-all duration-300"
                       >
-                        <p className="text-lg font-semibold text-[#0256BA]">
+                        <p className="text-sm lg:text-lg font-semibold text-[#0256BA]">
                           Tanishib chiqish
                         </p>
                         <Image
@@ -600,7 +650,7 @@ export default function Home() {
         <section className="container">
           <Reveal>
             <div
-              className=" min-h-[164px] w-full bg-center bg-no-repeat
+              className="min-h-[164px] w-full bg-center bg-no-repeat
             bg-cover rounded-[20px] flex items-center justify-center"
               style={{ backgroundImage: `url(/images/address.png)` }}
             >
