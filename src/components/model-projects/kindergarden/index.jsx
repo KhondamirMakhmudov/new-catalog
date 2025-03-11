@@ -35,7 +35,7 @@ const KindergardenProject = () => {
       {isLoading || isFetching ? (
         <ContentLoader />
       ) : (
-        <div children={"overflow-x-auto"}>
+        <div className={"overflow-x-auto"}>
           <motion.table
             className="w-full border-collapse border-[#D7D9E7] min-w-[100px]"
             initial={{ opacity: 0, translateY: "30px" }}
