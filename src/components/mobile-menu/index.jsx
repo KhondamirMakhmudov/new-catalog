@@ -145,12 +145,22 @@ const MobileMenu = () => {
               </li>
               <li>
                 <Link
-                  href="/"
-                  className=" px-[12px] py-[8px] flex items-center justify-between border rounded-[8px]"
+                  href="/contacts"
+                  className={` px-[12px] py-[8px] flex font-medium items-center ${
+                    router.pathname === "/contacts"
+                      ? "bg-[#EBF1F9] text-[#0256BA]"
+                      : "bg-transparent text-black"
+                  } justify-between  rounded-[8px]`}
                   onClick={toggleMenu}
                 >
-                  <p>Bosh sahifa</p>
-                  <div className="bg-[#9AA8BC] inline-block rounded-full">
+                  <p>Kontaktlar</p>
+                  <div
+                    className={`${
+                      router.pathname === "/contacts"
+                        ? " bg-[#0256BA]"
+                        : "bg-[#9AA8BCFF]"
+                    } inline-block rounded-full`}
+                  >
                     <RightIcon color="white" />
                   </div>
                 </Link>
