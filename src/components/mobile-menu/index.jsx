@@ -123,12 +123,22 @@ const MobileMenu = () => {
               </li>
               <li>
                 <Link
-                  href="/"
-                  className=" px-[12px] py-[8px] flex items-center justify-between border rounded-[8px]"
+                  href="/integrations"
+                  className={` px-[12px] py-[8px] flex font-medium items-center ${
+                    router.pathname === "/integrations"
+                      ? "bg-[#EBF1F9] text-[#0256BA]"
+                      : "bg-transparent text-black"
+                  } justify-between  rounded-[8px]`}
                   onClick={toggleMenu}
                 >
                   <p>Integratsiya</p>
-                  <div className="bg-[#9AA8BC] inline-block rounded-full">
+                  <div
+                    className={`${
+                      router.pathname === "/integrations"
+                        ? " bg-[#0256BA]"
+                        : "bg-[#9AA8BCFF]"
+                    } inline-block rounded-full`}
+                  >
                     <RightIcon color="white" />
                   </div>
                 </Link>
