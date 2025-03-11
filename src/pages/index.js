@@ -372,7 +372,7 @@ export default function Home() {
 
         {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
         <section className="relative py-[60px] z-10">
-          <div className="absolute z-10 -left-10 md:left-0 md:bottom-0">
+          <div className="absolute z-10 -left-10 md:left-0 md:bottom-0 hidden lg:block">
             <Image
               src={"/images/bg-eco-2.png"}
               alt={"eco-logo"}
@@ -382,7 +382,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="absolute -z-10 -right-6 overflow--x-hidden md:right-0 bottom-0">
+          <div className="absolute -z-10 -right-6 overflow-x-hidden md:right-0 bottom-0 hidden lg:block">
             <Image
               src={"/images/bg-eco-1.png"}
               alt={"eco-logo"}
@@ -395,14 +395,14 @@ export default function Home() {
           <Reveal>
             <div className="container">
               <div className="grid grid-cols-12 gap-[30px] z-50  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
-                <div className="col-span-12 md:col-span-6 max-w-[600px] w-full">
+                <div className="col-span-12 md:col-span-6 md:max-w-[300px] lg:max-w-[600px] w-full">
                   <Image
                     src={"/images/eco-logo.png"}
                     alt={"eco-logo"}
                     width={600}
                     height={436}
                     className={
-                      "w-full md:h-[436px] rounded-[20px] object-cover"
+                      "lg:w-[600px] w-[200px]  md:h-[436px] rounded-[20px] object-cover"
                     }
                   />
                 </div>
