@@ -81,7 +81,7 @@ const Search = () => {
   return (
     <div
       className={
-        "w-full max-w-[700px] hidden md:flex items-center border border-[#E6E5ED] rounded-[8px] relative"
+        "w-full max-w-[700px] hidden lg:flex items-center border border-[#E6E5ED] rounded-[8px] relative"
       }
     >
       <div className="absolute place-items-center ml-[10px]">

@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const router = useRouter();
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -73,15 +74,76 @@ const MobileMenu = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  href="/"
-                  className=" px-[12px] py-[8px] flex items-center justify-between  rounded-[8px]"
+                <button
+                  onClick={() => setIsCatalogOpen(!isCatalogOpen)}
+                  className=" px-[12px] py-[8px] flex items-center justify-between w-full rounded-[8px]"
                 >
-                  <p>Bo&apos;limlar</p>
-                  <div className="bg-[#9AA8BCFF] inline-block rounded-full">
+                  <p>Katalog</p>
+                  <div
+                    className={`bg-[#9AA8BC] inline-block rounded-full transition-transform ${
+                      isCatalogOpen ? "-rotate-90" : "rotate-90"
+                    }`}
+                  >
                     <RightIcon color="white" />
                   </div>
-                </Link>
+                </button>
+                {isCatalogOpen && (
+                  <ul className="ml-4 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        href="/materials"
+                        className={` px-[12px] py-[8px] flex font-medium items-center ${
+                          router.pathname === "/materials"
+                            ? "bg-[#EBF1F9] text-[#0256BA]"
+                            : "bg-gray-200 text-black"
+                        } justify-between  rounded-[8px]`}
+                        onClick={toggleMenu}
+                      >
+                        Material va jihozlar
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/machine-mechano"
+                        className={` px-[12px] py-[8px] flex font-medium items-center ${
+                          router.pathname === "/machine-mechano"
+                            ? "bg-[#EBF1F9] text-[#0256BA]"
+                            : "bg-gray-200 text-black"
+                        } justify-between  rounded-[8px]`}
+                        onClick={toggleMenu}
+                      >
+                        Mashina va mexanizmlar
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/technos"
+                        className={` px-[12px] py-[8px] flex font-medium items-center ${
+                          router.pathname === "/technos"
+                            ? "bg-[#EBF1F9] text-[#0256BA]"
+                            : "bg-gray-200 text-black"
+                        } justify-between  rounded-[8px]`}
+                        onClick={toggleMenu}
+                      >
+                        Uskuna va qurilmalar
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        href="/works"
+                        className={` px-[12px] py-[8px] flex font-medium items-center ${
+                          router.pathname === "/works"
+                            ? "bg-[#EBF1F9] text-[#0256BA]"
+                            : "bg-gray-200 text-black"
+                        } justify-between  rounded-[8px]`}
+                        onClick={toggleMenu}
+                      >
+                        Qurilish ishlari
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </li>
               <li>
                 <Link

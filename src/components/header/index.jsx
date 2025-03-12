@@ -20,7 +20,7 @@ const Header = ({ id }) => {
     <header className="sticky top-0 z-50">
       <div
         className={
-          "hidden md:block text-white bg-[#0256BA] py-[13px]   font-gilroy"
+          "hidden lg:block text-white bg-[#0256BA] py-[13px]   font-gilroy"
         }
       >
         <div className="container ">
@@ -90,14 +90,13 @@ const Header = ({ id }) => {
             <li>
               <WebAccess />
             </li>
-            <li>
-              {" "}
+            <li className="lg:hidden block">
               <MobileMenu />
             </li>
-            <li className="hidden md:block">
+            <li className="hidden lg:block">
               <Selected />
             </li>
-            <li className="hidden md:block">
+            <li className="hidden lg:block">
               <Basket />
             </li>
           </ul>
