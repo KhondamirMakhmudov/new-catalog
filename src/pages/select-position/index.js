@@ -11,6 +11,7 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { get } from "lodash";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -36,7 +37,7 @@ const Index = () => {
   return (
     <>
       <Header />
-
+      <NavigationButtom />
       <main className="container">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
@@ -58,14 +59,14 @@ const Index = () => {
             Kirish
           </Link>
         </section>
-        <section className="font-gilroy max-w-[456px] mx-auto mt-[130px]">
+        <section className="font-gilroy max-w-[456px] mx-auto lg:mt-[130px] mt-[30px]">
           <div className="  flex-col ">
             <div className="text-center">
               <motion.h1
                 initial={{ opacity: 0, translateY: "-50px" }}
                 animate={{ opacity: 1, translateY: "0px" }}
                 transition={{ duration: 0.3 }}
-                className="text-[32px] font-bold  text-[#1A202C]"
+                className="text-[20px] lg:text-[32px] font-bold  text-[#1A202C]"
               >
                 Qaysi turdagi foydalanuvchi bo&apos;lishni xohlayotganingizni
                 ko&apos;rsating
@@ -74,14 +75,14 @@ const Index = () => {
                 initial={{ opacity: 0, translateY: "-40px" }}
                 animate={{ opacity: 1, translateY: "0px" }}
                 transition={{ duration: 0.3 }}
-                className="text-base font-medium   text-[#718096]"
+                className="text-sm lg:text-base font-medium   text-[#718096]"
               >
                 Oldingi media kampaniyalari natijalarini hisobga olgan holda,
                 xaridor konventsiyasi tarkibni to&apos;liq o&apos;zgartiradi
               </motion.p>
             </div>
 
-            <div className="flex space-x-[24px] my-[30px]">
+            <div className="flex gap-[24px] justify-center items-center lg:flex-nowrap flex-wrap my-[30px]">
               <motion.button
                 initial={{ scale: 0.01 }}
                 animate={{ scale: 1 }}

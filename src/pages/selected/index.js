@@ -4,11 +4,13 @@ import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
+      <NavigationButtom />
       <Header />
 
       <main className="container mb-[46px]">

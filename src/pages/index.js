@@ -19,6 +19,7 @@ import HorizonChart from "@/components/bar/rechart";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
+import NavigationButtom from "@/components/bottom-navigation";
 const integrationData = [
   {
     id: 1,
@@ -58,6 +59,7 @@ export default function Home() {
     <>
       <Header />
       <FondStock />
+      <NavigationButtom />
       <main className="bg-white">
         <ScrollToTopButton />
 
