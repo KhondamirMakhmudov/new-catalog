@@ -42,7 +42,6 @@ const Index = () => {
       // Call the credentials provider with the code
       signIn("credentials", {
         code: code, // Pass the code from the query string
-        redirect: false, // Handle redirection manually
       })
         .then((result) => {
           console.log("Sign-in Result:", result);
