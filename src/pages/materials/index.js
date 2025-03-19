@@ -534,7 +534,7 @@ const Index = () => {
                     <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
                       <div className="overflow-x-auto">
                         <motion.table
-                          className="w-full border-collapse border-[#D7D9E7] min-w-[800px]"
+                          className="w-full border-collapse border-[#D7D9E7] min-w-[900px]"
                           initial={{ opacity: 0, translateY: "30px" }}
                           animate={{ opacity: 1, translateY: "0" }}
                           transition={{ duration: 0.4 }}
@@ -707,7 +707,7 @@ const Index = () => {
                                       }
                                     />
                                   </td>
-                                  <td className=" font-medium text-xs py-[10px]">
+                                  <td className=" font-medium text-xs py-[10px] w-[120px] lg:w-[120px]">
                                     <div className="flex space-x-[4px]">
                                       <Image
                                         src={"/icons/clock.svg"}
@@ -728,7 +728,7 @@ const Index = () => {
                                       </p>
                                     </div>
                                   </td>
-                                  <td className=" lg:w-auto w-[100px] flex items-center justify-center">
+                                  <td className=" lg:w-auto min-w-[100px] ">
                                     <div className="flex items-center gap-x-[4px]">
                                       <button
                                         className={

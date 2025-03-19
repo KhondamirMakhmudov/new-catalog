@@ -79,7 +79,7 @@ const Index = () => {
             </Link>
           </section>
 
-          <section className="flex items-center justify-center">
+          <section className="flex items-center justify-center translate-y-1/2">
             <motion.div
               initial={{ scale: 0.01 }}
               animate={{ scale: 1 }}
