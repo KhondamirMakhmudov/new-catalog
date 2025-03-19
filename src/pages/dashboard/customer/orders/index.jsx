@@ -8,7 +8,11 @@ import { get, dropRight } from "lodash";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
+import { useSession } from "next-auth/react";
 const Index = () => {
+  const { data: session } = useSession();
+  console.log("session", session?.user?.token);
+
   const {
     data: ordersOfCostumer,
     isLoading,
@@ -16,6 +20,10 @@ const Index = () => {
   } = useGetQuery({
     key: KEYS.orderListCustomer,
     url: URLS.orderListCustomer,
+    headers: {
+      Authorization: `Bearer ${session?.user?.token}`,
+    },
+    enabled: !!session?.user?.token,
   });
 
   if (isLoading || isFetching) {
