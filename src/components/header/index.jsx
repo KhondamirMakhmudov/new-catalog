@@ -8,6 +8,8 @@ import Login from "../buttons/login";
 import Search from "../search";
 import Lang from "../lang";
 import Link from "next/link";
+import Documents from "../documents";
+import MobileMenu from "../mobile-menu";
 
 const Header = ({ id }) => {
   const scrollToSection = (id) => {
@@ -16,7 +18,11 @@ const Header = ({ id }) => {
   };
   return (
     <header className="sticky top-0 z-50">
-      <div className={"text-white bg-[#0256BA] py-[13px]   font-gilroy"}>
+      <div
+        className={
+          "hidden lg:block text-white bg-[#0256BA] py-[13px]   font-gilroy"
+        }
+      >
         <div className="container ">
           {/* top of the header. will be component in next time */}
           <div className={"flex justify-between"}>
@@ -35,6 +41,10 @@ const Header = ({ id }) => {
 
               <li>
                 <Link href={"/integrations"}>Integratsiya</Link>
+              </li>
+
+              <li>
+                <Documents />
               </li>
 
               {/* <li onClick={() => scrollToSection("about-classifier")}>
@@ -65,7 +75,9 @@ const Header = ({ id }) => {
       </div>
 
       <div
-        className={"bg-white py-[20px] font-gilroy rounded-b-[24px] shadow-xl"}
+        className={
+          "bg-white py-[20px] font-gilroy lg:rounded-b-[24px] border border-[#E4E9F6] shadow-xl"
+        }
       >
         <div className={"container flex items-center justify-between"}>
           <Brand />
@@ -78,10 +90,13 @@ const Header = ({ id }) => {
             <li>
               <WebAccess />
             </li>
-            <li>
+            <li className="lg:hidden block">
+              <MobileMenu />
+            </li>
+            <li className="hidden lg:block">
               <Selected />
             </li>
-            <li>
+            <li className="hidden lg:block">
               <Basket />
             </li>
           </ul>

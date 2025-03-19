@@ -17,6 +17,7 @@ import { NumericFormat } from "react-number-format";
 import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -64,6 +65,7 @@ const Index = () => {
   if (Object.keys(state).length === 0) {
     return (
       <div className="bg-[#F7F7F7] min-h-screen">
+        <NavigationButtom />
         <Header />
 
         <main className="container mb-[46px]">
@@ -77,7 +79,7 @@ const Index = () => {
             </Link>
           </section>
 
-          <section className="translate-y-1/2 flex items-center justify-center">
+          <section className="flex items-center justify-center translate-y-1/2">
             <motion.div
               initial={{ scale: 0.01 }}
               animate={{ scale: 1 }}
@@ -164,384 +166,400 @@ const Index = () => {
     });
   };
   return (
-    <div className="bg-[#F7F7F7] min-h-screen">
-      <Header />
+    <>
+      <div className="bg-[#F7F7F7] h-screen">
+        <Header />
+        <NavigationButtom />
+        <main className="container mb-[46px]">
+          <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+            <button
+              onClick={() => router.back()}
+              className="text-[#262D33] text-sm font-semibold"
+            >
+              <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
+                <RightIcon color="white" />
+              </div>
+            </button>
+            <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
+              Bosh sahifa
+            </Link>
+            <RightIcon color="#BCBFC2" />
+            <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
+              Savat
+            </Link>
+          </section>
 
-      <main className="container mb-[46px]">
-        <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
-          <button
-            onClick={() => router.back()}
-            className="text-[#262D33] text-sm font-semibold"
-          >
-            <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
-              <RightIcon color="white" />
+          <section className="">
+            <div className="flex my-[16px] items-baseline gap-x-[20px]">
+              <h1 className="font-bold text-[32px]  font-anybody">Savat</h1>
+              <p className="text-[#718096] font-medium">2 ta mahsulot</p>
             </div>
-          </button>
-          <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
-            Bosh sahifa
-          </Link>
-          <RightIcon color="#BCBFC2" />
-          <Link className="text-[#0256BA] text-sm font-semibold" href={"#"}>
-            Savat
-          </Link>
-        </section>
 
-        <section className="">
-          <div className="flex my-[16px] items-baseline gap-x-[20px]">
-            <h1 className="font-bold text-[32px]  font-anybody">Savat</h1>
-            <p className="text-[#718096] font-medium">2 ta mahsulot</p>
-          </div>
+            <div className="grid grid-cols-12 gap-x-[30px]">
+              <div className="col-span-8 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] self-start">
+                <div>
+                  <motion.table
+                    className="w-full border-collapse border-[#D7D9E7]"
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0" }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <thead className="text-black text-start rounded-[10px]">
+                      <tr className="rounded-[10px]">
+                        <th
+                          className={
+                            "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                          }
+                        >
+                          №
+                        </th>
 
-          <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-8 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] self-start">
-              <div>
-                <motion.table
-                  className="w-full border-collapse border-[#D7D9E7]"
-                  initial={{ opacity: 0, translateY: "30px" }}
-                  animate={{ opacity: 1, translateY: "0" }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <thead className="text-black text-start rounded-[10px]">
-                    <tr className="rounded-[10px]">
-                      <th
-                        className={
-                          "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
-                        }
-                      >
-                        №
-                      </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Kompaniya
+                        </th>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Kompaniya
-                      </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs nomi
+                        </th>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Resurs nomi
-                      </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Narxi (so’m)
+                        </th>
+                      </tr>
+                    </thead>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Narxi (so’m)
-                      </th>
-                    </tr>
-                  </thead>
+                    <tbody>
+                      {Object.entries(state).map((item, index) => (
+                        <tr
+                          key={index}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
 
-                  <tbody>
-                    {Object.entries(state).map((item, index) => (
-                      <tr
-                        key={index}
-                        className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                      >
-                        <td className=" font-medium text-xs py-[10px]  text-center">
-                          {index + 1}
-                        </td>
+                          <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
+                            <Link
+                              href={`/company/${get(item, "company_stir")}`}
+                              className="underline-0 hover:underline transition-all duration-300"
+                            >
+                              {get(JSON.parse(head(item)), "company_name")}
+                            </Link>
 
-                        <td className=" font-medium text-xs py-[10px]  text-start max-w-[200px]">
-                          <Link
-                            href={`/company/${get(item, "company_stir")}`}
-                            className="underline-0 hover:underline transition-all duration-300"
-                          >
-                            {get(JSON.parse(head(item)), "company_name")}
-                          </Link>
+                            <p className={"hidden"}>
+                              {get(JSON.parse(head(item)), "company_stir")}
+                            </p>
+                            <p className={"hidden"}>
+                              {get(JSON.parse(head(item)), "id")}
+                            </p>
+                          </td>
 
-                          <p className={"hidden"}>
-                            {get(JSON.parse(head(item)), "company_stir")}
-                          </p>
-                          <p className={"hidden"}>
-                            {get(JSON.parse(head(item)), "id")}
-                          </p>
-                        </td>
+                          <td className="hidden">
+                            <p className={"hidden"}>
+                              {get(JSON.parse(head(item)), "material_name_id")
+                                ? "material"
+                                : get(
+                                    JSON.parse(head(item)),
+                                    "mmechano_name_id"
+                                  )
+                                ? "mmechano"
+                                : get(JSON.parse(head(item)), "techno_name_id")
+                                ? "techno"
+                                : get(
+                                    JSON.parse(head(item)),
+                                    "smallmechano_code"
+                                  )
+                                ? "smallmechano"
+                                : get(JSON.parse(head(item)), "work_name_id")
+                                ? "work"
+                                : ""}
+                            </p>
+                          </td>
 
-                        <td className="hidden">
-                          <p className={"hidden"}>
+                          <td className="hidden">
                             {get(JSON.parse(head(item)), "material_name_id")
                               ? "material"
                               : get(JSON.parse(head(item)), "mmechano_name_id")
                               ? "mmechano"
                               : get(JSON.parse(head(item)), "techno_name_id")
                               ? "techno"
-                              : get(JSON.parse(head(item)), "smallmechano_code")
-                              ? "smallmechano"
-                              : get(JSON.parse(head(item)), "work_name_id")
+                              : get(JSON.parse(head(item)), "material_name_id")
                               ? "work"
                               : ""}
-                          </p>
-                        </td>
+                          </td>
 
-                        <td className="hidden">
-                          {get(JSON.parse(head(item)), "material_name_id")
-                            ? "material"
-                            : get(JSON.parse(head(item)), "mmechano_name_id")
-                            ? "mmechano"
-                            : get(JSON.parse(head(item)), "techno_name_id")
-                            ? "techno"
-                            : get(JSON.parse(head(item)), "material_name_id")
-                            ? "work"
-                            : ""}
-                        </td>
-
-                        <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                          <p
-                            className={`text-xs  ${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "material_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            }`}
-                          >
-                            {get(JSON.parse(head(item)), "material_name")}
-                          </p>
-
-                          <p
-                            className={`text-xs ${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "techno_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            } font-bold`}
-                          >
-                            {get(JSON.parse(head(item)), "techno_name")}
-                          </p>
-                          <p
-                            className={`text-xs ${
-                              isEmpty(get(JSON.parse(head(item)), "work_name"))
-                                ? "hidden"
-                                : "visible"
-                            } font-bold`}
-                          >
-                            {get(JSON.parse(head(item)), "work_name")}
-                          </p>
-                          <p
-                            className={`text-xs ${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "mmechano_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            } font-bold`}
-                          >
-                            {get(JSON.parse(head(item)), "mmechano_name")}
-                          </p>
-                        </td>
-
-                        <td className=" font-medium text-xs py-[10px] ">
-                          <p
-                            className={`${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "material_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            }`}
-                          >
-                            <NumericFormat
-                              displayType={"text"}
-                              thousandSeparator={" "}
-                              value={(
-                                get(
-                                  JSON.parse(head(item)),
-                                  "material_price",
-                                  0
-                                ) *
-                                last(item) *
-                                get(
-                                  currency,
-                                  `data[${get(
-                                    JSON.parse(head(item)),
-                                    "material_price_currency"
-                                  )}]`,
-                                  1
+                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                            <p
+                              className={`text-xs  ${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "material_name")
                                 )
-                              ).toFixed(2)}
-                              suffix={` so'm / ${get(
-                                JSON.parse(head(item)),
-                                "material_measure"
-                              )}`}
-                            />
-                          </p>
-                          <p
-                            className={`${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "techno_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            }`}
-                          >
-                            <NumericFormat
-                              displayType={"text"}
-                              thousandSeparator={" "}
-                              value={(
-                                get(JSON.parse(head(item)), "techno_price", 0) *
-                                last(item) *
-                                get(
-                                  currency,
-                                  `data[${get(
-                                    JSON.parse(head(item)),
-                                    "techno_price_currency"
-                                  )}]`,
-                                  1
-                                )
-                              ).toFixed(2)}
-                              suffix={` so'm / ${get(
-                                JSON.parse(head(item)),
-                                "techno_measure"
-                              )}`}
-                            />
-                          </p>
-                          <p
-                            className={`${
-                              isEmpty(
-                                get(JSON.parse(head(item)), "mmechano_name")
-                              )
-                                ? "hidden"
-                                : "visible"
-                            }`}
-                          >
-                            <NumericFormat
-                              displayType={"text"}
-                              thousandSeparator={" "}
-                              value={(
-                                get(
-                                  JSON.parse(head(item)),
-                                  "mmechano_rent_price",
-                                  0
-                                ) *
-                                last(item) *
-                                get(
-                                  currency,
-                                  `data[${get(
-                                    JSON.parse(head(item)),
-                                    "mmechano_rent_price_currency"
-                                  )}]`,
-                                  1
-                                )
-                              ).toFixed(2)}
-                              suffix={` so'm / ${get(
-                                JSON.parse(head(item)),
-                                "mmechano_measure"
-                              )}`}
-                            />
-                          </p>
-
-                          <p
-                            className={`${
-                              isEmpty(get(JSON.parse(head(item)), "work_name"))
-                                ? "hidden"
-                                : "visible"
-                            }`}
-                          >
-                            <NumericFormat
-                              displayType={"text"}
-                              thousandSeparator={" "}
-                              value={(
-                                get(JSON.parse(head(item)), "work_price", 0) *
-                                last(item) *
-                                get(
-                                  currency,
-                                  `data[${get(
-                                    JSON.parse(head(item)),
-                                    "work_price_currency"
-                                  )}]`,
-                                  1
-                                )
-                              ).toFixed(2)}
-                              suffix={` so'm / ${get(
-                                JSON.parse(head(item)),
-                                "work_measure"
-                              )}`}
-                            />
-                          </p>
-                        </td>
-
-                        <td>
-                          <div className="flex items-center gap-x-[4px]">
-                            <button
-                              onClick={() =>
-                                handleDecrement(JSON.parse(head(item)))
-                              }
-                              className={
-                                "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                              }
+                                  ? "hidden"
+                                  : "visible"
+                              }`}
                             >
-                              <Image
-                                src={"/icons/minus-circle.svg"}
-                                alt={"minus-circle"}
-                                width={20}
-                                height={20}
-                              />
-                            </button>
-                            <p className={"p-1 inline-flex  text-[#28366D]"}>
-                              {last(item)}
+                              {get(JSON.parse(head(item)), "material_name")}
                             </p>
-                            <button
-                              onClick={() =>
-                                handleIncrement(JSON.parse(head(item)))
-                              }
-                              className={
-                                "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                              }
+
+                            <p
+                              className={`text-xs ${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "techno_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              } font-bold`}
                             >
-                              <Image
-                                src={"/icons/add-circle.svg"}
-                                alt={"add-circle"}
-                                width={20}
-                                height={20}
+                              {get(JSON.parse(head(item)), "techno_name")}
+                            </p>
+                            <p
+                              className={`text-xs ${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "work_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              } font-bold`}
+                            >
+                              {get(JSON.parse(head(item)), "work_name")}
+                            </p>
+                            <p
+                              className={`text-xs ${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "mmechano_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              } font-bold`}
+                            >
+                              {get(JSON.parse(head(item)), "mmechano_name")}
+                            </p>
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px] ">
+                            <p
+                              className={`${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "material_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              }`}
+                            >
+                              <NumericFormat
+                                displayType={"text"}
+                                thousandSeparator={" "}
+                                value={(
+                                  get(
+                                    JSON.parse(head(item)),
+                                    "material_price",
+                                    0
+                                  ) *
+                                  last(item) *
+                                  get(
+                                    currency,
+                                    `data[${get(
+                                      JSON.parse(head(item)),
+                                      "material_price_currency"
+                                    )}]`,
+                                    1
+                                  )
+                                ).toFixed(2)}
+                                suffix={` so'm / ${get(
+                                  JSON.parse(head(item)),
+                                  "material_measure"
+                                )}`}
                               />
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </motion.table>
+                            </p>
+                            <p
+                              className={`${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "techno_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              }`}
+                            >
+                              <NumericFormat
+                                displayType={"text"}
+                                thousandSeparator={" "}
+                                value={(
+                                  get(
+                                    JSON.parse(head(item)),
+                                    "techno_price",
+                                    0
+                                  ) *
+                                  last(item) *
+                                  get(
+                                    currency,
+                                    `data[${get(
+                                      JSON.parse(head(item)),
+                                      "techno_price_currency"
+                                    )}]`,
+                                    1
+                                  )
+                                ).toFixed(2)}
+                                suffix={` so'm / ${get(
+                                  JSON.parse(head(item)),
+                                  "techno_measure"
+                                )}`}
+                              />
+                            </p>
+                            <p
+                              className={`${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "mmechano_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              }`}
+                            >
+                              <NumericFormat
+                                displayType={"text"}
+                                thousandSeparator={" "}
+                                value={(
+                                  get(
+                                    JSON.parse(head(item)),
+                                    "mmechano_rent_price",
+                                    0
+                                  ) *
+                                  last(item) *
+                                  get(
+                                    currency,
+                                    `data[${get(
+                                      JSON.parse(head(item)),
+                                      "mmechano_rent_price_currency"
+                                    )}]`,
+                                    1
+                                  )
+                                ).toFixed(2)}
+                                suffix={` so'm / ${get(
+                                  JSON.parse(head(item)),
+                                  "mmechano_measure"
+                                )}`}
+                              />
+                            </p>
+
+                            <p
+                              className={`${
+                                isEmpty(
+                                  get(JSON.parse(head(item)), "work_name")
+                                )
+                                  ? "hidden"
+                                  : "visible"
+                              }`}
+                            >
+                              <NumericFormat
+                                displayType={"text"}
+                                thousandSeparator={" "}
+                                value={(
+                                  get(JSON.parse(head(item)), "work_price", 0) *
+                                  last(item) *
+                                  get(
+                                    currency,
+                                    `data[${get(
+                                      JSON.parse(head(item)),
+                                      "work_price_currency"
+                                    )}]`,
+                                    1
+                                  )
+                                ).toFixed(2)}
+                                suffix={` so'm / ${get(
+                                  JSON.parse(head(item)),
+                                  "work_measure"
+                                )}`}
+                              />
+                            </p>
+                          </td>
+
+                          <td>
+                            <div className="flex items-center gap-x-[4px]">
+                              <button
+                                onClick={() =>
+                                  handleDecrement(JSON.parse(head(item)))
+                                }
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/minus-circle.svg"}
+                                  alt={"minus-circle"}
+                                  width={20}
+                                  height={20}
+                                />
+                              </button>
+                              <p className={"p-1 inline-flex  text-[#28366D]"}>
+                                {last(item)}
+                              </p>
+                              <button
+                                onClick={() =>
+                                  handleIncrement(JSON.parse(head(item)))
+                                }
+                                className={
+                                  "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                }
+                              >
+                                <Image
+                                  src={"/icons/add-circle.svg"}
+                                  alt={"add-circle"}
+                                  width={20}
+                                  height={20}
+                                />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </motion.table>
+                </div>
+              </div>
+
+              <div className="col-span-4 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] p-[20px]">
+                <h1 className="font-bold text-[24px] mb-[20px]">
+                  Buyurtma tafsilotlari
+                </h1>
+
+                <ul className="space-y-[12px]">
+                  <li>
+                    <p className="text-sm font-medium text-[#718096]">
+                      Mahsulot miqdori
+                    </p>
+                  </li>
+
+                  <li>
+                    <p className="text-sm font-medium text-[#718096]">
+                      Mahsulot narxlari
+                    </p>
+                  </li>
+
+                  <li>
+                    <p className="text-sm font-medium text-[#718096]">
+                      Yetkazib berish narxi
+                    </p>
+                  </li>
+                </ul>
+
+                <div className="bg-[#E5E7E9] h-[1px] w-full my-[20px]"></div>
+
+                <div className="font-semibold text-xl flex justify-between">
+                  <p>Jami</p>
+                  <p> so&apos;m</p>
+                </div>
+
+                <button
+                  onClick={onSubmit}
+                  className="py-[15px] bg-[#0256BA] rounded-[12px] w-full text-white mt-[20px]"
+                >
+                  Buyurtma berish
+                </button>
               </div>
             </div>
-
-            <div className="col-span-4 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] p-[20px]">
-              <h1 className="font-bold text-[24px] mb-[20px]">
-                Buyurtma tafsilotlari
-              </h1>
-
-              <ul className="space-y-[12px]">
-                <li>
-                  <p className="text-sm font-medium text-[#718096]">
-                    Mahsulot miqdori
-                  </p>
-                </li>
-
-                <li>
-                  <p className="text-sm font-medium text-[#718096]">
-                    Mahsulot narxlari
-                  </p>
-                </li>
-
-                <li>
-                  <p className="text-sm font-medium text-[#718096]">
-                    Yetkazib berish narxi
-                  </p>
-                </li>
-              </ul>
-
-              <div className="bg-[#E5E7E9] h-[1px] w-full my-[20px]"></div>
-
-              <div className="font-semibold text-xl flex justify-between">
-                <p>Jami</p>
-                <p> so&apos;m</p>
-              </div>
-
-              <button
-                onClick={onSubmit}
-                className="py-[15px] bg-[#0256BA] rounded-[12px] w-full text-white mt-[20px]"
-              >
-                Buyurtma berish
-              </button>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+          </section>
+        </main>
+      </div>
+    </>
   );
 };
 

@@ -40,12 +40,12 @@ const Index = () => {
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
             Kontaktlar
           </h1>
-          <div className="grid grid-cols-12 gap-x-[24px]">
+          <div className="grid grid-cols-12 gap-[24px]">
             <motion.div
               initial={{ opacity: 0, translateX: "-40px" }}
               animate={{ opacity: 1, translateX: "0px" }}
               transition={{ duration: 0.5 }}
-              className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-5 space-y-[30px]"
+              className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-12 lg:col-span-5 space-y-[30px]"
             >
               <div>
                 <h1 className="text-sm text-[#718096] mb-[10px]">
@@ -116,16 +116,18 @@ const Index = () => {
                       alt="tmsiti"
                       width={249}
                       height={48}
+                      className="lg:w-[249px] lg:h-[48px] w-[220px] h-[34px]"
                     />
 
                     <Link href={"https://tmsiti.uz/"}>
-                      <button className="py-[13px] px-[24px] border border-[#DFDFDF] rounded-[12px] text-[#4B4B4B] flex items-center gap-x-[12px] font-medium">
-                        <p className="">Saytga o‘tish</p>
+                      <button className="lg:py-[13px] lg:px-[24px] py-[9px] px-[10px] border border-[#DFDFDF] rounded-[12px] text-[#4B4B4B] flex items-center gap-x-[12px] font-medium">
+                        <p className="lg:text-base text-sm">Saytga o‘tish</p>
                         <Image
                           src={"/icons/arrow-right.svg"}
                           alt="arrow-right"
                           width={20}
                           height={20}
+                          className="lg:w-[20px] lg:h-[20px] w-[14px] h-[14px]"
                         />
                       </button>
                     </Link>
@@ -138,7 +140,7 @@ const Index = () => {
               initial={{ opacity: 0, translateX: "40px" }}
               animate={{ opacity: 1, translateX: "0px" }}
               transition={{ duration: 0.5 }}
-              className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-7"
+              className="font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[20px] col-span-12 lg:col-span-7"
             >
               <h3 className="text-[24px] font-bold mb-[20px]">
                 Ariza qoldirish

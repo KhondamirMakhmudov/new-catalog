@@ -18,6 +18,7 @@ import { useCounter } from "@/context/counter";
 import toast from "react-hot-toast";
 import Calendar from "react-calendar";
 import { useRouter } from "next/router";
+import * as XLSX from "xlsx";
 
 import "react-calendar/dist/Calendar.css";
 const regions = [
@@ -95,6 +96,33 @@ const Index = () => {
     },
     enabled: true,
   });
+
+  const exportToExcel = (data) => {
+    if (!data || data.length === 0) {
+      alert("Yuklab olish uchun ma'lumot mavjud emas!");
+      return;
+    }
+
+    const formattedData = data.map((item, index) => ({
+      "№": index + 1,
+      Hudud: item.material_region_name,
+      "Korxona nomi": item.company_name,
+      "Resurs kodi": item.material_name_id,
+      "Resurs nomi": item.material_name,
+      "O‘lchov birligi": item.material_measure,
+      "Narxi (QQSsiz)": item.material_price,
+      "Narxi (QQS)": (item.material_price * 1.12).toFixed(2),
+      "Oxirgi o‘zgarish": dayjs(item.material_updated_date).format(
+        "DD.MM.YYYY HH:mm"
+      ),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(formattedData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Materials");
+
+    XLSX.writeFile(workbook, "materials.xlsx");
+  };
   // material volume
   const {
     data: materialVolume,
@@ -179,12 +207,30 @@ const Index = () => {
         </section>
 
         <section>
-          <h1 className="font-bold text-[32px] my-[16px] font-anybody">
-            Material va jihozlar
-          </h1>
+          <div className="flex justify-between items-center">
+            <h1 className="font-bold text-[22px]  md:text-[26px] lg:text-[32px] my-[16px] font-anybody">
+              Material va jihozlar
+            </h1>
 
-          <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
+            <button
+              onClick={() => exportToExcel(materialsFast?.data?.materials)}
+              className="flex gap-x-[10px] bg-[#00733B] hover:bg-[#00733bf1] scale-100 active:scale-90  lg:py-[9px] py-[10px] lg:px-[20px] px-[10px] items-center rounded-[8px] transform-all duration-200"
+            >
+              <Image
+                src={"/icons/excel.svg"}
+                alt="excel"
+                width={24}
+                height={24}
+                className="lg:w-[24px] lg:h-[24px] hidden"
+              />
+              <p className="text-xs lg:text-sm font-gilroy text-white ">
+                Excel yuklash
+              </p>
+            </button>
+          </div>
+
+          <div className="grid grid-cols-12 gap-[30px]">
+            <div className="col-span-12 lg:col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Mahsulot qidirish</h4>
                 <button onClick={() => setShowAllProjects(!showAllProjects)}>
@@ -330,9 +376,9 @@ const Index = () => {
               )}
             </div>
 
-            <div className="col-span-9 space-y-[16px]">
+            <div className="col-span-12 lg:col-span-9 space-y-[16px]">
               <div className="grid grid-cols-12 gap-[16px] p-[16px] font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
-                <div className="col-span-4 self-stretch">
+                <div className="col-span-12 lg:col-span-4 self-stretch">
                   <h3 className="font-semibold text-sm mb-[6px] ">Viloyat</h3>
 
                   <div
@@ -379,7 +425,7 @@ const Index = () => {
                   </select> */}
                 </div>
 
-                <div className="col-span-4">
+                <div className="col-span-12 lg:col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">
                     Mahsulot nomi
                   </h3>
@@ -395,7 +441,7 @@ const Index = () => {
                   />
                 </div>
 
-                <div className="col-span-4">
+                <div className="col-span-12 lg:col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Narxlar</h3>
 
                   <div className="flex gap-x-[2px] items-center">
@@ -420,7 +466,7 @@ const Index = () => {
                     />
                   </div>
                 </div>
-                <div className="col-span-4">
+                <div className="col-span-12 lg:col-span-4">
                   <h3 className="font-semibold text-sm mb-[6px] ">Sana</h3>
                   <div className="flex gap-x-[2px] items-center">
                     <div className="relative">
@@ -465,7 +511,7 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="col-span-8">
+                <div className="col-span-12 lg:col-span-8">
                   <h3 className="font-semibold text-sm mb-[6px] ">
                     Korxona nomi
                   </h3>
@@ -486,153 +532,121 @@ const Index = () => {
                     <ContentLoader />
                   ) : (
                     <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
-                      <motion.table
-                        className="w-full border-collapse border-[#D7D9E7]"
-                        initial={{ opacity: 0, translateY: "30px" }}
-                        animate={{ opacity: 1, translateY: "0" }}
-                        transition={{ duration: 0.4 }}
-                      >
-                        <thead className="text-black text-start rounded-[10px]">
-                          <tr className="rounded-[10px]">
-                            <th
-                              className={
-                                "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
-                              }
-                            >
-                              №
-                            </th>
-                            <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                              Hudud
-                            </th>
-                            <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                              Korxona nomi
-                            </th>
-                            <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                              Resurs kodi
-                            </th>
-                            <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                              Resurs nomi
-                            </th>
-                            <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                              O&apos;lchov birligi
-                            </th>
-                            <th
-                              className="text-[10px]   bg-white text-gray-900  font-bold text-center"
-                              colSpan={2}
-                            >
-                              Narxi (so&apos;m)
-                            </th>
-
-                            <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                              Oxirgi o&apos;zgarish
-                            </th>
-                          </tr>
-                          <tr className="">
-                            <th colSpan={6}></th>
-                            <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold ">
-                              QQSsiz
-                            </th>
-                            <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold">
-                              QQS
-                            </th>
-                            <th></th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          {get(materialsFast, "data.materials", [])?.map(
-                            (item, index) => (
-                              <tr
-                                key={get(item, "id")}
-                                className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                      <div className="overflow-x-auto">
+                        <motion.table
+                          className="w-full border-collapse border-[#D7D9E7] min-w-[900px]"
+                          initial={{ opacity: 0, translateY: "30px" }}
+                          animate={{ opacity: 1, translateY: "0" }}
+                          transition={{ duration: 0.4 }}
+                        >
+                          <thead className="text-black text-start rounded-[10px]">
+                            <tr className="rounded-[10px]">
+                              <th
+                                className={
+                                  "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                                }
                               >
-                                <td className=" font-medium text-xs py-[10px]  text-center">
-                                  {(page - 1) * 20 + index + 1}
-                                </td>
-                                <td className=" font-medium text-xs py-[10px]  text-start">
-                                  {get(item, "material_region_name")}
-                                </td>
+                                №
+                              </th>
+                              <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                                Hudud
+                              </th>
+                              <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                                Korxona nomi
+                              </th>
+                              <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                                Resurs kodi
+                              </th>
+                              <th className=" text-start text-[10px] lg:w-auto w-[200px]  bg-white text-gray-900  font-bold ">
+                                Resurs nomi
+                              </th>
+                              <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                                O&apos;lchov birligi
+                              </th>
+                              <th
+                                className="text-[10px]   bg-white text-gray-900  font-bold text-center"
+                                colSpan={2}
+                              >
+                                Narxi (so&apos;m)
+                              </th>
 
-                                <td className=" font-medium text-xs text-[#0256BA] py-[10px]  text-start max-w-[200px]">
-                                  <Link
-                                    href={`/company/${get(
-                                      item,
-                                      "company_stir"
-                                    )}`}
-                                    className="underline-0 hover:underline transition-all duration-300"
-                                  >
-                                    {get(item, "company_name")}
-                                  </Link>
-                                </td>
+                              <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
+                                Oxirgi o&apos;zgarish
+                              </th>
+                            </tr>
+                            <tr className="rounded-tr-[10px]">
+                              <th colSpan={6}></th>
+                              <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold ">
+                                QQSsiz
+                              </th>
+                              <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold">
+                                QQS
+                              </th>
+                              <th className="rounded-tr-[10px]"></th>
+                            </tr>
+                          </thead>
 
-                                <td className=" font-medium text-xs text-[#0256BA] py-[10px]">
-                                  <Link
-                                    href={`/materials/${get(
-                                      item,
-                                      "material_name_id"
-                                    )}`}
-                                    className="underline-0 hover:underline transition-all duration-300"
-                                  >
-                                    {get(item, "material_name_id")}
-                                  </Link>
-                                </td>
-                                <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                                  {get(item, "material_name")}
-                                </td>
-                                <td className=" font-medium text-xs py-[10px] text-center">
-                                  <div className="flex space-x-[4px]">
-                                    <Image
-                                      src={"/icons/measure-basket.svg"}
-                                      alt="measure-basket"
-                                      width={16}
-                                      height={16}
-                                    />
-                                    <p>{get(item, "material_measure")}</p>
-                                  </div>
-                                </td>
-                                <td className=" font-medium text-[10px] py-[10px] ">
-                                  <NumericFormat
-                                    thousandSeparator={" "}
-                                    displayType="text"
-                                    className="bg-transparent max-w-[100px]"
-                                    value={
-                                      Number.isInteger(
-                                        get(item, "material_price")
-                                      )
-                                        ? get(item, "material_price") *
-                                          get(
-                                            currency,
-                                            `data[${get(
-                                              item,
-                                              "material_price_currency"
-                                            )}]`,
-                                            1
-                                          )
-                                        : parseFloat(
-                                            get(item, "material_price")
-                                          ).toFixed(2) *
-                                          get(
-                                            currency,
-                                            `data[${get(
-                                              item,
-                                              "material_price_currency"
-                                            )}]`,
-                                            1
-                                          )
-                                    }
-                                  />
-                                </td>
-                                <td className=" font-medium text-[10px] py-[10px] ">
-                                  <NumericFormat
-                                    thousandSeparator={" "}
-                                    displayType="text"
-                                    className="bg-transparent max-w-[100px]"
-                                    value={
-                                      Number.isInteger(
-                                        get(item, "material_price")
-                                      )
-                                        ? (
-                                            get(item, "material_price") *
+                          <tbody>
+                            {get(materialsFast, "data.materials", [])?.map(
+                              (item, index) => (
+                                <tr
+                                  key={get(item, "id")}
+                                  className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                                >
+                                  <td className=" font-medium text-xs py-[10px]  text-center">
+                                    {(page - 1) * 20 + index + 1}
+                                  </td>
+                                  <td className=" font-medium text-xs py-[10px]  text-start">
+                                    {get(item, "material_region_name")}
+                                  </td>
+
+                                  <td className=" font-medium text-xs text-[#0256BA] py-[10px]  text-start max-w-[200px]">
+                                    <Link
+                                      href={`/company/${get(
+                                        item,
+                                        "company_stir"
+                                      )}`}
+                                      className="underline-0 hover:underline transition-all duration-300"
+                                    >
+                                      {get(item, "company_name")}
+                                    </Link>
+                                  </td>
+
+                                  <td className=" font-medium text-xs text-[#0256BA] py-[10px]">
+                                    <Link
+                                      href={`/materials/${get(
+                                        item,
+                                        "material_name_id"
+                                      )}`}
+                                      className="underline-0 hover:underline transition-all duration-300"
+                                    >
+                                      {get(item, "material_name_id")}
+                                    </Link>
+                                  </td>
+                                  <td className=" font-medium text-xs py-[10px]  lg:w-auto w-[300px]">
+                                    {get(item, "material_name")}
+                                  </td>
+                                  <td className=" font-medium text-xs py-[10px] text-center">
+                                    <div className="flex space-x-[4px]">
+                                      <Image
+                                        src={"/icons/measure-basket.svg"}
+                                        alt="measure-basket"
+                                        width={16}
+                                        height={16}
+                                      />
+                                      <p>{get(item, "material_measure")}</p>
+                                    </div>
+                                  </td>
+                                  <td className=" font-medium text-[10px] py-[10px] ">
+                                    <NumericFormat
+                                      thousandSeparator={" "}
+                                      displayType="text"
+                                      className="bg-transparent max-w-[100px]"
+                                      value={
+                                        Number.isInteger(
+                                          get(item, "material_price")
+                                        )
+                                          ? get(item, "material_price") *
                                             get(
                                               currency,
                                               `data[${get(
@@ -640,11 +654,8 @@ const Index = () => {
                                                 "material_price_currency"
                                               )}]`,
                                               1
-                                            ) *
-                                            1.12
-                                          ).toFixed(2)
-                                        : (
-                                            parseFloat(
+                                            )
+                                          : parseFloat(
                                               get(item, "material_price")
                                             ).toFixed(2) *
                                             get(
@@ -654,75 +665,113 @@ const Index = () => {
                                                 "material_price_currency"
                                               )}]`,
                                               1
-                                            ) *
-                                            1.12
-                                          ).toFixed(2)
-                                    }
-                                  />
-                                </td>
-                                <td className=" font-medium text-xs py-[10px]">
-                                  <div className="flex space-x-[4px]">
-                                    <Image
-                                      src={"/icons/clock.svg"}
-                                      alt="clock"
-                                      width={16}
-                                      height={16}
+                                            )
+                                      }
                                     />
-                                    <p>
-                                      {" "}
-                                      {dayjs(
-                                        get(item, "material_updated_date")
-                                      ).format("DD.MM.YYYY")}
-                                    </p>
-                                    <p>
-                                      {dayjs(
-                                        get(item, "material_updated_date")
-                                      ).format("HH:mm")}
-                                    </p>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div className="flex items-center gap-x-[4px]">
-                                    <button
-                                      className={
-                                        "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                  </td>
+                                  <td className=" font-medium text-[10px] py-[10px] ">
+                                    <NumericFormat
+                                      thousandSeparator={" "}
+                                      displayType="text"
+                                      className="bg-transparent max-w-[100px]"
+                                      value={
+                                        Number.isInteger(
+                                          get(item, "material_price")
+                                        )
+                                          ? (
+                                              get(item, "material_price") *
+                                              get(
+                                                currency,
+                                                `data[${get(
+                                                  item,
+                                                  "material_price_currency"
+                                                )}]`,
+                                                1
+                                              ) *
+                                              1.12
+                                            ).toFixed(2)
+                                          : (
+                                              parseFloat(
+                                                get(item, "material_price")
+                                              ).toFixed(2) *
+                                              get(
+                                                currency,
+                                                `data[${get(
+                                                  item,
+                                                  "material_price_currency"
+                                                )}]`,
+                                                1
+                                              ) *
+                                              1.12
+                                            ).toFixed(2)
                                       }
-                                    >
+                                    />
+                                  </td>
+                                  <td className=" font-medium text-xs py-[10px] w-[120px] lg:w-[120px]">
+                                    <div className="flex space-x-[4px]">
                                       <Image
-                                        src={"/icons/heart.svg"}
-                                        alt={"heart"}
-                                        width={18}
-                                        height={18}
+                                        src={"/icons/clock.svg"}
+                                        alt="clock"
+                                        width={16}
+                                        height={16}
                                       />
-                                    </button>
+                                      <p>
+                                        {" "}
+                                        {dayjs(
+                                          get(item, "material_updated_date")
+                                        ).format("DD.MM.YYYY")}
+                                      </p>
+                                      <p>
+                                        {dayjs(
+                                          get(item, "material_updated_date")
+                                        ).format("HH:mm")}
+                                      </p>
+                                    </div>
+                                  </td>
+                                  <td className=" lg:w-auto min-w-[100px] ">
+                                    <div className="flex items-center gap-x-[4px]">
+                                      <button
+                                        className={
+                                          "p-[5px] bg-[#DAE8F7] rounded-[8px] b active:scale-110 scale-100 transition-all duration-200"
+                                        }
+                                      >
+                                        <Image
+                                          src={"/icons/heart.svg"}
+                                          alt={"heart"}
+                                          width={18}
+                                          height={18}
+                                          className="w-[18px] h-[18px]"
+                                        />
+                                      </button>
 
-                                    <button
-                                      onClick={() => handleIncrement(item)}
-                                      className={
-                                        "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
-                                      }
-                                    >
-                                      <Image
-                                        src={"/icons/basket.svg"}
-                                        alt={"heart"}
-                                        width={18}
-                                        height={18}
-                                      />
-                                    </button>
-                                  </div>
-                                </td>
-                              </tr>
-                            )
-                          )}
-                        </tbody>
-                      </motion.table>
+                                      <button
+                                        onClick={() => handleIncrement(item)}
+                                        className={
+                                          "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                        }
+                                      >
+                                        <Image
+                                          src={"/icons/basket.svg"}
+                                          alt={"heart"}
+                                          width={18}
+                                          height={18}
+                                        />
+                                      </button>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )
+                            )}
+                          </tbody>
+                        </motion.table>
+                      </div>
                       <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-                      <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                      <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex flex-col md:flex-row items-center justify-between">
                         <div>
                           <p className="text-sm text-[#9392A0]">
                             {" "}
-                            {get(materialsFast, "data.count")} tadan 20 tasi
-                            ko&apos;rsatilgan
+                            {get(materialsFast, "data.total_items")} tadan 20
+                            tasi ko&apos;rsatilgan
                           </p>
                         </div>
 

@@ -10,8 +10,10 @@ import { URLS } from "@/constants/url";
 import Link from "next/link";
 import dayjs from "dayjs";
 import usePostQuery from "@/hooks/api/usePostQuery";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
+  const { data: session } = useSession();
   const {
     data: listOrders,
     isLoading,

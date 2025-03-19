@@ -36,6 +36,7 @@ export const authOptions = {
       },
       async authorize(credentials) {
         try {
+          console.log("Received code:", credentials.code);
           const res = await fetch(
             `https://backend.mkinfo.uz/fastapi/auth/callback/?code=${credentials.code}`,
             {

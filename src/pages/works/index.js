@@ -71,8 +71,8 @@ const Index = () => {
             Qurilish ishlari
           </h1>
 
-          <div className="grid grid-cols-12 gap-x-[30px]">
-            <div className="col-span-3 font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] self-start">
+          <div className="grid grid-cols-12 gap-[30px]">
+            <div className="col-span-12 lg:col-span-3 font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] self-start">
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Mahsulot qidirish</h4>
                 <button onClick={() => setShowAllProjects(!showAllProjects)}>
@@ -123,7 +123,7 @@ const Index = () => {
                 </ul>
               )}
             </div>
-            <div className="col-span-9 flex-grow font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
+            <div className="col-span-12 lg:col-span-9 flex-grow font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] ">
               {get(worksCategory, "data.results", []).map((item) => (
                 <div className=" " key={get(item, "id")}>
                   {selectedButton?.id === item.id && tableData && (
@@ -181,7 +181,7 @@ const Index = () => {
                         </tbody>
                       </motion.table>
                       <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-                      <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                      <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex flex-col lg:flex-row items-center justify-between">
                         <div>
                           <p className="text-sm text-[#9392A0]">
                             {" "}

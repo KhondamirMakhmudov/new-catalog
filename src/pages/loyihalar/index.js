@@ -13,21 +13,24 @@ const Index = () => {
       <Header />
 
       <main className="container mb-[46px]">
-        <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
+        <section className="mt-[16px] flex items-center space-y-[5px] lg:space-x-[12px] font-gilroy">
           <button
             onClick={() => router.back()}
-            className="text-[#262D33] text-sm font-semibold"
+            className="text-[#262D33] lg:text-sm text-xs font-semibold"
           >
             <div className="bg-[#9AA8BC] rounded-full p-[5px] rotate-180">
               <RightIcon color="white" />
             </div>
           </button>
-          <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
+          <Link
+            href={"/"}
+            className="text-[#262D33] lg:text-sm text-xs font-semibold"
+          >
             Bosh sahifa
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link
-            className="text-[#0256BA] text-sm font-semibold"
+            className="text-[#0256BA] lg:text-sm text-xs font-semibold"
             href={"/select-position"}
           >
             Loyihalar
@@ -42,7 +45,7 @@ const Index = () => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.9 }}
-              className="col-span-6 bg-white  rounded-[30px]"
+              className="col-span-12 lg:col-span-6 bg-white  rounded-[30px]"
             >
               <div
                 className={
@@ -86,7 +89,7 @@ const Index = () => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.3 }}
-              className="col-span-6 bg-white  rounded-[30px]"
+              className="col-span-12 lg:col-span-6 bg-white  rounded-[30px]"
             >
               <div
                 className={
@@ -129,7 +132,7 @@ const Index = () => {
               initial={{ scale: 0.1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="col-span-6 bg-white rounded-[30px]"
+              className="col-span-12 lg:col-span-6 bg-white rounded-[30px]"
             >
               <div
                 className={

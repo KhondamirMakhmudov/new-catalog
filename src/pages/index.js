@@ -15,7 +15,11 @@ import ScrollToTopButton from "@/components/scroll-to-top";
 import AboutClassifier from "@/components/about-company";
 import FondStock from "@/components/fondStock";
 import BackgroundSlider from "@/components/background-slider";
-
+import HorizonChart from "@/components/bar/rechart";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Navigation } from "swiper/modules";
+import NavigationButtom from "@/components/bottom-navigation";
 const integrationData = [
   {
     id: 1,
@@ -55,6 +59,7 @@ export default function Home() {
     <>
       <Header />
       <FondStock />
+      <NavigationButtom />
       <main className="bg-white">
         <ScrollToTopButton />
 
@@ -75,7 +80,7 @@ export default function Home() {
             <div className={"grid grid-cols-12 gap-[20px] mt-[20px]"}>
               <div
                 className={
-                  "col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
+                  "col-span-12 md:col-span-6 p-[32px] bg-[#F4F6FA] rounded-[16px] max-h-[200px] md:max-h-[300px] lg:max-h-[480px] h-full  overflow-hidden section z-10"
                 }
               >
                 {/* machine-mechano */}
@@ -85,7 +90,7 @@ export default function Home() {
                   </h1>
                   <p
                     className={
-                      "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
+                      "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0 lg:block hidden"
                     }
                   >
                     Global strategiyani o&apos;zgartirish mahsulotning
@@ -96,29 +101,29 @@ export default function Home() {
                   <Link href="/materials">
                     <div
                       className={
-                        " z-20 py-[13px] px-[24px] text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300"
+                        " z-20 py-[13px] px-[24px] text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] transition-all duration-300 mt-[20px] lg:mt-0"
                       }
                     >
                       <p className={""}>Batafsil</p>
                     </div>
                   </Link>
                 </div>
-                <div className={"absolute bg-section bottom-0 -z-30"}>
+                <div className={"absolute bg-section bottom-0 -z-10"}>
                   <Image
                     src={"/images/materials.png"}
                     alt={"materials"}
                     width={910}
                     height={485}
-                    className={"ml-[16px]"}
+                    className={"ml-[16px] xl:blur-0 blur-sm"}
                   />
                 </div>
               </div>
 
-              <div className={"col-span-6"}>
+              <div className={"col-span-12 md:col-span-6"}>
                 {/* machine-mechano */}
                 <div
                   className={
-                    "bg-[#FFE7DB] px-[32px] pt-[32px] pb-[34px] max-h-[230px] h-full rounded-[16px] section overflow-hidden cursor-pontiner"
+                    "bg-[#FFE7DB] px-[32px] pt-[32px] pb-[34px] max-h-[200px] md:max-h-[230px] h-full rounded-[16px] section overflow-hidden cursor-pontiner z-10"
                   }
                 >
                   <div className={"z-30"}>
@@ -127,7 +132,7 @@ export default function Home() {
                     </h1>
                     <p
                       className={
-                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0"
+                        "font-medium text-[#21201FB2] mt-[16px] mb-[24px] opacity-0 lg:block hidden"
                       }
                     >
                       Global strategiyani o&apos;zgartirish <br />{" "}
@@ -137,7 +142,7 @@ export default function Home() {
                     <Link href="/machine-mechano">
                       <div
                         className={
-                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30 text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] transition-all duration-300"
+                          "  py-[13px] px-[24px]  items-center border border-[#D7D9DC] inline-flex rounded-[8px] -z-30 text-[#21201FCC] hover:text-white bg-transparent hover:bg-[#0256BA] transition-all duration-300 mt-[20px] lg:mt-0"
                         }
                       >
                         <p>Batafsil</p>
@@ -145,22 +150,24 @@ export default function Home() {
                     </Link>
                   </div>
 
-                  <div className={"absolute bg-section bottom-0 right-0"}>
+                  <div className={"absolute bg-section bottom-0 right-0 -z-10"}>
                     <Image
                       src={"/images/machine-mechano.png"}
                       alt={"machine-mechano"}
                       width={274}
                       height={297}
-                      className={"ml-[16px]"}
+                      className={"ml-[16px] xl:blur-0 blur-sm"}
                     />
                   </div>
                 </div>
 
-                <div className={"flex gap-x-[20px] mt-[20px]"}>
+                <div
+                  className={"flex md:flex-row flex-col gap-[20px] mt-[20px]"}
+                >
                   {/* uskunalar va qurilmalar */}
                   <div
                     className={
-                      "border works flex-col border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
+                      "border works flex-col border-[#D9DADB] md:w-1/2 w-full p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
                     }
                   >
                     <h1
@@ -183,7 +190,7 @@ export default function Home() {
                   {/* Qurilish ishlari */}
                   <div
                     className={
-                      "border works border-[#D9DADB] w-1/2 p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
+                      "border works border-[#D9DADB] md:w-1/2 w-fulls p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
                     }
                   >
                     <h1
@@ -233,10 +240,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className={"grid grid-cols-12 gap-x-[20px] mt-[30px]"}>
+              <div className={"grid grid-cols-12 gap-[20px] mt-[30px]"}>
                 <div
                   className={
-                    "col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
+                    "col-span-12 md:col-span-6 min-h-[580px] rounded-[30px] relative z-10 bg-center"
                   }
                   style={{ backgroundImage: `url(/images/school-bg.png)` }}
                 >
@@ -269,7 +276,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className={"col-span-6 space-y-[20px]"}>
+                <div className={"col-span-12 md:col-span-6 space-y-[20px]"}>
                   <div
                     className={
                       "bg-white flex flex-col p-[32px] min-h-[280px] rounded-[30px] relative"
@@ -315,7 +322,7 @@ export default function Home() {
                     <div className="absolute bottom-0 right-0 p-[24px]">
                       <Image
                         src={"/images/medicine.png"}
-                        alt={"medicine"}
+                        alt={"medicine_img"}
                         width={150}
                         height={120}
                         className={"ml-[16px]"}
@@ -346,7 +353,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="col-span-12 mt-[30px] backdrop-blur-lg">
+                <div className="col-span-12 my-[30px] backdrop-blur-lg">
                   <div className="backdrop-blur bg-transparent">
                     <Link
                       href={"/loyihalar"}
@@ -368,45 +375,52 @@ export default function Home() {
         </section>
 
         {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
-        <section className="relative py-[60px]">
-          <div className="absolute z-10 left-0 bottom-0">
+        <section className="relative py-[60px] z-10">
+          <div className="absolute z-10 -left-10 md:left-0 md:bottom-0 hidden lg:block">
             <Image
               src={"/images/bg-eco-2.png"}
               alt={"eco-logo"}
               width={270}
               height={430}
-              className={""}
+              className={"w-ful h-[300px] md:h-[430px]"}
             />
           </div>
 
-          <div className="absolute z-10 right-0 bottom-0">
+          <div className="absolute -z-10 -right-6 overflow-x-hidden md:right-0 bottom-0 hidden lg:block">
             <Image
               src={"/images/bg-eco-1.png"}
               alt={"eco-logo"}
               width={270}
               height={430}
+              className={"w-ful h-[300px] md:h-[430px]"}
             />
           </div>
 
           <Reveal>
             <div className="container">
-              <div className="grid grid-cols-12 gap-x-[30px]  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
-                <div className="col-span-6 w-[600px]">
+              <div className="grid grid-cols-12 gap-[30px] z-50  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
+                <div className="col-span-12 md:col-span-6 md:max-w-[300px] lg:max-w-[600px] w-full">
                   <Image
                     src={"/images/eco-logo.png"}
                     alt={"eco-logo"}
                     width={600}
                     height={436}
-                    className={"w-full h-[436px] rounded-[20px]"}
+                    className={
+                      "lg:w-[600px] w-[200px]  md:h-[436px] rounded-[20px] object-cover"
+                    }
                   />
                 </div>
-                <div className="col-span-6 flex items-start justify-center flex-col">
-                  <h1 className={"font-bold text-[42px] text-[#21201F]"}>
-                    Ekologiya va atrof-muhitni muhofaza qilish boshqar
+                <div className="col-span-12 md:col-span-6 flex items-start justify-center flex-col">
+                  <h1
+                    className={
+                      "font-bold text-[20px] md:text-[42px] text-[#21201F]"
+                    }
+                  >
+                    Ekologiya va atrof-muhitni muhofaza qilish boshqarmasi
                   </h1>
                   <p
                     className={
-                      "font-medium text-[#21201FB2] text-[21px] mt-[16px] mb-[24px]"
+                      "font-medium text-[#21201FB2] text-base md:text-[21px] mt-[16px] mb-[24px]"
                     }
                   >
                     O‘zbekiston Respublikasi Vazirlar Mahkamasining 27.05.2019
@@ -459,10 +473,10 @@ export default function Home() {
             <Reveal>
               <Link href={"/monitoring"}>
                 <div className="grid grid-cols-12 gap-x-[30px] bg-white p-[30px] rounded-[20px] mt-[20px]">
-                  <div className="col-span-6">
-                    <HorizontalBarChart />
+                  <div className="col-span-12 md:col-span-6">
+                    <HorizonChart />
                   </div>
-                  <div className="col-span-6">
+                  <div className="col-span-12 md:col-span-6">
                     <div>
                       <MapOfUz />
                     </div>
@@ -477,20 +491,70 @@ export default function Home() {
         <section className="bg-white">
           <div className="container py-[42px]">
             <Reveal>
-              <h1 className="text-[32px] font-bold">
+              <h1 className="text-[30px] lg:text-[32px] font-bold">
                 Integratsiya bo&apos;yicha sheriklar
               </h1>
             </Reveal>
 
+            {/* Mobil uchun Swiper */}
             <Reveal>
-              <div className="grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
+              <div className="md:hidden mt-[20px]">
+                <Swiper
+                  spaceBetween={24}
+                  slidesPerView={1.2}
+                  breakpoints={{
+                    640: { slidesPerView: 1.5 },
+                    768: { slidesPerView: 2 }, // Bu md: dan kattaroq ekranda yashiriladi
+                  }}
+                >
+                  {integrationData.map((item) => (
+                    <SwiperSlide key={get(item, "id")}>
+                      <div className="flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]">
+                        <div
+                          className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED] w-[110px] h-[110px] rounded-[16px]"
+                          style={{
+                            backgroundImage: `url(/icons/${get(
+                              item,
+                              "image"
+                            )})`,
+                          }}
+                        ></div>
+                        <div>
+                          <h2 className="text-[20px] font-bold">
+                            {get(item, "title")}
+                          </h2>
+                          <Link
+                            href={"/integrations"}
+                            className="inline-flex gap-x-[10px] bg-[#EBF1F9] hover:bg-[#DEECFF] rounded-[8px] py-[17px] px-[16px] mt-[10px] transition-all duration-300"
+                          >
+                            <p className="text-sm lg:text-lg font-semibold text-[#0256BA]">
+                              Tanishib chiqish
+                            </p>
+                            <Image
+                              src={"/icons/integration-arrow-right.svg"}
+                              alt={"school"}
+                              width={20}
+                              height={20}
+                            />
+                          </Link>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
+              </div>
+            </Reveal>
+
+            {/* Katta ekran uchun Grid */}
+            <Reveal>
+              <div className="hidden md:grid grid-cols-12 gap-[24px] font-gilroy mt-[20px]">
                 {integrationData.map((item) => (
                   <div
-                    className="col-span-4 flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]"
+                    className="col-span-12 md:col-span-6 lg:col-span-4 flex gap-x-[24px] items-center border p-[24px] bg-[#F7F7F7] rounded-[20px]"
                     key={get(item, "id")}
                   >
                     <div
-                      className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED]  w-[110px] h-[110px] rounded-[16px]"
+                      className="bg-center bg-white border bg-no-repeat bg-[length:80px_80px] border-[#E6E5ED] w-[110px] h-[110px] rounded-[16px]"
                       style={{
                         backgroundImage: `url(/icons/${get(item, "image")})`,
                       }}
@@ -499,12 +563,11 @@ export default function Home() {
                       <h2 className="text-[20px] font-bold">
                         {get(item, "title")}
                       </h2>
-
                       <Link
                         href={"/integrations"}
                         className="inline-flex gap-x-[10px] bg-[#EBF1F9] hover:bg-[#DEECFF] rounded-[8px] py-[17px] px-[16px] mt-[10px] transition-all duration-300"
                       >
-                        <p className="text-lg font-semibold text-[#0256BA]">
+                        <p className="text-sm lg:text-lg font-semibold text-[#0256BA]">
                           Tanishib chiqish
                         </p>
                         <Image
@@ -590,7 +653,7 @@ export default function Home() {
         <section className="container">
           <Reveal>
             <div
-              className=" min-h-[164px] w-full bg-center bg-no-repeat
+              className="min-h-[164px] w-full bg-center bg-no-repeat
             bg-cover rounded-[20px] flex items-center justify-center"
               style={{ backgroundImage: `url(/images/address.png)` }}
             >

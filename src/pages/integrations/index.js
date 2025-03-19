@@ -52,12 +52,15 @@ const Index = () => {
         <section>
           <h1 className="font-bold text-[32px] my-[16px]">Integratsiyalar</h1>
           <motion.ul
-            className="  grid grid-cols-12 font-gilroy gap-x-[10px] mb-[16px]"
+            className="  grid grid-cols-12 font-gilroy gap-[10px] mb-[16px]"
             initial={{ opacity: 0, translateY: "30px" }}
             animate={{ opacity: 1, translateY: "0" }}
             transition={{ duration: 0.3 }}
           >
-            <li onClick={() => selectProject("birja")} className="col-span-2">
+            <li
+              onClick={() => selectProject("birja")}
+              className="col-span-12 lg:col-span-2"
+            >
               <div
                 className={`${
                   tab === "birja" ? "bg-[#E7EDF5]" : "bg-white"
@@ -93,7 +96,10 @@ const Index = () => {
               </div>
             </li>
 
-            <li onClick={() => selectProject("iqtisod")} className="col-span-2">
+            <li
+              onClick={() => selectProject("iqtisod")}
+              className="col-span-12 lg:col-span-2"
+            >
               <div
                 className={`${
                   tab === "iqtisod" ? "bg-[#E7EDF5]" : "bg-white"
@@ -127,7 +133,10 @@ const Index = () => {
               </div>
             </li>
 
-            <li onClick={() => selectProject("bojxona")} className="col-span-2">
+            <li
+              onClick={() => selectProject("bojxona")}
+              className="col-span-12 lg:col-span-2"
+            >
               <div
                 className={`${
                   tab === "bojxona" ? "bg-[#E7EDF5]" : "bg-white"
@@ -161,7 +170,10 @@ const Index = () => {
               </div>
             </li>
 
-            <li onClick={() => selectProject("tsa")} className="col-span-2">
+            <li
+              onClick={() => selectProject("tsa")}
+              className="col-span-12 lg:col-span-2"
+            >
               <div
                 className={`${
                   tab === "tsa" ? "bg-[#E7EDF5]" : "bg-white"
@@ -194,7 +206,10 @@ const Index = () => {
                 </div>
               </div>
             </li>
-            <li onClick={() => selectProject("soliq")} className="col-span-2">
+            <li
+              onClick={() => selectProject("soliq")}
+              className="col-span-12 lg:col-span-2"
+            >
               <div
                 className={`${
                   tab === "soliq" ? "bg-[#E7EDF5]" : "bg-white"
@@ -230,7 +245,7 @@ const Index = () => {
 
             <li
               onClick={() => selectProject("statistika")}
-              className="col-span-2"
+              className="col-span-12 lg:col-span-2"
             >
               <div
                 className={`${

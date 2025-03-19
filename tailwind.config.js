@@ -28,7 +28,7 @@ module.exports = {
       },
 
       fontFamily: {
-        anybody: ["AnyBody", "sans-serif"],
+        anybody: ["Anybody", "sans-serif"],
       },
 
       fontFamily: {
@@ -36,7 +36,14 @@ module.exports = {
       },
       container: {
         center: true,
-        padding: "50px",
+        padding: {
+          DEFAULT: "1rem", // Default padding (mobile)
+          sm: "2rem", // Small screens
+          md: "3rem", // Medium screens
+          lg: "4rem", // Large screens
+          xl: "5rem", // Extra large screens
+          "2xl": "6rem", // 1440px and above
+        },
       },
       screens: {
         "2xl": "1440px",

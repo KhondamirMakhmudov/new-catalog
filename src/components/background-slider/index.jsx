@@ -40,7 +40,7 @@ const BackgroundSlider = () => {
       <section
         style={{ backgroundImage: `url(${backgrounds[currentIndex]})` }}
         className={
-          "w-full relative min-h-[666px] h-full object-cover bg-cover bg-no-repeat font-anybody z-10 flex items-center justify-center"
+          "w-full relative min-h-[400px] md:min-h-[666px] h-full object-cover bg-cover bg-no-repeat font-anybody z-10 flex items-center justify-center"
         }
       >
         <div className={"container  text-[#ffffff] relative "}>
@@ -48,7 +48,7 @@ const BackgroundSlider = () => {
             initial={{ scale: 0.11 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className={"text-[42px] font-bold uppercase z-40"}
+            className={"text-[26px] md:text-[42px] font-bold uppercase z-40"}
           >
             Qurilish resurslari <br /> milliy klassifikatori
           </motion.h1>
