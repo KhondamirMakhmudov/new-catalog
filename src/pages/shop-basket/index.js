@@ -79,7 +79,7 @@ const Index = () => {
             </Link>
           </section>
 
-          <section className="translate-y-1/2 flex items-center justify-center">
+          <section className="flex items-center justify-center">
             <motion.div
               initial={{ scale: 0.01 }}
               animate={{ scale: 1 }}
@@ -167,9 +167,9 @@ const Index = () => {
   };
   return (
     <>
-      <div className="bg-[#F7F7F7] ">
+      <div className="bg-[#F7F7F7] h-screen">
         <Header />
-
+        <NavigationButtom />
         <main className="container mb-[46px]">
           <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
             <button
