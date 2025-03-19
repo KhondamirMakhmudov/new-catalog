@@ -67,11 +67,11 @@ const Index = () => {
             </div>
           </div>
 
-          <div className={"col-span-6"}>
+          <div className={"col-span-6 relative z-10"}>
             {/* machine-mechano */}
             <div
               className={
-                "bg-[#FFE7DB] px-[32px] pt-[32px] pb-[34px] max-h-[230px] h-full rounded-[16px] section overflow-hidden cursor-pontiner"
+                "bg-[#FFE7DB] px-[32px] pt-[32px] pb-[34px] max-h-[230px] h-full rounded-[16px] section overflow-hidden cursor-pontiner z-10"
               }
             >
               <div className={"z-30"}>
@@ -103,11 +103,11 @@ const Index = () => {
                 </Link>
               </div>
 
-              <div className={"absolute bg-section bottom-0 right-0"}>
+              <div className={"absolute bg-section bottom-0 right-0 -z-10"}>
                 <Image
                   src={"/images/machine-mechano.png"}
                   alt={"machine-mechano"}
-                  width={274}
+                  width={174}
                   height={217}
                   className={"ml-[16px]"}
                 />
