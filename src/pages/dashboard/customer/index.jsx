@@ -41,7 +41,7 @@ const Index = () => {
     if (code) {
       // Call the credentials provider with the code
       signIn("credentials", {
-        code, // Pass the code from the query string
+        code: code, // Pass the code from the query string
         redirect: false, // Handle redirection manually
       })
         .then((result) => {
