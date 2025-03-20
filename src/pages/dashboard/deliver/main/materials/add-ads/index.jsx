@@ -11,7 +11,9 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 const Index = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [warning, setWarning] = useState(false);
