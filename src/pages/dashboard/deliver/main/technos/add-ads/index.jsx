@@ -10,8 +10,10 @@ import { URLS } from "@/constants/url";
 import { get, isEmpty, find, head, debounce } from "lodash";
 import Select from "react-select";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
+  const { data: session } = useSession();
   const [search, setSearch] = useState("");
   const [warning, setWarning] = useState(false);
   const [technoValue, setTechnoValue] = useState(null);
@@ -76,6 +78,9 @@ const Index = () => {
       {
         url: URLS.technoAddAds,
         attributes: formData,
+        config: {
+          headers: { token: `${get(session, "user.token")}` },
+        },
       },
       {
         onSuccess: () => {

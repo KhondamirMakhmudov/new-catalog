@@ -11,8 +11,10 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
+  const { data: session } = useSession();
   const [search, setSearch] = useState("");
   const [work, setWork] = useState({});
   const [workValue, setWorkValue] = useState(null);
@@ -84,6 +86,9 @@ const Index = () => {
       {
         url: URLS.workAddAds,
         attributes: formData,
+        config: {
+          headers: { token: `${get(session, "user.token")}` },
+        },
       },
       {
         onSuccess: () => {

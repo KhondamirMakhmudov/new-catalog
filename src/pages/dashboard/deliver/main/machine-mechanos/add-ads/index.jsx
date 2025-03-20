@@ -10,7 +10,9 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import { get, isEmpty, find, head, debounce } from "lodash";
 import { toast } from "react-hot-toast";
 import Select from "react-select";
+import { useSession } from "next-auth/react";
 const Index = () => {
+  const { data: session } = useSession();
   const router = useRouter();
   const [search, setSearch] = useState("");
   const [machineMechano, setMachineMechano] = useState({});
@@ -80,6 +82,9 @@ const Index = () => {
       {
         url: URLS.machineMechanoAddAds,
         attributes: formData,
+        config: {
+          headers: { token: `${get(session, "user.token")}` },
+        },
       },
       {
         onSuccess: () => {
