@@ -12,11 +12,11 @@ import DeliverIcon from "@/components/icons/deliver";
 const Login = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session, "session");
+  console.log(session, "sessionadasdasdasdasd");
 
   return (
     <div className="hidden md:block">
-      {!get(session, "accessToken") ? (
+      {!get(session, "user.token") ? (
         <Link href={"/select-position"}>
           <button
             className={
@@ -38,7 +38,7 @@ const Login = () => {
             <p>Shaxsiy kabinet</p>
           </button>
         </div>
-      ) : (
+      ) : get(session, "user.role") === "customer" ? (
         <button
           onClick={() => router.push("/dashboard/customer/main")}
           className={
@@ -48,6 +48,16 @@ const Login = () => {
           <DeliverIcon color="#0256BA" />
           <p>Shaxsiy kabinet</p>
         </button>
+      ) : (
+        <Link href={"/select-position"}>
+          <button
+            className={
+              "text-[#0256BA] font-semibold py-[10px] px-[20px] bg-[#EBF2FA] rounded-[8px] text-sm active:scale-110 scale-100 transition-all duration-200"
+            }
+          >
+            Kirish
+          </button>
+        </Link>
       )}
     </div>
   );

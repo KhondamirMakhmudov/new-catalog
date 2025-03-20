@@ -154,10 +154,7 @@ const Index = () => {
               </motion.button>
             </div>
             {selectPosition === "client" ? (
-              <Link
-                href={`${get(oneIdLogin, "data.auth_url")}`}
-                className="w-full  "
-              >
+              <Link href={"/auth/login"} className="w-full  ">
                 <motion.button
                   initial={{ opacity: 0, translateY: "30px" }}
                   animate={{ opacity: 1, translateY: "0px" }}

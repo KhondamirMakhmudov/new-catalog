@@ -9,10 +9,11 @@ import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
 import { useSession } from "next-auth/react";
+import { useSettingsStore } from "@/store";
 const Index = () => {
   const { data: session } = useSession();
-  console.log("session", session?.user?.token);
-
+  console.log("session", session);
+  const token = useSettingsStore((state) => get(state, "token", null));
   const {
     data: ordersOfCostumer,
     isLoading,
@@ -20,10 +21,10 @@ const Index = () => {
   } = useGetQuery({
     key: KEYS.orderListCustomer,
     url: URLS.orderListCustomer,
-    headers: {
-      Authorization: `Bearer ${session?.user?.token}`,
-    },
-    enabled: !!session?.user?.token,
+    headers: { token: token ?? `${get(session, "user.token")}` },
+    enabled: !!(
+      get(session, "user.token") && get(session, "user.role") === "customer"
+    ),
   });
 
   if (isLoading || isFetching) {

@@ -14,11 +14,19 @@ import { useSession } from "next-auth/react";
 
 const Index = () => {
   const { data: session } = useSession();
+  const token = useSettingsStore((state) => get(state, "token", null));
   const {
     data: listOrders,
     isLoading,
     isFetching,
-  } = useGetQuery({ key: KEYS.orderListCompany, url: URLS.orderListCompany });
+  } = useGetQuery({
+    key: KEYS.orderListCompany,
+    url: URLS.orderListCompany,
+    headers: { token: token ?? `${get(session, "user.token")}` },
+    enabled: !!(
+      get(session, "user.token") && get(session, "user.role") === "company"
+    ),
+  });
 
   const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
     listKeyId: "company-info-one",
