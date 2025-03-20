@@ -95,6 +95,8 @@ const Index = () => {
     );
   };
 
+  console.log(data, "data");
+
   // Delete region from array
   const handleRegionDelete = (regionId) => {
     setSelectedElements((prevRegions) => {
