@@ -12,7 +12,6 @@ import DeliverIcon from "@/components/icons/deliver";
 const Login = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(session, "sessionadasdasdasdasd");
 
   return (
     <div className="hidden md:block">

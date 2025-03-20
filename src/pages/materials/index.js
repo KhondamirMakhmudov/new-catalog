@@ -154,17 +154,33 @@ const Index = () => {
   });
 
   const handleCheckboxChange = (item) => {
-    const isSelected = !selectedItems[item.id];
-    const newSelectedState = { ...selectedItems, [item.id]: isSelected };
-    setSelectedItems(newSelectedState);
+    setSelectedItems((prevSelected) => {
+      const isSelected = !prevSelected[item.id];
+      return { ...prevSelected, [item.id]: isSelected };
+    });
 
     getMaterial({
       url: URLS.getMaterial,
-      attributes: [item.id],
+      attributes: Object.keys(selectedItems).filter((id) => selectedItems[id]),
       onSuccess: (response) => {
         console.log("response", response);
 
-        setTableData((prevData) => [...prevData, ...response.data]);
+        try {
+          const data =
+            typeof response === "string" ? JSON.parse(response) : response;
+
+          console.log("Parsed response:", data);
+
+          // Ma'lumotlar `materials` array ichida kelgani uchun uni olish kerak
+          if (data && data.materials) {
+            setTableData((prevData) => [...prevData, ...data.materials]);
+          } else {
+            console.error("Ma'lumotlar ichida `materials` yo'q:", data);
+          }
+        } catch (error) {
+          console.error("JSON parsing error:", error);
+        }
+
         setPosted(true);
       },
       onError: (error) => {
@@ -173,7 +189,8 @@ const Index = () => {
       },
     });
   };
-  console.log("posted", posted);
+
+  console.log(tableData?.data?.materials);
 
   const handleIncrement = (product) => {
     dispatch({ type: "INCREMENT", payload: JSON.stringify(product) });
@@ -788,9 +805,466 @@ const Index = () => {
                 </div>
               ) : (
                 <div className="flex justify-center items-center h-[200px]">
-                  hello
+                  <div className="overflow-x-auto">
+                    <motion.table
+                      className="w-full border-collapse border-[#D7D9E7] min-w-[900px]"
+                      initial={{ opacity: 0, translateY: "30px" }}
+                      animate={{ opacity: 1, translateY: "0" }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <thead className="text-black text-start rounded-[10px]">
+                        <tr className="rounded-[10px]">
+                          <th
+                            className={
+                              "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                            }
+                          >
+                            №
+                          </th>
+                          <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                            Hudud
+                          </th>
+                          <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                            Korxona nomi
+                          </th>
+                          <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                            Resurs kodi
+                          </th>
+                          <th className=" text-start text-[10px] lg:w-auto w-[200px]  bg-white text-gray-900  font-bold ">
+                            Resurs nomi
+                          </th>
+                          <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                            O&apos;lchov birligi
+                          </th>
+                          <th
+                            className="text-[10px]   bg-white text-gray-900  font-bold text-center"
+                            colSpan={2}
+                          >
+                            Narxi (so&apos;m)
+                          </th>
+
+                          <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
+                            Oxirgi o&apos;zgarish
+                          </th>
+                        </tr>
+                        <tr className="rounded-tr-[10px]">
+                          <th colSpan={6}></th>
+                          <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold ">
+                            QQSsiz
+                          </th>
+                          <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold">
+                            QQS
+                          </th>
+                          <th className="rounded-tr-[10px]"></th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {get(tableData, "data.materials", [])?.map(
+                          (item, index) => (
+                            <tr
+                              key={get(item, "id")}
+                              className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                            >
+                              <td className=" font-medium text-xs py-[10px]  text-center">
+                                {(page - 1) * 20 + index + 1}
+                              </td>
+                              <td className=" font-medium text-xs py-[10px]  text-start">
+                                {get(item, "material_region_name")}
+                              </td>
+
+                              <td className=" font-medium text-xs text-[#0256BA] py-[10px]  text-start max-w-[200px]">
+                                <Link
+                                  href={`/company/${get(item, "company_stir")}`}
+                                  className="underline-0 hover:underline transition-all duration-300"
+                                >
+                                  {get(item, "company_name")}
+                                </Link>
+                              </td>
+
+                              <td className=" font-medium text-xs text-[#0256BA] py-[10px]">
+                                <Link
+                                  href={`/materials/${get(
+                                    item,
+                                    "material_name_id"
+                                  )}`}
+                                  className="underline-0 hover:underline transition-all duration-300"
+                                >
+                                  {get(item, "material_name_id")}
+                                </Link>
+                              </td>
+                              <td className=" font-medium text-xs py-[10px]  lg:w-auto w-[300px]">
+                                {get(item, "material_name")}
+                              </td>
+                              <td className=" font-medium text-xs py-[10px] text-center">
+                                <div className="flex space-x-[4px]">
+                                  <Image
+                                    src={"/icons/measure-basket.svg"}
+                                    alt="measure-basket"
+                                    width={16}
+                                    height={16}
+                                  />
+                                  <p>{get(item, "material_measure")}</p>
+                                </div>
+                              </td>
+                              <td className=" font-medium text-[10px] py-[10px] ">
+                                <NumericFormat
+                                  thousandSeparator={" "}
+                                  displayType="text"
+                                  className="bg-transparent max-w-[100px]"
+                                  value={
+                                    Number.isInteger(
+                                      get(item, "material_price")
+                                    )
+                                      ? get(item, "material_price") *
+                                        get(
+                                          currency,
+                                          `data[${get(
+                                            item,
+                                            "material_price_currency"
+                                          )}]`,
+                                          1
+                                        )
+                                      : parseFloat(
+                                          get(item, "material_price")
+                                        ).toFixed(2) *
+                                        get(
+                                          currency,
+                                          `data[${get(
+                                            item,
+                                            "material_price_currency"
+                                          )}]`,
+                                          1
+                                        )
+                                  }
+                                />
+                              </td>
+                              <td className=" font-medium text-[10px] py-[10px] ">
+                                <NumericFormat
+                                  thousandSeparator={" "}
+                                  displayType="text"
+                                  className="bg-transparent max-w-[100px]"
+                                  value={
+                                    Number.isInteger(
+                                      get(item, "material_price")
+                                    )
+                                      ? (
+                                          get(item, "material_price") *
+                                          get(
+                                            currency,
+                                            `data[${get(
+                                              item,
+                                              "material_price_currency"
+                                            )}]`,
+                                            1
+                                          ) *
+                                          1.12
+                                        ).toFixed(2)
+                                      : (
+                                          parseFloat(
+                                            get(item, "material_price")
+                                          ).toFixed(2) *
+                                          get(
+                                            currency,
+                                            `data[${get(
+                                              item,
+                                              "material_price_currency"
+                                            )}]`,
+                                            1
+                                          ) *
+                                          1.12
+                                        ).toFixed(2)
+                                  }
+                                />
+                              </td>
+                              <td className=" font-medium text-xs py-[10px] w-[120px] lg:w-[120px]">
+                                <div className="flex space-x-[4px]">
+                                  <Image
+                                    src={"/icons/clock.svg"}
+                                    alt="clock"
+                                    width={16}
+                                    height={16}
+                                  />
+                                  <p>
+                                    {" "}
+                                    {dayjs(
+                                      get(item, "material_updated_date")
+                                    ).format("DD.MM.YYYY")}
+                                  </p>
+                                  <p>
+                                    {dayjs(
+                                      get(item, "material_updated_date")
+                                    ).format("HH:mm")}
+                                  </p>
+                                </div>
+                              </td>
+                              <td className=" lg:w-auto min-w-[100px] ">
+                                <div className="flex items-center gap-x-[4px]">
+                                  <button
+                                    className={
+                                      "p-[5px] bg-[#DAE8F7] rounded-[8px] b active:scale-110 scale-100 transition-all duration-200"
+                                    }
+                                  >
+                                    <Image
+                                      src={"/icons/heart.svg"}
+                                      alt={"heart"}
+                                      width={18}
+                                      height={18}
+                                      className="w-[18px] h-[18px]"
+                                    />
+                                  </button>
+
+                                  <button
+                                    onClick={() => handleIncrement(item)}
+                                    className={
+                                      "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                    }
+                                  >
+                                    <Image
+                                      src={"/icons/basket.svg"}
+                                      alt={"heart"}
+                                      width={18}
+                                      height={18}
+                                    />
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </motion.table>
+                  </div>
                 </div>
               )}
+              <div className="flex justify-center items-center h-[200px]">
+                <div className="overflow-x-auto">
+                  <motion.table
+                    className="w-full border-collapse border-[#D7D9E7] min-w-[900px]"
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0" }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <thead className="text-black text-start rounded-[10px]">
+                      <tr className="rounded-[10px]">
+                        <th
+                          className={
+                            "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                          }
+                        >
+                          №
+                        </th>
+                        <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                          Hudud
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Korxona nomi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs kodi
+                        </th>
+                        <th className=" text-start text-[10px] lg:w-auto w-[200px]  bg-white text-gray-900  font-bold ">
+                          Resurs nomi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          O&apos;lchov birligi
+                        </th>
+                        <th
+                          className="text-[10px]   bg-white text-gray-900  font-bold text-center"
+                          colSpan={2}
+                        >
+                          Narxi (so&apos;m)
+                        </th>
+
+                        <th className=" text-start text-[10px] rounded-tr-[10px]  bg-white text-gray-900  font-bold ">
+                          Oxirgi o&apos;zgarish
+                        </th>
+                      </tr>
+                      <tr className="rounded-tr-[10px]">
+                        <th colSpan={6}></th>
+                        <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold ">
+                          QQSsiz
+                        </th>
+                        <th className="text-center border-r border-l text-[10px] bg-white text-gray-900 font-bold">
+                          QQS
+                        </th>
+                        <th className="rounded-tr-[10px]"></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {get(tableData, "data.materials", [])?.map(
+                        (item, index) => (
+                          <tr
+                            key={get(item, "id")}
+                            className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                          >
+                            <td className=" font-medium text-xs py-[10px]  text-center">
+                              {(page - 1) * 20 + index + 1}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px]  text-start">
+                              {get(item, "material_region_name")}
+                            </td>
+
+                            <td className=" font-medium text-xs text-[#0256BA] py-[10px]  text-start max-w-[200px]">
+                              <Link
+                                href={`/company/${get(item, "company_stir")}`}
+                                className="underline-0 hover:underline transition-all duration-300"
+                              >
+                                {get(item, "company_name")}
+                              </Link>
+                            </td>
+
+                            <td className=" font-medium text-xs text-[#0256BA] py-[10px]">
+                              <Link
+                                href={`/materials/${get(
+                                  item,
+                                  "material_name_id"
+                                )}`}
+                                className="underline-0 hover:underline transition-all duration-300"
+                              >
+                                {get(item, "material_name_id")}
+                              </Link>
+                            </td>
+                            <td className=" font-medium text-xs py-[10px]  lg:w-auto w-[300px]">
+                              {get(item, "material_name")}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] text-center">
+                              <div className="flex space-x-[4px]">
+                                <Image
+                                  src={"/icons/measure-basket.svg"}
+                                  alt="measure-basket"
+                                  width={16}
+                                  height={16}
+                                />
+                                <p>{get(item, "material_measure")}</p>
+                              </div>
+                            </td>
+                            <td className=" font-medium text-[10px] py-[10px] ">
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                displayType="text"
+                                className="bg-transparent max-w-[100px]"
+                                value={
+                                  Number.isInteger(get(item, "material_price"))
+                                    ? get(item, "material_price") *
+                                      get(
+                                        currency,
+                                        `data[${get(
+                                          item,
+                                          "material_price_currency"
+                                        )}]`,
+                                        1
+                                      )
+                                    : parseFloat(
+                                        get(item, "material_price")
+                                      ).toFixed(2) *
+                                      get(
+                                        currency,
+                                        `data[${get(
+                                          item,
+                                          "material_price_currency"
+                                        )}]`,
+                                        1
+                                      )
+                                }
+                              />
+                            </td>
+                            <td className=" font-medium text-[10px] py-[10px] ">
+                              <NumericFormat
+                                thousandSeparator={" "}
+                                displayType="text"
+                                className="bg-transparent max-w-[100px]"
+                                value={
+                                  Number.isInteger(get(item, "material_price"))
+                                    ? (
+                                        get(item, "material_price") *
+                                        get(
+                                          currency,
+                                          `data[${get(
+                                            item,
+                                            "material_price_currency"
+                                          )}]`,
+                                          1
+                                        ) *
+                                        1.12
+                                      ).toFixed(2)
+                                    : (
+                                        parseFloat(
+                                          get(item, "material_price")
+                                        ).toFixed(2) *
+                                        get(
+                                          currency,
+                                          `data[${get(
+                                            item,
+                                            "material_price_currency"
+                                          )}]`,
+                                          1
+                                        ) *
+                                        1.12
+                                      ).toFixed(2)
+                                }
+                              />
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] w-[120px] lg:w-[120px]">
+                              <div className="flex space-x-[4px]">
+                                <Image
+                                  src={"/icons/clock.svg"}
+                                  alt="clock"
+                                  width={16}
+                                  height={16}
+                                />
+                                <p>
+                                  {" "}
+                                  {dayjs(
+                                    get(item, "material_updated_date")
+                                  ).format("DD.MM.YYYY")}
+                                </p>
+                                <p>
+                                  {dayjs(
+                                    get(item, "material_updated_date")
+                                  ).format("HH:mm")}
+                                </p>
+                              </div>
+                            </td>
+                            <td className=" lg:w-auto min-w-[100px] ">
+                              <div className="flex items-center gap-x-[4px]">
+                                <button
+                                  className={
+                                    "p-[5px] bg-[#DAE8F7] rounded-[8px] b active:scale-110 scale-100 transition-all duration-200"
+                                  }
+                                >
+                                  <Image
+                                    src={"/icons/heart.svg"}
+                                    alt={"heart"}
+                                    width={18}
+                                    height={18}
+                                    className="w-[18px] h-[18px]"
+                                  />
+                                </button>
+
+                                <button
+                                  onClick={() => handleIncrement(item)}
+                                  className={
+                                    "p-[5px] bg-[#DAE8F7] rounded-[8px] active:scale-110 scale-100 transition-all duration-200"
+                                  }
+                                >
+                                  <Image
+                                    src={"/icons/basket.svg"}
+                                    alt={"heart"}
+                                    width={18}
+                                    height={18}
+                                  />
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        )
+                      )}
+                    </tbody>
+                  </motion.table>
+                </div>
+              </div>
             </div>
           </div>
         </section>
