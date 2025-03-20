@@ -85,6 +85,9 @@ const Index = () => {
       {
         url: URLS.addAds,
         attributes: formData,
+        config: {
+          headers: { Authorization: `Bearer ${get(session, "user.token")}` },
+        },
       },
       {
         onSuccess: () => {
