@@ -200,12 +200,6 @@ const Index = () => {
                               }
                             >
                               <p>Buyurtmani bekor qildingiz</p>
-                              <Image
-                                src={"/images/error.png"}
-                                alt={"success"}
-                                width={22}
-                                height={22}
-                              />
                             </div>
                           ) : get(item, "order_status") === "canceled" ? (
                             <div
@@ -214,22 +208,10 @@ const Index = () => {
                               }
                             >
                               <p>Yetkazib beruvchi mahsulotni bekor qildi</p>
-                              <Image
-                                src={"/images/error.png"}
-                                alt={"error"}
-                                width={22}
-                                height={22}
-                              />
                             </div>
                           ) : get(item, "order_status") === "on_way" ? (
                             <div className={"text-center w-full mb-[15px]"}>
                               <p>Mahsulot yo&apos;lda</p>
-                              <Image
-                                src={"/images/on_way.png"}
-                                alt={"success"}
-                                width={22}
-                                height={22}
-                              />
                             </div>
                           ) : get(item, "order_status") ===
                             "customer_accepted" ? (
