@@ -1,19 +1,18 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { request } from "../../services/api";
+import { request } from "@/services/api";
 import { toast } from "react-hot-toast";
-import { isArray, get, forEach, isObject, values } from "lodash";
 import { useTranslation } from "react-i18next";
 
-const postRequest = (url, attributes, config = {}) =>
-  request.post(url, attributes, {
+const putRequest = (url, attributes, config = {}) =>
+  request.put(url, attributes, {
     ...config,
     headers: {
-      ...config.headers, // Qo'shimcha headers
+      ...config.headers, // Qo'shimcha headers qo'shish
     },
   });
 
-const usePostQuery = ({
+const usePutQuery = ({
   hideSuccessToast = false,
   listKeyId = null,
   hideErrorToast = false,
@@ -22,7 +21,7 @@ const usePostQuery = ({
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError, error, isFetching } = useMutation(
-    ({ url, attributes, config = {} }) => postRequest(url, attributes, config),
+    ({ url, attributes, config = {} }) => putRequest(url, attributes, config),
     {
       onSuccess: (data) => {
         if (!hideSuccessToast) {
@@ -30,28 +29,12 @@ const usePostQuery = ({
         }
 
         if (listKeyId) {
-          if (isArray(listKeyId)) {
-            forEach(listKeyId, (val) => {
-              queryClient.invalidateQueries(val);
-            });
-          } else {
-            queryClient.invalidateQueries(listKeyId);
-          }
+          queryClient.invalidateQueries(listKeyId);
         }
       },
       onError: (data) => {
-        if (isArray(get(data, "response.data"))) {
-          forEach(get(data, "response.data"), (val) => {
-            toast.error(t(get(val, "message", "ERROR")));
-          });
-        } else if (isObject(get(data, "response.data"))) {
-          forEach(values(get(data, "response.data")), (val) => {
-            toast.error(val, { position: "top-right" });
-          });
-        } else {
-          if (!hideErrorToast) {
-            toast.error(t(data?.response?.data?.message) || t("ERROR"));
-          }
+        if (!hideErrorToast) {
+          toast.error(t(data?.response?.data?.message) || t("ERROR"));
         }
       },
     }
@@ -66,4 +49,4 @@ const usePostQuery = ({
   };
 };
 
-export default usePostQuery;
+export default usePutQuery;

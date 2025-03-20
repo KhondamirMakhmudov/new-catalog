@@ -11,8 +11,10 @@ import { get, isEmpty, find, head } from "lodash";
 import usePutQuery from "@/hooks/api/usePutQuery";
 import Title from "@/components/title";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
+  const { data: session } = useSession();
   const [search, setSearch] = useState("");
   const [material, setMaterial] = useState({});
   const [materialValue, setMaterialValue] = useState(false);
@@ -92,6 +94,9 @@ const Index = () => {
       {
         url: `${URLS.updateMaterial}${id}/`,
         attributes: formData,
+        config: {
+          headers: { token: `${get(session, "user.token")}` },
+        },
       },
       {
         onSuccess: () => {
