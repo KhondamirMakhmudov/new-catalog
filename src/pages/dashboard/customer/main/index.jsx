@@ -10,8 +10,13 @@ import { get, dropRight } from "lodash";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
+import { useSession } from "next-auth/react";
+import { useSettingsStore } from "@/store";
 
 const Index = () => {
+  const { data: session } = useSession();
+
+  const token = useSettingsStore((state) => get(state, "token", null));
   const {
     data: ordersOfCostumer,
     isLoading,
@@ -19,6 +24,10 @@ const Index = () => {
   } = useGetQuery({
     key: KEYS.orderListCustomer,
     url: URLS.orderListCustomer,
+    headers: { token: token ?? `${get(session, "user.token")}` },
+    enabled: !!(
+      get(session, "user.token") && get(session, "user.role") === "customer"
+    ),
   });
 
   return (

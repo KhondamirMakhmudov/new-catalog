@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 import { useSettingsStore } from "@/store";
 const Index = () => {
   const { data: session } = useSession();
-  console.log("session", session);
+
   const token = useSettingsStore((state) => get(state, "token", null));
   const {
     data: ordersOfCostumer,

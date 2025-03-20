@@ -44,6 +44,13 @@ const Index = () => {
       code: search,
     },
   });
+
+  const { data: user } = useGetQuery({
+    key: KEYS.getCustomer,
+    url: URLS.getCustomer,
+    headers: { token: token ?? `${get(session, "user.token")}` },
+    enabled: !!(get(session, "user.token") || token),
+  });
   console.log(customerOneId);
 
   const { mutate: sendOrder, isLoading: isLoadingOrder } = usePostQuery({
@@ -119,7 +126,8 @@ const Index = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     forEach(entries(state), (item) => {
-      const customer = parseInt(get(customerOneId, "data.id"), 10);
+      const customer = parseInt(get(user, "data.id"), 10);
+      // const customer = parseInt(get(customerOneId, "data.id"), 10);
       const phone = "+998933169850";
 
       const attributes = {
