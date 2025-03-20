@@ -31,7 +31,10 @@ const Index = () => {
     key: "material-one",
     url: URLS.updateMaterial,
     id: `${id}/`,
-    enabled: !!id,
+    headers: { token: `${get(session, "user.token")}` },
+    enabled:
+      !!id &&
+      !!(get(session, "user.token") && get(session, "user.role") === "company"),
   });
 
   const { data: materials, isLoadingMaterial } = useGetQuery({
