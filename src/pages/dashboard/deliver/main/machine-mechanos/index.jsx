@@ -10,10 +10,12 @@ import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import MainSectionContent from "@/layouts/dashboard/deliver/components/main-page/content";
 import RecentAds from "@/layouts/dashboard/deliver/components/main-page/recent-ads";
 import dayjs from "dayjs";
+import { useSession } from "next-auth/react";
 
 const MyMaterials = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(24);
+  const { data: session } = useSession();
 
   const { data: machineMechano } = useGetQuery({
     key: KEYS.myMachineMechano,
@@ -22,6 +24,10 @@ const MyMaterials = () => {
       page,
       page_size: pageSize,
     },
+    headers: { token: `${get(session, "user.token")}` },
+    enabled: !!(
+      get(session, "user.token") && get(session, "user.role") === "company"
+    ),
   });
   return (
     <DeliverDashboard>
