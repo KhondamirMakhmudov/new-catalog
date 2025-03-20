@@ -110,7 +110,7 @@ const Index = () => {
                       >
                         {showPassword ? (
                           <Image
-                            src={"/icons/eye.svg"}
+                            src={"/icons/eyes.svg"}
                             alt={"edit"}
                             width={24}
                             height={24}
