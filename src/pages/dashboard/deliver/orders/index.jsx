@@ -51,22 +51,24 @@ const Index = () => {
 
     try {
       const response = await fetch(`${URLS.sendOrderStatus}${selectedId}/`, {
-        method: "POST",
+        method: "POST", // ✅ API faqat POST talab qilgan
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenValue}`,
+          Authorization: `Bearer ${tokenValue}`, // ✅ Token yuborilyapti
         },
-        body: JSON.stringify({ order_status: selectStatus }),
+        body: JSON.stringify({
+          order_status: selectStatus, // ✅ API talab qilgan parametr
+        }),
       });
 
       if (!response.ok) {
-        throw new Error("Order statusni yuborishda xatolik yuz berdi");
+        throw new Error(`Xatolik: ${response.status}`);
       }
 
       const data = await response.json();
       console.log("Order status muvaffaqiyatli jo‘natildi:", data);
     } catch (error) {
-      console.error(error);
+      console.error("Xatolik yuz berdi:", error);
     }
   };
 
