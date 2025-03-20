@@ -38,7 +38,7 @@ const Index = () => {
     <>
       <Header />
       <NavigationButtom />
-      <main className="container">
+      <main className="container mb-[100px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
             onClick={() => router.back()}
@@ -153,7 +153,7 @@ const Index = () => {
                 </p>
               </motion.button>
             </div>
-            <div className="pb-[30px]">
+            <div className="">
               {selectPosition === "client" ? (
                 <Link href={"/auth/login"} className="w-full  ">
                   <motion.button
