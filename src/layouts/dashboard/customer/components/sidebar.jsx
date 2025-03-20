@@ -21,7 +21,7 @@ const SidebarCustomer = () => {
   };
 
   return (
-    <div className="col-span-3 border border-r border-t border-l-0 border-b-0  py-[20px] font-gilroy flex flex-col space-y-[388px] self-start">
+    <div className="col-span-12 lg:col-span-3 border border-r border-t border-l-0 border-b-0  py-[20px] font-gilroy flex flex-col space-y-[388px] self-start">
       <ul className="">
         <li onClick={() => handleSelectBar("main")} className="cursor-pointer">
           <Link href={"/dashboard/customer/main"}>

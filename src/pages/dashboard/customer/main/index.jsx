@@ -32,11 +32,11 @@ const Index = () => {
 
   return (
     <CustomerDashboard>
-      <div className="col-span-9 p-[20px] border border-t border-l-0 border-b-0 border-r-0">
-        <div className="grid grid-cols-12 gap-x-[16px]">
+      <div className="col-span-12 lg:col-span-9 p-[20px] border border-t border-l-0 border-b-0 border-r-0">
+        <div className="grid grid-cols-12 gap-[16px]">
           <div
             className={
-              "col-span-6 p-[32px] bg-[#EAF1FF] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
+              "col-span-12 lg:col-span-6 p-[32px] bg-[#EAF1FF] rounded-[16px] min-h-[480px] h-full  overflow-hidden section z-10"
             }
           >
             {/* Material va jihozlar */}
@@ -76,7 +76,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className={"col-span-6 relative z-10"}>
+          <div className={"col-span-12 lg:col-span-6 relative z-10"}>
             {/* machine-mechano */}
             <div
               className={
@@ -118,16 +118,18 @@ const Index = () => {
                   alt={"machine-mechano"}
                   width={174}
                   height={217}
-                  className={"ml-[16px]"}
+                  className={"ml-[16px] xl:blur-0 blur-sm"}
                 />
               </div>
             </div>
 
-            <div className={"flex gap-x-[20px] mt-[20px]"}>
+            <div
+              className={"flex gap-[20px] mt-[20px]  flex-wrap lg:flex-nowrap"}
+            >
               {/* uskunalar va qurilmalar */}
               <div
                 className={
-                  " works flex-col bg-[#EDF4FC]  w-1/2 p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
+                  " works flex-col bg-[#EDF4FC] w-full  lg:w-1/2 p-[24px] rounded-[16px] cursor-pointer transition-all duration-300"
                 }
               >
                 <h1 className={"font-bold text-[20px] flex-1 text-[#21201F]"}>
@@ -146,7 +148,7 @@ const Index = () => {
               {/* Qurilish ishlari */}
               <div
                 className={
-                  "works bg-[#EDF4FC]  w-1/2 p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
+                  "works bg-[#EDF4FC]  w-full  lg:w-1/2 p-[24px] rounded-[16px] flex flex-col transition-all duration-300"
                 }
               >
                 <h1 className={"font-bold text-[20px] text-[#21201F] flex-1"}>
