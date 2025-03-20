@@ -12,9 +12,6 @@ import { useEffect } from "react";
 
 const CustomerDashboard = ({ children }) => {
   const { data: session } = useSession();
-  console.log(session);
-  console.log(get(session, "data.accessToken"), "accesstoken of data");
-  console.log(get(session, "accessToken"), "accesstoken");
 
   const token = useSettingsStore((state) => get(state, "token", null));
 
@@ -22,11 +19,6 @@ const CustomerDashboard = ({ children }) => {
     get(state, "setToken", () => {})
   );
 
-  useEffect(() => {
-    if (get(session, "accessToken")) {
-      setToken(get(session, "accessToken"));
-    }
-  }, [session, setToken]);
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
