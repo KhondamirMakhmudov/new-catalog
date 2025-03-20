@@ -40,8 +40,8 @@ const Index = () => {
       attributes: {
         order_status: `${selectStatus}`,
       },
-      headers: {
-        headers: { token: token ?? `${get(session, "user.token")}` },
+      config: {
+        headers: { token: `${get(session, "user.token")}` },
       },
     });
   };
