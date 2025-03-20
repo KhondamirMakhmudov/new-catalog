@@ -42,7 +42,8 @@ const Index = () => {
         order_status: `${selectStatus}`,
       },
       headers: {
-        Authorization: `Bearer ${get(session, "user.token")}`, // Faqat bitta token (Bearer)
+        Authorization: `Bearer ${token}`, // Birinchi token (Bearer)
+        token: `${get(session, "user.token")}`, // Ikkinchi token
       },
     });
   };
