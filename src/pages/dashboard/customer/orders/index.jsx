@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
 import { useSession } from "next-auth/react";
 import { useSettingsStore } from "@/store";
+import usePostQuery from "@/hooks/api/usePostQuery";
 const Index = () => {
   const { data: session } = useSession();
 
@@ -26,6 +27,21 @@ const Index = () => {
       get(session, "user.token") && get(session, "user.role") === "customer"
     ),
   });
+
+  const { mutate: sendOrderStatus, isLoading: isLoadingSendOrderStatus } =
+    usePostQuery({
+      listKeyId: "customer-info-one",
+    });
+
+  const handleSendOrderStatus = (id, selectStatus) => {
+    const selectedId = +id;
+    sendOrderStatus({
+      url: `${URLS.sendOrderStatus}${selectedId}/`,
+      attributes: {
+        order_status: `${selectStatus}`,
+      },
+    });
+  };
 
   if (isLoading || isFetching) {
     return (
@@ -127,7 +143,102 @@ const Index = () => {
                       </td>
                       <td className=" font-medium text-xs py-[10px] text-center ">
                         <div className="flex space-x-[4px]">
-                          {get(item, "order_status")}
+                          {get(item, "order_status") === "new_order" ? (
+                            <div className={"flex flex-col gap-y-2"}>
+                              <button
+                                onClick={() =>
+                                  handleSendOrderStatus(
+                                    get(row, "id"),
+                                    "customer_canceled"
+                                  )
+                                }
+                                className={
+                                  "bg-red-600 hover:bg-red-700 active:bg-red-500 text-white py-2 px-8 rounded-[6px]"
+                                }
+                              >
+                                Bekor qilish
+                              </button>
+                            </div>
+                          ) : get(item, "order_status") === "accepted" ? (
+                            <div>
+                              <p
+                                className={
+                                  "bg-green-600 hover:bg-green-700 text-center active:bg-green-500 text-white py-2 px-8 rounded-[6px]"
+                                }
+                              >
+                                Buyurtma qabul qilindi
+                              </p>
+                            </div>
+                          ) : get(item, "order_status") === "sent" ? (
+                            <div className={"rounded-[6px]"}>
+                              <div
+                                className={
+                                  "flex bg-yellow-600 text-white mb-[10px] justify-center py-2 px-2 rounded-[6px] items-center gap-x-2"
+                                }
+                              >
+                                <p>Mahsulot yo'lda</p>
+                              </div>
+                              <button
+                                onClick={() =>
+                                  handleSendOrderStatus(
+                                    get(row, "id"),
+                                    "customer_accepted"
+                                  )
+                                }
+                                className={
+                                  "bg-green-600 w-full text-center hover:bg-green-700 active:bg-green-500 text-white py-2 px-8 rounded-[6px]"
+                                }
+                              >
+                                Mahsulotni qabul qilish
+                              </button>
+                            </div>
+                          ) : get(item, "order_status") ===
+                            "customer_canceled" ? (
+                            <div
+                              className={
+                                "flex items-center gap-x-2  rounded-[6px]"
+                              }
+                            >
+                              <p>Buyurtmani bekor qildingiz</p>
+                              <Image
+                                src={"/images/error.png"}
+                                alt={"success"}
+                                width={22}
+                                height={22}
+                              />
+                            </div>
+                          ) : get(item, "order_status") === "canceled" ? (
+                            <div
+                              className={
+                                "flex items-center gap-x-2  rounded-[6px]"
+                              }
+                            >
+                              <p>Yetkazib beruvchi mahsulotni bekor qildi</p>
+                              <Image
+                                src={"/images/error.png"}
+                                alt={"error"}
+                                width={22}
+                                height={22}
+                              />
+                            </div>
+                          ) : get(item, "order_status") === "on_way" ? (
+                            <div className={"text-center w-full mb-[15px]"}>
+                              <p>Mahsulot yo'lda</p>
+                              <Image
+                                src={"/images/on_way.png"}
+                                alt={"success"}
+                                width={22}
+                                height={22}
+                              />
+                            </div>
+                          ) : get(item, "order_status") ===
+                            "customer_accepted" ? (
+                            <div className={"text-center w-full mb-[15px]"}>
+                              <p>Mahsulot qabul qilindi</p>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
                       </td>
                     </tr>
