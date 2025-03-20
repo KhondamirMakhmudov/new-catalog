@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import usePutQuery from "@/hooks/api/usePutQuery";
 import toast from "react-hot-toast";
 import Image from "next/image";
-
+import { useSession } from "next-auth/react";
 const MyMaterials = () => {
   const { data: session } = useSession();
   const [page, setPage] = useState(0);
