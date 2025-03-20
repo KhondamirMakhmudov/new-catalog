@@ -12,8 +12,10 @@ import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import Header from "@/components/header";
 import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 
 const Index = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
@@ -95,13 +97,33 @@ const Index = () => {
                         </span>
                       )}
                     </div>
-                    <div>
+                    <div className="relative">
                       <input
                         {...register("password", { required: true })}
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Parol"
                         className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg"
                       />
+                      <div
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute top-4 right-3 bottom-0 cursor-pointer"
+                      >
+                        {showPassword ? (
+                          <Image
+                            src={"/icons/eye.svg"}
+                            alt={"edit"}
+                            width={24}
+                            height={24}
+                          />
+                        ) : (
+                          <Image
+                            src={"/icons/eye-off.svg"}
+                            alt={"edit"}
+                            width={24}
+                            height={24}
+                          />
+                        )}
+                      </div>
 
                       {errors.password && (
                         <span className={"text-xs text-red-500"}>

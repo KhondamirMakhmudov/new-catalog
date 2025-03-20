@@ -52,6 +52,9 @@ const MyMaterials = () => {
           attributes: {
             id: _id,
           },
+          config: {
+            headers: { token: `${get(session, "user.token")}` },
+          },
         },
         {
           onSuccess: () => {

@@ -11,8 +11,10 @@ import { get, isEmpty, find, head } from "lodash";
 import usePutQuery from "@/hooks/api/usePutQuery";
 import Title from "@/components/title";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
+  const { data: session } = useSession();
   const [search, setSearch] = useState();
   const [machineMechano, setMachineMechano] = useState({});
   const [machineMechanoValue, setMachineMechanoValue] = useState(false);
@@ -28,7 +30,10 @@ const Index = () => {
     key: "mmechano-one",
     url: URLS.updateMachineMechano,
     id: `${id}/`,
-    enabled: !!id,
+    headers: { token: `${get(session, "user.token")}` },
+    enabled:
+      !!id &&
+      !!(get(session, "user.token") && get(session, "user.role") === "company"),
   });
 
   const { data: machineMechanos, isLoadingMachineMechano } = useGetQuery({
@@ -39,6 +44,7 @@ const Index = () => {
       value: search,
       page_size: 100,
     },
+
     enabled: !!search,
   });
 
@@ -115,6 +121,9 @@ const Index = () => {
         url: URLS.updateMachineMechano,
         attributes: {
           id: _id,
+        },
+        config: {
+          headers: { token: `${get(session, "user.token")}` },
         },
       });
     }
