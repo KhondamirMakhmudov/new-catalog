@@ -85,6 +85,9 @@ const Index = () => {
       {
         url: URLS.addAds,
         attributes: formData,
+        config: {
+          headers: { token: `${get(session, "user.token")}` },
+        },
       },
       {
         onSuccess: () => {

@@ -6,7 +6,12 @@ import { isArray, get, forEach, isObject, values } from "lodash";
 import { useTranslation } from "react-i18next";
 
 const postRequest = (url, attributes, config = {}) =>
-  request.post(url, attributes, config);
+  request.post(url, attributes, {
+    ...config,
+    headers: {
+      ...config.headers, // Qo'shimcha headers
+    },
+  });
 
 const usePostQuery = ({
   hideSuccessToast = false,
@@ -14,7 +19,6 @@ const usePostQuery = ({
   hideErrorToast = false,
 }) => {
   const { t } = useTranslation();
-
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError, error, isFetching } = useMutation(
@@ -61,4 +65,5 @@ const usePostQuery = ({
     isFetching,
   };
 };
+
 export default usePostQuery;
