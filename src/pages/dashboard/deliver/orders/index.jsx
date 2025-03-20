@@ -41,7 +41,7 @@ const Index = () => {
       attributes: {
         order_status: `${selectStatus}`,
       },
-      headers: { token: `${get(session, "user.token")}` },
+      headers: { Authorization: `Bearer ${get(session, "user.token")}` },
     });
   };
 
