@@ -29,20 +29,45 @@ const Index = () => {
     ),
   });
 
-  const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
-    listKeyId: "company-info-one",
-    hideSuccessToast: true,
-  });
+  // const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
+  //   listKeyId: "company-info-one",
+  //   hideSuccessToast: true,
+  // });
 
-  const handleSendOrderStatus = (id, selectStatus) => {
+  // const handleSendOrderStatus = (id, selectStatus) => {
+  //   const selectedId = +id;
+  //   sendOrderStatus({
+  //     url: `${URLS.sendOrderStatus}${selectedId}/`,
+  //     attributes: {
+  //       order_status: `${selectStatus}`,
+  //     },
+  //     headers: { token: token ?? `${get(session, "user.token")}` },
+  //   });
+  // };
+
+  const handleSendOrderStatus = async (id, selectStatus) => {
     const selectedId = +id;
-    sendOrderStatus({
-      url: `${URLS.sendOrderStatus}${selectedId}/`,
-      attributes: {
-        order_status: `${selectStatus}`,
-      },
-      headers: { token: token ?? `${get(session, "user.token")}` },
-    });
+    const tokenValue = token ?? get(session, "user.token");
+
+    try {
+      const response = await fetch(`${URLS.sendOrderStatus}${selectedId}/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenValue}`,
+        },
+        body: JSON.stringify({ order_status: selectStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Order statusni yuborishda xatolik yuz berdi");
+      }
+
+      const data = await response.json();
+      console.log("Order status muvaffaqiyatli jo‘natildi:", data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   console.log(listOrders);
