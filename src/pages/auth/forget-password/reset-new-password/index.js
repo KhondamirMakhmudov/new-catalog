@@ -90,7 +90,7 @@ const Index = () => {
               <input
                 {...register("new_password", { required: true })}
                 type="password"
-                placeholder="Elektron pochtangizga kelgan parolni kiriting"
+                placeholder="Kiriting"
                 className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"
               />
               {errors.password && (
@@ -102,7 +102,7 @@ const Index = () => {
               <input
                 {...register("new_password", { required: true })}
                 type="password"
-                placeholder="Elektron pochtangizga kelgan parolni kiriting"
+                placeholder="Kiriting"
                 className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg mb-[30px]"
               />
               {errors.password && (
