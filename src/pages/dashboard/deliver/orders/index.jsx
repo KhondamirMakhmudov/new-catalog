@@ -29,32 +29,20 @@ const Index = () => {
     ),
   });
 
-  const handleSendOrderStatus = async (id, selectStatus) => {
+  const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
+    listKeyId: "company-info-one",
+    hideSuccessToast: true,
+  });
+
+  const handleSendOrderStatus = (id, selectStatus) => {
     const selectedId = +id;
-    const token = get(session, "user.token");
-
-    try {
-      const response = await fetch(`${URLS.sendOrderStatus}${selectedId}/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ order_status: selectStatus }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data?.message || "Something went wrong");
-      }
-
-      console.log("Success:", data);
-      toast.success("Order status updated successfully");
-    } catch (error) {
-      console.error("Error:", error);
-      toast.error(error.message || "Failed to update order status");
-    }
+    sendOrderStatus({
+      url: `${URLS.sendOrderStatus}${selectedId}/`,
+      attributes: {
+        order_status: `${selectStatus}`,
+      },
+      headers: { token: `${get(session, "user.token")}` },
+    });
   };
 
   console.log(listOrders);
