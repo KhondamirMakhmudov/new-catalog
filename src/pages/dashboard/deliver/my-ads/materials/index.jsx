@@ -13,8 +13,10 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import usePutQuery from "@/hooks/api/usePutQuery";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 const MyMaterials = () => {
+  const { data: session } = useSession();
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(24);
   const [itemId, setItemId] = useState(null);
@@ -31,6 +33,10 @@ const MyMaterials = () => {
       page: page,
       page_size: pageSize,
     },
+    headers: { token: `${get(session, "user.token")}` },
+    enabled: !!(
+      get(session, "user.token") && get(session, "user.role") === "company"
+    ),
   });
 
   const deActivate = (_id) => {
