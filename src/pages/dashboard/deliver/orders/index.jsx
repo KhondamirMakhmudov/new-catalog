@@ -41,9 +41,8 @@ const Index = () => {
       attributes: {
         order_status: `${selectStatus}`,
       },
-      headers: {
-        Authorization: `Bearer ${get(session, "user.token")}`, // Birinchi token (Bearer)
-        token: `${get(session, "user.token")}`, // Ikkinchi token
+      config: {
+        headers: { token: `${get(session, "user.token")}` },
       },
     });
   };
