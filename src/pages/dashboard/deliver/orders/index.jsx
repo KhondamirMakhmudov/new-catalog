@@ -29,47 +29,20 @@ const Index = () => {
     ),
   });
 
-  // const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
-  //   listKeyId: "company-info-one",
-  //   hideSuccessToast: true,
-  // });
+  const { mutate: sendOrderStatus, isLoadingSendOrderStatus } = usePostQuery({
+    listKeyId: "company-info-one",
+    hideSuccessToast: true,
+  });
 
-  // const handleSendOrderStatus = (id, selectStatus) => {
-  //   const selectedId = +id;
-  //   sendOrderStatus({
-  //     url: `${URLS.sendOrderStatus}${selectedId}/`,
-  //     attributes: {
-  //       order_status: `${selectStatus}`,
-  //     },
-  //     headers: { token: token ?? `${get(session, "user.token")}` },
-  //   });
-  // };
-
-  const handleSendOrderStatus = async (id, selectStatus) => {
+  const handleSendOrderStatus = (id, selectStatus) => {
     const selectedId = +id;
-    const tokenValue = token ?? get(session, "user.token");
-
-    try {
-      const response = await fetch(`${URLS.sendOrderStatus}${selectedId}/`, {
-        method: "POST", // ✅ API faqat POST talab qilgan
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${tokenValue}`, // ✅ Token yuborilyapti
-        },
-        body: JSON.stringify({
-          order_status: selectStatus, // ✅ API talab qilgan parametr
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Xatolik: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log("Order status muvaffaqiyatli jo‘natildi:", data);
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
-    }
+    sendOrderStatus({
+      url: `${URLS.sendOrderStatus}${selectedId}/`,
+      attributes: {
+        order_status: `${selectStatus}`,
+      },
+      headers: { token: token ?? `${get(session, "user.token")}` },
+    });
   };
 
   console.log(listOrders);
