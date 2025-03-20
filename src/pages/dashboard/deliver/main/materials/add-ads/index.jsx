@@ -30,7 +30,10 @@ const Index = () => {
       value: search,
       page_size: 100,
     },
-    enabled: !!search,
+    headers: { token: `${get(session, "user.token")}` },
+    enabled:
+      !!search &&
+      !!(get(session, "user.token") && get(session, "user.role") === "company"),
   });
 
   const { mutate: addAds, isLoading } = usePostQuery({
