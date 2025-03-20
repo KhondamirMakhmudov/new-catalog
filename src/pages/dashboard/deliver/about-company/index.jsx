@@ -15,7 +15,7 @@ const Index = () => {
           Oqilona yuboring, sarflang va tejang
         </p>
         <form className="grid grid-cols-12 gap-[16px] mt-[16px]">
-          <div className="col-span-4">
+          <div className="col-span-12 lg:col-span-4">
             <div className="flex gap-x-[10px] items-center">
               <div className="bg-white rounded-[12px] p-[27px] inline-block">
                 <Image
@@ -35,7 +35,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input
               type="text"
@@ -44,7 +44,7 @@ const Index = () => {
             />
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <label className="text-[#718096]">Korxona nomi</label>
             <input
               type="text"

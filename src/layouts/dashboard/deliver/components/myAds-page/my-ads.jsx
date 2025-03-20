@@ -11,7 +11,7 @@ const MyAdsAll = ({ children }) => {
   };
   return (
     <div>
-      <ul className="flex items-center gap-x-[12px] mt-[20px]">
+      <ul className="flex lg:flex-nowrap flex-wrap items-center gap-[12px] mt-[20px]">
         <li
           onClick={() => {
             handleSelectDepartment("all");
