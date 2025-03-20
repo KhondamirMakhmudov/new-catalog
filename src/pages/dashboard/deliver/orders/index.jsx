@@ -23,7 +23,7 @@ const Index = () => {
   } = useGetQuery({
     key: KEYS.orderListCompany,
     url: URLS.orderListCompany,
-    headers: { token: token ?? `${get(session, "user.token")}` },
+    headers: { token: `${get(session, "user.token")}` },
     enabled: !!(
       get(session, "user.token") && get(session, "user.role") === "company"
     ),
@@ -41,7 +41,7 @@ const Index = () => {
       attributes: {
         order_status: `${selectStatus}`,
       },
-      headers: { token: token ?? `${get(session, "user.token")}` },
+      headers: { token: `${get(session, "user.token")}` },
     });
   };
 

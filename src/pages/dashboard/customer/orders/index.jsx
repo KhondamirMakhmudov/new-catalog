@@ -92,7 +92,7 @@ const Index = () => {
                   <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
                     Miqdori
                   </th>
-                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold rounded-tr-[10px]">
+                  <th className=" text-[10px]  text-center  bg-white text-gray-900  font-bold rounded-tr-[10px]">
                     Buyurtmaning holati
                   </th>
                 </tr>
