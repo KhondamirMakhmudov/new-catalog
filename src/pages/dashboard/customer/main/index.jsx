@@ -218,7 +218,7 @@ const Index = () => {
                 </thead>
 
                 <tbody>
-                  {dropRight(get(ordersOfCostumer, "data.results", []), 6).map(
+                  {get(ordersOfCostumer, "data.results", []).map(
                     (item, index) => (
                       <tr
                         key={index}
