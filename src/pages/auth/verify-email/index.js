@@ -7,9 +7,11 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import usePostQuery from "@/hooks/api/usePostQuery";
+import { useState } from "react";
 
 const Index = () => {
   const router = useRouter();
+  const [code, setCode] = useState("");
   const { email } = router.query;
   console.log(router);
 
@@ -23,18 +25,20 @@ const Index = () => {
     hideSuccessToast: true,
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     confirmCodeFromEmail(
       {
-        url: URLS.confirmCode,
-        attributes: { ...data },
+        url: URLS.verifyEmail,
+        attributes: {
+          email: email,
+          verification_code: code,
+        },
       },
       {
         onSuccess: () => {
           toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
           router.push({
-            pathname: "/auth/forget-password/reset-new-password",
-            query: { reset_code: data.reset_code },
+            pathname: "/auth/login/",
           });
         },
       }
@@ -79,7 +83,8 @@ const Index = () => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
-                {...register("reset_code", { required: true })}
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
                 type="text"
                 placeholder="Elektron pochtangizga kelgan parolni kiriting"
                 className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] border border-[#C8CED5] rounded-lg my-[30px]"

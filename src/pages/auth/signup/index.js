@@ -34,7 +34,7 @@ const Index = () => {
             position: "top-right",
           });
           router.push({
-            pathname: "/auth/login",
+            pathname: "/auth/verify-email",
             query: { email: data.email },
           });
         },
