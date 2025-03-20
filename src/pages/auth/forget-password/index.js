@@ -52,7 +52,7 @@ const Index = () => {
           </Link>
           <RightIcon color="#BCBFC2" />
           <Link
-            href={"/login"}
+            href={"/auth/login"}
             className="text-[#262D33] text-sm font-semibold"
           >
             Buyurtmachi

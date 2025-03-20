@@ -73,8 +73,8 @@ const Index = () => {
         </section>
         <section>
           <div className="grid grid-cols-12 gap-x-[48px] ">
-            <div className="col-span-6">
-              <div className="max-w-[427px] w-full flex flex-col justify-center items-center mt-[72px]">
+            <div className="lg:col-span-6 col-span-12">
+              <div className="lg:max-w-[427px] w-full flex flex-col justify-center items-center mt-[72px]">
                 <h1 className="text-[32px] font-bold ">Kirish</h1>
                 <p className="font-normal text-[#718096]">
                   Oqilona yuboring, sarflang va tejang
@@ -165,7 +165,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="col-span-6 ">
+            <div className="col-span-6 hidden lg:block">
               <div
                 className="bg-[#0256BA] rounded-[20px] min-h-[823px] bg-no-repeat bg-center px-[31px] relative"
                 style={{ backgroundImage: `url(/images/map_uzb.png)` }}
