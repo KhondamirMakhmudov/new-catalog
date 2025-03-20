@@ -148,7 +148,7 @@ const Index = () => {
                               <button
                                 onClick={() =>
                                   handleSendOrderStatus(
-                                    get(row, "id"),
+                                    get(item, "id"),
                                     "customer_canceled"
                                   )
                                 }
@@ -181,7 +181,7 @@ const Index = () => {
                               <button
                                 onClick={() =>
                                   handleSendOrderStatus(
-                                    get(row, "id"),
+                                    get(item, "id"),
                                     "customer_accepted"
                                   )
                                 }
