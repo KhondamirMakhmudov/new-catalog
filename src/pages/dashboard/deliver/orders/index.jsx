@@ -11,6 +11,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { useSession } from "next-auth/react";
+import { useSettingsStore } from "@/store";
 
 const Index = () => {
   const { data: session } = useSession();
