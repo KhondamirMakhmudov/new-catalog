@@ -59,7 +59,7 @@ const Index = () => {
             Kirish
           </Link>
         </section>
-        <section className="font-gilroy max-w-[456px] mx-auto lg:mt-[130px] mt-[30px]">
+        <section className="font-gilroy max-w-[456px] mx-auto lg:mt-[130px] mt-[30px] ">
           <div className="  flex-col ">
             <div className="text-center">
               <motion.h1
@@ -153,31 +153,33 @@ const Index = () => {
                 </p>
               </motion.button>
             </div>
-            {selectPosition === "client" ? (
-              <Link href={"/auth/login"} className="w-full  ">
-                <motion.button
-                  initial={{ opacity: 0, translateY: "30px" }}
-                  animate={{ opacity: 1, translateY: "0px" }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]"
-                >
-                  Keyingi
-                </motion.button>
-              </Link>
-            ) : selectPosition === "deliver" ? (
-              <Link href={"/auth/e-imzo"} className="w-full mt-[30px] ">
-                <motion.button
-                  initial={{ opacity: 0, translateY: "30px" }}
-                  animate={{ opacity: 1, translateY: "0px" }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]"
-                >
-                  Keyingi
-                </motion.button>
-              </Link>
-            ) : (
-              ""
-            )}
+            <div className="pb-[30px]">
+              {selectPosition === "client" ? (
+                <Link href={"/auth/login"} className="w-full  ">
+                  <motion.button
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0px" }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]"
+                  >
+                    Keyingi
+                  </motion.button>
+                </Link>
+              ) : selectPosition === "deliver" ? (
+                <Link href={"/auth/e-imzo"} className="w-full mt-[30px] ">
+                  <motion.button
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0px" }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-[#0256BA] rounded-[12px] w-full text-white font-semibold py-[15px]"
+                  >
+                    Keyingi
+                  </motion.button>
+                </Link>
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </section>
       </main>
