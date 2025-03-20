@@ -176,7 +176,7 @@ const Index = () => {
                                   "flex bg-yellow-600 text-white mb-[10px] justify-center py-2 px-2 rounded-[6px] items-center gap-x-2"
                                 }
                               >
-                                <p>Mahsulot yo'lda</p>
+                                <p>Mahsulot yo&apos;lda</p>
                               </div>
                               <button
                                 onClick={() =>
@@ -223,7 +223,7 @@ const Index = () => {
                             </div>
                           ) : get(item, "order_status") === "on_way" ? (
                             <div className={"text-center w-full mb-[15px]"}>
-                              <p>Mahsulot yo'lda</p>
+                              <p>Mahsulot yo&apos;lda</p>
                               <Image
                                 src={"/images/on_way.png"}
                                 alt={"success"}
