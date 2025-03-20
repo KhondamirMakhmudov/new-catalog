@@ -4,14 +4,24 @@ import { request } from "@/services/api";
 import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
-const putRequest = (url, attributes) => request.put(url, attributes);
+const putRequest = (url, attributes, config = {}) =>
+  request.put(url, attributes, {
+    ...config,
+    headers: {
+      ...config.headers, // Qo'shimcha headers qo'shish
+    },
+  });
 
-const usePutQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
+const usePutQuery = ({
+  hideSuccessToast = false,
+  listKeyId = null,
+  hideErrorToast = false,
+}) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError, error, isFetching } = useMutation(
-    ({ url, attributes }) => putRequest(url, attributes),
+    ({ url, attributes, config = {} }) => putRequest(url, attributes, config),
     {
       onSuccess: (data) => {
         if (!hideSuccessToast) {
@@ -23,7 +33,9 @@ const usePutQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
         }
       },
       onError: (data) => {
-        toast.error(t(data?.response?.data?.message) || t("ERROR"));
+        if (!hideErrorToast) {
+          toast.error(t(data?.response?.data?.message) || t("ERROR"));
+        }
       },
     }
   );
@@ -36,4 +48,5 @@ const usePutQuery = ({ hideSuccessToast = false, listKeyId = null }) => {
     isFetching,
   };
 };
+
 export default usePutQuery;
