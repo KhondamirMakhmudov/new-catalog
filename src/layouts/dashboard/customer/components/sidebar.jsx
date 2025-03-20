@@ -1,12 +1,7 @@
 import { useState } from "react";
-import DeliverIcon from "@/components/icons/deliver";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import MyAdsIcon from "@/components/icons/my-ads";
 import { useSession } from "next-auth/react";
-import CompanyIcon from "@/components/icons/about-company";
-import DeliverOrderIcon from "@/components/icons/deliver-order";
-import Image from "next/image";
 import LogOut from "@/components/buttons/logout";
 import MainCustomerIcon from "@/components/icons/main-customer";
 import CustomerOrderIcon from "@/components/icons/customer-order";

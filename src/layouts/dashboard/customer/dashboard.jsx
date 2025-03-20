@@ -11,14 +11,6 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
 const CustomerDashboard = ({ children }) => {
-  const { data: session } = useSession();
-
-  const token = useSettingsStore((state) => get(state, "token", null));
-
-  const setToken = useSettingsStore((state) =>
-    get(state, "setToken", () => {})
-  );
-
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
