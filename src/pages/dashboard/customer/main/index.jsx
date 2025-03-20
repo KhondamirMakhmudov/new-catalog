@@ -211,9 +211,9 @@ const Index = () => {
                     <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
                       Miqdori
                     </th>
-                    <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold rounded-tr-[10px]">
+                    {/* <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold rounded-tr-[10px]">
                       Buyurtmaning holati
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
 
@@ -267,11 +267,11 @@ const Index = () => {
                             {get(item, "quantity")}
                           </div>
                         </td>
-                        <td className=" font-medium text-xs py-[10px] text-center ">
+                        {/* <td className=" font-medium text-xs py-[10px] text-center ">
                           <div className="flex space-x-[4px]">
                             {get(item, "order_status")}
                           </div>
-                        </td>
+                        </td> */}
                       </tr>
                     )
                   )}

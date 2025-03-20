@@ -23,7 +23,7 @@ const Index = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get("code");
-  console.log(search);
+
   const { state, dispatch } = useCounter();
   const { data: session } = useSession();
   const token = useSettingsStore((state) => get(state, "token", null));
@@ -51,7 +51,6 @@ const Index = () => {
     headers: { token: token ?? `${get(session, "user.token")}` },
     enabled: !!(get(session, "user.token") || token),
   });
-  console.log(customerOneId);
 
   const { mutate: sendOrder, isLoading: isLoadingOrder } = usePostQuery({
     listKeyId: "order-one",
@@ -68,6 +67,8 @@ const Index = () => {
       state.count = 0;
     }
   };
+
+  console.log(state);
 
   if (Object.keys(state).length === 0) {
     return (
@@ -524,7 +525,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="col-span-4 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] p-[20px]">
+              {/* <div className="col-span-4 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] p-[20px]">
                 <h1 className="font-bold text-[24px] mb-[20px]">
                   Buyurtma tafsilotlari
                 </h1>
@@ -556,6 +557,15 @@ const Index = () => {
                   <p> so&apos;m</p>
                 </div>
 
+                <button
+                  onClick={onSubmit}
+                  className="py-[15px] bg-[#0256BA] rounded-[12px] w-full text-white mt-[20px]"
+                >
+                  Buyurtma berish
+                </button>
+              </div> */}
+
+              <div className="col-span-4 font-gilroy">
                 <button
                   onClick={onSubmit}
                   className="py-[15px] bg-[#0256BA] rounded-[12px] w-full text-white mt-[20px]"
