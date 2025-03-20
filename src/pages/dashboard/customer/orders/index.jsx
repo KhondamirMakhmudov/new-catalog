@@ -41,7 +41,7 @@ const Index = () => {
         order_status: `${selectStatus}`,
       },
       headers: {
-        token: `${get(session, "user.token")}`, // Ikkinchi token
+        headers: { token: token ?? `${get(session, "user.token")}` },
       },
     });
   };
