@@ -124,11 +124,9 @@ const Index = () => {
             />
           </div>
 
-          <Link href={"/dashboard/deliver/about-company/update"}>
-            <button className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white">
-              Tahrirlash
-            </button>
-          </Link>
+          <button className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white">
+            Tahrirlash
+          </button>
         </form>
       </MainContent>
     </DeliverDashboard>
