@@ -125,8 +125,11 @@ const Index = () => {
             />
           </div>
 
-          <Link href={"/dashboard/deliver/about-company/update"}>
-            <button className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white">
+          <Link
+            href={"/dashboard/deliver/about-company/update"}
+            className="col-span-12"
+          >
+            <button className="w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white">
               Tahrirlash
             </button>
           </Link>
