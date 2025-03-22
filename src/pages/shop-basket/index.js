@@ -126,6 +126,14 @@ const Index = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (!get(user, "data.id")) {
+      toast.error(
+        "Siz ro'yxatdan o'tmagansiz. Ro'yxatdan o'tib, keyin mahsulot buyurtma qiling!",
+        { position: "top-center" }
+      );
+      return;
+    }
     forEach(entries(state), (item) => {
       const customer = parseInt(get(user, "data.id"), 10);
       // const customer = parseInt(get(customerOneId, "data.id"), 10);
