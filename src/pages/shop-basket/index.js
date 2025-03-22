@@ -178,6 +178,12 @@ const Index = () => {
               position: "top-center",
             });
           },
+          onError: (error) => {
+            toast.error(
+              error?.message || "Buyurtma yuborishda xatolik yuz berdi!",
+              { position: "top-center" }
+            );
+          },
         }
       );
     });
