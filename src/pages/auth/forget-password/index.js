@@ -30,7 +30,11 @@ const Index = () => {
       {
         onSuccess: () => {
           toast.success("Muvaqqiyatli yakunlandi", { position: "top-right" });
-          router.push("/auth/forget-password/confirm-code");
+
+          router.push({
+            pathname: "/auth/forget-password/confirm-code",
+            query: { email: data.email },
+          });
         },
       }
     );
