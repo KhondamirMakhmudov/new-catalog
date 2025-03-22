@@ -1,7 +1,24 @@
 import CustomerDashboard from "@/layouts/dashboard/customer/dashboard";
 import MainContent from "@/layouts/dashboard/customer/components/main-content";
 import Image from "next/image";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import useGetQuery from "@/hooks/api/useGetQuery";
+import { useSession } from "next-auth/react";
+import { get } from "lodash";
 const Index = () => {
+  const { data: session } = useSession();
+  const {
+    data: aboutProfile,
+    isLoading,
+    isFetching,
+  } = useGetQuery({
+    key: KEYS.aboutProfile,
+    url: URLS.aboutProfile,
+    params: {
+      email: `${get(session, "user.email")}`,
+    },
+  });
   return (
     <CustomerDashboard>
       <MainContent>
@@ -14,7 +31,7 @@ const Index = () => {
         </p>
 
         <form className="grid grid-cols-12 gap-[16px] mt-[16px]">
-          <div className="col-span-12 lg:col-span-4">
+          {/* <div className="col-span-12 lg:col-span-4">
             <div className="flex gap-x-[10px] items-center">
               <div className="bg-white rounded-[12px] p-[27px] inline-block">
                 <Image
@@ -32,45 +49,53 @@ const Index = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          <div className="col-span-12 md:col-span-6 lg:col-span-6">
             <label className="text-[#718096]">Ismingiz</label>
             <input
               type="text"
+              value={get(aboutProfile, "data[0].first_name")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          <div className="col-span-12 md:col-span-6 lg:col-span-6">
             <label className="text-[#718096]">Familiyangiz</label>
             <input
               type="text"
+              value={get(aboutProfile, "data[0].last_name")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <label className="text-[#718096]">PINFL</label>
+          <div className="col-span-12 md:col-span-6 lg:col-span-6">
+            <label className="text-[#718096]">JSHSHIR</label>
+            <input
+              type="text"
+              value={get(aboutProfile, "data[0].company")}
+              disabled={true}
+              placeholder="Kiriting"
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
+            />
+          </div>
+
+          <div className="col-span-12 md:col-span-6 lg:col-span-6">
+            <label className="text-[#718096]">Pochta</label>
             <input
               type="text"
               placeholder="Kiriting"
+              value={get(aboutProfile, "data[0].email")}
+              disabled={true}
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <label className="text-[#718096]">INN</label>
-            <input
-              type="text"
-              placeholder="Kiriting"
-              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
-            />
-          </div>
-
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          {/* <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <label className="text-[#718096]">Passport seriyasi</label>
             <input
               type="text"
@@ -97,12 +122,14 @@ const Index = () => {
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
-          </div>
+          </div> */}
 
           <div className="col-span-6">
             <label className="text-[#718096]">Telefon raqamingiz</label>
             <input
               type="text"
+              value={get(aboutProfile, "data[0].phone")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />

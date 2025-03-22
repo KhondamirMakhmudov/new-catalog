@@ -100,4 +100,6 @@ export const KEYS = {
   oneIdCustomer: "oneIdCustomer",
   shnk: "shnk",
   soliqDataNew: "soliqDataNew",
+
+  aboutProfile: "aboutProfile",
 };

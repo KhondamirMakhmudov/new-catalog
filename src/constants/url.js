@@ -108,4 +108,6 @@ export const URLS = {
   fastApiLogin: "fastapi/auth/login",
   oneIdCustomer: "fastapi/auth/callback/",
   soliqDataNew: "soliq_data_price/",
+
+  aboutProfile: "/api/customer/profile",
 };
