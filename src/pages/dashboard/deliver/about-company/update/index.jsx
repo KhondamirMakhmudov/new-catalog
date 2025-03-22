@@ -2,6 +2,9 @@ import MainContent from "@/layouts/dashboard/deliver/components/main-page/main";
 import MyAdsAll from "@/layouts/dashboard/deliver/components/myAds-page/my-ads";
 import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import Image from "next/image";
+import { KEYS } from "@/constants/key";
+import { URLS } from "@/constants/url";
+import useGetQuery from "@/hooks/api/useGetQuery";
 
 const Index = () => {
   const {
