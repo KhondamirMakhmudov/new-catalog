@@ -22,19 +22,18 @@ const Index = () => {
   });
 
   const onSubmit = ({
-    company_name,
     company_ceo,
     company_address,
-    company_stir,
+
     company_phone_main,
     company_email,
     company_phone_other,
   }) => {
     let formData = new FormData();
-    formData.append("company_name", company_name);
+
     formData.append("company_ceo", company_ceo);
     formData.append("company_address", company_address);
-    formData.append("company_stir", company_stir);
+
     formData.append("company_phone_main", company_phone_main);
     formData.append("company_email", company_email);
     formData.append("company_phone_other", company_phone_other);
@@ -75,16 +74,6 @@ const Index = () => {
           className="grid grid-cols-12 gap-[16px] mt-[16px]"
         >
           <div className="col-span-12">
-            <label className="text-[#718096]">Korxona yuridik nomi</label>
-            <input
-              {...register("company_name", { required: true })}
-              type="text"
-              placeholder="Kiriting"
-              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
-            />
-          </div>
-
-          <div className="col-span-12">
             <label className="text-[#718096]">Korxona direktori</label>
             <input
               {...register("company_ceo", { required: true })}
@@ -99,16 +88,6 @@ const Index = () => {
             <input
               type="text"
               {...register("company_address", { required: true })}
-              placeholder="Kiriting"
-              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
-            />
-          </div>
-
-          <div className="col-span-6">
-            <label className="text-[#718096]">Korxona STIR</label>
-            <input
-              type="number"
-              {...register("company_stir", { required: true })}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
