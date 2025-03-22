@@ -36,7 +36,7 @@ const Index = () => {
           Oqilona yuboring, sarflang va tejang
         </p>
         <form className="grid grid-cols-12 gap-[16px] mt-[16px]">
-          <div className="col-span-12 lg:col-span-4">
+          {/* <div className="col-span-12 lg:col-span-4">
             <div className="flex gap-x-[10px] items-center">
               <div className="bg-white rounded-[12px] p-[27px] inline-block">
                 <Image
@@ -54,13 +54,15 @@ const Index = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input
+              value={get(aboutCompany, "data[0].company_name")}
               type="text"
               placeholder="Kiriting"
+              disabled={true}
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
