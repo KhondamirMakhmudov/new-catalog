@@ -7,9 +7,11 @@ import { URLS } from "@/constants/url";
 import useGetQuery from "@/hooks/api/useGetQuery";
 import { get } from "lodash";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Index = () => {
   const { data: session } = useSession();
+  const router = useRouter();
   const {
     data: aboutCompany,
     isLoadingCompany,
@@ -60,6 +62,17 @@ const Index = () => {
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input
               value={get(aboutCompany, "data[0].company_name")}
+              type="text"
+              placeholder="Kiriting"
+              disabled={true}
+              className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
+            />
+          </div>
+
+          <div className="col-span-12">
+            <label className="text-[#718096]">Korxona direktori</label>
+            <input
+              value={get(aboutCompany, "data[0].company_ceo")}
               type="text"
               placeholder="Kiriting"
               disabled={true}
@@ -131,8 +144,11 @@ const Index = () => {
             />
           </div>
 
-          <button className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white">
-            Keyingi
+          <button
+            onClick={() => router.push("/update")}
+            className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white"
+          >
+            Tahrirlash
           </button>
         </form>
       </MainContent>
