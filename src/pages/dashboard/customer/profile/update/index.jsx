@@ -1,9 +1,6 @@
 import CustomerDashboard from "@/layouts/dashboard/customer/dashboard";
 import MainContent from "@/layouts/dashboard/customer/components/main-content";
-import Image from "next/image";
-import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
-import useGetQuery from "@/hooks/api/useGetQuery";
 import { useSession } from "next-auth/react";
 import { get } from "lodash";
 import { useRouter } from "next/router";

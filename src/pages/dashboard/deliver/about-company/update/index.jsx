@@ -1,16 +1,19 @@
 import MainContent from "@/layouts/dashboard/deliver/components/main-page/main";
-import MyAdsAll from "@/layouts/dashboard/deliver/components/myAds-page/my-ads";
 import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
-import Image from "next/image";
-import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
-import useGetQuery from "@/hooks/api/useGetQuery";
 import { get } from "lodash";
 import usePutQuery from "@/hooks/api/usePutQuery";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
 
 const Index = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -67,7 +70,10 @@ const Index = () => {
         <p className="text-[#718096] text-sm">
           Oqilona yuboring, sarflang va tejang
         </p>
-        <form className="grid grid-cols-12 gap-[16px] mt-[16px]">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-12 gap-[16px] mt-[16px]"
+        >
           <div className="col-span-12">
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input
