@@ -102,4 +102,5 @@ export const KEYS = {
   soliqDataNew: "soliqDataNew",
 
   aboutProfile: "aboutProfile",
+  aboutProfileUpdate: "aboutProfileUpdate",
 };

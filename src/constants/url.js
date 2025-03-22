@@ -110,4 +110,5 @@ export const URLS = {
   soliqDataNew: "soliq_data_price/",
 
   aboutProfile: "/api/customer/profile",
+  aboutProfileUpdate: "/api/customer/profile_update/",
 };
