@@ -38,7 +38,7 @@ const Index = () => {
     formData.append("company_email", company_email);
     formData.append("company_phone_other", company_phone_other);
 
-    editAdds(
+    updateCompanyInfo(
       {
         url: URLS.updateCompanyInfo,
         attributes: formData,
