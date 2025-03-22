@@ -2,29 +2,8 @@ import MainContent from "@/layouts/dashboard/deliver/components/main-page/main";
 import MyAdsAll from "@/layouts/dashboard/deliver/components/myAds-page/my-ads";
 import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import Image from "next/image";
-import { KEYS } from "@/constants/key";
-import { URLS } from "@/constants/url";
-import useGetQuery from "@/hooks/api/useGetQuery";
-import { get } from "lodash";
-import { useSession } from "next-auth/react";
 
 const Index = () => {
-  const { data: session } = useSession();
-  const {
-    data: aboutCompany,
-    isLoadingCompany,
-    isFetching: isFetchingCompany,
-  } = useGetQuery({
-    key: KEYS.aboutCompany,
-    url: URLS.aboutCompany,
-    headers: { token: `${get(session, "user.token")}` },
-    enabled: !!(
-      get(session, "user.token") && get(session, "user.role") === "company"
-    ),
-  });
-
-  console.log(aboutCompany, "aboutCompany");
-
   return (
     <DeliverDashboard>
       <MainContent>
