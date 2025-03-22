@@ -20,6 +20,8 @@ import { useRouter } from "next/router";
 import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
+  const [responseError, setResponseError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get("code");
@@ -174,10 +176,9 @@ const Index = () => {
           onError: (errors) => {
             console.log(errors, "errors");
             console.log(errors?.response.data, "errors?.message");
-
-            toast.error("Buyurtma yuborishda xatolik yuz berdi!", {
-              position: "top-center",
-            });
+            console.log(errors?.response.data.customer, "errors?.message");
+            setResponseError(errors?.response.data.customer);
+            setIsModalOpen(true);
           },
         }
       );
@@ -580,6 +581,28 @@ const Index = () => {
                   className="py-[15px] bg-[#0256BA] rounded-[12px] w-full text-white mt-[20px]"
                 >
                   Buyurtma berish
+                </button>
+              </div>
+            </div>
+
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-white p-6 rounded shadow-lg w-96">
+                <h2 className="text-red-500 text-lg font-bold">
+                  Siz ro&apos;yxatdan o&apos;tmagansiz. Ro&apos;yxatdan
+                  o&apos;tib, keyin mahsulot buyurtma qiling!
+                </h2>
+                <p>{responseError}</p>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="mt-4 bg-gray-500 text-white px-4 py-2 rounded"
+                >
+                  Yopish
+                </button>
+                <button
+                  onClick={() => setIsModalOpen(false)}
+                  className="mt-4 w-full bg-red-500 text-white py-2 rounded"
+                >
+                  Yopish
                 </button>
               </div>
             </div>
