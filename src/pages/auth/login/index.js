@@ -42,10 +42,12 @@ const Index = () => {
       });
 
       if (response.ok) {
-        toast.success("Login successful!");
+        toast.success("Kirish muvaffaqiyatli yakunlandi!");
         router.push("/dashboard/customer");
       } else {
-        toast.error("Login failed! Please check your credentials.");
+        toast.error(
+          "Kirish muvaffaqiyatsiz yakunlandi! Iltimos, ma'lumotlaringizni tekshiring."
+        );
       }
     } catch (error) {
       toast.error("An error occurred during login.");
