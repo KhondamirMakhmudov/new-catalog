@@ -4,6 +4,11 @@ import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import Image from "next/image";
 
 const Index = () => {
+  const {
+    data: editCompany,
+    isLoading: isLoadingCompany,
+    isFetching: isFetchingCompany,
+  } = useGetQuery({});
   return (
     <DeliverDashboard>
       <MainContent>
@@ -15,26 +20,6 @@ const Index = () => {
           Oqilona yuboring, sarflang va tejang
         </p>
         <form className="grid grid-cols-12 gap-[16px] mt-[16px]">
-          <div className="col-span-12 lg:col-span-4">
-            <div className="flex gap-x-[10px] items-center">
-              <div className="bg-white rounded-[12px] p-[27px] inline-block">
-                <Image
-                  src={"/icons/company-image.svg"}
-                  alt="company-image"
-                  width={32}
-                  height={32}
-                />
-              </div>
-
-              <div>
-                <h3 className="text-[#718096] mb-[2px]">Logotip</h3>
-                <p className="text-[#718096] font-semibold text-sm">
-                  Max size 10 mb
-                </p>
-              </div>
-            </div>
-          </div>
-
           <div className="col-span-12 md:col-span-6 lg:col-span-4">
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input

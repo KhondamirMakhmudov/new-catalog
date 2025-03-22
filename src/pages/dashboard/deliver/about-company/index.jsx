@@ -145,7 +145,9 @@ const Index = () => {
           </div>
 
           <button
-            onClick={() => router.push("/update")}
+            onClick={() =>
+              router.push("/dashboard/deliver/about-company/update")
+            }
             className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white"
           >
             Tahrirlash
