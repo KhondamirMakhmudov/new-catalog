@@ -2,11 +2,11 @@ import MainContent from "@/layouts/dashboard/deliver/components/main-page/main";
 import DeliverDashboard from "@/layouts/dashboard/deliver/dashboard";
 import { URLS } from "@/constants/url";
 import { get } from "lodash";
-import usePutQuery from "@/hooks/api/usePutQuery";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Link from "next/link";
+
 import { useForm } from "react-hook-form";
+import usePostQuery from "@/hooks/api/usePostQuery";
 
 const Index = () => {
   const {
@@ -17,7 +17,7 @@ const Index = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  const { mutate: updateCompanyInfo, isLoading } = usePutQuery({
+  const { mutate: updateCompanyInfo, isLoading } = usePostQuery({
     listKeyId: "update-profile-deliver",
   });
 
