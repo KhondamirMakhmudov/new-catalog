@@ -56,7 +56,7 @@ const Index = () => {
             </div>
           </div> */}
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
+          <div className="col-span-12">
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input
               value={get(aboutCompany, "data[0].company_name")}
@@ -67,56 +67,66 @@ const Index = () => {
             />
           </div>
 
-          <div className="col-span-12 md:col-span-6 lg:col-span-4">
-            <label className="text-[#718096]">Korxona nomi</label>
+          <div className="col-span-12 md:col-span-6 lg:col-span-6">
+            <label className="text-[#718096]">Korxona manzili</label>
             <input
               type="text"
+              value={get(aboutCompany, "data[0].company_address")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
           <div className="col-span-6">
-            <label className="text-[#718096]">Korxona INN</label>
+            <label className="text-[#718096]">Korxona STIR</label>
             <input
               type="number"
+              value={get(aboutCompany, "data[0].company_stir")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
           <div className="col-span-6">
-            <label className="text-[#718096]">Korxona guvohnoma raqami</label>
+            <label className="text-[#718096]">Korxona telefon raqami</label>
             <input
               type="text"
+              value={get(aboutCompany, "data[0].company_phone_main")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
-          <div className="col-span-12 space-y-[10px]">
+          {/* <div className="col-span-12 space-y-[10px]">
             <label className="text-[#718096]">Korxona haqida</label>
 
             <textarea
               name="about-material"
               className=" py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             ></textarea>
-          </div>
+          </div> */}
 
           <div className="col-span-6">
             <label className="text-[#718096]">Pochta </label>
             <input
               type="mail"
+              value={get(aboutCompany, "data[0].company_email")}
+              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
 
           <div className="col-span-6">
-            <label className="text-[#718096]">Telefon raqami</label>
+            <label className="text-[#718096]">Telefon raqami (boshqa)</label>
             <input
               type="text"
               placeholder="Kiriting"
+              value={get(aboutCompany, "data[0].company_phone_other")}
+              disabled={true}
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
