@@ -76,7 +76,7 @@ const Index = () => {
           <div className="col-span-12">
             <label className="text-[#718096]">Korxona direktori</label>
             <input
-              {...register("company_ceo", { required: true })}
+              {...register("company_ceo")}
               type="text"
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
@@ -87,7 +87,7 @@ const Index = () => {
             <label className="text-[#718096]">Korxona manzili</label>
             <input
               type="text"
-              {...register("company_address", { required: true })}
+              {...register("company_address")}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
@@ -97,7 +97,7 @@ const Index = () => {
             <label className="text-[#718096]">Korxona telefon raqami</label>
             <input
               type="text"
-              {...register("company_phone_main", { required: true })}
+              {...register("company_phone_main")}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
@@ -107,7 +107,7 @@ const Index = () => {
             <label className="text-[#718096]">Pochta </label>
             <input
               type="mail"
-              {...register("company_email", { required: true })}
+              {...register("company_email")}
               disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
@@ -119,7 +119,7 @@ const Index = () => {
             <input
               type="text"
               placeholder="Kiriting"
-              {...register("company_phone_other", { required: true })}
+              {...register("company_phone_other")}
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
           </div>
