@@ -13,6 +13,7 @@ import { signIn } from "next-auth/react";
 import Header from "@/components/header";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -57,7 +58,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7]">
       <Header />
-
+      <NavigationButtom />
       <main className="container font-gilroy h-screen">
         <section className="mt-[16px] flex items-center space-x-[12px]">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">

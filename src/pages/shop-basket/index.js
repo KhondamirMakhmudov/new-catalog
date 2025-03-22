@@ -213,10 +213,10 @@ const Index = () => {
             </div>
 
             <div className="grid grid-cols-12 gap-x-[30px]">
-              <div className="col-span-8 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] self-start">
-                <div>
+              <div className="col-span-12 lg:col-span-8 font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] self-start">
+                <div className="overflow-x-auto">
                   <motion.table
-                    className="w-full border-collapse border-[#D7D9E7]"
+                    className="w-full border-collapse border-[#D7D9E7] min-w-[700px]"
                     initial={{ opacity: 0, translateY: "30px" }}
                     animate={{ opacity: 1, translateY: "0" }}
                     transition={{ duration: 0.4 }}
@@ -573,7 +573,7 @@ const Index = () => {
                 </button>
               </div> */}
 
-              <div className="col-span-4 font-gilroy">
+              <div className="col-span-12 lg:col-span-4 font-gilroy">
                 <button
                   onClick={onSubmit}
                   className="py-[15px] bg-[#0256BA] rounded-[12px] w-full text-white mt-[20px]"
