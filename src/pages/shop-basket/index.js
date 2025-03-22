@@ -175,10 +175,9 @@ const Index = () => {
             console.log(errors, "errors");
             console.log(errors?.response.data, "errors?.message");
 
-            toast.error(
-              errors?.response.data || "Buyurtma yuborishda xatolik yuz berdi!",
-              { position: "top-center" }
-            );
+            toast.error("Buyurtma yuborishda xatolik yuz berdi!", {
+              position: "top-center",
+            });
           },
         }
       );
