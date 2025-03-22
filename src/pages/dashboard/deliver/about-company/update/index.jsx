@@ -107,7 +107,6 @@ const Index = () => {
             <label className="text-[#718096]">Pochta </label>
             <input
               type="mail"
-              value={get(aboutCompany, "data[0].company_email")}
               {...register("company_email", { required: true })}
               disabled={true}
               placeholder="Kiriting"
