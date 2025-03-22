@@ -8,8 +8,11 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const Index = () => {
+  const [responseErrors, setResponseErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const {
     register,
@@ -38,9 +41,15 @@ const Index = () => {
             query: { email: data.email },
           });
         },
+        onError: (errorResponse) => {
+          setResponseErrors(errorResponse.response.data); // Xatolarni saqlash
+        },
       }
     );
   };
+
+  console.log("responseErrors", responseErrors);
+
   return (
     <div>
       <Header />
@@ -209,33 +218,79 @@ const Index = () => {
                         className="placeholder:text-[#A0AEC0] text-black w-1/2 p-[16px] bg-white border border-[#C8CED5] rounded-lg"
                       />
                     </div>
-                    <input
-                      type="email"
-                      {...register("email", { required: true })}
-                      placeholder="E-mailni kiriting"
-                      className="placeholder:text-[#A0AEC0] text-black max-w-[427px] bg-white w-full p-[16px] border border-[#C8CED5] rounded-lg"
-                    />
+                    <div>
+                      <input
+                        type="email"
+                        {...register("email", { required: true })}
+                        placeholder="E-mailni kiriting"
+                        className="placeholder:text-[#A0AEC0] text-black max-w-[427px] bg-white w-full p-[16px] border border-[#C8CED5] rounded-lg"
+                      />
+                      {responseErrors?.email && (
+                        <p className="text-red-500">
+                          Ushbu elektron pochta allaqachon ro&apos;yxatdan
+                          o&apos;tgan
+                        </p>
+                      )}
+                    </div>
 
-                    <input
-                      type="text"
-                      {...register("company", { required: true })}
-                      placeholder="INN"
-                      className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] bg-white border border-[#C8CED5] rounded-lg"
-                    />
+                    <div>
+                      <input
+                        type="text"
+                        {...register("company", { required: true })}
+                        placeholder="JSHSHIR"
+                        className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] bg-white border border-[#C8CED5] rounded-lg"
+                      />
+                      {responseErrors?.company && (
+                        <p className="text-red-500">
+                          Ushbu JSHSHIR allaqachon ro&apos;yxatdan o&apos;tgan
+                        </p>
+                      )}
+                    </div>
 
-                    <input
-                      type="tel"
-                      {...register("phone", { required: true })}
-                      placeholder="+998"
-                      className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] bg-white border border-[#C8CED5] rounded-lg"
-                    />
+                    <div>
+                      <input
+                        type="tel"
+                        {...register("phone", { required: true })}
+                        placeholder="Telefon raqamingiz"
+                        className="placeholder:text-[#A0AEC0] text-black w-full p-[16px] bg-white border border-[#C8CED5] rounded-lg"
+                      />
+                      {responseErrors?.phone && (
+                        <p className="text-red-500">
+                          Ushbu telefon raqam allaqachon ro&apos;yxatdan
+                          o&apos;tgan
+                        </p>
+                      )}
+                    </div>
 
-                    <input
-                      type="password"
-                      {...register("password", { required: true })}
-                      placeholder="Parol"
-                      className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg"
-                    />
+                    <div className="relative">
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        {...register("password", { required: true })}
+                        placeholder="Parol"
+                        className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg"
+                      />
+
+                      <div
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute top-4 right-3 bottom-0 cursor-pointer"
+                      >
+                        {showPassword ? (
+                          <Image
+                            src={"/icons/eyes.svg"}
+                            alt={"edit"}
+                            width={24}
+                            height={24}
+                          />
+                        ) : (
+                          <Image
+                            src={"/icons/eye-off.svg"}
+                            alt={"edit"}
+                            width={24}
+                            height={24}
+                          />
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   <p>
