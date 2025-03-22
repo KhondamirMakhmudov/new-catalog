@@ -8,6 +8,7 @@ import useGetQuery from "@/hooks/api/useGetQuery";
 import { get } from "lodash";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Index = () => {
   const { data: session } = useSession();
@@ -38,26 +39,6 @@ const Index = () => {
           Oqilona yuboring, sarflang va tejang
         </p>
         <form className="grid grid-cols-12 gap-[16px] mt-[16px]">
-          {/* <div className="col-span-12 lg:col-span-4">
-            <div className="flex gap-x-[10px] items-center">
-              <div className="bg-white rounded-[12px] p-[27px] inline-block">
-                <Image
-                  src={"/icons/company-image.svg"}
-                  alt="company-image"
-                  width={32}
-                  height={32}
-                />
-              </div>
-
-              <div>
-                <h3 className="text-[#718096] mb-[2px]">Logotip</h3>
-                <p className="text-[#718096] font-semibold text-sm">
-                  Max size 10 mb
-                </p>
-              </div>
-            </div>
-          </div> */}
-
           <div className="col-span-12">
             <label className="text-[#718096]">Korxona yuridik nomi</label>
             <input
@@ -144,14 +125,11 @@ const Index = () => {
             />
           </div>
 
-          <button
-            onClick={() =>
-              router.push("/dashboard/deliver/about-company/update")
-            }
-            className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white"
-          >
-            Tahrirlash
-          </button>
+          <Link href={"/dashboard/deliver/about-company/update"}>
+            <button className="col-span-12 w-full bg-[#0256BA] rounded-[12px] py-[12px] text-white">
+              Tahrirlash
+            </button>
+          </Link>
         </form>
       </MainContent>
     </DeliverDashboard>
