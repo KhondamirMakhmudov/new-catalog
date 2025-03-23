@@ -253,7 +253,7 @@ const Index = () => {
                       <div className={""}>
                         <button
                           onClick={() => {
-                            setIsOpen(row);
+                            handleListComment(item);
                           }}
                           className={"text-center"}
                         >
@@ -268,12 +268,12 @@ const Index = () => {
                                   "flex justify-between items-center mb-[30px]"
                                 }
                               >
-                                <button
+                                {/* <button
                                   className={"text-lg "}
                                   onClick={() => handleListComment(item)}
                                 >
                                   Ko&apos;rish
-                                </button>
+                                </button> */}
 
                                 <button onClick={() => setIsOpen(!isOpen)}>
                                   <Image
