@@ -63,7 +63,7 @@ const Index = () => {
     <DeliverDashboard>
       <MainContent>
         <h1 className="text-[26px] font-bold">
-          Korxonangiz xaqidagi malumotlar
+          Korxonangiz haqidagi malumotlarni tahrirlash
         </h1>
 
         <p className="text-[#718096] text-sm">

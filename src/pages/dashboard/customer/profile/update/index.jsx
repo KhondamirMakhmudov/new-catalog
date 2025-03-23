@@ -55,7 +55,7 @@ const Index = () => {
     <CustomerDashboard>
       <MainContent>
         <h1 className="text-[26px] font-bold">
-          Sizning profilingiz, sizning hayotingiz
+          Sizning profilingiz, tahrirlash sahifasi
         </h1>
 
         <p className="text-[#718096] text-sm">
