@@ -319,10 +319,7 @@ const Index = () => {
                         </button>
 
                         {Boolean(isOpen) && (
-                          <div
-                            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30"
-                            onClick={() => setIsOpen(false)}
-                          >
+                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
                             <div className="bg-white p-8 rounded shadow-md w-[700px] h-auto flex flex-col">
                               <div
                                 className={"flex justify-between items-center "}
@@ -332,7 +329,7 @@ const Index = () => {
                                 <Image
                                   onClick={closeModal}
                                   className={"cursor-pointer"}
-                                  src={"/icons/close.svg"}
+                                  src={"/icons/x-close.svg"}
                                   alt={"close"}
                                   width={30}
                                   height={30}
