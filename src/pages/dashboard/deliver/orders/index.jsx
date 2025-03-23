@@ -12,9 +12,13 @@ import dayjs from "dayjs";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { useSession } from "next-auth/react";
 import { useSettingsStore } from "@/store";
+import { useState } from "react";
+import { config } from "@/config";
 
 const Index = () => {
   const { data: session } = useSession();
+  const [isOpen, setIsOpen] = useState(false);
+  const [extractedData, setExtractedData] = useState(null);
   const token = useSettingsStore((state) => get(state, "token", null));
   const {
     data: listOrders,
@@ -47,7 +51,33 @@ const Index = () => {
     });
   };
 
-  console.log(listOrders);
+  function handleListComment(row) {
+    console.log(row);
+    fetch(`${config.API_URL}${URLS.customerComment}`, {
+      method: "POST",
+      body: JSON.stringify({
+        product_category: row?.product_category,
+        ad_id: parseInt(row?.ad_id),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const extractedData = data; // replace 'someSpecificField' with the actual field name
+        console.log(extractedData);
+        if (Array.isArray(extractedData)) {
+          setExtractedData(extractedData);
+        } else {
+          console.error("Extracted data is not an array:", extractedData);
+        }
+      });
+  }
+
+  const openModal = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <DeliverDashboard>
@@ -92,6 +122,9 @@ const Index = () => {
                   </th>
                   <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold rounded-tr-[10px]">
                     Buyurtmaning holati
+                  </th>
+                  <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold rounded-tr-[10px]">
+                    Sharhni ko&apos;rish
                   </th>
                 </tr>
               </thead>
@@ -214,6 +247,148 @@ const Index = () => {
                       ) : (
                         ""
                       )}
+                    </td>
+                    <td>
+                      <div className={""}>
+                        <button
+                          onClick={() => {
+                            setIsOpen(row);
+                          }}
+                          className={"text-center"}
+                        >
+                          Ko'rish
+                        </button>
+
+                        {Boolean(isOpen) && (
+                          <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-transparent bg-opacity-30">
+                            <div className="bg-white p-8 rounded shadow-md w-[700px] h-[800px] overflow-y-scroll flex flex-col">
+                              <div
+                                className={
+                                  "flex justify-between items-center mb-[30px]"
+                                }
+                              >
+                                <button
+                                  className={"text-lg "}
+                                  onClick={() => handleListComment(item)}
+                                >
+                                  Ko'rish
+                                </button>
+
+                                <button onClick={() => setIsOpen(!isOpen)}>
+                                  <Image
+                                    src={"/icons/closeModal.svg"}
+                                    alt={"modalcloser"}
+                                    width={24}
+                                    height={24}
+                                    className={
+                                      "float-right block cursor-pointer bg-white p-1 rounded-[2px]"
+                                    }
+                                  />
+                                </button>
+                              </div>
+
+                              {extractedData?.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className={
+                                    "border mb-[20px] shadow rounded-[10px]"
+                                  }
+                                >
+                                  <div className={"flex gap-x-2 p-2 font-bold"}>
+                                    <p>{get(item, "first_name")}</p>
+                                    <p>{get(item, "last_name")}</p>
+                                  </div>
+
+                                  <p className={"text-lg mb-[15px] p-2"}>
+                                    Mahsulotga berilgan baho
+                                  </p>
+                                  <div
+                                    className={"mb-[10px] p-2"}
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "row",
+                                    }}
+                                  >
+                                    {[...Array(get(item, "rating"))].map(
+                                      (star, index) => {
+                                        return (
+                                          <label
+                                            key={index}
+                                            style={{ display: "inline-block" }}
+                                          >
+                                            <input
+                                              type="radio"
+                                              name="rating"
+                                              value={get(item, "rating")}
+                                              style={{ display: "none" }}
+                                            />
+                                            <svg
+                                              className="star"
+                                              width="25"
+                                              height="25"
+                                              viewBox="0 0 24 24"
+                                              fill={"#ffd700"}
+                                            >
+                                              <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
+                                            </svg>
+                                          </label>
+                                        );
+                                      }
+                                    )}
+                                  </div>
+
+                                  <div className={"w-full mt-[10px]  p-2"}>
+                                    <p>{get(item, "comment")}</p>
+                                  </div>
+
+                                  <div
+                                    className={
+                                      "w-full h-[1px] bg-gray-400 my-[20px]"
+                                    }
+                                  ></div>
+                                  <p className={"text-lg p-2 mb-[15px]"}>
+                                    Yetkazib beruvchiga berilgan baho
+                                  </p>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      flexDirection: "row",
+                                    }}
+                                    className={"p-2"}
+                                  >
+                                    {[
+                                      ...Array(get(item, "rating_company")),
+                                    ].map((star, index) => {
+                                      return (
+                                        <label
+                                          key={index}
+                                          style={{ display: "inline-block" }}
+                                        >
+                                          <input
+                                            type="radio"
+                                            name="rating"
+                                            value={get(item, "rating_company")}
+                                            style={{ display: "none" }}
+                                          />
+                                          <svg
+                                            className="star"
+                                            width="25"
+                                            height="25"
+                                            viewBox="0 0 24 24"
+                                            fill={"#ffd700"}
+                                          >
+                                            <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
+                                          </svg>
+                                        </label>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
