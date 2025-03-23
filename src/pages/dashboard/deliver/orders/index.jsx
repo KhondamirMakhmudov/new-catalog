@@ -52,6 +52,7 @@ const Index = () => {
   };
 
   function handleListComment(row) {
+    setIsOpen(true);
     console.log(row);
     fetch(`${config.API_URL}${URLS.customerComment}`, {
       method: "POST",
