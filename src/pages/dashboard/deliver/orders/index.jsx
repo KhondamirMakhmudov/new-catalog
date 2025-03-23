@@ -256,7 +256,7 @@ const Index = () => {
                           }}
                           className={"text-center"}
                         >
-                          Ko'rish
+                          Ko&apos;rish
                         </button>
 
                         {Boolean(isOpen) && (
@@ -271,7 +271,7 @@ const Index = () => {
                                   className={"text-lg "}
                                   onClick={() => handleListComment(item)}
                                 >
-                                  Ko'rish
+                                  Ko&apos;rish
                                 </button>
 
                                 <button onClick={() => setIsOpen(!isOpen)}>
