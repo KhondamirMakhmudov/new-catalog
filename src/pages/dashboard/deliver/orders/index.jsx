@@ -253,7 +253,7 @@ const Index = () => {
                       <div className={""}>
                         <button
                           onClick={() => {
-                            handleListComment(item.id);
+                            handleListComment(item);
                           }}
                           className={
                             "text-center text-white bg-[#2563EB] py-2 px-4 rounded-md"
