@@ -339,7 +339,8 @@ const Index = () => {
                                 />
                               </div>
                               <p className={"text-lg mb-[15px]"}>
-                                Mahsulot borasida o'z izohingizni qoldiring.
+                                Mahsulot borasida o&apos;z izohingizni
+                                qoldiring.
                               </p>
                               <textarea
                                 ref={commentRef}
