@@ -386,11 +386,6 @@ const Index = () => {
                                             ? "#ffd700"
                                             : "#ccc"
                                         }
-                                        fill={
-                                          ratingValue <= (hover || rating)
-                                            ? "#ffd700"
-                                            : "#ccc"
-                                        }
                                         onMouseEnter={() =>
                                           setHover(ratingValue)
                                         }
@@ -436,12 +431,6 @@ const Index = () => {
                                         width="25"
                                         height="25"
                                         viewBox="0 0 24 24"
-                                        fill={
-                                          companyRatingValue <=
-                                          (hoverRatingCompany || ratingCompany)
-                                            ? "#ffd700"
-                                            : "#ccc"
-                                        }
                                         fill={
                                           companyRatingValue <=
                                           (hoverRatingCompany || ratingCompany)
