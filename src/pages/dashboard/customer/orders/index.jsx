@@ -11,10 +11,46 @@ import ContentLoader from "@/components/loader/content-loader";
 import { useSession } from "next-auth/react";
 import { useSettingsStore } from "@/store";
 import usePostQuery from "@/hooks/api/usePostQuery";
+import { useState, useRef } from "react";
+import { toast } from "react-hot-toast";
+import Image from "next/image";
 const Index = () => {
   const { data: session } = useSession();
-
+  const [selectedStars, setSelectedStars] = useState(0);
+  const [comments, setComments] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
+  const productCategoryRef = useRef(null);
+  const companyStirRef = useRef(null);
+  const ratingValueRef = useRef(null);
+  const companyRatingValueRef = useRef(null);
+  const commentRef = useRef(null);
+  const productIdRef = useRef(null);
   const token = useSettingsStore((state) => get(state, "token", null));
+  const [rating, setRating] = useState(0);
+  const [ratingCompany, setRatingCompany] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [hoverRatingCompany, setHoverRatingCompany] = useState(0);
+
+  const { data: user } = useGetQuery({
+    key: KEYS.getCustomer,
+    url: URLS.getCustomer,
+    headers: { token: token ?? `${get(session, "user.token")}` },
+    enabled: !!(get(session, "user.token") || token),
+  });
+
+  const handleClick = (ratingValue) => {
+    setRating(ratingValue);
+    ratingValue = ratingValueRef.current?.value;
+  };
+
+  const handleRatingCompany = (ratingValue) => {
+    setRatingCompany(ratingValue);
+    ratingValue = companyRatingValueRef.current?.value;
+  };
+
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   const {
     data: ordersOfCostumer,
     isLoading,
@@ -46,6 +82,49 @@ const Index = () => {
     });
   };
 
+  const { mutate: sendComment, isLoadingComment } = usePostQuery({
+    listKeyId: "comment-one",
+  });
+
+  const handleSendComment = (row) => {
+    console.log(row, "ROEw");
+    const enteredProductCategory = row?.product_category;
+    const selectedStars = rating;
+    const enteredComment = commentRef.current?.value;
+    const customer = parseInt(get(user, "data.id"));
+    const productId = parseInt(row?.ad_id);
+    const enteredRatingCompany = ratingCompany;
+    const enteredCompanyStir = parseInt(row?.company);
+
+    const commentInfo = {
+      product_category: enteredProductCategory,
+      ad_id: productId,
+      comment: enteredComment,
+      rating: selectedStars,
+      customer: customer,
+      company_stir: enteredCompanyStir,
+      rating_company: enteredRatingCompany,
+    };
+
+    setComments(commentInfo);
+
+    sendComment(
+      {
+        url: URLS.sendComment,
+        attributes: commentInfo,
+      },
+      {
+        onSuccess: () => {
+          toast.success(
+            "Siz bergan izoh va baho yetkazib beruvchiga yuborildi",
+            { position: "top-right" }
+          );
+        },
+      }
+    );
+    setIsOpen(false);
+  };
+
   if (isLoading || isFetching) {
     return (
       <CustomerDashboard>
@@ -62,7 +141,7 @@ const Index = () => {
         <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] mt-[12px]">
           <div className="overflow-x-auto">
             <motion.table
-              className="w-full border-collapse border-[#D7D9E7] min-w-[600px]"
+              className="w-full border-collapse border-[#D7D9E7] min-w-[800px]"
               initial={{ opacity: 0, translateY: "60px" }}
               animate={{ opacity: 1, translateY: "0" }}
               transition={{ duration: 0.4 }}
@@ -97,6 +176,9 @@ const Index = () => {
                   </th>
                   <th className=" text-[10px]  text-center  bg-white text-gray-900  font-bold rounded-tr-[10px]">
                     Buyurtmaning holati
+                  </th>
+                  <th className=" text-[10px]  text-center  bg-white text-gray-900  font-bold rounded-tr-[10px]">
+                    Sharh qoldirish
                   </th>
                 </tr>
               </thead>
@@ -140,9 +222,7 @@ const Index = () => {
                         </div>
                       </td>
                       <td className=" font-medium text-xs py-[10px] text-center">
-                        <div className="flex space-x-[4px]">
-                          {get(item, "quantity")}
-                        </div>
+                        {get(item, "quantity")}
                       </td>
                       <td className=" font-medium text-xs py-[10px] text-center ">
                         <div className="flex space-x-[4px]">
@@ -225,6 +305,175 @@ const Index = () => {
                             ""
                           )}
                         </div>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            setIsOpen(item.id);
+                          }}
+                          className={
+                            "text-center text-white bg-[#FF6A04] py-2 px-4 rounded-md"
+                          }
+                        >
+                          Yuborish
+                        </button>
+
+                        {Boolean(isOpen) && (
+                          <div
+                            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            <div className="bg-white p-8 rounded shadow-md w-[700px] h-auto flex flex-col">
+                              <div
+                                className={"flex justify-between items-center "}
+                              >
+                                <h1>Mahsulotni baholash</h1>
+
+                                <Image
+                                  onClick={closeModal}
+                                  className={"cursor-pointer"}
+                                  src={"/icons/close.svg"}
+                                  alt={"close"}
+                                  width={30}
+                                  height={30}
+                                />
+                              </div>
+                              <p className={"text-lg mb-[15px]"}>
+                                Mahsulot borasida o'z izohingizni qoldiring.
+                              </p>
+                              <textarea
+                                ref={commentRef}
+                                rows={10}
+                                placeholder={"Izoh qoldirish"}
+                                className={
+                                  "border p-3 shadow-lg rounded-[6px] mb-[20px] "
+                                }
+                              ></textarea>
+
+                              <p className={"text-lg mb-[15px]"}>
+                                Mahsulotni baholang
+                              </p>
+                              <div
+                                className={"mb-[30px]"}
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                }}
+                              >
+                                {[...Array(5)].map((star, index) => {
+                                  const ratingValue = index + 1;
+
+                                  return (
+                                    <label
+                                      key={index}
+                                      style={{ display: "inline-block" }}
+                                    >
+                                      <input
+                                        type="radio"
+                                        name="rating"
+                                        value={ratingValue}
+                                        onClick={() => handleClick(ratingValue)}
+                                        style={{ display: "none" }}
+                                      />
+                                      <svg
+                                        className="star"
+                                        width="25"
+                                        height="25"
+                                        viewBox="0 0 24 24"
+                                        fill={
+                                          ratingValue <= (hover || rating)
+                                            ? "#ffd700"
+                                            : "#ccc"
+                                        }
+                                        fill={
+                                          ratingValue <= (hover || rating)
+                                            ? "#ffd700"
+                                            : "#ccc"
+                                        }
+                                        onMouseEnter={() =>
+                                          setHover(ratingValue)
+                                        }
+                                        onMouseLeave={() => setHover(0)}
+                                      >
+                                        <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
+                                      </svg>
+                                    </label>
+                                  );
+                                })}
+                              </div>
+
+                              <p className={"text-lg mb-[15px]"}>
+                                Yetkazib beruvchini baholang
+                              </p>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                }}
+                              >
+                                {[...Array(5)].map((star, index) => {
+                                  const companyRatingValue = index + 1;
+
+                                  return (
+                                    <label
+                                      key={index}
+                                      style={{ display: "inline-block" }}
+                                    >
+                                      <input
+                                        type="radio"
+                                        name="rating"
+                                        value={companyRatingValue}
+                                        onClick={() =>
+                                          handleRatingCompany(
+                                            companyRatingValue
+                                          )
+                                        }
+                                        style={{ display: "none" }}
+                                      />
+                                      <svg
+                                        className="star"
+                                        width="25"
+                                        height="25"
+                                        viewBox="0 0 24 24"
+                                        fill={
+                                          companyRatingValue <=
+                                          (hoverRatingCompany || ratingCompany)
+                                            ? "#ffd700"
+                                            : "#ccc"
+                                        }
+                                        fill={
+                                          companyRatingValue <=
+                                          (hoverRatingCompany || ratingCompany)
+                                            ? "#ffd700"
+                                            : "#ccc"
+                                        }
+                                        onMouseEnter={() =>
+                                          setHoverRatingCompany(
+                                            companyRatingValue
+                                          )
+                                        }
+                                        onMouseLeave={() =>
+                                          setHoverRatingCompany(0)
+                                        }
+                                      >
+                                        <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
+                                      </svg>
+                                    </label>
+                                  );
+                                })}
+                              </div>
+
+                              <button
+                                className={
+                                  "bg-blue-500 hover:bg-blue-600 active:bg-blue-400 mt-[30px] text-white w-full text-lg py-2 rounded-[6px]"
+                                }
+                                onClick={() => handleSendComment(item)}
+                              >
+                                Yuborish
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </td>
                     </tr>
                   )
