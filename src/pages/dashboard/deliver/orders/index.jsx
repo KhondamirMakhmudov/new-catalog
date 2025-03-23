@@ -255,7 +255,9 @@ const Index = () => {
                           onClick={() => {
                             handleListComment(item.id);
                           }}
-                          className={"text-center"}
+                          className={
+                            "text-center text-white bg-[#2563EB] py-2 px-4 rounded-md"
+                          }
                         >
                           Ko&apos;rish
                         </button>
@@ -339,6 +341,9 @@ const Index = () => {
                                   </div>
 
                                   <div className={"w-full mt-[10px]  p-2"}>
+                                    <p className={"text-lg mb-[15px] p-2"}>
+                                      Buyurtmachining izohi
+                                    </p>
                                     <p>{get(item, "comment")}</p>
                                   </div>
 
