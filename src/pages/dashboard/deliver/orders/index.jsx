@@ -253,7 +253,7 @@ const Index = () => {
                       <div className={""}>
                         <button
                           onClick={() => {
-                            handleListComment(item);
+                            handleListComment(item.id);
                           }}
                           className={"text-center"}
                         >
@@ -261,7 +261,7 @@ const Index = () => {
                         </button>
 
                         {Boolean(isOpen) && (
-                          <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-transparent bg-opacity-30">
+                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
                             <div className="bg-white p-8 rounded shadow-md w-[700px] h-[800px] overflow-y-scroll flex flex-col">
                               <div
                                 className={
@@ -277,7 +277,7 @@ const Index = () => {
 
                                 <button onClick={() => setIsOpen(!isOpen)}>
                                   <Image
-                                    src={"/icons/closeModal.svg"}
+                                    src={"/icons/x-close.svg"}
                                     alt={"modalcloser"}
                                     width={24}
                                     height={24}
