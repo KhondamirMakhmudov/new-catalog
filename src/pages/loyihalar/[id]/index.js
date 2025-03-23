@@ -12,6 +12,7 @@ import SchoolProject from "@/components/model-projects/school";
 import MedicineProject from "@/components/model-projects/medicine";
 import { useRouter } from "next/router";
 import Footer from "@/components/footer";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -35,7 +36,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[5px] lg:space-x-[12px] font-gilroy">
           <button

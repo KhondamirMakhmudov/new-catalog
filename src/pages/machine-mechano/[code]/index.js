@@ -13,6 +13,7 @@ import dayjs from "dayjs";
 import toast from "react-hot-toast";
 import { useCounter } from "@/context/counter";
 import Footer from "@/components/footer";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const [limit] = useState(9);
@@ -180,7 +181,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
@@ -278,8 +279,8 @@ const Index = () => {
                 )}
               </div>
 
-              <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
-                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+              <div className="col-span-12 grid grid-cols-10 gap-[14px]">
+                <div className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
@@ -310,7 +311,7 @@ const Index = () => {
                   </ul>
                 </div>
 
-                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                <div className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
@@ -339,7 +340,7 @@ const Index = () => {
                   </ul>
                 </div>
 
-                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                <div className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
@@ -368,7 +369,7 @@ const Index = () => {
                   </ul>
                 </div>
 
-                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                <div className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
@@ -399,7 +400,7 @@ const Index = () => {
                   </ul>
                 </div>
 
-                <div className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
+                <div className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block">
                   <div className="flex gap-x-[10px] items-center">
                     <div>
                       <div
@@ -471,9 +472,9 @@ const Index = () => {
               </div>
 
               <div className="col-span-12 mt-[16px]">
-                <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+                <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] overflow-x-auto">
                   <motion.table
-                    className="w-full border-collapse border-[#D7D9E7]"
+                    className="w-full border-collapse border-[#D7D9E7] min-w-[700px]"
                     initial={{ opacity: 0, translateY: "30px" }}
                     animate={{ opacity: 1, translateY: "0" }}
                     transition={{ duration: 0.4 }}

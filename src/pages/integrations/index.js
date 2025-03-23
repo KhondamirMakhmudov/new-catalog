@@ -17,6 +17,7 @@ import BirjaComponent from "@/components/integrations/birja";
 import BojxonaComponent from "@/components/integrations/bojxona";
 import SoliqComponent from "@/components/integrations/soliq";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -29,7 +30,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7]">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[30px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button

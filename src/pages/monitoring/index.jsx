@@ -17,6 +17,7 @@ import Pagination from "@/components/pagination";
 
 import { useRouter } from "next/router";
 import HorizonChart from "@/components/bar/rechart";
+import NavigationButtom from "@/components/bottom-navigation";
 const Index = () => {
   const limit = 24;
   const [data, setData] = useState([]);
@@ -138,7 +139,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button

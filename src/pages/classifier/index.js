@@ -16,6 +16,7 @@ import usePostQuery from "@/hooks/api/usePostQuery";
 import toast from "react-hot-toast";
 import Footer from "@/components/footer";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -93,6 +94,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
@@ -117,7 +119,7 @@ const Index = () => {
             Qurilish resurslari Klassifikatori
           </h1>
 
-          <div className="grid grid-cols-12 gap-x-[30px] font-gilroy">
+          <div className="grid grid-cols-12 gap-[30px] font-gilroy">
             <div className={"col-span-12 "}>
               <div className={"mb-5"}>
                 <div className={"mb-2.5"}>
@@ -142,7 +144,7 @@ const Index = () => {
                 )}
               </div>
             </div>
-            <div className="col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
+            <div className="col-span-12 lg:col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Mahsulot qidirish</h4>
                 <button onClick={() => setShowAllProjects(!showAllProjects)}>
@@ -310,84 +312,86 @@ const Index = () => {
                 </motion.div>
               )}
             </div>
-            <div className="col-span-9 tablet:mt-0 ">
+            <div className="col-span-12 lg:col-span-9 tablet:mt-0 ">
               {!posted ? (
                 <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
-                  <motion.table
-                    className="w-full border-collapse border-[#D7D9E7]"
-                    initial={{ opacity: 0, translateY: "30px" }}
-                    animate={{ opacity: 1, translateY: "0" }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <thead className="text-black text-start rounded-[10px]">
-                      <tr className="rounded-[10px]">
-                        <th
-                          className={
-                            "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
-                          }
-                        >
-                          №
-                        </th>
+                  <div className="overflow-x-auto">
+                    <motion.table
+                      className="w-full border-collapse border-[#D7D9E7] min-w-[700px]"
+                      initial={{ opacity: 0, translateY: "30px" }}
+                      animate={{ opacity: 1, translateY: "0" }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <thead className="text-black text-start rounded-[10px]">
+                        <tr className="rounded-[10px]">
+                          <th
+                            className={
+                              "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                            }
+                          >
+                            №
+                          </th>
 
-                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          Resurs kodi
-                        </th>
-                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          Resurs nomi
-                        </th>
-                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                          GOST
-                        </th>
+                          <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                            Resurs kodi
+                          </th>
+                          <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                            Resurs nomi
+                          </th>
+                          <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                            GOST
+                          </th>
 
-                        <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
-                          O&apos;lchov birligi
-                        </th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {filteredData?.map((item, index) => (
-                        <tr
-                          key={index}
-                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                        >
-                          <td className=" font-medium text-xs py-[10px]  text-center">
-                            {index + 1}
-                          </td>
-                          <td className=" font-medium text-xs py-[10px] text-[#0256BA]  text-start">
-                            <Link
-                              href={`materials/${get(
-                                item,
-                                "material_csr_code"
-                              )}`}
-                            >
-                              {get(item, "material_csr_code")}
-                            </Link>
-                          </td>
-
-                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                            {get(item, "material_name")}
-                          </td>
-                          <td className=" font-medium text-xs py-[10px] max-w-[200px]">
-                            {get(item, "materil_gost")}
-                          </td>
-                          <td className=" font-medium text-xs py-[10px] text-center">
-                            <div className="flex space-x-[4px]">
-                              <Image
-                                src={"/icons/measure-basket.svg"}
-                                alt="measure-basket"
-                                width={16}
-                                height={16}
-                              />
-                              <p>{get(item, "material_measure")}</p>
-                            </div>
-                          </td>
+                          <th className=" text-start text-[10px] rounded-tr-[10px]   bg-white text-gray-900  font-bold ">
+                            O&apos;lchov birligi
+                          </th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </motion.table>
+                      </thead>
+
+                      <tbody>
+                        {filteredData?.map((item, index) => (
+                          <tr
+                            key={index}
+                            className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                          >
+                            <td className=" font-medium text-xs py-[10px]  text-center">
+                              {index + 1}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] text-[#0256BA]  text-start">
+                              <Link
+                                href={`materials/${get(
+                                  item,
+                                  "material_csr_code"
+                                )}`}
+                              >
+                                {get(item, "material_csr_code")}
+                              </Link>
+                            </td>
+
+                            <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                              {get(item, "material_name")}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] max-w-[200px]">
+                              {get(item, "materil_gost")}
+                            </td>
+                            <td className=" font-medium text-xs py-[10px] text-center">
+                              <div className="flex space-x-[4px]">
+                                <Image
+                                  src={"/icons/measure-basket.svg"}
+                                  alt="measure-basket"
+                                  width={16}
+                                  height={16}
+                                />
+                                <p>{get(item, "material_measure")}</p>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </motion.table>{" "}
+                  </div>
                   <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-                  <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                  <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex flex-col lg:flex-row items-center justify-between">
                     <div>
                       <p className="text-sm text-[#9392A0]">
                         {" "}
@@ -406,9 +410,9 @@ const Index = () => {
                   </div>
                 </div>
               ) : (
-                <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+                <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] overflow-x-auto">
                   <motion.table
-                    className="w-full border-collapse border-[#D7D9E7]"
+                    className="w-full border-collapse border-[#D7D9E7] min-w-[700px]"
                     initial={{ opacity: 0, translateY: "30px" }}
                     animate={{ opacity: 1, translateY: "0" }}
                     transition={{ duration: 0.4 }}
@@ -481,7 +485,7 @@ const Index = () => {
                     </tbody>
                   </motion.table>
                   <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-                  <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                  <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex flex-col lg:flex-row items-center justify-between">
                     <div>
                       <p className="text-sm text-[#9392A0]">
                         {" "}

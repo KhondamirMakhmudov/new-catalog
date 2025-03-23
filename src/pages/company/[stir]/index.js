@@ -13,6 +13,7 @@ import { motion } from "framer-motion";
 import Pagination from "@/components/pagination";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const [page, setPage] = useState(1);
@@ -58,8 +59,8 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
-
-      <main className="container mb-[46px]">
+      <NavigationButtom />
+      <main className="container mb-[46px] pb-[20px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
             onClick={() => router.back()}
@@ -108,7 +109,7 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="col-span-7 flex gap-x-[36px] items-center">
+            <div className="col-span-12 lg:col-span-7 flex gap-[36px] lg:flex-nowrap flex-wrap items-center">
               <div>
                 <div className="flex gap-x-[8px]">
                   <p className="text-sm font-bold">Rahbari:</p>
@@ -125,7 +126,7 @@ const Index = () => {
                 </div>
               </div>
 
-              <div className="w-[1px] h-[36px] bg-[#E6E5ED]"></div>
+              <div className="w-[1px] h-[36px] bg-[#E6E5ED] lg:block hidden"></div>
               <div>
                 <div className="flex gap-x-[8px]">
                   <p className="text-sm font-bold">Elektron pochta:</p>
@@ -152,7 +153,7 @@ const Index = () => {
             <div className="col-span-12">
               <Reveal>
                 <div
-                  className=" min-h-[164px] w-full bg-center bg-no-repeat bg-cover rounded-[20px] flex items-center justify-center"
+                  className="min-h-[164px] w-full bg-center bg-no-repeat bg-cover rounded-[20px] flex items-center justify-center"
                   style={{ backgroundImage: `url(/images/address.png)` }}
                 >
                   <Link
@@ -178,14 +179,14 @@ const Index = () => {
           <div className="grid grid-cols-12 gap-x-[30px]">
             <div className="col-span-12  space-y-[16px]">
               <div>
-                <div className="grid grid-cols-12 items-end gap-x-[30px]">
+                <div className="grid grid-cols-12 items-end gap-[30px]">
                   <button
-                    className={`col-span-2 py-[10px] px-[20px] font-gilroy bg-[#0256BA] text-white border-none rounded-[8px] text-sm `}
+                    className={` col-span-12 lg:col-span-2 py-[10px] px-[20px] font-gilroy bg-[#0256BA] text-white border-none rounded-[8px] text-sm `}
                   >
                     Barcha e&apos;lonlar
                   </button>
 
-                  <div className="flex flex-col font-gilroy col-span-10 gap-y-[3px]">
+                  <div className="flex flex-col font-gilroy col-span-12  lg:col-span-10 gap-y-[3px]">
                     <label className="font-semibold">Mahsulot nomi</label>
                     <input
                       onChange={debounce(function (e) {
@@ -199,115 +200,117 @@ const Index = () => {
                 </div>
               </div>
               <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
-                <motion.table
-                  className="w-full border-collapse border-[#D7D9E7]"
-                  initial={{ opacity: 0, translateY: "30px" }}
-                  animate={{ opacity: 1, translateY: "0" }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <thead className="text-black text-start rounded-[10px]">
-                    <tr className="rounded-[10px]">
-                      <th
-                        className={
-                          "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
-                        }
-                      >
-                        №
-                      </th>
-                      <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
-                        Hudud
-                      </th>
+                <div className="overflow-x-auto">
+                  <motion.table
+                    className="w-full border-collapse border-[#D7D9E7] min-w-[700px]"
+                    initial={{ opacity: 0, translateY: "30px" }}
+                    animate={{ opacity: 1, translateY: "0" }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <thead className="text-black text-start rounded-[10px]">
+                      <tr className="rounded-[10px]">
+                        <th
+                          className={
+                            "px-4 py-2 text-[10px] rounded-tl-[10px] bg-white  text-gray-900  font-bold "
+                          }
+                        >
+                          №
+                        </th>
+                        <th className=" text-[10px]  text-start  bg-white text-gray-900  font-bold ">
+                          Hudud
+                        </th>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Resurs kodi
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Resurs nomi
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        O&apos;lchov Birligi
-                      </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs kodi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Resurs nomi
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          O&apos;lchov Birligi
+                        </th>
 
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Narxi (so’m)
-                      </th>
-                      <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
-                        Oxirgi o&apos;zgarish
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {filteredData.map((item, index) => (
-                      <tr
-                        key={index}
-                        className="text-sm odd:bg-[#EDF4FC] even:bg-white"
-                      >
-                        <td className=" font-medium text-xs py-[10px]  text-center">
-                          {index + 1}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px]">
-                          {get(item, "material_region")}
-                        </td>
-                        <td className=" font-medium text-[#0256BA] text-xs py-[10px]">
-                          <Link
-                            href={`/materials/${get(item, "material_name")}`}
-                            className="underline-0 hover:underline transition-all duration-300"
-                          >
-                            {get(item, "material_csr_code")}
-                          </Link>
-                        </td>
-                        <td className=" font-medium text-xs py-[10px] max-w-[150px]">
-                          {get(item, "material_name")}
-                        </td>
-                        <td className=" font-medium text-xs py-[10px] text-center">
-                          <div className="flex space-x-[4px]">
-                            <Image
-                              src={"/icons/measure-basket.svg"}
-                              alt="measure-basket"
-                              width={16}
-                              height={16}
-                            />
-                            <p>{get(item, "material_measure")}</p>
-                          </div>
-                        </td>
-
-                        <td className=" font-medium text-xs py-[10px]">
-                          <NumericFormat
-                            thousandSeparator={" "}
-                            displayType="text"
-                            value={get(item, "material_price")}
-                            className="w-[80px] bg-transparent"
-                          />
-                        </td>
-
-                        <td className=" font-medium text-xs py-[10px] text-center">
-                          <div className="flex space-x-[4px]">
-                            <Image
-                              src={"/icons/clock.svg"}
-                              alt="clock"
-                              width={16}
-                              height={16}
-                            />
-                            <p>
-                              {" "}
-                              {dayjs(get(item, "material_updated_date")).format(
-                                "DD.MM.YYYY"
-                              )}
-                            </p>
-                            <p>
-                              {dayjs(get(item, "material_updated_date")).format(
-                                "HH:mm"
-                              )}
-                            </p>
-                          </div>
-                        </td>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Narxi (so’m)
+                        </th>
+                        <th className=" text-start text-[10px]   bg-white text-gray-900  font-bold ">
+                          Oxirgi o&apos;zgarish
+                        </th>
                       </tr>
-                    ))}
-                  </tbody>
-                </motion.table>
+                    </thead>
+
+                    <tbody>
+                      {filteredData.map((item, index) => (
+                        <tr
+                          key={index}
+                          className="text-sm odd:bg-[#EDF4FC] even:bg-white"
+                        >
+                          <td className=" font-medium text-xs py-[10px]  text-center">
+                            {index + 1}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px]">
+                            {get(item, "material_region")}
+                          </td>
+                          <td className=" font-medium text-[#0256BA] text-xs py-[10px]">
+                            <Link
+                              href={`/materials/${get(item, "material_name")}`}
+                              className="underline-0 hover:underline transition-all duration-300"
+                            >
+                              {get(item, "material_csr_code")}
+                            </Link>
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] max-w-[150px]">
+                            {get(item, "material_name")}
+                          </td>
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/measure-basket.svg"}
+                                alt="measure-basket"
+                                width={16}
+                                height={16}
+                              />
+                              <p>{get(item, "material_measure")}</p>
+                            </div>
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px]">
+                            <NumericFormat
+                              thousandSeparator={" "}
+                              displayType="text"
+                              value={get(item, "material_price")}
+                              className="w-[80px] bg-transparent"
+                            />
+                          </td>
+
+                          <td className=" font-medium text-xs py-[10px] text-center">
+                            <div className="flex space-x-[4px]">
+                              <Image
+                                src={"/icons/clock.svg"}
+                                alt="clock"
+                                width={16}
+                                height={16}
+                              />
+                              <p>
+                                {" "}
+                                {dayjs(
+                                  get(item, "material_updated_date")
+                                ).format("DD.MM.YYYY")}
+                              </p>
+                              <p>
+                                {dayjs(
+                                  get(item, "material_updated_date")
+                                ).format("HH:mm")}
+                              </p>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </motion.table>
+                </div>
                 <div className="w-full h-[1px] text-[#E2E2EA] "></div>
-                <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex items-center justify-between">
+                <div className="py-[20px] px-[24px] bg-white rounded-br-[12px] rounded-bl-[12px] flex lg:flex-row flex-col items-center justify-between">
                   <div>
                     <p className="text-sm text-[#9392A0]">
                       {get(companyAds, "data.count")} tadan{" "}

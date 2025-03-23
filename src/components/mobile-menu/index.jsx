@@ -147,6 +147,28 @@ const MobileMenu = () => {
               </li>
               <li>
                 <Link
+                  href="/classifier"
+                  className={` px-[12px] py-[8px] flex font-medium items-center ${
+                    router.pathname === "/classifier"
+                      ? "bg-[#EBF1F9] text-[#0256BA]"
+                      : "bg-transparent text-black"
+                  } justify-between  rounded-[8px]`}
+                  onClick={toggleMenu}
+                >
+                  <p>Klassifikator</p>
+                  <div
+                    className={`${
+                      router.pathname === "/classifier"
+                        ? " bg-[#0256BA]"
+                        : "bg-[#9AA8BCFF]"
+                    } inline-block rounded-full`}
+                  >
+                    <RightIcon color="white" />
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/loyihalar"
                   className={` px-[12px] py-[8px] flex font-medium items-center ${
                     router.pathname === "/loyihalar"

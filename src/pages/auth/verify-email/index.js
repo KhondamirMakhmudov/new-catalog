@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { useState } from "react";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -47,6 +48,7 @@ const Index = () => {
   return (
     <>
       <Header />
+      <NavigationButtom />
       <main className="container font-gilroy h-screen">
         <section className="mt-[16px] flex items-center space-x-[12px]">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">

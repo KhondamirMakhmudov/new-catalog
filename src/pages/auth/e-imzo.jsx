@@ -6,6 +6,7 @@ import Header from "@/components/header";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
+import NavigationButtom from "@/components/bottom-navigation";
 const ESIGN = dynamic(() => import("../../components/e-imzo"), {
   ssr: false,
 });
@@ -30,6 +31,7 @@ const EimzoLogin = () => {
   return (
     <>
       <Header />
+      <NavigationButtom />
       <main className="container font-gilroy">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy mb-[21px]">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
@@ -48,8 +50,8 @@ const EimzoLogin = () => {
           </Link>
         </section>
         <section>
-          <div className="grid grid-cols-12">
-            <div className="col-span-6">
+          <div className="lg:grid grid-cols-12 flex items-center justify-center">
+            <div className="col-span-6 hidden lg:block">
               <div className=" ">
                 <div
                   className="bg-[#0256BA] rounded-[20px] min-h-[823px] bg-no-repeat bg-center px-[31px] relative"

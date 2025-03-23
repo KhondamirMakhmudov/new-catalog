@@ -10,13 +10,14 @@ import Reveal from "@/components/reveal";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
   return (
     <div className="bg-[#F7F7F7]">
       <Header />
-
+      <NavigationButtom />
       <main className="container ">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button

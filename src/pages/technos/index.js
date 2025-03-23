@@ -14,6 +14,7 @@ import ContentLoader from "@/components/loader/content-loader";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -65,7 +66,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button

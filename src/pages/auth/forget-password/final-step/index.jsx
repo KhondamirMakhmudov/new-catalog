@@ -2,11 +2,13 @@ import Header from "@/components/header";
 import Link from "next/link";
 import RightIcon from "@/components/icons/right";
 import Image from "next/image";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   return (
     <>
       <Header />
+      <NavigationButtom />
       <main className="container font-gilroy h-screen">
         <section className="mt-[16px] flex items-center space-x-[12px]">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">

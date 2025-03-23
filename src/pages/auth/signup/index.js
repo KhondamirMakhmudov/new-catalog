@@ -9,6 +9,7 @@ import { KEYS } from "@/constants/key";
 import { URLS } from "@/constants/url";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const [responseErrors, setResponseErrors] = useState({});
@@ -53,6 +54,7 @@ const Index = () => {
   return (
     <div>
       <Header />
+      <NavigationButtom />
       <main className="container font-gilroy   h-screen">
         <section className="mt-[16px] flex items-center space-x-[12px]">
           <Link href={"/"} className="text-[#262D33] text-sm font-semibold">
@@ -79,8 +81,8 @@ const Index = () => {
         </section>
 
         <section>
-          <div className="grid grid-cols-12 gap-x-[48px] mt-[21px] ">
-            <div className="col-span-6 ">
+          <div className=" lg:grid grid-cols-12 flex items-center justify-center gap-x-[48px] mt-[21px] ">
+            <div className="col-span-6 hidden lg:block ">
               <div
                 className="bg-[#0256BA] rounded-[20px] min-h-[823px] bg-no-repeat bg-center px-[31px] relative"
                 style={{ backgroundImage: `url(/images/map_uzb.png)` }}
@@ -192,8 +194,8 @@ const Index = () => {
               </div>
             </div>
 
-            <div className="col-span-6 place-items-center">
-              <div className="max-w-[427px] w-full flex flex-col justify-center items-center ">
+            <div className="col-span-12 lg:col-span-6 place-items-center">
+              <div className=" w-full flex flex-col justify-center items-center ">
                 <h1 className="text-[32px] font-bold mb-[16px]">
                   Ro&apos;yxatdan o&apos;tish
                 </h1>

@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import Footer from "@/components/footer";
 import SimpleLoader from "@/components/loader/simple-loader";
 import { NumericFormat } from "react-number-format";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const [limit] = useState(9);
@@ -250,17 +251,17 @@ const Index = () => {
   }, [materialAds, currency]);
 
   ///// Tavsiyaviy narx
-  console.log("Maximum:", maximum);
-  console.log("Average:", average);
-  console.log("Minimum:", minimum);
+  // console.log("Maximum:", maximum);
+  // console.log("Average:", average);
+  // console.log("Minimum:", minimum);
 
-  console.log("soliq max", get(soliqData, "data.max_sum", 0).toFixed(2));
-  console.log("soliq midle", get(soliqData, "data.midle_sum", 0).toFixed(2));
-  console.log("soliq min", get(soliqData, "data.min_sum", 0).toFixed(2));
+  // console.log("soliq max", get(soliqData, "data.max_sum", 0).toFixed(2));
+  // console.log("soliq midle", get(soliqData, "data.midle_sum", 0).toFixed(2));
+  // console.log("soliq min", get(soliqData, "data.min_sum", 0).toFixed(2));
 
-  console.log("birja max", get(birja, "data.max_sum", 0).toFixed(2));
-  console.log("birja midle", get(birja, "data.middle_sum", 0).toFixed(2));
-  console.log("birja min", get(birja, "data.min_sum", 0).toFixed(2));
+  // console.log("birja max", get(birja, "data.max_sum", 0).toFixed(2));
+  // console.log("birja midle", get(birja, "data.middle_sum", 0).toFixed(2));
+  // console.log("birja min", get(birja, "data.min_sum", 0).toFixed(2));
 
   const recommendedPriceMax = (
     (Number(get(soliqData, "data.max_sum", 0).toFixed(2)) +
@@ -291,7 +292,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] min-h-screen">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
@@ -325,9 +326,9 @@ const Index = () => {
                 <ContentLoader />
               ) : (
                 <div className="grid grid-cols-12 bg-white p-[20px] border border-[#E4E7F5] rounded-[12px] gap-y-[30px] font-gilroy">
-                  <div className="col-span-9 flex justify-between items-center">
+                  <div className="col-span-12 lg:col-span-9 flex justify-between items-center">
                     <div className="">
-                      <div className="flex gap-x-[20px] items-center mb-[12px]">
+                      <div className="flex gap-[20px] flex-wrap lg:flex-nowrap items-center mb-[12px]">
                         <div className="flex gap-x-[6px]">
                           <Image
                             src={"/icons/clock.svg"}
@@ -394,7 +395,7 @@ const Index = () => {
                       </h2>
                     </div>
                   </div>
-                  <div className="col-span-3">
+                  <div className="col-span-12 lg:col-span-3">
                     <motion.button
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
@@ -487,12 +488,12 @@ const Index = () => {
                     )}
                   </div> */}
 
-                  <div className="col-span-12 grid grid-cols-10 gap-x-[14px]">
+                  <div className="col-span-12 grid grid-cols-10 gap-[14px]">
                     <motion.div
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.2 }}
-                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                      className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
                     >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
@@ -549,7 +550,7 @@ const Index = () => {
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.2 }}
-                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                      className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
                     >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
@@ -606,7 +607,7 @@ const Index = () => {
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.2 }}
-                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                      className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
                     >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
@@ -642,7 +643,7 @@ const Index = () => {
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.2 }}
-                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                      className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
                     >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
@@ -678,7 +679,7 @@ const Index = () => {
                       initial={{ scale: 0.01 }}
                       animate={{ scale: 1 }}
                       transition={{ duration: 0.2 }}
-                      className="p-[14px] col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
+                      className="p-[14px] col-span-12 lg:col-span-2 border border-[#E6E5ED] rounded-[16px] inline-block"
                     >
                       <div className="flex gap-x-[10px] items-center">
                         <div>
@@ -765,9 +766,9 @@ const Index = () => {
                 </div>
 
                 <div className="col-span-12 mt-[16px]">
-                  <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px]">
+                  <div className="font-gilroy bg-white  border border-[#E0E2F0] rounded-[12px] overflow-x-auto">
                     <motion.table
-                      className="w-full border-collapse border-[#D7D9E7]"
+                      className="w-full border-collapse border-[#D7D9E7] min-w-[700px]"
                       initial={{ opacity: 0, translateY: "30px" }}
                       animate={{ opacity: 1, translateY: "0" }}
                       transition={{ duration: 0.4 }}

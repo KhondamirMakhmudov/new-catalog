@@ -77,9 +77,9 @@ const Index = () => {
           </Link>
         </section>
         <section>
-          <div className="grid grid-cols-12 gap-x-[48px] ">
-            <div className="lg:col-span-6 col-span-12">
-              <div className="lg:max-w-[427px] w-full flex flex-col justify-center items-center mt-[72px]">
+          <div className="lg:grid grid-cols-12 flex justify-center items-center gap-[48px] ">
+            <div className="col-span-6 lg:col-span-6">
+              <div className="lg:max-w-2xl w-full flex flex-col justify-center items-center mt-[72px]">
                 <h1 className="text-[32px] font-bold ">Kirish</h1>
                 <p className="font-normal text-[#718096]">
                   Oqilona yuboring, sarflang va tejang
@@ -92,7 +92,7 @@ const Index = () => {
                         {...register("email", { required: true })}
                         type="text"
                         placeholder="E-mailni kiriting"
-                        className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg"
+                        className="placeholder:text-[#A0AEC0] text-black  w-full p-[16px] border border-[#C8CED5] rounded-lg"
                       />
                       {errors.email && (
                         <span className={"text-xs text-red-500"}>
@@ -105,7 +105,7 @@ const Index = () => {
                         {...register("password", { required: true })}
                         type={showPassword ? "text" : "password"}
                         placeholder="Parol"
-                        className="placeholder:text-[#A0AEC0] text-black max-w-[427px] w-full p-[16px] border border-[#C8CED5] rounded-lg"
+                        className="placeholder:text-[#A0AEC0] text-black  w-full p-[16px] border border-[#C8CED5] rounded-lg"
                       />
                       <div
                         onClick={() => setShowPassword((prev) => !prev)}

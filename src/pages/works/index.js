@@ -12,6 +12,7 @@ import { config } from "@/config";
 import { motion } from "framer-motion";
 import Pagination from "@/components/pagination";
 import Image from "next/image";
+import NavigationButtom from "@/components/bottom-navigation";
 
 const Index = () => {
   const router = useRouter();
@@ -47,6 +48,7 @@ const Index = () => {
   return (
     <div>
       <Header />
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
@@ -127,9 +129,9 @@ const Index = () => {
               {get(worksCategory, "data.results", []).map((item) => (
                 <div className=" " key={get(item, "id")}>
                   {selectedButton?.id === item.id && tableData && (
-                    <div className="">
+                    <div className="overflow-x-auto">
                       <motion.table
-                        className="w-full border-collapse border-[#D7D9E7]"
+                        className="w-full border-collapse border-[#D7D9E7] min-w-[600px]"
                         initial={{ opacity: 0, translateY: "30px" }}
                         animate={{ opacity: 1, translateY: "0" }}
                         transition={{ duration: 0.4 }}

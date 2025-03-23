@@ -15,6 +15,7 @@ import dayjs from "dayjs";
 import ContentLoader from "@/components/loader/content-loader";
 import usePostQuery from "@/hooks/api/usePostQuery";
 import { useRouter } from "next/router";
+import NavigationButtom from "@/components/bottom-navigation";
 const Index = () => {
   const router = useRouter();
   const [volumed, setVolumed] = useState(null);
@@ -85,7 +86,7 @@ const Index = () => {
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
-
+      <NavigationButtom />
       <main className="container mb-[46px]">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
