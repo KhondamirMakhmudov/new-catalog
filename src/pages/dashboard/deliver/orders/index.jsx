@@ -263,10 +263,7 @@ const Index = () => {
                         </button>
 
                         {Boolean(isOpen) && (
-                          <div
-                            className="fixed inset-0 z-50 flex items-center justify-center"
-                            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
-                          >
+                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
                             <div className="bg-white p-8 rounded shadow-md w-[700px] h-[800px] overflow-y-scroll flex flex-col">
                               <div
                                 className={
@@ -300,85 +297,101 @@ const Index = () => {
                                     <p>{get(item, "last_name")}</p>
                                   </div>
 
-                                  <p className={"text-lg mb-[15px] p-2"}>
-                                    Mahsulotga berilgan baho
-                                  </p>
-                                  <div
-                                    className={"mb-[10px] p-2"}
-                                    style={{
-                                      display: "flex",
-                                      flexDirection: "row",
-                                    }}
-                                  >
-                                    {[...Array(get(item, "rating"))].map(
-                                      (star, index) => {
-                                        return (
-                                          <label
-                                            key={index}
-                                            style={{ display: "inline-block" }}
-                                          >
-                                            <input
-                                              type="radio"
-                                              name="rating"
-                                              value={get(item, "rating")}
-                                              style={{ display: "none" }}
-                                            />
-                                            <svg
-                                              className="star"
-                                              width="25"
-                                              height="25"
-                                              viewBox="0 0 24 24"
-                                              fill={"#ffd700"}
-                                            >
-                                              <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
-                                            </svg>
-                                          </label>
-                                        );
-                                      }
-                                    )}
+                                  <div className={"w-full mt-[10px]  p-2"}>
+                                    <p className={"text-lg mb-[15px] p-2"}>
+                                      Buyurtmachining izohi
+                                    </p>
+                                    <p>{get(item, "comment")}</p>
                                   </div>
 
-                                  <div
-                                    className={
-                                      "w-full h-[1px] bg-gray-400 my-[20px]"
-                                    }
-                                  ></div>
-                                  <p className={"text-lg p-2 mb-[15px]"}>
-                                    Yetkazib beruvchiga berilgan baho
-                                  </p>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      flexDirection: "row",
-                                    }}
-                                    className={"p-2"}
-                                  >
-                                    {[
-                                      ...Array(get(item, "rating_company")),
-                                    ].map((star, index) => {
-                                      return (
-                                        <label
-                                          key={index}
-                                          style={{ display: "inline-block" }}
-                                        >
-                                          <input
-                                            type="radio"
-                                            name="rating"
-                                            value={get(item, "rating_company")}
-                                            style={{ display: "none" }}
-                                          />
-                                          <svg
-                                            className="star"
-                                            width="25"
-                                            height="25"
-                                            viewBox="0 0 24 24"
-                                            fill={"#ffd700"}
-                                          >
-                                            <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
-                                          </svg>
-                                        </label>
-                                      );
-                                    })}
+                                  <div className="flex items-center gap-[20px]">
+                                    {/* Mahsulotga berilgan baho */}
+                                    <div>
+                                      <p className={"text-lg mb-[15px] p-2"}>
+                                        Mahsulotga berilgan baho
+                                      </p>
+                                      <div
+                                        className={"mb-[10px] p-2"}
+                                        style={{
+                                          display: "flex",
+                                          flexDirection: "row",
+                                        }}
+                                      >
+                                        {[...Array(get(item, "rating"))].map(
+                                          (star, index) => {
+                                            return (
+                                              <label
+                                                key={index}
+                                                style={{
+                                                  display: "inline-block",
+                                                }}
+                                              >
+                                                <input
+                                                  type="radio"
+                                                  name="rating"
+                                                  value={get(item, "rating")}
+                                                  style={{ display: "none" }}
+                                                />
+                                                <svg
+                                                  className="star"
+                                                  width="25"
+                                                  height="25"
+                                                  viewBox="0 0 24 24"
+                                                  fill={"#ffd700"}
+                                                >
+                                                  <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
+                                                </svg>
+                                              </label>
+                                            );
+                                          }
+                                        )}
+                                      </div>
+                                    </div>
+                                    {/* Yetkazib beruvchiga berilgan baho */}
+                                    <div>
+                                      <p className={"text-lg p-2 mb-[15px]"}>
+                                        Yetkazib beruvchiga berilgan baho
+                                      </p>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          flexDirection: "row",
+                                        }}
+                                        className={"p-2"}
+                                      >
+                                        {[
+                                          ...Array(get(item, "rating_company")),
+                                        ].map((star, index) => {
+                                          return (
+                                            <label
+                                              key={index}
+                                              style={{
+                                                display: "inline-block",
+                                              }}
+                                            >
+                                              <input
+                                                type="radio"
+                                                name="rating"
+                                                value={get(
+                                                  item,
+                                                  "rating_company"
+                                                )}
+                                                style={{ display: "none" }}
+                                              />
+                                              <svg
+                                                className="star"
+                                                width="25"
+                                                height="25"
+                                                viewBox="0 0 24 24"
+                                                fill={"#ffd700"}
+                                              >
+                                                <polygon points="12,2 15,8 22,9 17,14 18,21 12,17 6,21 7,14 2,9 9,8" />
+                                              </svg>
+                                            </label>
+                                          );
+                                        })}
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               ))}
