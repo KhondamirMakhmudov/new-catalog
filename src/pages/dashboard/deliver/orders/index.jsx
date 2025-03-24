@@ -263,14 +263,14 @@ const Index = () => {
                         </button>
 
                         {Boolean(isOpen) && (
-                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30">
                             <div className="bg-white p-8 rounded shadow-md w-[700px] h-[800px] overflow-y-scroll flex flex-col">
                               <div
                                 className={
                                   "flex justify-between items-center mb-[30px]"
                                 }
                               >
-                                <p>Izoh qismi</p>
+                                <p className="text-lg">Izoh qismi</p>
 
                                 <button onClick={() => setIsOpen(!isOpen)}>
                                   <Image
