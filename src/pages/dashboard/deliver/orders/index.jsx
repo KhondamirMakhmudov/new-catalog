@@ -263,19 +263,17 @@ const Index = () => {
                         </button>
 
                         {Boolean(isOpen) && (
-                          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-30">
+                          <div
+                            className="fixed inset-0 z-50 flex items-center justify-center"
+                            style={{ backgroundColor: "rgba(0, 0, 0, 0.3)" }}
+                          >
                             <div className="bg-white p-8 rounded shadow-md w-[700px] h-[800px] overflow-y-scroll flex flex-col">
                               <div
                                 className={
                                   "flex justify-between items-center mb-[30px]"
                                 }
                               >
-                                {/* <button
-                                  className={"text-lg "}
-                                  onClick={() => handleListComment(item)}
-                                >
-                                  Ko&apos;rish
-                                </button> */}
+                                <p>Izoh qismi</p>
 
                                 <button onClick={() => setIsOpen(!isOpen)}>
                                   <Image
@@ -338,13 +336,6 @@ const Index = () => {
                                         );
                                       }
                                     )}
-                                  </div>
-
-                                  <div className={"w-full mt-[10px]  p-2"}>
-                                    <p className={"text-lg mb-[15px] p-2"}>
-                                      Buyurtmachining izohi
-                                    </p>
-                                    <p>{get(item, "comment")}</p>
                                   </div>
 
                                   <div
