@@ -297,11 +297,17 @@ const Index = () => {
                                     <p>{get(item, "last_name")}</p>
                                   </div>
 
-                                  <div className={"w-full mt-[10px]  p-2"}>
+                                  <div
+                                    className={
+                                      "w-full my-[10px]  p-2 border-b border-b-[#E9E9E9]"
+                                    }
+                                  >
                                     <p className={"text-lg mb-[15px] p-2"}>
                                       Buyurtmachining izohi
                                     </p>
-                                    <p>{get(item, "comment")}</p>
+                                    <p className="text-[17px] p-2">
+                                      {get(item, "comment")}
+                                    </p>
                                   </div>
 
                                   <div className="flex items-center flex-wrap lg:flex-nowrap gap-[20px] mb-[15px]">
@@ -311,7 +317,7 @@ const Index = () => {
                                         Mahsulotga berilgan baho
                                       </p>
                                       <div
-                                        className={"mb-[10px] p-2"}
+                                        className={" p-2"}
                                         style={{
                                           display: "flex",
                                           flexDirection: "row",
