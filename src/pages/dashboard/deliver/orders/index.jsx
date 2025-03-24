@@ -304,10 +304,10 @@ const Index = () => {
                                     <p>{get(item, "comment")}</p>
                                   </div>
 
-                                  <div className="flex items-center gap-[20px]">
+                                  <div className="flex items-center flex-wrap lg:flex-nowrap gap-[20px] mb-[15px]">
                                     {/* Mahsulotga berilgan baho */}
                                     <div>
-                                      <p className={"text-lg mb-[15px] p-2"}>
+                                      <p className={"text-lg  p-2"}>
                                         Mahsulotga berilgan baho
                                       </p>
                                       <div
@@ -347,9 +347,11 @@ const Index = () => {
                                         )}
                                       </div>
                                     </div>
+
+                                    <div className="w-[1px] h-[50px] bg-[#E9E9E9]"></div>
                                     {/* Yetkazib beruvchiga berilgan baho */}
                                     <div>
-                                      <p className={"text-lg p-2 mb-[15px]"}>
+                                      <p className={"text-lg p-2 "}>
                                         Yetkazib beruvchiga berilgan baho
                                       </p>
                                       <div
