@@ -25,7 +25,7 @@ const SidebarCustomer = () => {
                 router.pathname === "/dashboard/customer/main"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
-              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+              } w-full flex items-center gap-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
@@ -61,7 +61,7 @@ const SidebarCustomer = () => {
                 router.pathname === "/dashboard/customer/orders"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
-              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+              } w-full flex items-center gap-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
@@ -97,7 +97,7 @@ const SidebarCustomer = () => {
                 router.pathname === "/dashboard/customer/profile"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
-              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+              } w-full flex items-center gap-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${

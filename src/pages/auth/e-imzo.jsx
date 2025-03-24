@@ -50,7 +50,7 @@ const EimzoLogin = () => {
           </Link>
         </section>
         <section>
-          <div className="lg:grid grid-cols-12 flex items-center justify-center">
+          <div className="lg:grid grid-cols-12 flex items-center lg:items-start justify-center">
             <div className="col-span-6 hidden lg:block">
               <div className=" ">
                 <div

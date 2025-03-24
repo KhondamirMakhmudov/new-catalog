@@ -27,7 +27,7 @@ const Sidebar = () => {
                 router.pathname === "/dashboard/deliver/main"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
-              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+              } w-full flex items-center gap-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
@@ -63,7 +63,7 @@ const Sidebar = () => {
                 router.pathname === "/dashboard/deliver/my-ads"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
-              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+              } w-full flex items-center gap-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
@@ -101,7 +101,7 @@ const Sidebar = () => {
                 router.pathname === "/dashboard/deliver/orders"
                   ? "bg-white border-l-[2px] border-[#0256BA]"
                   : "bg-transparent"
-              } w-full flex items-center gap-x-[14px] py-[14px] px-[12px] transition-all duration-100`}
+              } w-full flex items-center gap-[14px] py-[14px] px-[12px] transition-all duration-100`}
             >
               <div
                 className={`p-[14px] ${
