@@ -55,6 +55,8 @@ const Index = () => {
     enabled: !!(get(session, "user.token") || token),
   });
 
+  console.log(user, "user");
+
   const { mutate: sendOrder, isLoading: isLoadingOrder } = usePostQuery({
     listKeyId: "order-one",
     hideSuccessToast: true,
@@ -582,53 +584,55 @@ const Index = () => {
                 </button>
               </div>
             </div>
-            <AnimatePresence>
-              {isModalOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 50 }}
-                  transition={{ duration: 0.3 }}
-                  className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 font-gilroy"
-                  onClick={() => setIsModalOpen(false)}
-                >
-                  <div className="bg-white p-6 rounded shadow-lg w-96">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-[12px]">
-                        <Image
-                          src={"/icons/warning.svg"}
-                          alt="warning"
-                          width={24}
-                          height={24}
-                        />
-                        <h2 className="text-[#D36804FF] text-lg font-bold">
-                          Siz ro&apos;yxatdan o&apos;tmagansiz.
-                        </h2>
+            {isEmpty(get(user, "data.id")) && (
+              <AnimatePresence>
+                {isModalOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 50 }}
+                    transition={{ duration: 0.3 }}
+                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 font-gilroy"
+                    onClick={() => setIsModalOpen(false)}
+                  >
+                    <div className="bg-white p-6 rounded shadow-lg w-96">
+                      <div className="space-y-2">
+                        <div className="flex items-center gap-[12px]">
+                          <Image
+                            src={"/icons/warning.svg"}
+                            alt="warning"
+                            width={24}
+                            height={24}
+                          />
+                          <h2 className="text-[#D36804FF] text-lg font-bold">
+                            Siz ro&apos;yxatdan o&apos;tmagansiz.
+                          </h2>
+                        </div>
+                        <p className="text-sm">
+                          Ro&apos;yxatdan o&apos;tib, keyin mahsulot buyurtma
+                          qiling!
+                        </p>
                       </div>
-                      <p className="text-sm">
-                        Ro&apos;yxatdan o&apos;tib, keyin mahsulot buyurtma
-                        qiling!
-                      </p>
-                    </div>
 
-                    <div className="flex gap-x-[10px]">
-                      <button
-                        onClick={() => setIsModalOpen(false)}
-                        className="mt-4 bg-gray-500 text-white px-4 py-2 rounded"
-                      >
-                        Yopish
-                      </button>
-                      <button
-                        onClick={() => router.push("/auth/login")}
-                        className="mt-4 w-full bg-[#0256BAFF] text-white py-2 rounded"
-                      >
-                        Ro&apos;yxatdan o&apos;tish
-                      </button>
+                      <div className="flex gap-x-[10px]">
+                        <button
+                          onClick={() => setIsModalOpen(false)}
+                          className="mt-4 bg-gray-500 text-white px-4 py-2 rounded"
+                        >
+                          Yopish
+                        </button>
+                        <button
+                          onClick={() => router.push("/auth/login")}
+                          className="mt-4 w-full bg-[#0256BAFF] text-white py-2 rounded"
+                        >
+                          Ro&apos;yxatdan o&apos;tish
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            )}
           </section>
         </main>
       </div>
