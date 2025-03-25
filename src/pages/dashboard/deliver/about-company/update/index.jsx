@@ -51,7 +51,7 @@ const Index = () => {
           toast.success("E'lon muvaffaqiyatli tahrirlandi", {
             position: "top-center",
           });
-          router.push("/dashboard/deliver/profile");
+          router.push("/dashboard/deliver/about-company");
         },
         onError: (error) => {
           toast.error(`Error is ${error}`, { position: "top-right" });
@@ -108,7 +108,6 @@ const Index = () => {
             <input
               type="mail"
               {...register("company_email")}
-              disabled={true}
               placeholder="Kiriting"
               className="py-[14px] px-[16px] bg-white w-full border border-[#E2E8F0] rounded-[12px]"
             />
