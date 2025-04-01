@@ -3,38 +3,30 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import RightIcon from "@/components/icons/right";
 import { useState, useEffect } from "react";
-import { nth } from "lodash";
-import parse from "html-react-parser";
+import { get } from "lodash";
+import Footer from "@/components/footer";
 
 const Index = () => {
   const router = useRouter();
-  const [responseData, setResponseData] = useState(null);
-  const [error, setError] = useState(null);
+
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://doc.mkinfo.uz/app_main/api/document/"
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setResponseData(data);
-      } catch (error) {
-        setError(error.message);
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    fetch("https://shnk.tmsiti.uz/reglament/qurilish/")
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) =>
+        console.error("Ma'lumotlarni olishda xatolik yuz berdi:", error)
+      );
   }, []);
+
+  console.log(get);
+
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
 
-      <main className="container mb-[46px]">
+      <main className="container ">
         <section className="mt-[16px] flex items-center space-x-[12px] font-gilroy">
           <button
             onClick={() => router.back()}
@@ -57,19 +49,54 @@ const Index = () => {
           <h1 className="font-bold text-[32px] my-[16px] font-anybody">
             Qurilish reglamentlari
           </h1>
+
+          <table className="col-span-12 mt-2 border-collapse border border-gray-300 w-full text-left my-[30px]">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border border-gray-300 px-4 py-2 text-center">
+                  №
+                </th>
+                <th className="border border-gray-300 px-4 py-2 ">
+                  Белгиланиши{" "}
+                </th>
+                <th className="border border-gray-300 px-4 py-2 ">
+                  Қурилиш регламентлари номи
+                </th>
+                <th className="border border-gray-300 text-center px-4 py-2 ">
+                  Ҳужжат
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((doc, docIndex) => (
+                <tr key={docIndex} className="border border-gray-300">
+                  <td className="border border-gray-300 px-4 py-2 text-center">
+                    {docIndex + 1}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2 ">
+                    {doc.designation}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2 ">
+                    {doc.name}
+                  </td>
+
+                  <td className="border border-gray-300 px-4 py-2  text-center">
+                    <a
+                      href={`https://main.tmsiti.uz/media/${doc.pdf_uz}` || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
+                    >
+                      Кўриш
+                    </a>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
 
-        {nth(
-          responseData?.map((item) => (
-            <div
-              className="bg-white p-[30px] rounded-[20px] border-spacing-24 font-gilroy"
-              key={item.id}
-            >
-              {parse(item.document)}
-            </div>
-          )),
-          1
-        )}
+        <Footer />
       </main>
     </div>
   );
