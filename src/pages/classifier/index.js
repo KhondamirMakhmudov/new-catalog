@@ -120,7 +120,7 @@ const Index = () => {
           </h1>
 
           <div className="grid grid-cols-12 gap-[30px] font-gilroy">
-            <div className={"col-span-12 "}>
+            {/* <div className={"col-span-12 "}>
               <div className={"mb-5"}>
                 <div className={"mb-2.5"}>
                   <label className={""} htmlFor="#">
@@ -143,7 +143,7 @@ const Index = () => {
                   </span>
                 )}
               </div>
-            </div>
+            </div> */}
             <div className="col-span-12 lg:col-span-3 self-start font-gilroy bg-white p-[16px] border border-[#E0E2F0] rounded-[12px] ">
               <div className="flex justify-between items-center">
                 <h4 className="font-extrabold">Mahsulot qidirish</h4>
