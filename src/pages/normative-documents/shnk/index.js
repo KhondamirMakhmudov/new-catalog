@@ -168,7 +168,13 @@ const Index = ({ data }) => {
 
                                   <td className="border border-gray-300 px-4 py-2 w-1/5 text-center">
                                     <a
-                                      href={doc.url || "#"}
+                                      href={
+                                        doc.url
+                                          ? doc.url
+                                          : doc.pdf_uz
+                                          ? `https://main.tmsiti.uz/media/${doc.pdf_uz}`
+                                          : "#"
+                                      }
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       className="text-blue-600 underline"
