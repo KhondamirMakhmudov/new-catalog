@@ -666,9 +666,8 @@ export default function Home() {
             </div>
           </Reveal>
         </section>
+        <Footer />
       </main>
-
-      <Footer />
     </>
   );
 }
