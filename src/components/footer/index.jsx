@@ -26,12 +26,12 @@ const Footer = () => {
 
                 <ul className="space-x-[12px] mt-[16px]">
                   <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
-                    <Link href={"#"}>
+                    <a href={"https://t.me/tmsiti"} target="_blank">
                       <TelegramIcon />
-                    </Link>
+                    </a>
                   </li>
 
-                  <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
+                  {/* <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
                     <Link href={"#"}>
                       <InstagramIcon />
                     </Link>
@@ -41,12 +41,12 @@ const Footer = () => {
                     <Link href={"#"}>
                       <FacebookIcon />
                     </Link>
-                  </li>
+                  </li> */}
 
                   <li className="p-[9px] bg-[#3F7ECB] inline-block rounded-[12px]">
-                    <Link href={"#"}>
+                    <a href={"https://www.youtube.com/@tmsiti"} target="_blank">
                       <YoutubeIcon />
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -60,19 +60,21 @@ const Footer = () => {
                   </h4>
                 </li>
                 <li>
-                  <Link href={"/"}>Biz haqimizda</Link>
+                  <a href={"https://www.tmsiti.uz/about"} target="_blank">
+                    Biz haqimizda
+                  </a>
                 </li>
-
+                {/* 
                 <li>
                   <Link href={"/"}>Yangiliklar</Link>
-                </li>
+                </li> */}
 
                 <li>
                   <Link href={"/loyihalar"}>Loyihalar</Link>
                 </li>
 
                 <li>
-                  <Link href={"/"}>Bog&apos;lanish</Link>
+                  <Link href={"/contacts"}>Bog&apos;lanish</Link>
                 </li>
               </ul>
             </div>
