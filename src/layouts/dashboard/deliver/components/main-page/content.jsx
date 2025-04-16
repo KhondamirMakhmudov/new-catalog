@@ -36,6 +36,24 @@ const MainSectionContent = ({ children }) => {
         </div>
         <div className="col-span-3 bg-white p-[24px] rounded-[16px] ">
           <Link
+            href={"/dashboard/deliver/main/mxik-code"}
+            className="flex items-center justify-center flex-col"
+          >
+            <button className="p-[18px] rounded-full bg-[#EBF1F9] mb-[24px]">
+              <Image
+                src={"/icons/add-circle.svg"}
+                alt={"arrow-right"}
+                width={28}
+                height={28}
+                className={""}
+              />
+            </button>
+
+            <p className="font-semibold">Yangi mxik kod olish</p>
+          </Link>
+        </div>
+        {/* <div className="col-span-3 bg-white p-[24px] rounded-[16px] ">
+          <Link
             href={"/dashboard/deliver/main/machine-mechanos/add-ads"}
             className="flex items-center justify-center flex-col"
           >
@@ -89,7 +107,7 @@ const MainSectionContent = ({ children }) => {
 
             <p className="font-semibold text-center">Qurilish ishlari</p>
           </Link>
-        </div>
+        </div> */}
 
         <div className="col-span-12 mt-[23px]">{children}</div>
       </div>
