@@ -205,7 +205,7 @@ const Index = () => {
             onClick={addRow}
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 text-sm"
           >
-            + Qator qo'shish
+            + Qator qo&apos;shish
           </button>
           <button
             onClick={removeLastRow}
