@@ -82,8 +82,8 @@ const Index = () => {
 
         <p className="my-[15px] text-gray-500">
           Sizning mahsulotingizga to&apos;g&apos;ri keladigan yangilangan MXIK
-          kodini topish yoki qurilish materiali bo'yicha yangi MXIK kodi olish
-          uchun so&apos;rov yuboring!
+          kodini topish yoki qurilish materiali bo&apos;yicha yangi MXIK kodi
+          olish uchun so&apos;rov yuboring!
         </p>
 
         <p className="text-gray-500">
