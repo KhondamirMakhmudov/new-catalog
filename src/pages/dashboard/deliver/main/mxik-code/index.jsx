@@ -64,9 +64,10 @@ const Index = () => {
     ]);
   };
 
-  const removeLastRow = () => {
+  const handleDeleteRow = (indexToDelete) => {
     if (rows.length > 1) {
-      setRows(rows.slice(0, -1));
+      const updatedRows = rows.filter((_, index) => index !== indexToDelete);
+      setRows(updatedRows);
     }
   };
 
@@ -78,6 +79,17 @@ const Index = () => {
     <DeliverDashboard>
       <MainContent>
         <h1 className="text-2xl font-semibold">Yangi MXIK kod olish</h1>
+
+        <p className="my-[15px] text-gray-500">
+          Sizning mahsulotingizga to&apos;g&apos;ri keladigan yangilangan MXIK
+          kodini topish yoki qurilish materiali bo'yicha yangi MXIK kodi olish
+          uchun so&apos;rov yuboring!
+        </p>
+
+        <p className="text-gray-500">
+          Mahsulotlarni birma-bir kiriting yoki shunchaki exceldan bizning
+          jadvalga nusxalang!
+        </p>
 
         <div className="font-gilroy bg-white  border border-[#E0E2F0]  mt-[12px]">
           <motion.table
@@ -182,6 +194,15 @@ const Index = () => {
                       className="w-full text-[12px] border px-2 py-1 rounded"
                     />
                   </td>
+                  <td className="px-2 py-1 text-center">
+                    <button
+                      onClick={() => handleDeleteRow(index)}
+                      className="text-red-500 hover:text-red-700 text-sm"
+                      title="Qatorni o‘chirish"
+                    >
+                      ❌
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -207,12 +228,7 @@ const Index = () => {
           >
             + Qator qo&apos;shish
           </button>
-          <button
-            onClick={removeLastRow}
-            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 text-sm"
-          >
-            ↩️ Oxirgi qatordan qaytish
-          </button>
+
           <button
             onClick={handleSubmit}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
