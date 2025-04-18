@@ -4,9 +4,11 @@ import MainContent from "@/layouts/dashboard/deliver/components/main-page/main";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { get } from "lodash";
+import Link from "next/link";
 
 const Index = () => {
   const [pasteData, setPasteData] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const [rows, setRows] = useState([
     {
       material: "",
@@ -58,8 +60,8 @@ const Index = () => {
         resourceCode: "",
         resourceName: "",
         unit: "",
-        price: "",
-        secondCode: "",
+        // price: "",
+        // secondCode: "",
       },
     ]);
   };
@@ -119,12 +121,6 @@ const Index = () => {
                 <th className=" text-center text-[10px]   bg-white text-gray-900  font-bold  rounded-tr-[10px]">
                   GOST
                 </th>
-                <th className=" text-[10px]  text-center  bg-white text-gray-900  font-bold ">
-                  Yangi MXIK
-                </th>
-                <th className=" text-[10px]  text-center  bg-white text-gray-900  font-bold ">
-                  Resurs kodi
-                </th>
               </tr>
             </thead>
 
@@ -174,7 +170,7 @@ const Index = () => {
                       className="w-full text-[12px] border px-2 py-1 rounded"
                     />
                   </td>
-                  <td className=" px-2 py-1">
+                  {/* <td className=" px-2 py-1">
                     <input
                       type="number"
                       value={row.price}
@@ -183,8 +179,8 @@ const Index = () => {
                       }
                       className="w-full text-[12px] border px-2 py-1 rounded"
                     />
-                  </td>
-                  <td className=" px-2 py-1">
+                  </td> */}
+                  {/* <td className=" px-2 py-1">
                     <input
                       type="text"
                       value={row.secondCode}
@@ -193,7 +189,7 @@ const Index = () => {
                       }
                       className="w-full text-[12px] border px-2 py-1 rounded"
                     />
-                  </td>
+                  </td> */}
                   <td className="px-2 py-1 text-center">
                     <button
                       onClick={() => handleDeleteRow(index)}
@@ -221,6 +217,59 @@ const Index = () => {
           />
         </div> */}
 
+        {/* Murojaat uchun tel */}
+
+        <div className="my-[15px] space-y-2">
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="phone1"
+            >
+              Telefon raqami (asosiy)
+            </label>
+            <input
+              type="tel"
+              id="phone1"
+              name="phone1"
+              placeholder="Kiriting"
+              className=" px-4 py-2 border w-1/3 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="phone2"
+            >
+              Qo‘shimcha raqam (1)
+            </label>
+            <input
+              type="tel"
+              id="phone2"
+              name="phone2"
+              placeholder="Kiriting"
+              className=" px-4 py-2 border w-1/3 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              htmlFor="phone3"
+            >
+              Qo‘shimcha raqam (2)
+            </label>
+            <input
+              type="tel"
+              id="phone3"
+              name="phone3"
+              placeholder="Kiriting"
+              className=" px-4 py-2 border w-1/3 border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+        </div>
+
         <div className="flex gap-4 mt-4">
           <button
             onClick={addRow}
@@ -230,12 +279,54 @@ const Index = () => {
           </button>
 
           <button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              setOpenModal(true);
+            }}
             className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm"
           >
             Yakunlash
           </button>
         </div>
+
+        {openModal && (
+          <div
+            className={`fixed inset-0  z-50 bg-black bg-opacity-75 flex justify-center items-center `}
+          >
+            <div
+              className={
+                "w-[480px] p-[30px] rounded-[5px] bg-white flex justify-center items-center flex-col"
+              }
+            >
+              {/* <div className="p-[18px] rounded-full bg-[#FAEBEB] mx-auto inline-block ">
+                <Image
+                  src={"/images/info-circle.png"}
+                  alt={"circle"}
+                  width={24}
+                  height={24}
+                  className={"  cursor-pointer"}
+                />
+              </div> */}
+
+              <h1 className="font-bold text-[32px] mt-[10px] text-center">
+                So‘rovingiz muvaffaqiyatli yuborildi!
+              </h1>
+              <p className="font-medium text-[#75758B] text-center">
+                Yuborgan so‘rovingiz 1–3 ish kunida ko‘rib chiqiladi. Jarayon
+                yakunlangach, natijani shu yerda ko‘rishingiz mumkin:
+              </p>
+              <br />
+
+              <div className={"gap-x-[20px] mt-[20px] w-full"}>
+                <Link href={"/dashboard/deliver/main/mxik-code/result"}>
+                  <button className="bg-[#0256BA] text-white rounded-[12px] py-2 w-full">
+                    Ko'rish
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </MainContent>
     </DeliverDashboard>
   );
