@@ -320,7 +320,7 @@ const Index = () => {
               <div className={"gap-x-[20px] mt-[20px] w-full"}>
                 <Link href={"/dashboard/deliver/main/mxik-code/result"}>
                   <button className="bg-[#0256BA] text-white rounded-[12px] py-2 w-full">
-                    Ko'rish
+                    Ko&apos;rish
                   </button>
                 </Link>
               </div>
