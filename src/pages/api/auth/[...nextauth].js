@@ -121,7 +121,9 @@ export const authOptions = {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({pkcs7:pkcs7})
+
+          body: JSON.stringify({ pkcs7: pkcs7 }),
+
         });
 
         const token = await res.json();
