@@ -114,12 +114,14 @@ export const authOptions = {
       credentials: {},
       async authorize(credentials, req) {
         const { company_name, company_stir, company_ceo, pkcs7 } = credentials;
+        const formData = new FormData();
+        formData.append("pkcs7", pkcs7);
         const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ pkcs7: pkcs7 }),
+          body: formData,
         });
 
         const user = await res.json();
