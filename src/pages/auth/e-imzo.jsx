@@ -15,18 +15,20 @@ const EimzoLogin = () => {
   const loginWithKey = async (data, key) => {
     if (get(key, "O")) {
       const result = await signIn("eimzo", {
-        pkcs7:get(data,'pkcs7_64'),
+        pkcs7: get(data, "pkcs7_64"),
         redirect: false,
         callbackUrl: "/dashboard/deliver/main",
       });
       if (result?.error) {
-        alert("Login failed: " + result.error);
+        console.log("Login failed: " + result.error);
       }
     } else {
       toast.error("Jismoniy shaxs kalitida tizimga kirish mumkin emas", {
         position: "top-right",
       });
     }
+
+    console.log("pkcs7 =>", get(data, "pkcs7_64"));
   };
 
   return (
