@@ -15,6 +15,17 @@ const request = axios.create({
     },
   },
 });
+
+const eimzo = axios.create({
+    baseURL: config.EIMZO_URL,
+    params: {},
+    headers: {
+        common: {
+            Accept: "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+        },
+    },
+});
 request.interceptors.request.use(
   (config) => {
     const token = get(
@@ -43,4 +54,4 @@ request.interceptors.response.use(
   }
 );
 
-export { request };
+export { request,eimzo };

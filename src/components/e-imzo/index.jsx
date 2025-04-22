@@ -9,6 +9,7 @@ import Link from "next/link";
 import { toast } from "react-hot-toast";
 import Image from "next/image";
 import SimpleLoader from "../loader/simple-loader";
+import {eimzo} from "../../services/api";
 
 const ESIGN = ({
   setOpen = () => {},
@@ -44,7 +45,9 @@ const ESIGN = ({
 
   const handleOk = async (key) => {
     try {
-      let res = await ReactEIMZO.signPkcs7(key, "Hello world");
+      const challenge = await eimzo.get("api/get-challenge").then((res) => res);
+      let res = await ReactEIMZO.signPkcs7(key, get(challenge,"data.challenge"), true);
+
       eSign(res, key);
     } catch (e) {
       toast.error(t("Incorrect password"), { position: "top-right" });
@@ -116,7 +119,7 @@ const ESIGN = ({
                     </p>
                   </div>
                 </div>
-                {/* 
+                {/*
               <div className={"col-span-12 my-[10px]"}>
                 <h4 className={"text-sm"}>Tashkilot:</h4>
                 <p className={"font-medium"}>{get(key, "O", "-")}</p>

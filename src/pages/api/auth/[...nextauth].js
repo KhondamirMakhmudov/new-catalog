@@ -113,17 +113,16 @@ export const authOptions = {
       name: "eimzo",
       credentials: {},
       async authorize(credentials, req) {
-        const { company_name, company_stir, company_ceo } = credentials;
-        const res = await fetch("https://backend.mkinfo.uz/api/imzo", {
+        debugger
+        const { company_name, company_stir, company_ceo,pkcs7 } = credentials;
+        const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            company_name,
-            company_stir,
-            company_ceo,
-          }),
+          body: {
+            pkcs7
+          }
         });
 
         const user = await res.json();
