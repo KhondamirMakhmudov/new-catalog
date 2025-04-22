@@ -13,16 +13,18 @@ const ESIGN = dynamic(() => import("../../components/e-imzo"), {
 
 const EimzoLogin = () => {
   const loginWithKey = async (data, key) => {
-
     if (get(key, "O")) {
       const result = await signIn("eimzo", {
         pkcs7:get(data,'pkcs7_64'),
         company_name: get(key, "O"),
         company_stir: get(key, "TIN"),
         company_ceo: get(key, "CN"),
-        redirect: true,
+        redirect: false,
         callbackUrl: "/dashboard/deliver/main",
       });
+      if (result?.error) {
+        alert("Login failed: " + result.error);
+      }
     } else {
       toast.error("Jismoniy shaxs kalitida tizimga kirish mumkin emas", {
         position: "top-right",

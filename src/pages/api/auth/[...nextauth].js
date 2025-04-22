@@ -113,23 +113,21 @@ export const authOptions = {
       name: "eimzo",
       credentials: {},
       async authorize(credentials, req) {
-        debugger
         const { company_name, company_stir, company_ceo,pkcs7 } = credentials;
         const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: {
-            pkcs7
-          }
+          body:  JSON.stringify({pkcs7:pkcs7})
         });
 
         const user = await res.json();
 
         if (res.ok && user) {
           return user;
-        } else return null;
+        }
+        return null;
       },
     }),
     CredentialsProvider({
