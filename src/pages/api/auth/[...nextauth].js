@@ -109,23 +109,25 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      id: "eimzo",
+      id:'eimzo',
       name: "eimzo",
-      credentials: {},
+      credentials:{
+        pkcs7:''
+      },
       async authorize(credentials, req) {
-        const { company_name, company_stir, company_ceo,pkcs7 } = credentials;
+        const { pkcs7 } = credentials;
         const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body:  JSON.stringify({pkcs7:pkcs7})
+          body: JSON.stringify({pkcs7:pkcs7})
         });
 
-        const user = await res.json();
+        const token = await res.json();
 
-        if (res.ok && user) {
-          return user;
+        if (res.ok && token) {
+          return token;
         }
         return null;
       },
@@ -172,9 +174,9 @@ export const authOptions = {
       return session;
     },
   },
-  // session: {
-  //     strategy: "jwt"
-  // },
+  session: {
+      strategy: "jwt"
+  },
   pages: {
     signIn: "/auth/e-imzo",
     // login: "/auth/login",
