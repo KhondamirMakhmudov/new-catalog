@@ -5,8 +5,8 @@ import { toast } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { isArray, get, forEach, isObject, values } from "lodash";
 
-const postRequest = (url, attributes, config = {}) =>
-  request.post(url, attributes, {
+const postRequest = (url, attributes, config = {},axios=request) =>
+    axios.post(url, attributes, {
     ...config,
     headers: {
       ...config.headers, // Qo'shimcha headers
@@ -16,13 +16,13 @@ const postRequest = (url, attributes, config = {}) =>
 const usePostQuery = ({
   hideSuccessToast = false,
   listKeyId = null,
-  hideErrorToast = false,
+  hideErrorToast = false, axios=request
 }) => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
   const { mutate, isLoading, isError, error, isFetching } = useMutation(
-    ({ url, attributes, config = {} }) => postRequest(url, attributes, config),
+    ({ url, attributes, config = {} }) => postRequest(url, attributes, config,axios),
     {
       onSuccess: (data) => {
         if (!hideSuccessToast) {
