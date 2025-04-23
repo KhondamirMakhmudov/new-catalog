@@ -115,15 +115,17 @@ export const authOptions = {
       async authorize(credentials, req) {
         const { pkcs7 } = credentials;
 
+
         const formData = new FormData();
         formData.append("pkcs7", pkcs7);
 
-        const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
+        const res = await  fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
-          body: {
-            pkcs7: formData,
+          headers:{
+            'Content-Type':'multipart/form-data'
           },
-        });
+          body:formData,
+        })
 
         const user = await res.json();
 
@@ -144,7 +146,7 @@ export const authOptions = {
         captcha_key: {},
       },
       async authorize(credentials, req) {
-        debugger;
+
         const { email, password, captcha_response, captcha_key } = credentials;
         const res = await fetch("https://backend.mkinfo.uz/api/login", {
           method: "POST",
@@ -176,9 +178,9 @@ export const authOptions = {
       return session;
     },
   },
-  // session: {
-  //     strategy: "jwt"
-  // },
+  session: {
+      strategy: "jwt"
+  },
   pages: {
     signIn: "/auth/e-imzo",
     // login: "/auth/login",
