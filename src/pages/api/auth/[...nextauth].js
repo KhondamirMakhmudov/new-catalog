@@ -120,7 +120,7 @@ export const authOptions = {
 
         const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
-          body: formData, // ❗️ headersni qo‘shmang!
+          body: formData,
         });
 
         const user = await res.json();
