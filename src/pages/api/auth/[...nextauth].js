@@ -115,14 +115,16 @@ export const authOptions = {
       async authorize(credentials, req) {
         const { pkcs7 } = credentials;
 
-        const formData = new FormData();
-        formData.append("pkcs7", pkcs7);
+        // const formData = new FormData();
+        // formData.append("pkcs7", pkcs7);
 
         const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
-          body: {
-            pkcs7: formData,
+          headers: {
+            "Content-Type": "application/json",
           },
+
+          body: JSON.stringify({ pkcs7: pkcs7 }),
         });
 
         const user = await res.json();
