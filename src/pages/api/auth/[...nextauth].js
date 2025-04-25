@@ -113,17 +113,15 @@ export const authOptions = {
       name: "eimzo",
       credentials: {},
       async authorize(credentials, req) {
-        const { pkcs7 } = credentials;
-
         // const formData = new FormData();
         // formData.append("pkcs7", pkcs7);
 
+        const { company_name, company_stir, company_ceo, pkcs7 } = credentials;
         const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({ pkcs7: pkcs7 }),
         });
 

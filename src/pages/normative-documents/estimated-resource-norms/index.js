@@ -2,34 +2,35 @@ import Header from "@/components/header";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import RightIcon from "@/components/icons/right";
-import { nth } from "lodash";
 import { useState, useEffect } from "react";
-import parse from "html-react-parser";
+import Image from "next/image";
 
 const Index = () => {
   const router = useRouter();
-  const [responseData, setResponseData] = useState(null);
+
+  const [data, setData] = useState([]);
   const [error, setError] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://doc.mkinfo.uz/app_main/api/document/"
-        );
+    fetch("https://shnk.tmsiti.uz/sren")
+      .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          throw new Error("Ma'lumotlarni yuklab bo‘lmadi");
         }
-        const data = await response.json();
-        setResponseData(data);
-      } catch (error) {
-        setError(error.message);
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+        return response.json();
+      })
+      .then((result) => {
+        setData(result);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
+
+  let rowNumber = 1;
+
   return (
     <div className="bg-[#F7F7F7] ">
       <Header />
@@ -58,18 +59,78 @@ const Index = () => {
             Smeta resurs normalari
           </h1>
         </section>
-
-        {nth(
-          responseData?.map((item) => (
-            <div
-              className="bg-white p-[30px] rounded-[20px] border-spacing-24 font-gilroy"
-              key={item.id}
-            >
-              {parse(item.document)}
-            </div>
-          )),
-          2
-        )}
+        <table className="table-auto border-collapse border border-black w-full text-sm">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border border-black p-2">№</th>
+              <th className="border border-black p-2">Yangi ShNQ raqami</th>
+              <th className="border border-black p-2">
+                Yangidan ishlab chiqiladigan ShNQ nomi
+              </th>
+              <th className="border border-black p-2">ShNQ raqami</th>
+              <th className="border border-black p-2">ShNQ nomi</th>
+              <th className="border border-black p-2">Fayl</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, idx) =>
+              item.sren_shnk.map((shnk, shnkIdx) => (
+                <tr key={`${idx}-${shnkIdx}`}>
+                  {shnkIdx === 0 ? (
+                    <>
+                      <td
+                        className="border border-black p-2"
+                        rowSpan={item.sren_shnk.length}
+                      >
+                        {rowNumber++}
+                      </td>
+                      <td
+                        className="border border-black p-2"
+                        rowSpan={item.sren_shnk.length}
+                      >
+                        <b>
+                          <i>{item.sren_designation}</i>
+                        </b>
+                      </td>
+                      <td
+                        className="border border-black p-2"
+                        rowSpan={item.sren_shnk.length}
+                      >
+                        {item.sren_name_uz}
+                      </td>
+                    </>
+                  ) : null}
+                  <td className="border border-black p-2">
+                    <b>
+                      <i>{shnk.sren_designation}</i>
+                    </b>
+                  </td>
+                  <td className="border border-black p-2">
+                    {shnk.sren_shnk_uz}
+                  </td>
+                  <td className="border border-black p-2">
+                    {item.sren_pdf_uz ? (
+                      <a
+                        href={`https://main.tmsiti.uz/media/${item.sren_pdf_uz}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Image
+                          src={"/icons/download.svg"}
+                          alt="download"
+                          width={24}
+                          height={24}
+                        />
+                      </a>
+                    ) : (
+                      ""
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </main>
     </div>
   );
