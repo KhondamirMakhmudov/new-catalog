@@ -19,7 +19,7 @@ const EimzoLogin = () => {
         company_name: get(key, "O"),
         company_stir: get(key, "TIN"),
         company_ceo: get(key, "CN"),
-        redirect: false,
+        redirect: true,
         callbackUrl: "/dashboard/deliver/main",
       });
       if (result?.error) {

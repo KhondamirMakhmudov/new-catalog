@@ -122,9 +122,8 @@ export const authOptions = {
           method: "POST",
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data',
           },
-          body: JSON.stringify({...formData}),
+          body: formData,
         })
          if (!res.ok) {
           const errText = await res.text();
@@ -132,6 +131,7 @@ export const authOptions = {
         }
 
         const json = await res.json();
+        console.log("JSON",json)
 
 
         if (res.ok && json) {
