@@ -118,19 +118,24 @@ export const authOptions = {
         const formData = new FormData();
         formData.append("pkcs7", pkcs7);
 
-        const res = await fetch("https://mk.shaffofqurilish.uz/api/auth", {
+        const res =  await  fetch("https://mk.shaffofqurilish.uz/api/auth", {
           method: "POST",
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data',
           },
-          body: formData,
-        });
-        console.log("RESULT", res);
+          body: JSON.stringify({...formData}),
+        })
+         if (!res.ok) {
+          const errText = await res.text();
+          throw new Error(`HTTP ${res.status}: ${JSON.parse(errText)?.message} - ${errText}`);
+        }
 
-        const user = await res.json();
+        const json = await res.json();
 
-        if (res.ok && user) {
-          return user;
+
+        if (res.ok && json) {
+          return json;
         }
         return null;
       },
