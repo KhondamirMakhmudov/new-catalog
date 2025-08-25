@@ -375,81 +375,81 @@ export default function Home() {
         </section>
 
         {/* /////// Ekologiya va atrof-muhitni muhofaza qilish boshqar //////// */}
-        <section className="relative py-[60px] z-10">
-          <div className="absolute z-10 -left-10 md:left-0 md:bottom-0 hidden lg:block">
-            <Image
-              src={"/images/bg-eco-2.png"}
-              alt={"eco-logo"}
-              width={270}
-              height={430}
-              className={"w-ful h-[300px] md:h-[430px]"}
-            />
-          </div>
+        // <section className="relative py-[60px] z-10">
+        //   <div className="absolute z-10 -left-10 md:left-0 md:bottom-0 hidden lg:block">
+        //     <Image
+        //       src={"/images/bg-eco-2.png"}
+        //       alt={"eco-logo"}
+        //       width={270}
+        //       height={430}
+        //       className={"w-ful h-[300px] md:h-[430px]"}
+        //     />
+        //   </div>
 
-          <div className="absolute -z-10 -right-6 overflow-x-hidden md:right-0 bottom-0 hidden lg:block">
-            <Image
-              src={"/images/bg-eco-1.png"}
-              alt={"eco-logo"}
-              width={270}
-              height={430}
-              className={"w-ful h-[300px] md:h-[430px]"}
-            />
-          </div>
+        //   <div className="absolute -z-10 -right-6 overflow-x-hidden md:right-0 bottom-0 hidden lg:block">
+        //     <Image
+        //       src={"/images/bg-eco-1.png"}
+        //       alt={"eco-logo"}
+        //       width={270}
+        //       height={430}
+        //       className={"w-ful h-[300px] md:h-[430px]"}
+        //     />
+        //   </div>
 
-          <Reveal>
-            <div className="container">
-              <div className="grid grid-cols-12 gap-[30px] z-50  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
-                <div className="col-span-12 md:col-span-6 md:max-w-[300px] lg:max-w-[600px] w-full">
-                  <Image
-                    src={"/images/eco-logo.png"}
-                    alt={"eco-logo"}
-                    width={600}
-                    height={436}
-                    className={
-                      "lg:w-[600px] w-[200px]  md:h-[436px] rounded-[20px] object-cover"
-                    }
-                  />
-                </div>
-                <div className="col-span-12 md:col-span-6 flex items-start justify-center flex-col">
-                  <h1
-                    className={
-                      "font-bold text-[20px] md:text-[42px] text-[#21201F]"
-                    }
-                  >
-                    Ekologiya va atrof-muhitni muhofaza qilish boshqarmasi
-                  </h1>
-                  <p
-                    className={
-                      "font-medium text-[#21201FB2] text-base md:text-[21px] mt-[16px] mb-[24px]"
-                    }
-                  >
-                    O‘zbekiston Respublikasi Vazirlar Mahkamasining 27.05.2019
-                    yildagi «O‘zbekiston Respublikasida mahsulotlarni ixtiyoriy
-                    ekologik markirovkalash tizimini joriy etish to‘g‘risida»gi
-                    435-son qarori
-                  </p>
+        //   <Reveal>
+        //     <div className="container">
+        //       <div className="grid grid-cols-12 gap-[30px] z-50  bg-[#F3F5F6CC] backdrop-blur-sm p-[30px] rounded-[20px]">
+        //         <div className="col-span-12 md:col-span-6 md:max-w-[300px] lg:max-w-[600px] w-full">
+        //           <Image
+        //             src={"/images/eco-logo.png"}
+        //             alt={"eco-logo"}
+        //             width={600}
+        //             height={436}
+        //             className={
+        //               "lg:w-[600px] w-[200px]  md:h-[436px] rounded-[20px] object-cover"
+        //             }
+        //           />
+        //         </div>
+        //         <div className="col-span-12 md:col-span-6 flex items-start justify-center flex-col">
+        //           <h1
+        //             className={
+        //               "font-bold text-[20px] md:text-[42px] text-[#21201F]"
+        //             }
+        //           >
+        //             Ekologiya va atrof-muhitni muhofaza qilish boshqarmasi
+        //           </h1>
+        //           <p
+        //             className={
+        //               "font-medium text-[#21201FB2] text-base md:text-[21px] mt-[16px] mb-[24px]"
+        //             }
+        //           >
+        //             O‘zbekiston Respublikasi Vazirlar Mahkamasining 27.05.2019
+        //             yildagi «O‘zbekiston Respublikasida mahsulotlarni ixtiyoriy
+        //             ekologik markirovkalash tizimini joriy etish to‘g‘risida»gi
+        //             435-son qarori
+        //           </p>
 
-                  <Link href="#">
-                    <div
-                      className={
-                        "  py-[13px] px-[52px]  justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
-                      }
-                    >
-                      <p className={"text-[#21201FCC]"}>Jadvalni ko’rish</p>
-                      <Image
-                        src={"/icons/arrow-right.svg"}
-                        alt={"arrow-right"}
-                        width={20}
-                        height={20}
-                        className={"ml-[16px]"}
-                      />
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </section>
+        //           <Link href="#">
+        //             <div
+        //               className={
+        //                 "  py-[13px] px-[52px]  justify-center  items-center border border-[#D7D9DC] inline-flex rounded-[8px]"
+        //               }
+        //             >
+        //               <p className={"text-[#21201FCC]"}>Jadvalni ko’rish</p>
+        //               <Image
+        //                 src={"/icons/arrow-right.svg"}
+        //                 alt={"arrow-right"}
+        //                 width={20}
+        //                 height={20}
+        //                 className={"ml-[16px]"}
+        //               />
+        //             </div>
+        //           </Link>
+        //         </div>
+        //       </div>
+        //     </div>
+        //   </Reveal>
+        // </section>
 
         {/* Klassifikator haqida */}
         <section className={"container pb-[60px]"} id="about-classifier">
